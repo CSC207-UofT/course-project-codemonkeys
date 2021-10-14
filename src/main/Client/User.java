@@ -1,12 +1,12 @@
 package Clients;
-
 import java.util.Objects;
 
 public abstract class User {
 
     //____________________ Variables ___________________________________________________________________________________
     private String name; // username
-
+    private Portfolio portfolio;
+    private Regular reg;
     //____________________ Constructors ________________________________________________________________________________
 
     /**
@@ -26,7 +26,7 @@ public abstract class User {
     /**
      * Compares this Object to another
      * @param o is the other Object
-     * @return true if o is a User or a child of User
+     * @return true if o is a Clients.User or a child of Clients.User
      */
     @Override
     public boolean equals(Object o) {

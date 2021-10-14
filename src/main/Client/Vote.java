@@ -1,6 +1,7 @@
+import Clients.Admin;
+
 public class Vote {
     //____________________ Variables ___________________________________________________________________________________
-
     private String voter;
     private double power;
 
