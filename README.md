@@ -2,7 +2,7 @@
 
 **Project Repository**
 
-\&lt;[https://github.com/CSC207-UofT/course-project-codemonkeys](https://github.com/CSC207-UofT/course-project-codemonkeys)\&gt;
+<[https://github.com/CSC207-UofT/course-project-codemonkeys](https://github.com/CSC207-UofT/course-project-codemonkeys)>;
 
 **CRC Representation**
 
@@ -10,15 +10,12 @@
 
 **Contributors**
 
-\&lt;Contributor name\&gt; \&lt;Contributor GitHub link\&gt;
+<Contributor name> <Contributor GitHub link>
 
-...
+<Tammy Yujin Liu> <https://github.com/tammyliuu](https://github.com/tammyliuu)>
+<Jiamu Sun> <https://github.com/JackSunjm](https://github.com/JackSunjm)>
 
-\&lt;Tammy Yujin Liu\&gt; \&lt;[https://github.com/tammyliuu](https://github.com/tammyliuu)\&gt;
-
-\&lt;Jiamu Sun\&gt; \&lt;[https://github.com/JackSunjm](https://github.com/JackSunjm)\&gt;
-
-\&lt;Andrew Hanzhuo Zhang\&gt; \&lt;[https://github.com/a663E-36z1120](https://github.com/a663E-36z1120)\&gt;
+<Andrew Hanzhuo Zhang> <https://github.com/a663E-36z1120](https://github.com/a663E-36z1120)>
 
 \&lt;Peng Du\&gt; \&lt;[https://github.com/Vim0315](https://github.com/Vim0315)\&gt;
 
