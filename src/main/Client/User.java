@@ -59,11 +59,11 @@ public abstract class User {
         this.name = name;
     }
 
-    public int getuserId(){
+    public int getUserId(){
         return this.userId;
     }
 
-    public void setuserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }
