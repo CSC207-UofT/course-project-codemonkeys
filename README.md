@@ -12,12 +12,15 @@
 
 <Contributor name> <Contributor GitHub link>
 
-<Tammy Yujin Liu> <https://github.com/tammyliuu](https://github.com/tammyliuu)>
-<Jiamu Sun> <https://github.com/JackSunjm](https://github.com/JackSunjm)>
+Langson Zhang <https://github.com/langsonzhang>
+Tammy Yujin Liu <https://github.com/tammyliuu>
+Jiamu Sun <https://github.com/JackSunjm>
+Andrew Hanzhuo Zhang <https://github.com/a663E-36z1120>
+Peng Du <https://github.com/Vim0315>
+Raymond Zhang <https://github.com/RaymondZhang24>
+Edward Li <https://github.com/Edward11235>
+Charlie Guo <https://github.com/charlieguo2021>
 
-<Andrew Hanzhuo Zhang> <https://github.com/a663E-36z1120](https://github.com/a663E-36z1120)>
-
-\&lt;Peng Du\&gt; \&lt;[https://github.com/Vim0315](https://github.com/Vim0315)\&gt;
 
 **1. Domain**
 
