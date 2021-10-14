@@ -4,19 +4,23 @@ import java.util.Objects;
 public abstract class User {
 
     //____________________ Variables ___________________________________________________________________________________
-
+<<<<<<< HEAD:src/main/Client/User.java
     private String name; // username
     private Portfolio portfolio; // shadow portfolio for the user
-    private int userId; // the user's identification number
-
     //____________________ Constructors ________________________________________________________________________________
 
     /**
      * Basic constructor for a user
      * @param name is the username
-     * @param userId is the user's identification number
      */
+    public User(String name){
+=======
+    private String name;
+    private int userId;
+
+    //____________________ Constructors ________________________________________________________________________________
     public User(String name, int userId){
+>>>>>>> main:src/main/User.java
         this.name = name;
         this.userId = userId;
     }
@@ -59,7 +63,7 @@ public abstract class User {
         this.name = name;
     }
 
-    public int getuserId(){
+    public String getuserId(){
         return this.userId;
     }
 
