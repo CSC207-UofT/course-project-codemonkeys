@@ -1,3 +1,5 @@
+import Client.Transaction;
+
 public class PriceFetcher implements Fetcher<Transaction, Integer> {
     //____________________ Variables ___________________________________________________________________________________
 

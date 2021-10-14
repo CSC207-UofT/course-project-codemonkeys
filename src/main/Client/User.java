@@ -1,12 +1,11 @@
-package Clients;
+package Client;
 import java.util.Objects;
 
 public abstract class User {
 
     //____________________ Variables ___________________________________________________________________________________
     private String name; // username
-    private Portfolio portfolio;
-    private Regular reg;
+    private Portfolio portfolio; // shadow portfolio for the user
     //____________________ Constructors ________________________________________________________________________________
 
     /**

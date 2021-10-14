@@ -1,4 +1,4 @@
-import Clients.Admin;
+package Client;
 
 public class Vote {
     //____________________ Variables ___________________________________________________________________________________

@@ -1,4 +1,4 @@
-import Clients.User;
+package Client;
 
 public class Transaction {
     //____________________ Variables ___________________________________________________________________________________

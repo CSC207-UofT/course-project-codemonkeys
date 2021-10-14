@@ -1,4 +1,4 @@
-package Clients;
+package Client;
 
 public class Regular extends User {
 

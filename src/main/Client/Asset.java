@@ -1,3 +1,5 @@
+package Client;
+
 import Identification.StringIdentifier;
 
 public class Asset {
@@ -8,8 +10,8 @@ public class Asset {
     //____________________ Constructors ________________________________________________________________________________
 
     /**
-     * Basic constructor for an Asset
-     * @param id is the identifier of the Asset
+     * Basic constructor for an Clients.Asset
+     * @param id is the identifier of the Clients.Asset
      * @param value is the value of the asset in USD
      */
     public Asset(String id, Double value){
