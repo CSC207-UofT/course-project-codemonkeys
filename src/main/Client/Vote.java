@@ -1,6 +1,7 @@
+package Client;
+
 public class Vote {
     //____________________ Variables ___________________________________________________________________________________
-
     private String voter;
     private double power;
     private String vote_for;
