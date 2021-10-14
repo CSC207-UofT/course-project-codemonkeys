@@ -4,10 +4,12 @@ public abstract class User {
 
     //____________________ Variables ___________________________________________________________________________________
     private String name;
+    private int userId;
 
     //____________________ Constructors ________________________________________________________________________________
-    public User(String name){
+    public User(String name, int userId){
         this.name = name;
+        this.userId = userId;
     }
 
     //____________________ Methods _____________________________________________________________________________________
@@ -36,5 +38,13 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getuserId(){
+        return this.userId;
+    }
+
+    public void setuserId(int userId) {
+        this.userId = userId;
     }
 }
