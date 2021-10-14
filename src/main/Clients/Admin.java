@@ -1,3 +1,5 @@
+package Clients;
+
 public class Admin extends User {
 
     public Admin(String name) {

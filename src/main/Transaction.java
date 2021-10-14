@@ -1,3 +1,5 @@
+import Clients.User;
+
 public class Transaction {
     //____________________ Variables ___________________________________________________________________________________
     private User user;
