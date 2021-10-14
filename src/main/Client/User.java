@@ -1,12 +1,21 @@
+package Client;
 import java.util.Objects;
 
 public abstract class User {
 
     //____________________ Variables ___________________________________________________________________________________
-    private String name;
-    private int userId;
+
+    private String name; // username
+    private Portfolio portfolio; // shadow portfolio for the user
+    private int userId; // the user's identification number
 
     //____________________ Constructors ________________________________________________________________________________
+
+    /**
+     * Basic constructor for a user
+     * @param name is the username
+     * @param userId is the user's identification number
+     */
     public User(String name, int userId){
         this.name = name;
         this.userId = userId;
@@ -17,6 +26,12 @@ public abstract class User {
 
 
     //____________________ Generic Overrides ___________________________________________________________________________
+
+    /**
+     * Compares this Object to another
+     * @param o is the other Object
+     * @return true if o is a Clients.User or a child of Clients.User
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -25,6 +40,10 @@ public abstract class User {
         return Objects.equals(getName(), user.getName());
     }
 
+    /**
+     * TODO: Javadoc and hashCode function possibly for future use???
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getName());
@@ -40,11 +59,11 @@ public abstract class User {
         this.name = name;
     }
 
-    public String getuserId(){
+    public int getUserId(){
         return this.userId;
     }
 
-    public void setuserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }

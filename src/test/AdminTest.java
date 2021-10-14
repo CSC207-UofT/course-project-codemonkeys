@@ -1,3 +1,4 @@
+import Client.Admin;
 import org.junit.*;
 import static org.junit.Assert.*;
 
