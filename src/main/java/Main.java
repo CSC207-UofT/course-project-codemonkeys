@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Asset teslaStock = new Asset("TSLA", 3.123);
         YahooFinanceAPI yahoo = new YahooFinanceAPI();
         while (true) {
@@ -17,8 +17,9 @@ public class Main {
             double value = teslaStock.getValue();
             double price = teslaStock.getPrice();
             double quantity = teslaStock.getQuantity();
+            Thread.sleep(2000);
 
-            System.out.println(quantity + " Tesla Stock is now worth $" + value + "at price $" + price);
+            System.out.println(quantity + " Tesla Stock is now worth $" + value + " at price $" + price);
         }
     }
 }
