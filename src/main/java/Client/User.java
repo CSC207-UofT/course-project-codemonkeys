@@ -21,6 +21,10 @@ public abstract class User {
         this.userId = userId;
     }
 
+    public User(String name){
+        this.name = name;
+    }
+
     //____________________ Methods _____________________________________________________________________________________
 
 
