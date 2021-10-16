@@ -1,47 +1,50 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Asset {
     //____________________ Variables ___________________________________________________________________________________
-    private final String symbol;  // Symbol representing the asset
-    private double price; // price of the asset in USD
-    private final double quantity; // value of the asset in USD
-
+    private String type;
+    private List<Transaction> transactionList;
     //____________________ Constructors ________________________________________________________________________________
 
-    /**
-     * Basic constructor for an Clients.Asset
-     * @param symbol is the symbol of the asset listed on exchanges
-     * @param quantity is the value of the asset in USD
-     */
-    public Asset(String symbol, Double quantity){
-        this.symbol = symbol;
-        this.quantity = quantity;
-        this.price = 0.0;
+    public Asset(String type){
+        this.type = type;
+        this.transactionList = new ArrayList<Transaction>();
     }
 
-    //____________________ Methods _____________________________________________________________________________________
-
-
-    //____________________ Generic Overrides ___________________________________________________________________________
-
-
-    //____________________ Getters and Setters__________________________________________________________________________
-
-    public String getSymbol() {
-        return symbol;
+    public String getType() {
+        return type;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    private void addTransaction(Transaction t) {
+        this.transactionList.add(t);
     }
 
-    public double getPrice() {
-        return price;
+    public static boolean transfer(Asset from, Asset to, double value) {
+        if (from.getTotalValue() < value) {
+            return false;  // transaction denied
+        }
+        Transaction[] t = Transaction.generateTransactionPair(from.getType(), to.getType(), value);
+        from.addTransaction(t[0]);
+        to.addTransaction(t[1]);
+        return true;  // Transaction approved.
     }
 
-    public double getQuantity() { return quantity; }
+    public double getTotalValue(){
+        double sum = 0;
+        for (Transaction t : this.transactionList) {
+            sum += t.getValue();
+        }
+        return sum;
+    }
 
-    public double getValue() {
-        return price * quantity;
+    public Asset copy() {
+        Asset clone = new Asset(this.type);
+        for (Transaction t : this.transactionList) {
+            clone.transactionList.add(t);
+        }
+        return clone;
     }
 }
