@@ -1,12 +1,15 @@
 package Client;
 
-public class Transaction {
+import Identification.Identifiable;
+
+public class Transaction extends Identifiable {
     //____________________ Variables ___________________________________________________________________________________
     private User user;
 
     //____________________ Constructors ________________________________________________________________________________
 
     public Transaction(User user){
+        super(null);
         this.user = user;
     }
 

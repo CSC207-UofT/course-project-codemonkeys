@@ -1,6 +1,6 @@
 package Identification;
 
-public abstract class Identifier<T> {
+public class Identifier<T> {
     T identifier; // the identifier
 
     /**
@@ -14,7 +14,12 @@ public abstract class Identifier<T> {
     /**
      * return the identity of desired object
      */
-    public T getId(){
-        return this.identifier;
+    public boolean equals(Object other){
+        return identifier.equals(other);
+    }
+
+    @Override
+    public String toString() {
+        return identifier.toString();
     }
 }

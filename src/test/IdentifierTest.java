@@ -1,9 +1,5 @@
 import Identification.Identifier;
-import Identification.StringIdentifier;
 import org.junit.*;
-import org.junit.Assert;
-import org.junit.rules.*;
-import java.io.*;
 
 public class IdentifierTest {
     private Identifier id;

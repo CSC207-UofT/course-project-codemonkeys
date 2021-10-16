@@ -1,10 +1,11 @@
 package Client;
 
-import Identification.StringIdentifier;
+import Identification.Identifiable;
+import Identification.Identifier;
 
-public class Asset {
+public class Asset extends Identifiable {
+
     //____________________ Variables ___________________________________________________________________________________
-    private final StringIdentifier identifier;  // identifier for the string
     private Double value; // value of the asset in USD
 
     //____________________ Constructors ________________________________________________________________________________
@@ -15,7 +16,7 @@ public class Asset {
      * @param value is the value of the asset in USD
      */
     public Asset(String id, Double value){
-        this.identifier = new StringIdentifier(id);
+        super(id);
         this.value = value;
     }
 
@@ -26,10 +27,6 @@ public class Asset {
 
 
     //____________________ Getters and Setters__________________________________________________________________________
-
-    public StringIdentifier getIdentifier() {
-        return identifier;
-    }
 
     public Double getValue() {
         return value;

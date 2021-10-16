@@ -8,7 +8,7 @@ public class AdminTest {
     @Before
 
     public void setUp() {
-        admin  = new Admin("Bob");
+        admin  = new Admin("Bob", 123);
     }
 
     @After

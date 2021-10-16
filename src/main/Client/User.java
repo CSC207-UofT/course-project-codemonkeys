@@ -1,13 +1,15 @@
 package Client;
+import Identification.Identifiable;
+import Identification.Identifier;
+
 import java.util.Objects;
 
-public abstract class User {
+public class User extends Identifiable {
 
     //____________________ Variables ___________________________________________________________________________________
 
     private String name; // username
     private Portfolio portfolio; // shadow portfolio for the user
-    private int userId; // the user's identification number
 
     //____________________ Constructors ________________________________________________________________________________
 
@@ -17,11 +19,13 @@ public abstract class User {
      * @param userId is the user's identification number
      */
     public User(String name, int userId){
+        super(userId);
         this.name = name;
-        this.userId = userId;
+        this.portfolio = new Portfolio();
     }
 
     //____________________ Methods _____________________________________________________________________________________
+
 
 
 
@@ -59,11 +63,11 @@ public abstract class User {
         this.name = name;
     }
 
-    public int getUserId(){
-        return this.userId;
+    public Portfolio getPortfolio() {
+        return portfolio;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
 }
