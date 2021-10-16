@@ -18,7 +18,7 @@ public class User extends Identifiable {
      * @param name is the username
      * @param userId is the user's identification number
      */
-    public User(String name, int userId){
+    public User(String name, Object userId){
         super(userId);
         this.name = name;
         this.portfolio = new Portfolio();
