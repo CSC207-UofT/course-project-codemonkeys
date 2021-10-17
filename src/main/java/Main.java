@@ -4,12 +4,15 @@ import Interfaces.YahooFinanceAPI;
 import UseCases.AssetManager;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
+import Interfaces.CommandLine;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+        CommandLine cmd = new CommandLine();
+
 //        Asset teslaStock = new Asset("TSLA", 3.123);
 //        YahooFinanceAPI yahoo = new YahooFinanceAPI();
 //        while (true) {

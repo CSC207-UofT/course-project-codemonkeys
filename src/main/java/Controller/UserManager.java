@@ -56,4 +56,12 @@ public class UserManager {
     public static boolean isUserPresent(String name) {
         return UserManager.getInstance().getUser(name) != null;
     }
+
+    public int getUserSize() {
+        return this.userMap.size();
+    }
+
+    public void addAsset(String username, String AssetName) {  //TODO change return type to boolean
+        this.getUser(username).addAsset(AssetName);
+    }
 }

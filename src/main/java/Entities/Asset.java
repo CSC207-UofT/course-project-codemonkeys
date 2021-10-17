@@ -18,7 +18,7 @@ public class Asset {
         return type;
     }
 
-    private void addTransaction(Transaction t) {
+    public void addTransaction(Transaction t) {
         this.transactionList.add(t);
     }
 
@@ -32,9 +32,11 @@ public class Asset {
         return true;  // Transaction approved.
     }
 
+
     public double getTotalValue(){
         double sum = 0;
         for (Transaction t : this.transactionList) {
+            if (t.getTo_type() == "_") continue;
             sum += t.getValue();
         }
         return sum;
