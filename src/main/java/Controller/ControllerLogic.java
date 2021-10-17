@@ -86,7 +86,7 @@ public class ControllerLogic {
     }
 
     public String getVoteInfo(UUID voteId) {
-        return null;  // vote manager里拿过来，如果不存在 excepton。然后 把vote的信息format成string
+        return null;
     }
 
     public void createVote(String username, String type, double value) {
