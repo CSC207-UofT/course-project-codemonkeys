@@ -1,5 +1,6 @@
 package Controller;
 
+import Entities.User;
 import Entities.Vote;
 
 import java.util.Collection;
@@ -21,6 +22,21 @@ public class VoteManager {
             VoteManager.instance = new VoteManager();
         }
         return VoteManager.instance;  // VoteManager only initiated for once
+    }
+
+    public void addVote(User initiator, String type, double val) {
+        Vote v = new Vote(initiator, "USD", type, val);
+        this.voteMap.put(v.getId(), v);
+    }
+
+    public String viewVotes(){
+        StringBuilder res = new StringBuilder();
+        for (Map.Entry<UUID, Vote> entry : this.voteMap.entrySet()) {
+            UUID u = entry.getKey();
+            Vote v = entry.getValue();
+            res.append("key: ").append(u.toString()).append(", name: ").append(v.getToType()).append(", value: ").append(v.getValue());
+        }
+        return res.toString();
     }
 
     public void addVote(Vote u) {

@@ -28,7 +28,7 @@ public class Vote{
     }
 
     public boolean check() {
-        double sum = this.initiator.getLiquidAssetValue();
+        double sum = 0.0;
         for(User u : this.upVoters) {
             sum += u.getLiquidAssetValue();
         }
@@ -36,6 +36,22 @@ public class Vote{
             sum -= u.getLiquidAssetValue();
         }
         return sum >= this.value;
+    }
+
+    public boolean checkApprove(int num) {
+        if (num != this.upVoters.size() + this.downVoters.size()) {
+            return false;
+        } else {
+            return this.check();
+        }
+    }
+
+    public int upVoterSize() {
+        return this.upVoters.size();
+    }
+
+    public int downVoterSize() {
+        return this.downVoters.size();
     }
 
     public void upVote(User u) {
@@ -63,7 +79,7 @@ public class Vote{
     }
 
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public User getInitiator() {

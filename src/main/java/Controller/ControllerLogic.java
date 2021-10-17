@@ -9,7 +9,10 @@ import java.nio.file.AccessDeniedException;
 import java.util.UUID;
 
 public class ControllerLogic {
-    private void join(String name, boolean isAdmin){
+    VoteManager voteManager;
+
+    private void join(String name, boolean isAdmin, int init_USD){
+        this.voteManager = VoteManager.getInstance();
         name = UserManager.checkUserName(name);
         if (UserManager.isUserPresent(name)) {
             throw new IllegalStateException("User Already in the system");
@@ -17,18 +20,20 @@ public class ControllerLogic {
         User user;
         if (isAdmin){
             user = new Admin(name);
+            user.addInitialAsset(init_USD);
         } else {
             user = new User(name);
+            user.addInitialAsset(init_USD);
         }
         UserManager.getInstance().addUser(user);
     }
 
-    public void join(String name) {
-        this.join(name, false);
+    public void join(String name, int init) {
+        this.join(name, false, init);
     }
 
-    public void joinAdmin(String name) {
-        this.join(name, true);
+    public void joinAdmin(String name, int init) {
+        this.join(name, true, init);
     }
 
     public void leave(String name) {
@@ -55,8 +60,37 @@ public class ControllerLogic {
         this.leave(user);
     }
 
+    public String viewVotes() {
+        return this.voteManager.viewVotes();  // vote manager里拿过来，如果不存在 excepton。然后 把vote的信息format成string
+    }
+
+    public int voterNumer(UUID id) {
+        return this.voteManager.getVote(id).upVoterSize() + this.voteManager.getVote(id).downVoterSize();
+    }
+
+    public int userNumber() {
+        return UserManager.getInstance().getUserSize();
+    }
+
+    public void upVote(UUID id, String name) {
+        this.voteManager.getVote(id).upVote(UserManager.getInstance().getUser(name));
+    }
+
+    public void downVote(UUID id, String name) {
+        this.voteManager.getVote(id).downVote(UserManager.getInstance().getUser(name));
+    }
+
+    public boolean checkVoteFinish(UUID id) {
+        int members = UserManager.getInstance().getUserSize();
+        return this.voteManager.getVote(id).checkApprove(members);
+    }
+
     public String getVoteInfo(UUID voteId) {
         return null;  // vote manager里拿过来，如果不存在 excepton。然后 把vote的信息format成string
+    }
+
+    public void createVote(String username, String type, double value) {
+        this.voteManager.addVote(UserManager.getInstance().getUser(username), type, value);
     }
 
     public UUID transferAttempt(String name, String from, String to, double value) {

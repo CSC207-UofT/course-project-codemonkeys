@@ -46,4 +46,17 @@ public class User {
         }
         return null;
     }
+
+    public void addAsset(String assetName) {
+        Asset a = new Asset(assetName);
+        this.assets.add(a);
+    }
+
+    public void addInitialAsset(int value) {
+        Asset a = new Asset("USD");
+        Transaction[] t = Transaction.generateTransactionPair("_", "USD", value);
+        a.addTransaction(t[0]);
+        a.addTransaction(t[1]);
+        this.assets.add(a);
+    }
 }
