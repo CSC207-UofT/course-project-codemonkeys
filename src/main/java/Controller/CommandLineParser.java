@@ -30,6 +30,21 @@ public class CommandLineParser {
         UserManager.getInstance().addUser(user);
     }
 
+    private void join(String name, boolean isAdmin){
+        this.voteManager = VoteManager.getInstance();
+        name = UserManager.checkUserName(name);
+        if (UserManager.isUserPresent(name)) {
+            throw new IllegalStateException("User Already in the system");
+        }
+        User user;
+        if (isAdmin){
+            user = new Admin(name);
+        } else {
+            user = new User(name);
+        }
+        UserManager.getInstance().addUser(user);
+    }
+
     public void join(String name, int init) {
         this.join(name, false, init);
     }
