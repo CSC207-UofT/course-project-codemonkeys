@@ -101,6 +101,14 @@ public class Vote{
     public boolean performTransfer() {
         Asset from = this.initiator.getAsset(this.fromType);
         Asset to = this.initiator.getAsset(this.toType);
+        if(to == null) {
+            this.initiator.addAsset(this.toType);
+            to = this.initiator.getAsset(this.toType);
+        }
+        if(from == null) {
+            this.initiator.addAsset(this.fromType);
+            from = this.initiator.getAsset(this.fromType);
+        }
         return Asset.transfer(from, to, this.value);
     }
 }

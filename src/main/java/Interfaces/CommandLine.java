@@ -116,8 +116,10 @@ public class CommandLine {
             case "viewvote":
                 System.out.println(this.logic.viewVotes());
                 this.userAccoint();
-            case "upvote":  // TODO: check input type
-                UUID uid = UUID.fromString(parts[1]);
+            case "upvote":
+                System.out.println("Please enter id for the vote");
+                String id = this.scan.nextLine();
+                UUID uid = UUID.fromString(id);
                 this.logic.upVote(uid, this.cur_user);
                 int allVotersSoFar = this.logic.voterNumer(uid);
                 int allUsers = this.logic.userNumber();
@@ -125,10 +127,10 @@ public class CommandLine {
                     System.out.println(this.cur_user+": upvote received.");
                 }
                 if (this.logic.checkVoteFinish(uid)) {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is approved.");
+                    System.out.println(this.cur_user+": Vote finished. " + id + " is approved.");
                     this.logic.transferAttempt(uid);
                 } else {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is declined.");
+                    System.out.println(this.cur_user+": Vote finished. " + id + " is declined.");
                 }
                 this.userAccoint();
             case "downvote":
