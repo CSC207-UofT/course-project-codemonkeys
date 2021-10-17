@@ -2,7 +2,7 @@
 
 **Project Repository**
 
-\&lt;[https://github.com/CSC207-UofT/course-project-codemonkeys](https://github.com/CSC207-UofT/course-project-codemonkeys)\&gt;
+<[https://github.com/CSC207-UofT/course-project-codemonkeys](https://github.com/CSC207-UofT/course-project-codemonkeys)>;
 
 **CRC Representation**
 
@@ -10,17 +10,25 @@
 
 **Contributors**
 
-\&lt;Contributor name\&gt; \&lt;Contributor GitHub link\&gt;
+\<Contributor name>  \<Contributor GitHub link>
 
-...
+\<Langson Zhang> \<https://github.com/langsonzhang >
+  
+\<Tammy Yujin Liu> \<https://github.com/tammyliuu >
 
-\&lt;Tammy Yujin Liu\&gt; \&lt;[https://github.com/tammyliuu](https://github.com/tammyliuu)\&gt;
+\<Jiamu Sun> \<https://github.com/JackSunjm >
 
-\&lt;Jiamu Sun\&gt; \&lt;[https://github.com/JackSunjm](https://github.com/JackSunjm)\&gt;
+\<Andrew Hanzhuo Zhang> \<https://github.com/a663E-36z1120 >
 
-\&lt;Andrew Hanzhuo Zhang\&gt; \&lt;[https://github.com/a663E-36z1120](https://github.com/a663E-36z1120)\&gt;
+\<Peng Du> \<https://github.com/Vim0315 >
 
-\&lt;Peng Du\&gt; \&lt;[https://github.com/Vim0315](https://github.com/Vim0315)\&gt;
+\<Raymond Zhang> \<https://github.com/RaymondZhang24 >
+
+\<Edward Li> \<https://github.com/Edward11235 >
+
+\<Charlie Guo> \<https://github.com/charlieguo2021 >
+
+
 
 **1. Domain**
 
@@ -113,19 +121,22 @@ Manages transactions.
 
 **5.1 CLI**
 
-buy \&lt;asset symbol\&gt; \&lt;volume in USD\&gt;
+buy \<asset symbol> \<volunme in USD>
+  
+sell \<asset symbol> \<volume in USD>
+  
+for \<vote ID> \<optional admin flag ‘-admin’>
+  
+against \<vote ID> \<optional admin flag ‘-admin’>
+  
+getStatus \<global or user> \<optional user ID>
+  
+promote \<user ID> \<user class admin, regular, or bot>
+  
+ban \<user ID>
+  
+arrive  \<user ID>
 
-sell \&lt;asset symbol\&gt; \&lt;volume in USD\&gt;
-
-for \&lt;vote ID\&gt; \&lt;optional admin flag &#39;-admin&#39;\&gt;
-
-against \&lt;vote ID\&gt; \&lt;optional admin flag &#39;-admin&#39;\&gt;
-
-getStatus \&lt;global portfolio &#39;global&#39; or user&#39;s shadow portfolio &#39;user&#39;\&gt; \&lt;optional user ID\&gt;
-
-register \&lt;user ID\&gt; \&lt;user class &#39;admin&#39;, &#39;regular&#39;, or &#39;bot&#39;\&gt;
-
-ban \&lt;user ID\&gt;
 
 **5.2 GUI**
 
