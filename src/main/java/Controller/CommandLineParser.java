@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.UserManager;
+import Controller.VoteManager;
 import Entities.Admin;
 import Entities.User;
 import Entities.Vote;
@@ -8,7 +10,7 @@ import org.hamcrest.core.IsInstanceOf;
 import java.nio.file.AccessDeniedException;
 import java.util.UUID;
 
-public class ControllerLogic {
+public class CommandLineParser {
     VoteManager voteManager;
 
     private void join(String name, boolean isAdmin, int init_USD){
@@ -125,6 +127,11 @@ public class ControllerLogic {
             throw new IllegalArgumentException("Invalid vote uuid");
         }
         return this.transferAttempt(vote);
+    }
+
+    //TODO finish this methods.
+    public boolean sell(String from, String to, double val) {
+        return true;
     }
 
 }
