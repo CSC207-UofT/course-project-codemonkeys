@@ -1,14 +1,14 @@
 package Controller;
 
+import UseCases.UserManager;
+import UseCases.VoteManager;
 import Entities.Admin;
 import Entities.User;
 import Entities.Vote;
-import org.hamcrest.core.IsInstanceOf;
 
-import java.nio.file.AccessDeniedException;
 import java.util.UUID;
 
-public class ControllerLogic {
+public class CommandLineParser {
     VoteManager voteManager;
 
     private void join(String name, boolean isAdmin, int init_USD){
@@ -24,6 +24,21 @@ public class ControllerLogic {
         } else {
             user = new User(name);
             user.addInitialAsset(init_USD);
+        }
+        UserManager.getInstance().addUser(user);
+    }
+
+    private void join(String name, boolean isAdmin){
+        this.voteManager = VoteManager.getInstance();
+        name = UserManager.checkUserName(name);
+        if (UserManager.isUserPresent(name)) {
+            throw new IllegalStateException("User Already in the system");
+        }
+        User user;
+        if (isAdmin){
+            user = new Admin(name);
+        } else {
+            user = new User(name);
         }
         UserManager.getInstance().addUser(user);
     }
@@ -61,7 +76,7 @@ public class ControllerLogic {
     }
 
     public String viewVotes() {
-        return this.voteManager.viewVotes();  // vote manager里拿过来，如果不存在 excepton。然后 把vote的信息format成string
+        return this.voteManager.viewVotes();
     }
 
     public int voterNumer(UUID id) {
@@ -125,6 +140,11 @@ public class ControllerLogic {
             throw new IllegalArgumentException("Invalid vote uuid");
         }
         return this.transferAttempt(vote);
+    }
+
+    //TODO finish this methods.
+    public boolean sell(String from, String to, double val) {
+        return true;
     }
 
 }

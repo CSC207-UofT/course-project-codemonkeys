@@ -1,16 +1,16 @@
 package Interfaces;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-import Controller.ControllerLogic;
-import Controller.UserManager;
-import Entities.Admin;
-import Entities.User;
+import UseCases.UserManager;
+import Controller.CommandLineParser;
+import Entities.Asset;
 
 public class CommandLine {
     private String cur_user = "Finance_Simulation";
-    private ControllerLogic logic = new ControllerLogic();
+    private CommandLineParser logic = new CommandLineParser();
     private Scanner scan = new Scanner(System.in);
     private YahooFinanceAPI api = new YahooFinanceAPI();
     private String admin;
@@ -52,12 +52,13 @@ public class CommandLine {
                 int allUsers = this.logic.userNumber();
                 if (allVotersSoFar < allUsers) {
                     System.out.println(this.cur_user+": upvote received.");
-                }
-                if (this.logic.checkVoteFinish(uid)) {
-                    System.out.println(this.cur_user+": Vote finished. " + id + " is approved.");
-                    this.logic.transferAttempt(uid);
                 } else {
-                    System.out.println(this.cur_user+": Vote finished. " + id + " is declined.");
+                    if (this.logic.checkVoteFinish(uid)) {
+                        System.out.println(this.cur_user + ": Vote finished. " + id + " is approved.");
+                        this.logic.transferAttempt(uid);
+                    } else {
+                        System.out.println(this.cur_user + ": Vote finished. " + id + " is declined.");
+                    }
                 }
                 this.adminAccoint();
             case "downvote":
@@ -67,12 +68,35 @@ public class CommandLine {
                 this.logic.downVote(uid, this.cur_user);
                 if (allVotersSoFar < allUsers) {
                     System.out.println(this.cur_user+": downvote received.");
-                }
-                if (this.logic.checkVoteFinish(uid)) {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is approved.");
-                    this.logic.transferAttempt(uid);
                 } else {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is declined.");
+                    if (this.logic.checkVoteFinish(uid)) {
+                        System.out.println(this.cur_user + ": Vote finished. " + parts[1] + " is approved.");
+                        this.logic.transferAttempt(uid);
+                    } else {
+                        System.out.println(this.cur_user + ": Vote finished. " + parts[1] + " is declined.");
+                    }
+                }
+                this.adminAccoint();
+            case "viewallasset":
+                ArrayList<Asset> a = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (Asset as : a) {
+                    System.out.println(as.getType() + " : " + as.getValue());
+                }
+                this.adminAccoint();
+            case "sell":
+                boolean flag = false;
+                ArrayList<Asset> b = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (Asset as : b) {
+                    if (parts[1].equals(as.getType())) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (! flag) {
+                    System.out.println("You don't have this asset.s");
+                } else {
+                    double sellvalue = Integer.parseInt(parts[2]);
+
                 }
                 this.adminAccoint();
             default:
@@ -125,12 +149,13 @@ public class CommandLine {
                 int allUsers = this.logic.userNumber();
                 if (allVotersSoFar < allUsers) {
                     System.out.println(this.cur_user+": upvote received.");
-                }
-                if (this.logic.checkVoteFinish(uid)) {
-                    System.out.println(this.cur_user+": Vote finished. " + id + " is approved.");
-                    this.logic.transferAttempt(uid);
                 } else {
-                    System.out.println(this.cur_user+": Vote finished. " + id + " is declined.");
+                    if (this.logic.checkVoteFinish(uid)) {
+                        System.out.println(this.cur_user + ": Vote finished. " + id + " is approved.");
+                        this.logic.transferAttempt(uid);
+                    } else {
+                        System.out.println(this.cur_user + ": Vote finished. " + id + " is declined.");
+                    }
                 }
                 this.userAccoint();
             case "downvote":
@@ -140,12 +165,19 @@ public class CommandLine {
                 this.logic.downVote(uid, this.cur_user);
                 if (allVotersSoFar < allUsers) {
                     System.out.println(this.cur_user+": downvote received.");
-                }
-                if (this.logic.checkVoteFinish(uid)) {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is approved.");
-                    this.logic.transferAttempt(uid);
                 } else {
-                    System.out.println(this.cur_user+": Vote finished. " + parts[1] + " is declined.");
+                    if (this.logic.checkVoteFinish(uid)) {
+                        System.out.println(this.cur_user + ": Vote finished. " + parts[1] + " is approved.");
+                        this.logic.transferAttempt(uid);
+                    } else {
+                        System.out.println(this.cur_user + ": Vote finished. " + parts[1] + " is declined.");
+                    }
+                }
+                this.userAccoint();
+            case "viewallasset":
+                ArrayList<Asset> a = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (Asset as : a) {
+                    System.out.println(as.getType() + " : " + as.getValue());
                 }
                 this.userAccoint();
             default:

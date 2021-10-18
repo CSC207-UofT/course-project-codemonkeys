@@ -2,6 +2,7 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Asset {
     //____________________ Variables ___________________________________________________________________________________
@@ -9,13 +10,31 @@ public class Asset {
     private List<Transaction> transactionList;
     //____________________ Constructors ________________________________________________________________________________
 
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
     public Asset(String type){
         this.type = type;
         this.transactionList = new ArrayList<Transaction>();
     }
 
     public String getType() {
-        return type;
+        return this.type;
+    }
+
+    public double getValue() {
+        double res = 0.0;
+        for (Transaction t: this.transactionList) {
+//            if (t.getFrom_type().equals("_") || t.getTo_type().equals("_")) continue;
+//            if (t.getFrom_type().equals(this.type)) {
+//                res -= t.getValue();
+//            }
+            if (t.getTo_type().equals(this.type)) {
+                res += t.getValue();
+            }
+        }
+        return res;
     }
 
     public void addTransaction(Transaction t) {
