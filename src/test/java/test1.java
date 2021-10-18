@@ -1,3 +1,5 @@
 public class test1 {
-    static void
+    public static void main(String[] args) {
+//        lkdasjfl;kasjd;lfkjas
+    }
 }
