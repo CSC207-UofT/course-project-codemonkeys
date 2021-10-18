@@ -1,13 +1,11 @@
 package Controller;
 
-import Controller.UserManager;
-import Controller.VoteManager;
+import UseCases.UserManager;
+import UseCases.VoteManager;
 import Entities.Admin;
 import Entities.User;
 import Entities.Vote;
-import org.hamcrest.core.IsInstanceOf;
 
-import java.nio.file.AccessDeniedException;
 import java.util.UUID;
 
 public class CommandLineParser {

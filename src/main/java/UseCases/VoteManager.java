@@ -1,4 +1,4 @@
-package Controller;
+package UseCases;
 
 import Entities.User;
 import Entities.Vote;

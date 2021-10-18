@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-import Controller.UserManager;
+import UseCases.UserManager;
 import Controller.CommandLineParser;
 import Entities.Asset;
 
