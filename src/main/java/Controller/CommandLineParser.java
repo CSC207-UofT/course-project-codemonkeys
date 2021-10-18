@@ -76,7 +76,7 @@ public class CommandLineParser {
     }
 
     public String viewVotes() {
-        return this.voteManager.viewVotes();  // vote manager里拿过来，如果不存在 excepton。然后 把vote的信息format成string
+        return this.voteManager.viewVotes();
     }
 
     public int voterNumer(UUID id) {
