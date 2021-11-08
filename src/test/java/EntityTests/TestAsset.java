@@ -1,3 +1,5 @@
+package EntityTests;
+
 import Entities.Asset;
 import org.junit.*;
 import static org.junit.Assert.*;

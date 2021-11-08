@@ -2,9 +2,10 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.UUID;
 
-public class Vote{
+public class Vote extends Observable {
     private UUID id;
     private User initiator;
     private String fromType;
@@ -35,7 +36,17 @@ public class Vote{
         for(User u : this.downVoters) {
             sum -= u.getLiquidAssetValue();
         }
+
+
+
+        // --------------------
+        changeMessage(sum >= this.value ? "True" : "False");
+
+
+
+
         return sum >= this.value;
+
     }
 
     public boolean checkApprove(int num) {
@@ -110,6 +121,15 @@ public class Vote{
             from = this.initiator.getAsset(this.fromType);
         }
         return Asset.transfer(from, to, this.value);
+    }
+
+
+
+    //-----------------------------------------------
+    public void changeMessage(String message)
+    {
+        setChanged();
+        notifyObservers(message);
     }
 }
 
