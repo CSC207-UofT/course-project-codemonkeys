@@ -2,7 +2,6 @@ package Controller;
 
 import UseCases.UserManager;
 import UseCases.VoteManager;
-import Entities.Admin;
 import Entities.User;
 import Entities.Vote;
 
