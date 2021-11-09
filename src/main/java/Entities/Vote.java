@@ -12,6 +12,7 @@ public class Vote{
     private double value;
     private List<User> upVoters;
     private List<User> downVoters;
+    private boolean status; //True if it is on going and false if the vote is vetoed.
 
     public Vote(User init, String fromType, String toType, double val) {
         this.id = UUID.randomUUID();
@@ -21,6 +22,14 @@ public class Vote{
         this.value = val;
         this.upVoters = new ArrayList<User>();
         this.downVoters = new ArrayList<User>();
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public boolean getStatus() {
+        return status;
     }
 
     public boolean isEligible(){
@@ -35,7 +44,17 @@ public class Vote{
         for(User u : this.downVoters) {
             sum -= u.getLiquidAssetValue();
         }
+
+
+
+        // --------------------
+        changeMessage(sum >= this.value ? "True" : "False");
+
+
+
+
         return sum >= this.value;
+
     }
 
     public boolean checkApprove(int num) {
@@ -111,5 +130,13 @@ public class Vote{
         }
         return Asset.transfer(from, to, this.value);
     }
-}
 
+
+
+    //-----------------------------------------------
+    public void changeMessage(String message)
+    {
+        setChanged();
+        notifyObservers(message);
+    }
+}
