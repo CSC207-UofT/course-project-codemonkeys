@@ -1,6 +1,5 @@
 package UseCases.Commands;
 
-public class CommandExecutor {
-    public CommandExecutor() {
-    }
+public abstract class CommandExecutor {
+
 }

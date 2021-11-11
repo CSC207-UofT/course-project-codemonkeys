@@ -1,20 +1,26 @@
 import Interfaces.CommandLine;
 import UseCases.Commands.*;
-import org.reflections.Reflections;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
-        CommandLine cmd = new CommandLine();
 
         /**
          * Test the help command
          * TODO: implement functionality for other commands
          */
-        new Help().execute();
+
+        Object[] a = {Kick.class, Help.class};
+
+        new Help().execute(new ArrayList(Arrays.asList(a)));
+
+        CommandLine cmd = new CommandLine();
 
 //        Asset teslaStock = new Asset("TSLA", 3.123);
 //        YahooFinanceAPI yahoo = new YahooFinanceAPI();
@@ -27,5 +33,7 @@ public class Main {
 //
 //            System.out.println(quantity + " Tesla Stock is now worth $" + value + " at price $" + price);
     }
+
+
 
 }

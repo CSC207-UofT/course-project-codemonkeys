@@ -1,14 +1,14 @@
 package UseCases.Commands;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface Command {
     /**
      * Executes the functionality of a Command
      * @returns true if successfully exectued, false otherwise
+     * @param args
      */
-    public boolean execute();
+    public boolean execute(ArrayList args);
 
     /**
      * Gives help

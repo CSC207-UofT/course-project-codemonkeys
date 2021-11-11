@@ -1,3 +1,12 @@
+/**
+ * @File: CommandManager.java
+ * @Brief: Class for centralized manipulation of Commands
+ *
+ * @Author: Langson Zhang for CSC207 codeMonkeys
+ * @Date: Nov 11 2021
+ * @Version: 1.0
+ */
+
 package UseCases.Commands;
 
 import org.reflections.Reflections;
@@ -6,7 +15,6 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 
 /**
  * Follows the singleton design
