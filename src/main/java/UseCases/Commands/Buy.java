@@ -1,8 +1,8 @@
 package UseCases.Commands;
 
-public class Leave implements Command{
+public class Buy implements Command{
 
-    public Leave() {
+    public Buy() {
     }
 
     @Override
@@ -12,6 +12,6 @@ public class Leave implements Command{
 
     @Override
     public String help() {
-        return "this is info for the leave command";
+        return "this is info for the buy command";
     }
 }
