@@ -3,8 +3,6 @@ package Entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Double.NaN;
-
 public class User {
     private String name;
     private List<Asset> assets;

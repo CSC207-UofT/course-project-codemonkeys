@@ -1,3 +1,5 @@
+package EntityTests;
+
 import Entities.User;
 import Entities.Vote;
 import org.junit.*;
