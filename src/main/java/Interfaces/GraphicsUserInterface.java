@@ -1,7 +1,7 @@
 package Interfaces;
 
 import javax.swing.*;
-import Controller.GraphicsPresenter.ChartPanelFactory;
+import Controller.GraphicsPresenter.*;
 
 public class GraphicsUserInterface {
     public static void presentGraphics(){
@@ -10,10 +10,11 @@ public class GraphicsUserInterface {
         frame.setLayout(null);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
-        frame.add(ChartPanelFactory.makeChartPanel("Portfolio Value Chart", 0, 0, 500, 500));
-        frame.add(ChartPanelFactory.makeChartPanel("Portfolio Composition Chart", 500, 0, 500, 500));
-        frame.add(ChartPanelFactory.makeChartPanel("Asset Growth Chart", 0, 500, 500, 250));
-        frame.add(ChartPanelFactory.makeChartPanel("Portfolio Growth Chart", 0, 750, 500, 250));
-        frame.add(ChartPanelFactory.makeChartPanel("User Leaderboard", 500, 500, 500, 500));
+        frame.add(PanelFactory.makePanel("Text", 0, 0, 500, 250));
+        frame.add(PanelFactory.makePanel("Portfolio Value Chart", 0, 250, 500, 250));
+        frame.add(PanelFactory.makePanel("Portfolio Composition Chart", 500, 0, 500, 500));
+        frame.add(PanelFactory.makePanel("Asset Growth Chart", 0, 500, 500, 250));
+        frame.add(PanelFactory.makePanel("Portfolio Growth Chart", 0, 750, 500, 250));
+        frame.add(PanelFactory.makePanel("User Leaderboard", 500, 500, 500, 500));
     }
 }

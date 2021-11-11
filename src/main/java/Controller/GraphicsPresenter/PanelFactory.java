@@ -1,24 +1,29 @@
 package Controller.GraphicsPresenter;
 
-import org.jfree.chart.ChartPanel;
+import javax.swing.*;
 
-public class ChartPanelFactory {
-    public static ChartPanel makeChartPanel(String type, int x, int y, int width, int height) {
-        if (type == "Portfolio Value Chart") {
+public class PanelFactory {
+    // Makes JPanels to display on the GUI
+    public static JPanel makePanel(String type, int x, int y, int width, int height) {
+
+        if (type == "Text") {
+            TextPanel text = new TextPanel();
+            return text.getPanel(x, y, width, height);
+        } else if (type == "Portfolio Value Chart") {
             PortfolioValueChartPanel growthChart = new PortfolioValueChartPanel();
-            return growthChart.getChartPanel(x, y, width, height);
+            return growthChart.getPanel(x, y, width, height);
         } else if (type == "Portfolio Composition Chart") {
             PortfolioPieChartPanel pieChart = new PortfolioPieChartPanel();
-            return pieChart.getChartPanel(x, y, width, height);
+            return pieChart.getPanel(x, y, width, height);
         } else if (type == "Asset Growth Chart") {
             AssetGrowthChartPanel barChart = new AssetGrowthChartPanel();
-            return barChart.getChartPanel(x, y, width, height);
+            return barChart.getPanel(x, y, width, height);
         } else if (type == "Portfolio Growth Chart") {
             PortfolioGrowthChartPanel barChart = new PortfolioGrowthChartPanel();
-            return barChart.getChartPanel(x, y, width, height);
+            return barChart.getPanel(x, y, width, height);
         } else if (type == "User Leaderboard") {
             UserLeaderboardChartPanel barChart = new UserLeaderboardChartPanel();
-            return barChart.getChartPanel(x, y, width, height);
+            return barChart.getPanel(x, y, width, height);
         }
         return null;
     }
