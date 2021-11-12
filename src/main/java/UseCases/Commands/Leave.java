@@ -1,12 +1,14 @@
 package UseCases.Commands;
 
+import java.util.ArrayList;
+
 public class Leave implements Command{
 
     public Leave() {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(ArrayList args) {
         return false;
     }
 

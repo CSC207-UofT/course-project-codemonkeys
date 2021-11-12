@@ -1,12 +1,14 @@
 package UseCases.Commands;
 
+import java.util.ArrayList;
+
 public class Upvote implements Command{
 
     public Upvote() {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(ArrayList args) {
         return false;
     }
 
