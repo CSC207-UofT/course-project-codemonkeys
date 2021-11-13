@@ -1,8 +1,9 @@
 package Entities;
 
 import java.util.*;
+import java.io.*;
 
-public class Asset {
+public class Asset implements Serializable{
     //____________________ Variables ___________________________________________________________________________________
     private String type;
     private List<Transaction> transactionList;

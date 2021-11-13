@@ -31,7 +31,3 @@ public class TransactionManager {
     public void delete(Transaction trans){this.transactionLists.remove(trans.getId());}
 
     public void delete(UUID id){this.transactionLists.remove(id);}
-
-
-
-}
