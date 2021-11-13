@@ -121,7 +121,7 @@ public class Vote{
         Asset from = this.initiator.getAsset(this.fromType);
         Asset to = this.initiator.getAsset(this.toType);
         if(to == null) {
-            this.initiator.addAsset(this.toType);
+            this.initiator.addAsset(this.fromType);
             to = this.initiator.getAsset(this.toType);
         }
         if(from == null) {
@@ -136,7 +136,7 @@ public class Vote{
     //-----------------------------------------------
     public void changeMessage(String message)
     {
-        setChanged();
-        notifyObservers(message);
+       // setChanged();
+       // notifyObservers(message);
     }
 }

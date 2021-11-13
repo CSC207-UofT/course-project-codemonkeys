@@ -1,42 +1,40 @@
 package Entities;
-
+import java.util.Date;
 import java.util.UUID;
 
 public class Transaction {
-    private UUID id;
-    private String from_type;
-    private String to_type;
-    private double value;  // the price of the to_type
-    // private double quantity;  // the quantity of the to_type
+    private final UUID id;
+    private final User initializer;
+    private final Date time;
+    private final Asset from_asset;
+    private final Asset to_asset;
 
-    private Transaction(UUID id, String from, String to, double val){
+    public Transaction(UUID id, String from, User initializer, String to,
+                        Asset from_asset, Asset to_asset, Date time){
         this.id = id;
-        this.from_type = from;
-        this.to_type = to;
-        this.value = val;
+        this.from_asset = from_asset;
+        this.to_asset = to_asset;
+        this.initializer = initializer;
+        this.time = time;
     }
 
-    public static Transaction[] generateTransactionPair(String from, String to, double val) {
-        UUID id = UUID.randomUUID();
-        Transaction[] t = new Transaction[2];
-        t[0] = new Transaction(id, to, from, -val);  // transfering from
-        t[1] = new Transaction(id, from, to, val);  // transfering to
-        return t;
-    }
 
     public UUID getId() {
         return this.id;
     }
 
-    public String getFrom_type() {
-        return this.from_type;
+    public Asset getFrom_asset() {
+        return from_asset;
     }
 
-    public String getTo_type() {
-        return this.to_type;
+    public Asset getTo_asset() {
+        return to_asset;
     }
 
-    public double getValue() {
-        return this.value;
+    public User getInitializer(){return this.initializer;}
+
+    public Date getTime(){
+        return this.time;
     }
+
 }

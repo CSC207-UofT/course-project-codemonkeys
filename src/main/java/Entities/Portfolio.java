@@ -38,4 +38,38 @@ public class Portfolio {
 
         return result;
     }
+
+    public double CalculateLiquidValue(){
+        double result = 0;
+        for(Asset a: this.assets){
+            if(a.getType().equals("Liquid")){
+                result += a.getTotalPriceOwned();
+            }
+        }
+        return result;
+    }
+
+    public double TypeAssetValue(String type){
+        // Calculate the total asset value of a specific type of asset in the portfolio.
+        double result = 0;
+        for(Asset a: this.assets){
+            if(a.getType().equals(type)){
+                result += a.getTotalPriceOwned();
+            }
+        }
+        return result;
+    }
+
+    public Asset GetAsset(String type){
+        for(Asset a: this.assets){
+            if(a.getType().equals(type)){
+                return a;
+            }
+        }
+        return null;
+    }
+    // Not sure
+    public void AddAssetType(String type){
+        this.AddAsset(new Asset(type));
+    }
 }

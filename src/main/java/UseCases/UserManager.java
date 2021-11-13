@@ -22,13 +22,13 @@ public class UserManager {
         return UserManager.instance;  // UserManager only initiated for once
     }
 
-    public void addUser(User u) {
-        this.userMap.put(u.getName(), u);
-    }
+  //  public void addUser(User u) {
+  //      this.userMap.put(u.getName(), u);
+  //  }
 
-    public void delUser(User u) {
-        this.userMap.remove(u.getName());
-    }
+  //  public void delUser(User u) {
+     //   this.userMap.remove(u.getName());
+   // }
 
     public void delUser(String name) {
         this.userMap.remove(name);
