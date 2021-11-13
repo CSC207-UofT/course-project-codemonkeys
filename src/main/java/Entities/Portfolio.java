@@ -68,4 +68,8 @@ public class Portfolio {
         }
         return null;
     }
+    // Not sure
+    public void AddAssetType(String type){
+        this.AddAsset(new Asset(type));
+    }
 }

@@ -1,27 +1,21 @@
 package Entities;
-
+import java.util.Date;
 import java.util.UUID;
 
 public class Transaction {
-    private UUID id;
-    private User initializer;
-    private String from_type;
-    private String to_type;
-    private double from_price;  // the price of the to_type
-    private double from_quantity;  // the quantity of the to_type
-    private double to_price;  // the price of the to_type
-    private double to_quantity;  // the quantity of the to_type
+    private final UUID id;
+    private final User initializer;
+    private final Date time;
+    private final Asset from_asset;
+    private final Asset to_asset;
 
-    private Transaction(UUID id, String from, User initializer, String to,
-                        double from_price, double from_quantity, double to_price, double to_quantity){
+    public Transaction(UUID id, String from, User initializer, String to,
+                        Asset from_asset, Asset to_asset, Date time){
         this.id = id;
-        this.from_type = from;
-        this.to_type = to;
-        this.from_price = from_price;
-        this.from_quantity = from_quantity;
-        this.to_price = to_price;
-        this.to_quantity = to_quantity;
+        this.from_asset = from_asset;
+        this.to_asset = to_asset;
         this.initializer = initializer;
+        this.time = time;
     }
 
 
@@ -29,31 +23,18 @@ public class Transaction {
         return this.id;
     }
 
-    public String getFrom_type() {
-        return this.from_type;
+    public Asset getFrom_asset() {
+        return from_asset;
     }
 
-    public String getTo_type() {
-        return this.to_type;
-    }
-
-    public double getFrom_price() {
-        return this.from_price;
-    }
-
-    public double getFrom_quantity() {
-        return this.from_quantity;
-    }
-
-    public double getTo_price() {
-        return this.to_price;
-    }
-
-    public double getTo_quantity() {
-        return this.to_quantity;
+    public Asset getTo_asset() {
+        return to_asset;
     }
 
     public User getInitializer(){return this.initializer;}
 
+    public Date getTime(){
+        return this.time;
+    }
 
 }

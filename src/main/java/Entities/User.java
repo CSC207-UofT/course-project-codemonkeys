@@ -5,15 +5,29 @@ import java.util.List;
 import java.util.UUID;
 
 import static java.lang.Double.NaN;
-public interface User{
+public abstract class User{      // Apply the decoration design pattern.
+    private UUID id;
+    private Portfolio portfolio;
 
-// Apply the decoration design pattern.
-    // String getName();
-    // void setName(String name);
-    // UUID getId();
-    // void setId(UUID id);
-    // Portfolio getPortfolio();
-    // void setPortfolio(Portfolio portfolio);
+
+    public double getLiquidAssetValue() {
+        return this.portfolio.CalculateLiquidValue();
+    }
+
+
+    public boolean hasAssetValue(String fromType, double value) {
+        return this.portfolio.TypeAssetValue(fromType) >= value;
+    }
+
+    public Asset getAsset(String Type) {
+        return this.portfolio.GetAsset(Type);
+    }
+
+    public void addAsset(String Type) {
+        this.portfolio.AddAssetType(Type);
+    }
+
 
 }
+
 

@@ -29,9 +29,9 @@ public class Asset {
 //            if (t.getFrom_type().equals(this.type)) {
 //                res -= t.getValue();
 //            }
-            if (t.getTo_type().equals(this.type)) {
-                res += t.getValue();
-            }
+        //    if (t.getTo_type().equals(this.type)) {
+       //         res += t.getValue();
+       //     }
         }
         return res;
     }
@@ -44,19 +44,19 @@ public class Asset {
         if (from.getTotalValue() < value) {
             return false;  // transaction denied
         }
-        Transaction[] t = Transaction.generateTransactionPair(from.getType(), to.getType(), value);
-        from.addTransaction(t[0]);
-        to.addTransaction(t[1]);
+      //  Transaction[] t = Transaction.generateTransactionPair(from.getType(), to.getType(), value);
+     //   from.addTransaction(t[0]);
+     //   to.addTransaction(t[1]);
         return true;  // Transaction approved.
     }
 
 
     public double getTotalValue(){
         double sum = 0;
-        for (Transaction t : this.transactionList) {
-            if (t.getTo_type() == "_") continue;
-            sum += t.getValue();
-        }
+      //  for (Transaction t : this.transactionList) {
+         //   if (t.getTo_type() == "_") continue;
+        //    sum += t.getValue();
+     //   }
         return sum;
     }
 
