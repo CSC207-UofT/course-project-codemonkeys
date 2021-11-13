@@ -3,8 +3,10 @@ package Entities;
 import Entities.Identification.Identifiable;
 
 import java.util.*;
+import java.io.*;
 
-public class Asset<T extends AssetType> extends Identifiable<T> {
+
+public class Asset<T extends AssetType> extends Identifiable<T> implements Serializable{
     //____________________ Variables ___________________________________________________________________________________
 
     private User owner;

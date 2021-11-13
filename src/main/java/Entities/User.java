@@ -58,3 +58,4 @@ public class User {
         this.assets.add(a);
     }
 }
+
