@@ -1,9 +1,8 @@
 package Entities;
 
 import java.util.ArrayList;
-import java.io.*;
 
-public class Portfolio implements Serializable{
+public class Portfolio {
     private ArrayList<Asset> assets;
 
     public Portfolio(ArrayList<Asset> assets){
@@ -38,5 +37,35 @@ public class Portfolio implements Serializable{
         }
 
         return result;
+    }
+
+    public double CalculateLiquidValue(){
+        double result = 0;
+        for(Asset a: this.assets){
+            if(a.getType().equals("Liquid")){
+                result += a.getTotalPriceOwned();
+            }
+        }
+        return result;
+    }
+
+    public double TypeAssetValue(String type){
+        // Calculate the total asset value of a specific type of asset in the portfolio.
+        double result = 0;
+        for(Asset a: this.assets){
+            if(a.getType().equals(type)){
+                result += a.getTotalPriceOwned();
+            }
+        }
+        return result;
+    }
+
+    public Asset GetAsset(String type){
+        for(Asset a: this.assets){
+            if(a.getType().equals(type)){
+                return a;
+            }
+        }
+        return null;
     }
 }
