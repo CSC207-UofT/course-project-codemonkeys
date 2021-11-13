@@ -6,7 +6,7 @@ public class AssetFactory {
             return null;
         }
         if (assetType.equalsIgnoreCase("Stock")) {
-            return new Stock(symbol);
+//            return new Stock(symbol);
         } else if (assetType.equalsIgnoreCase("Cryptocurrency")) {
             return new Cryptocurrency();
         } else if (assetType.equalsIgnoreCase("USD")) {

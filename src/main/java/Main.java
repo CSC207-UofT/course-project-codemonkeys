@@ -14,7 +14,22 @@ import java.util.UUID;
 public class Main {
     public static void main(String[] args) throws InterruptedException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
 
-        Asset<Stock> asset = new Asset(10, 10 );
+        /**
+         * Create a stock
+         */
+        Stock tesla = new Stock();
+        tesla.name = "Tesla";
+        tesla.symbol = "TSLA";
+
+        /**
+         * Make an asset for that stock
+         */
+        Asset<Stock> asset = new Asset<Stock>(10, 10, tesla);
+        System.out.println(asset.getType().name);
+        System.out.println(asset.getType().symbol);
+        System.out.println(asset.getPrice());
+        System.out.println(asset.getVolume());
+
 
         /**
          * Test the help command

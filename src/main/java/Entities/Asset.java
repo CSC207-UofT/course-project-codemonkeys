@@ -21,12 +21,10 @@ public class Asset<T extends AssetType> extends Identifiable<T> {
         this.owner = owner;
     }
 
-    public Asset(double volume, double price) {
-        super();
-    }
-
     public Asset(double volume, double price, T type) {
         super(type);
+        this.volume = volume;
+        this.price = price;
     }
 
     //____________________ Methods _____________________________________________________________________________________
