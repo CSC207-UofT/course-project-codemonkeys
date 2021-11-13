@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import static java.lang.Double.NaN;
 public interface User{
+
 // Apply the decoration design pattern.
     // String getName();
     // void setName(String name);

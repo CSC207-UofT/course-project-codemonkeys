@@ -52,4 +52,24 @@ public class ConcreteUser implements User {
     public void setId(UUID id) {
         this.id = id;
     }
+
+
+    public double getLiquidAssetValue() {
+        return this.portfolio.CalculateLiquidValue();
+    }
+
+
+    public boolean hasAssetValue(String fromType, double value) {
+        return this.portfolio.TypeAssetValue(fromType) >= value;
+    }
+
+// Not exactly sure about what the following two methods mean
+    public Asset getAsset(String Type) {
+        return this.portfolio.GetAsset(Type);
+    }
+
+
+    public void addAsset(String toType) {
+
+    }
 }
