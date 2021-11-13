@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.*;
 
-public class Asset {
+public class AssetOLD {
     //____________________ Variables ___________________________________________________________________________________
     private String type;
     private List<Transaction> transactionList;
@@ -13,7 +13,7 @@ public class Asset {
         return transactionList;
     }
 
-    public Asset(String type){
+    public AssetOLD(String type){
         this.type = type;
         this.transactionList = new ArrayList<Transaction>();
     }
@@ -40,7 +40,7 @@ public class Asset {
         this.transactionList.add(t);
     }
 
-    public static boolean transfer(Asset from, Asset to, double value) {
+    public static boolean transfer(AssetOLD from, AssetOLD to, double value) {
         if (from.getTotalValue() < value) {
             return false;  // transaction denied
         }
@@ -60,8 +60,8 @@ public class Asset {
         return sum;
     }
 
-    public Asset copy() {
-        Asset clone = new Asset(this.type);
+    public AssetOLD copy() {
+        AssetOLD clone = new AssetOLD(this.type);
         for (Transaction t : this.transactionList) {
             clone.transactionList.add(t);
         }
@@ -79,7 +79,7 @@ public class Asset {
 
 
 
-    public Asset () {}
+    public AssetOLD() {}
 
     public void setPrice(double newPrice) {
         this.price = newPrice;

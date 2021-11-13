@@ -1,15 +1,38 @@
+import Entities.Asset;
+import Entities.AssetType;
+import Entities.Stock;
 import Interfaces.CommandLine;
 import UseCases.Commands.*;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
+
+        /**
+         * Create a stock
+         */
+        Stock tesla = new Stock();
+        tesla.name = "Tesla";
+        tesla.symbol = "TSLA";
+
+        AssetType.CAD cad = new AssetType.CAD();
+        /**
+         * Make an asset for that stock
+         */
+        Asset<Stock> asset = new Asset<Stock>(10, 10, tesla);
+        System.out.println(asset.getType().name);
+        System.out.println(asset.getType().symbol);
+        System.out.println(asset.getPrice());
+        System.out.println(asset.getVolume());
+        System.out.println(asset.getId());
 
         /**
          * Test the help command

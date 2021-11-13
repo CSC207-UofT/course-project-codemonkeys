@@ -1,6 +1,6 @@
 package Entities;
 
-public class USD extends Asset {
+public class USD extends AssetOLD {
 
 
 }
