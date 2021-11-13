@@ -44,6 +44,10 @@ public class TransactionManager {
         return this.transactionHashMap.containsKey(id);
     }
 
+    public boolean hasTransaction(Transaction transaction) {
+        return this.transactionHashMap.containsKey(transaction.getId());
+    }
+
     public void delete(Transaction trans) {
         this.transactionHashMap.remove(trans.getId());
     }
