@@ -12,18 +12,20 @@ public class TextPanel implements Panel{
         // Return the text displayed on the panel
         // TODO Connect with lower levels to get actual data
 
-        return """
-               <html> <br/>
+        return
+                """
+                <html> <br/>
+                
                 US $50000 Total Investment<br/>
-
+                                
                 Current Portfolio Net Worth: US <$60000<br/>
-
+                                
                 Current Net Profit: US $10000 (+20%)<br/>
-
+                
                 Total Invested Users: 3<br/>
-
+                
                 <br/>
-
+                
                 <html>
                 """ + "Timestamp: " + date.toString();
     }

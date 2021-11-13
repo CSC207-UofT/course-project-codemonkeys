@@ -1,33 +1,42 @@
 package UseCases;
-import Entities.*;
+import Entities.Transaction;
+import Entities.Vote;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import java.util.*;
 
 public class TransactionManager {
-    private List<Transaction> transactionLists;
+    private Map<UUID, Transaction[]> transactionMap;
 
-    private TransactionManager(){ this.transactionLists = new ArrayList<>(); }
+    private TransactionManager(){ this.transactionMap = new HashMap<UUID, Transaction[]>(); }
 
-    public void creat(Date date, User user, double volume1, double price1, AssetType type1,
-                      double volume2, double price2, AssetType type2){
-        //create 2 assets then add into transaction
-        Asset asset1 = new Asset(volume1, price1, type1);
-        Asset asset2 = new Asset(volume2, price2, type2);
-        // assign Id to the transaction.
-        UUID id = UUID.randomUUID();
-        // create transaction and add into the manager list
-        this.transactionLists.add(new Transaction(id, date, user, asset1, asset2));
+    public void creat(String from, String to, double val){
+         Transaction[] trans = Transaction.generateTransactionPair(from, to, val);
+         this.transactionMap.put(trans[0].getId(), trans);
     }
 
-    public List<Transaction> view(){
-        return this.transactionLists;
+    public String viewTransaction(){
+        StringBuilder res = new StringBuilder();
+        for (Map.Entry<UUID, Transaction[]> entry : this.transactionMap.entrySet()) {
+            UUID u = entry.getKey();
+            Transaction v[] = entry.getValue();
+            for (Transaction t: v) {
+                res.append("id: ").append(u.toString()).append(", from ").append(t.getFrom_type()).
+                        append(", to: ").append(t.getTo_type()).
+                        append(", value: ").append(t.getValue());
+            }
+        }
+        return res.toString();
     }
 
-    public boolean checkTransaction(Transaction t){
-        return this.transactionLists.contains(t);
-    }
+    public void delete(Transaction trans){this.transactionMap.remove(trans.getId());}
 
-    public void delete(Transaction trans){this.transactionLists.remove(trans.getId());}
+    public void delete(UUID id){this.transactionMap.remove(id);}
 
-    public void delete(UUID id){this.transactionLists.remove(id);}
+    public Transaction[] getTransaction(UUID id){return this.transactionMap.get(id); }
+
+
+
+}
