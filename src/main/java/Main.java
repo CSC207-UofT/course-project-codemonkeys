@@ -1,13 +1,5 @@
 
-import Entities.Asset;
-import Interfaces.YahooFinanceAPI;
-import UseCases.AssetManager;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 import Interfaces.CommandLine;
-
-import java.io.IOException;
-import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
