@@ -1,10 +1,12 @@
 import Entities.Asset;
+import Entities.AssetType;
 import Entities.Stock;
 import Interfaces.CommandLine;
 import UseCases.Commands.*;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,7 @@ public class Main {
         tesla.name = "Tesla";
         tesla.symbol = "TSLA";
 
+        AssetType.CAD cad = new AssetType.CAD();
         /**
          * Make an asset for that stock
          */
@@ -29,7 +32,7 @@ public class Main {
         System.out.println(asset.getType().symbol);
         System.out.println(asset.getPrice());
         System.out.println(asset.getVolume());
-
+        System.out.println(asset.getId());
 
         /**
          * Test the help command
