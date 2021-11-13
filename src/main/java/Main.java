@@ -1,16 +1,12 @@
-import Entities.Asset;
-import Entities.AssetType;
-import Entities.Stock;
+import Assets.Asset;
+import Assets.AssetType;
+import Assets.Stock;
+import Commands.*;
 import Interfaces.CommandLine;
-import UseCases.Commands.*;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 
 public class Main {
