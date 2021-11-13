@@ -11,6 +11,15 @@ public class AssetManager {
     // TODO : List<Asset> -> AssetList Iterable
     public List<Asset> assets = new ArrayList<>(); // asset -> totalAssets
 
+    private static AssetManager instance = null;
+
+    public static AssetManager getInstance() {
+        if(AssetManager.instance == null) {
+            AssetManager.instance = new AssetManager();
+        }
+        return AssetManager.instance;  // UserManager only initiated for once
+    }
+
     public void updateAssetPrice(DataAccessInterface source) {
         for (Asset asset : this.assets) {
             double price = source.getUpdate(asset.getSymbol());
@@ -36,6 +45,15 @@ public class AssetManager {
 
     public void assetAddOwner(Asset asset, UUID owner, Double amount) {
         asset.addOwner(owner, amount);
+    }
+
+    public Asset checkByType(String name){
+        for(Asset a: this.assets){
+          if(a.getType() == name)  {
+              return a;
+          };
+        };
+        return null;
     }
 
     // TODO: probably strategy pattern

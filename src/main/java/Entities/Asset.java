@@ -7,6 +7,7 @@ public class Asset implements Serializable{
     //____________________ Variables ___________________________________________________________________________________
     private String type;
     private List<Transaction> transactionList;
+    private double amount;
 
     //____________________ Constructors ________________________________________________________________________________
 
@@ -17,6 +18,7 @@ public class Asset implements Serializable{
     public Asset(String type){
         this.type = type;
         this.transactionList = new ArrayList<Transaction>();
+        this.amount = 0;
     }
 
     public String getType() {
