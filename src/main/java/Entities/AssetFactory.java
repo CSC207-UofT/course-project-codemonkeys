@@ -11,8 +11,9 @@ public class AssetFactory {
             return new Cryptocurrency();
         } else if (assetType.equalsIgnoreCase("USD")) {
             return new USD();
+        } else {
+            return new Asset();
         }
 
-        return null;
     }
 }
