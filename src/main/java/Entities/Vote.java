@@ -1,9 +1,6 @@
 package Entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.UUID;
+import java.util.*;
 import java.io.*;
 
 public class Vote extends Observable implements Serializable{
@@ -12,8 +9,8 @@ public class Vote extends Observable implements Serializable{
     private String fromType;
     private String toType;
     private double value;
-    private List<User> upVoters;
-    private List<User> downVoters;
+    private Set<User> upVoters; //in case someone re-vote and the list will be larger.
+    private Set<User> downVoters;
     private boolean status; //True if it is on going and false if the vote is vetoed.
 
     public Vote(User init, String fromType, String toType, double val) {
@@ -22,8 +19,8 @@ public class Vote extends Observable implements Serializable{
         this.fromType = fromType;
         this.toType = toType;
         this.value = val;
-        this.upVoters = new ArrayList<User>();
-        this.downVoters = new ArrayList<User>();
+        this.upVoters = new HashSet<User>();
+        this.downVoters = new HashSet<User>();
     }
 
     public void setStatus(boolean status) {
