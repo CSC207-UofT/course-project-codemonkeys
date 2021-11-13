@@ -1,5 +1,5 @@
 package UseCases;
-import Entities.Asset;
+import Entities.AssetOLD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,32 +9,32 @@ import java.util.UUID;
 public class AssetManager {
 
     // TODO : List<Asset> -> AssetList Iterable
-    public List<Asset> assets = new ArrayList<>(); // asset -> totalAssets
+    public List<AssetOLD> assets = new ArrayList<>(); // asset -> totalAssets
 
     public void updateAssetPrice(DataAccessInterface source) {
-        for (Asset asset : this.assets) {
+        for (AssetOLD asset : this.assets) {
             double price = source.getUpdate(asset.getSymbol());
             asset.setPrice(price);
         }
     }
 
-    public void addAsset(Asset newAsset) {
+    public void addAsset(AssetOLD newAsset) {
         this.assets.add(newAsset);
     }
 
-    public void removeAsset(Asset delAsset) {
+    public void removeAsset(AssetOLD delAsset) {
         this.assets.remove(delAsset);
     }
 
-    public List<Asset> getAllAssets() {
+    public List<AssetOLD> getAllAssets() {
         return this.assets;
     }
 
-    public Map<UUID, Double> getAssetOwner(Asset asset) {
+    public Map<UUID, Double> getAssetOwner(AssetOLD asset) {
         return asset.getOwnerList();
     }
 
-    public void assetAddOwner(Asset asset, UUID owner, Double amount) {
+    public void assetAddOwner(AssetOLD asset, UUID owner, Double amount) {
         asset.addOwner(owner, amount);
     }
 
@@ -44,26 +44,26 @@ public class AssetManager {
         return null;
     }
 
-    public Asset findBySymbol(String symbol){
-        for (Asset a : this.assets) {
+    public AssetOLD findBySymbol(String symbol){
+        for (AssetOLD a : this.assets) {
             if (a.getSymbol().equalsIgnoreCase(symbol)) return a;
         }
         return null;
     }
 
     // TODO
-    public List<Asset> getLiquidAssets() {
+    public List<AssetOLD> getLiquidAssets() {
         // if a.isLiquid()
         return null;
     }
 
-    public List<Asset> getNonLiquidAssets() {
+    public List<AssetOLD> getNonLiquidAssets() {
         // copy the previous one
         return null;
     }
 
     // TODO: convert initiator's share of 1 asset to another
-    public void transfer1AssetToAnotherAsset(Asset a, Asset b, UUID initiator) {
+    public void transfer1AssetToAnotherAsset(AssetOLD a, AssetOLD b, UUID initiator) {
         // a = "TSLA" -> {C: 10, J: 10}; TSLA $1000/share
         // b = "Oracle" -> {}; ORC $200/share
 

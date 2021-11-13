@@ -1,7 +1,7 @@
 package Entities;
 
 public class AssetFactory {
-    public Asset getAsset(String assetType, String symbol) {
+    public AssetOLD getAsset(String assetType, String symbol) {
         if (assetType == null) {
             return null;
         }

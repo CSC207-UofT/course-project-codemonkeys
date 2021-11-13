@@ -110,8 +110,8 @@ public class Vote extends Observable {
     }
 
     public boolean performTransfer() {
-        Asset from = this.initiator.getAsset(this.fromType);
-        Asset to = this.initiator.getAsset(this.toType);
+        AssetOLD from = this.initiator.getAsset(this.fromType);
+        AssetOLD to = this.initiator.getAsset(this.toType);
         if(to == null) {
             this.initiator.addAsset(this.toType);
             to = this.initiator.getAsset(this.toType);
@@ -120,7 +120,7 @@ public class Vote extends Observable {
             this.initiator.addAsset(this.fromType);
             from = this.initiator.getAsset(this.fromType);
         }
-        return Asset.transfer(from, to, this.value);
+        return AssetOLD.transfer(from, to, this.value);
     }
 
 

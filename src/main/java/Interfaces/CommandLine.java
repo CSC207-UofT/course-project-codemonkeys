@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import UseCases.UserManager;
 import Controller.CommandLineParser;
-import Entities.Asset;
+import Entities.AssetOLD;
 
 public class CommandLine {
     private String cur_user = "Finance_Simulation";
@@ -78,15 +78,15 @@ public class CommandLine {
                 }
                 this.adminAccoint();
             case "viewallasset":
-                ArrayList<Asset> a = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
-                for (Asset as : a) {
+                ArrayList<AssetOLD> a = (ArrayList<AssetOLD>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (AssetOLD as : a) {
                     System.out.println(as.getType() + " : " + as.getValue());
                 }
                 this.adminAccoint();
             case "sell":
                 boolean flag = false;
-                ArrayList<Asset> b = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
-                for (Asset as : b) {
+                ArrayList<AssetOLD> b = (ArrayList<AssetOLD>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (AssetOLD as : b) {
                     if (parts[1].equals(as.getType())) {
                         flag = true;
                         break;
@@ -175,8 +175,8 @@ public class CommandLine {
                 }
                 this.userAccoint();
             case "viewallasset":
-                ArrayList<Asset> a = (ArrayList<Asset>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
-                for (Asset as : a) {
+                ArrayList<AssetOLD> a = (ArrayList<AssetOLD>) UserManager.getInstance().getUser(this.admin).getAssetSnapshot();
+                for (AssetOLD as : a) {
                     System.out.println(as.getType() + " : " + as.getValue());
                 }
                 this.userAccoint();

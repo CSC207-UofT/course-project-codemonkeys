@@ -5,20 +5,20 @@ import java.util.List;
 
 public class User {
     private String name;
-    private List<Asset> assets;
+    private List<AssetOLD> assets;
 
     public User(String n) {
         this.name = n;
-        this.assets = new ArrayList<Asset>();
+        this.assets = new ArrayList<AssetOLD>();
     }
 
     public String getName() {
         return this.name;
     }
 
-    public List<Asset> getAssetSnapshot() {
-        List<Asset> res = new ArrayList<Asset>();
-        for (Asset a : this.assets){
+    public List<AssetOLD> getAssetSnapshot() {
+        List<AssetOLD> res = new ArrayList<AssetOLD>();
+        for (AssetOLD a : this.assets){
             res.add(a.copy());
         }
         return res;
@@ -36,8 +36,8 @@ public class User {
         return this.getAssetValue(type) >= value;
     }
 
-    public Asset getAsset(String type) {
-        for (Asset a : this.assets) {
+    public AssetOLD getAsset(String type) {
+        for (AssetOLD a : this.assets) {
             if (a.getType().equalsIgnoreCase(type)){
                 return a;
             }
@@ -46,12 +46,12 @@ public class User {
     }
 
     public void addAsset(String assetName) {
-        Asset a = new Asset(assetName);
+        AssetOLD a = new AssetOLD(assetName);
         this.assets.add(a);
     }
 
     public void addInitialAsset(int value) {
-        Asset a = new Asset("USD");
+        AssetOLD a = new AssetOLD("USD");
         Transaction[] t = Transaction.generateTransactionPair("_", "USD", value);
         a.addTransaction(t[0]);
         a.addTransaction(t[1]);
