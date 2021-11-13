@@ -1,8 +1,9 @@
 package UseCases;
 import Entities.Transaction;
-import Entities.Vote;
+import Entities.Asset;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.util.Collection;
+import javax.naming.NamingSecurityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -10,11 +11,18 @@ import java.util.UUID;
 public class TransactionManager {
     private Map<UUID, Transaction[]> transactionMap;
 
-    private TransactionManager(){ this.transactionMap = new HashMap<UUID, Transaction[]>(); }
+    private TransactionManager(){this.transactionMap = new HashMap<UUID, Transaction[]>(); }
+
+    public boolean check(Transaction tran){
+
+    }
 
     public void creat(String from, String to, double val){
-         Transaction[] trans = Transaction.generateTransactionPair(from, to, val);
-         this.transactionMap.put(trans[0].getId(), trans);
+        if(Transaction.check()){
+
+        }
+        Transaction[] trans = Transaction.generateTransactionPair(from, to, val);
+        this.transactionMap.put(trans[0].getId(), trans);
     }
 
     public String viewTransaction(){
@@ -36,7 +44,5 @@ public class TransactionManager {
     public void delete(UUID id){this.transactionMap.remove(id);}
 
     public Transaction[] getTransaction(UUID id){return this.transactionMap.get(id); }
-
-
 
 }
