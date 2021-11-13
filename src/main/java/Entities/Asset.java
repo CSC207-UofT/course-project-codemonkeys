@@ -15,8 +15,8 @@ public class Asset<T extends AssetType> extends Identifiable<T> {
 
     /**
      * Basic constructor.
-     * @param volume is how much asset
-     * @param price is how much $
+     * @param volume is how many of the asset
+     * @param price is how much $ its worth
      * @param type holds the information about the type of asset
      */
     public Asset(double volume, double price, T type) {
