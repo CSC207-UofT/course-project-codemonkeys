@@ -1,3 +1,4 @@
+
 package Entities;
 //Could be deleted
 public class Admin extends User{
