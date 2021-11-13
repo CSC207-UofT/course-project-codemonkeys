@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.UUID;
+import java.io.*;
 
-public class Vote extends Observable {
+public class Vote extends Observable implements Serializable{
     private UUID id;
     private User initiator;
     private String fromType;
