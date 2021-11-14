@@ -7,7 +7,7 @@ import org.junit.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AssetTest {
+public class AssetTest {
     private Vote vote;
 
     @Before

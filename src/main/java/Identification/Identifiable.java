@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public abstract class Identifiable<T> {
 
-    private UUID id;
-    private T type;
+    private UUID id; // unique id
+    private T type; // user defined type for the object
 
 
     public Identifiable(){
@@ -20,14 +20,22 @@ public abstract class Identifiable<T> {
     }
 
 
+    /**
+     * Checks for equivalency between the UUIDs
+     * @param other is the other object
+     * @returns whether the two objects are equal
+     */
     @Override
     public boolean equals(Object other) {
         if(other instanceof Identifiable)
-            return this.type.equals(((Identifiable) other).getId());
+            return this.getId().equals(((Identifiable) other).getId());
         return false;
     }
 
-
+    /**
+     * Hash the id instead
+     * @returns the hash
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getId());

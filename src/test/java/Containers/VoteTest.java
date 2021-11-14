@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-class VoteTest {
+public class VoteTest {
 
 
     @Before
