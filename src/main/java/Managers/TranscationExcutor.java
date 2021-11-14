@@ -16,8 +16,8 @@ public class TranscationExcutor {
      */
     public void excute(Transaction transaction){
 
-        Asset transin = transaction.getIn();
-        Asset tranout = transaction.getOut();
+        Asset transin = transaction.getSell();
+        Asset tranout = transaction.getBuy();
 
         //get the portfolio of the transaction initiator.
         Portfolio userPortfolio = transaction.getInitiator().getPortfolio();
