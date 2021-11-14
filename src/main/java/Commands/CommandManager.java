@@ -16,35 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Follows the singleton design
- */
+
 public class CommandManager {
-    private static CommandManager instance; //the instance
+    private static CommandManager instance; // The instance
 
-    Set<Class<? extends Command>> cmdClasses; //Class objects for the commands
-    List<Command> cmdTemplates; //template instances of the commands
+    Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
+    List<Command> cmdTemplates; // Template instances of the commands
 
+    //______________________________________________ Constructors ______________________________________________________
 
     private CommandManager() {
-        init(); //initialize the class variables
+        init(); // Initialize the class variables
     }
-
 
     static {
-        instance = new CommandManager(); //static initializer
+        instance = new CommandManager(); // Static initializer
     }
 
+    //_________________________________________________ Methods ________________________________________________________
 
     /**
      * Helper method for the initialization phase
      */
     private void init() {
-        //we use the reflection api to scan for all subtypes of Command
+        // We use the reflection api to scan for all subtypes of Command
         cmdClasses = new Reflections(Command.class).getSubTypesOf(Command.class);
         cmdTemplates = new ArrayList<Command>();
 
-        //then we try to instantiate those Classes
+        // Then we try to instantiate those Classes
         try{
             for (Class c : cmdClasses) {
                 cmdTemplates.add((Command) c.getConstructor().newInstance());
@@ -53,9 +52,7 @@ public class CommandManager {
         catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e){
             e.printStackTrace();
         }
-
     }
-
 
     /**
      * Gets the singleton instance
@@ -65,7 +62,6 @@ public class CommandManager {
         return instance;
     }
 
-
     /**
      * Gets the templates
      * @returns the templates
@@ -73,7 +69,6 @@ public class CommandManager {
     public List<Command> getTemplates(){
         return this.cmdTemplates;
     }
-
 
 
 }

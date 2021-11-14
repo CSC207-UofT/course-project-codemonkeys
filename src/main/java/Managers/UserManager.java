@@ -1,22 +1,29 @@
 package Managers;
 
+import Users.Admin;
 import Users.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
-public class UserManager {
+public class UserManager extends HashMap<UUID, User>{
+    //_______________________________________________ Variables ________________________________________________________
+
     private static UserManager instance;
-    private HashMap<UUID, User> userHashMap;
+
+    //______________________________________________ Constructors ______________________________________________________
 
     private UserManager(){
-        this.userHashMap = new HashMap<UUID, User>();
+        super();
     }
 
     static {
         instance = new UserManager();
     }
 
+    //_________________________________________________ Methods ________________________________________________________
 
     /**
      * Gets the singleton instance of UserManager
@@ -26,25 +33,26 @@ public class UserManager {
         return instance;
     }
 
-
     /**
-     * Gets a user by their UUID
-     * @param id is the id of the user
-     * @returns the desired User
-     * @throws UserNotFoundException
+     * Gets a list of all admins
+     * @return
      */
-    public User getUser(UUID id) throws UserNotFoundException {
-        if(!this.userHashMap.containsKey(id))
-            throw new UserNotFoundException("User "+id+" not found.");
-        return this.userHashMap.get(id);
-    }
-
-    /**
-     * Custom exception for user not found in UserManager
-     */
-    class UserNotFoundException extends Exception{
-        public UserNotFoundException(String errorMessage){
-            super(errorMessage);
+    public List<Admin> getAdminList(){
+        List<Admin> admins = new ArrayList<>();
+        for (User user : this.values()){
+            if (user instanceof Admin)
+                admins.add((Admin) user);
         }
+        return admins;
     }
+
+    /**
+     * Checks if a UUID is associated with an admin
+     * @param id is the UUID
+     * @returns whether that user, if they exist, is an admin
+     */
+    public boolean isAdmin(UUID id){
+        return this.get(id) instanceof Admin;
+    }
+
 }
