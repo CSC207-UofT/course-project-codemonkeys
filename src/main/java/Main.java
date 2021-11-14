@@ -1,5 +1,6 @@
 import Assets.Asset;
 import Assets.AssetType;
+import Assets.Currency;
 import Assets.Stock;
 import Commands.*;
 import Interfaces.CommandLine;
@@ -19,7 +20,10 @@ public class Main {
         tesla.name = "Tesla";
         tesla.symbol = "TSLA";
 
-        AssetType.CAD cad = new AssetType.CAD();
+        Currency usd = new Currency();
+        usd.name = "United States Dollar";
+        usd.symbol = "USD";
+
         /**
          * Make an asset for that stock
          */

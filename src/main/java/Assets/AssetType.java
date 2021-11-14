@@ -1,12 +1,5 @@
 package Assets;
 
-public interface AssetType {
+public abstract class AssetType {
 
-
-    class CAD implements AssetType{
-
-        public CAD() {
-
-        }
-    }
 }
