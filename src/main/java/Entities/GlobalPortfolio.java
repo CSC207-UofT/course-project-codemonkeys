@@ -22,7 +22,6 @@ public class GlobalPortfolio extends UserPortfolio{
         }
         return result;
     }
-
     public double CalculateLiquidValue(){
         double result = 0;
         for(Asset a: this.assets){
