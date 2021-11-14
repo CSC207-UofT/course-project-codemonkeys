@@ -2,7 +2,6 @@ package Controller;
 
 import UseCases.UserManager;
 import UseCases.VoteManager;
-import Entities.Admin;
 import Entities.User;
 import Entities.Vote;
 
@@ -19,13 +18,13 @@ public class CommandLineParser {
         }
         User user;
         if (isAdmin){
-            user = new Admin(name);
-            user.addInitialAsset(init_USD);
+           // user = new Admin(name);
+           // user.addInitialAsset(init_USD);
         } else {
-            user = new User(name);
-            user.addInitialAsset(init_USD);
+           // user = new User(name);
+          //  user.addInitialAsset(init_USD);
         }
-        UserManager.getInstance().addUser(user);
+       // UserManager.getInstance().addUser(user);
     }
 
     private void join(String name, boolean isAdmin){
@@ -36,11 +35,11 @@ public class CommandLineParser {
         }
         User user;
         if (isAdmin){
-            user = new Admin(name);
+          //  user = new Admin(name);
         } else {
-            user = new User(name);
+           // user = new User(name);
         }
-        UserManager.getInstance().addUser(user);
+    //    UserManager.getInstance().addUser(user);
     }
 
     public void join(String name, int init) {
@@ -69,9 +68,9 @@ public class CommandLineParser {
             throw new IllegalStateException("User not in the system");
         }
         User operatorObject = UserManager.getInstance().getUser(operator);
-        if (!(operatorObject instanceof Admin)) {
-            throw new IllegalStateException(operator + " are not an admin");
-        }
+     //  if (!(operatorObject instanceof Admin)) {
+     //       throw new IllegalStateException(operator + " are not an admin");
+     //   }
         this.leave(user);
     }
 

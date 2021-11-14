@@ -1,20 +1,17 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.io.*;
 
-public class Portfolio implements Serializable{
-    private ArrayList<Asset> assets;
+public  class UserPortfolio implements Serializable {
+    public ArrayList<Asset> assets;
 
-    public Portfolio(ArrayList<Asset> assets){
-        this.assets = assets;
-    }
-
-    public Portfolio(){
+    public UserPortfolio(){
         this.assets = new ArrayList<Asset>();
     }
 
-    public void AddAsset(Asset asset){
+    public void addasset(Asset asset){
         this.assets.add(asset);
     }
 
@@ -24,7 +21,7 @@ public class Portfolio implements Serializable{
         return this.assets;
     }
 
-    public boolean CheckAssetIn(Asset asset){
+    public boolean Contains(Asset asset){
 
         return this.assets.contains(asset);
     }
@@ -34,9 +31,18 @@ public class Portfolio implements Serializable{
 
         double result = 0;
         for(Asset a: this.assets){
-            result += a.getTotalPriceOwned();
+            result += a.getValue()
+            ;
         }
-
         return result;
     }
+    public Asset GetTypeAsset(String type){
+        for(Asset a: this.assets){
+            if(a.getType().equals(type)){
+                return a;
+            }
+        }
+        return null;
+    }
+
 }

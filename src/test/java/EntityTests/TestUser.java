@@ -1,5 +1,3 @@
-package EntityTests;
-
 import Entities.User;
 import org.junit.*;
 import static org.junit.Assert.*;
