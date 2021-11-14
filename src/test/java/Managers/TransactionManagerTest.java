@@ -1,10 +1,7 @@
 package Managers;
 
 import Assets.Asset;
-import Assets.Stock;
 import Containers.Transaction;
-import Containers.Vote;
-import Users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,10 +52,10 @@ public class TransactionManagerTest {
          */
         tm.remove(transactions[0].getId()); // 1
         assertEquals(false, tm.containsValue(transactions[0]) || tm.containsKey(transactions[0].getId())); // 2
-        assertEquals(90, tm.get(transactions[9].getId()).getIn().getPrice()); // 3
+        assertEquals(90, tm.get(transactions[9].getId()).getSell().getPrice()); // 3
         assertEquals(9, tm.size()); // 4
         for(Transaction t : tm.values()){ // 5
-            assertEquals(0, t.getIn().getPrice() % 10);
+            assertEquals(0, t.getSell().getPrice() % 10);
         }
     }
 }
