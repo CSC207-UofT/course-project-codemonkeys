@@ -1,12 +1,8 @@
 package Assets;
 
 public interface AssetType {
+    public String getName();
 
+    public String getSymbol();
 
-    class CAD implements AssetType{
-
-        public CAD() {
-
-        }
-    }
 }
