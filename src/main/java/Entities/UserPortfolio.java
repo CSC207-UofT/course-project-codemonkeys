@@ -36,7 +36,6 @@ public  class UserPortfolio implements Serializable {
         }
         return result;
     }
-
     public Asset GetAsset(UUID id){
         for(Asset a: this.assets){
             if(a.getId().equals(id)){
