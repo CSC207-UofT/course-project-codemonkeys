@@ -2,6 +2,7 @@ package UseCases;
 import Entities.Portfolio;
 import Entities.User;
 import Entities.Asset;
+import Entities.UserPortfolio;
 import UseCases.TransactionManager;
 
 import java.util.ArrayList;
@@ -9,14 +10,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 public class PortfolioManager {
-    private  Map<User, Portfolio> portfoliomap;
+    private  Map<User, UserPortfolio> portfoliomap;
 
     private PortfolioManager() {
         this.portfoliomap = new HashMap<>();
     }
 
     public void addPortfolio(User name) {
-        this.portfoliomap.put(name, name.getPortfolio());
+        this.portfoliomap.put(name, name.getUserPortfolio());
     }
 
     public void delPortfolio(User name) {
@@ -25,7 +26,7 @@ public class PortfolioManager {
 
     public double getgloablvalue() {
         double value = 0;
-        for(Portfolio p: this.portfoliomap.values()) {
+        for(UserPortfolio p: this.portfoliomap.values()) {
             value += p.GetTotalValue();
         }
         return value;

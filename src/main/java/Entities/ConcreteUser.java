@@ -7,26 +7,26 @@ public class ConcreteUser extends User {
     private String name;
     private UUID id;
     private boolean banned;
-    private Portfolio portfolio;
+    private UserPortfolio portfolio;
 
     public ConcreteUser(String name, UUID id) {
         this.name = name;
         this.id = id;
-        this.portfolio = new Portfolio();
+        this.portfolio = new UserPortfolio();
         this.banned = false;
     }
 
     public ConcreteUser(String name) {
         this.name = name;
         this.id = UUID.randomUUID();
-        this.portfolio = new Portfolio();
+        this.portfolio = new UserPortfolio();
         this.banned = false;
     }
 
-    public ConcreteUser(String name, UUID id, Portfolio portfolio) {
+    public ConcreteUser(String name, UUID id, UserPortfolio portfolio) {
         this.name = name;
         this.id = id;
-        this.portfolio = new Portfolio();
+        this.portfolio = new UserPortfolio();
         this.banned = false;
     }
 
@@ -46,11 +46,11 @@ public class ConcreteUser extends User {
         this.banned = banned;
     }
 
-    public Portfolio getPortfolio() {
+    public UserPortfolio getPortfolio() {
         return this.portfolio;
     }
 
-    public void setPortfolio(Portfolio portfolio) {
+    public void setPortfolio(UserPortfolio portfolio) {
         this.portfolio = portfolio;
     }
 
