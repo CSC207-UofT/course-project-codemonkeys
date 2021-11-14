@@ -1,7 +1,6 @@
 package Managers;
 
 import Users.Admin;
-import Users.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

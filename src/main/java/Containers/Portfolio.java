@@ -35,5 +35,4 @@ public class Portfolio extends HashMap<UUID, Asset> {
         }
         return assetList;
     }
-
 }
