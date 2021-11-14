@@ -40,7 +40,7 @@ public class User extends Identifiable {
     }
 
     public void setPortfolio(Portfolio portfolio) {
-
+        this.portfolio = portfolio;
     }
 
     public Portfolio getPortfolio() {
@@ -48,10 +48,18 @@ public class User extends Identifiable {
     }
 
     public void setVotingPower(double num) {
-
+        this.votingPower = num;
     }
     public double getVotingPower() {
-        return 0;
+        return votingPower;
+    }
+
+    public void setSecurityLevel(int level){
+        this.securityLevel = level;
+    }
+
+    public int getSecurityLevel(){
+        return this.securityLevel;
     }
 
 
