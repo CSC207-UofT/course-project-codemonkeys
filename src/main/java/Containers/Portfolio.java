@@ -35,4 +35,15 @@ public class Portfolio extends HashMap<UUID, Asset> {
         return assetList;
     }
 
+    /**
+     * Sums up the values of all the assets in the portfolio
+     * @returns the total value
+     */
+    public double getTotalValue(){
+        double totalValue = 0;
+        for (Asset asset : this.values()){
+            totalValue += asset.getValue();
+        }
+        return totalValue;
+    }
 }
