@@ -2,9 +2,8 @@ package UseCases.Commands;
 
 import java.util.ArrayList;
 
-public class Downvote implements Command{
-
-    public Downvote() {
+public class Viewvote implements Command{
+    public Viewvote() {
     }
 
     @Override
@@ -14,6 +13,6 @@ public class Downvote implements Command{
 
     @Override
     public String help() {
-        return "this is info for the downvote command";
+        return "this is info for the view vote command";
     }
 }

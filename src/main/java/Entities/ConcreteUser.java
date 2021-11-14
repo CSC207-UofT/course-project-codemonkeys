@@ -3,7 +3,7 @@ package Entities;
 import java.util.List;
 import java.util.UUID;
 
-public class ConcreteUser implements User {
+public class ConcreteUser extends User {
     private String name;
     private UUID id;
     private boolean banned;
@@ -15,7 +15,15 @@ public class ConcreteUser implements User {
         this.portfolio = new Portfolio();
         this.banned = false;
     }
-    public ConcreteUser(String name, UUID id, Portfolio portfolio){
+
+    public ConcreteUser(String name) {
+        this.name = name;
+        this.id = UUID.randomUUID();
+        this.portfolio = new Portfolio();
+        this.banned = false;
+    }
+
+    public ConcreteUser(String name, UUID id, Portfolio portfolio) {
         this.name = name;
         this.id = id;
         this.portfolio = new Portfolio();
@@ -37,6 +45,7 @@ public class ConcreteUser implements User {
     public void setBanned(boolean banned) {
         this.banned = banned;
     }
+
     public Portfolio getPortfolio() {
         return this.portfolio;
     }
@@ -53,23 +62,4 @@ public class ConcreteUser implements User {
         this.id = id;
     }
 
-
-    public double getLiquidAssetValue() {
-        return this.portfolio.CalculateLiquidValue();
-    }
-
-
-    public boolean hasAssetValue(String fromType, double value) {
-        return this.portfolio.TypeAssetValue(fromType) >= value;
-    }
-
-// Not exactly sure about what the following two methods mean
-    public Asset getAsset(String Type) {
-        return this.portfolio.GetAsset(Type);
-    }
-
-
-    public void addAsset(String toType) {
-
-    }
 }

@@ -3,7 +3,6 @@ package UseCases.Commands;
 import java.util.ArrayList;
 
 public class Sell implements Command{
-
     public Sell() {
     }
 

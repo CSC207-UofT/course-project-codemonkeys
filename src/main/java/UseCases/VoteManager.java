@@ -24,8 +24,8 @@ public class VoteManager {
         return VoteManager.instance;  // VoteManager only initiated for once
     }
 
-    public void addVote(User initiator, String type, double val) {
-        Vote v = new Vote(initiator, "USD", type, val);
+    public void addVote(User initiator, String fromType, String toType, double val) {
+        Vote v = new Vote(initiator, fromType, toType, val);
         this.voteMap.put(v.getId(), v);
     }
 

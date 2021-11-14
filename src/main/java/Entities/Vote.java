@@ -1,6 +1,9 @@
 package Entities;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.UUID;
 import java.io.*;
 
 public class Vote extends Observable implements Serializable{
@@ -9,9 +12,8 @@ public class Vote extends Observable implements Serializable{
     private String fromType;
     private String toType;
     private double value;
-    private Set<User> upVoters; //in case someone re-vote and the list will be larger.
-    private Set<User> downVoters;
-    private boolean status; //True if it is on going and false if the vote is vetoed.
+    private List<User> upVoters;
+    private List<User> downVoters;
 
     public Vote(User init, String fromType, String toType, double val) {
         this.id = UUID.randomUUID();
@@ -19,16 +21,8 @@ public class Vote extends Observable implements Serializable{
         this.fromType = fromType;
         this.toType = toType;
         this.value = val;
-        this.upVoters = new HashSet<User>();
-        this.downVoters = new HashSet<User>();
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public boolean getStatus() {
-        return status;
+        this.upVoters = new ArrayList<User>();
+        this.downVoters = new ArrayList<User>();
     }
 
     public boolean isEligible(){
@@ -117,8 +111,8 @@ public class Vote extends Observable implements Serializable{
     }
 
     public boolean performTransfer() {
-        AssetOLD from = this.initiator.getAsset(this.fromType);
-        AssetOLD to = this.initiator.getAsset(this.toType);
+        Asset from = this.initiator.getAsset(this.fromType);
+        Asset to = this.initiator.getAsset(this.toType);
         if(to == null) {
             this.initiator.addAsset(this.toType);
             to = this.initiator.getAsset(this.toType);
@@ -127,16 +121,7 @@ public class Vote extends Observable implements Serializable{
             this.initiator.addAsset(this.fromType);
             from = this.initiator.getAsset(this.fromType);
         }
-        return AssetOLD.transfer(from, to, this.value);
-    }
-
-
-
-    //-----------------------------------------------
-    public void changeMessage(String message)
-    {
-        setChanged();
-        notifyObservers(message);
+        return Asset.transfer(from, to, this.value);
     }
 
 
@@ -148,3 +133,4 @@ public class Vote extends Observable implements Serializable{
         notifyObservers(message);
     }
 }
+

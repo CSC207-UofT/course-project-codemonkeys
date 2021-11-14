@@ -3,7 +3,6 @@ package UseCases.Commands;
 import java.util.ArrayList;
 
 public class CreateUser implements Command{
-
     public CreateUser() {
     }
 
@@ -14,6 +13,6 @@ public class CreateUser implements Command{
 
     @Override
     public String help() {
-        return "this is info for the createuser command";
+        return "this is info for the create user command";
     }
 }
