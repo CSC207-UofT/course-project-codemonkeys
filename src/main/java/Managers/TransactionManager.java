@@ -30,7 +30,7 @@ public class TransactionManager extends HashMap<UUID, Transaction>{
 
     /**
      * Gets the singleton instance
-     * @returns the instance
+     * @return the instance
      */
     public static TransactionManager getInstance() {
         return instance;
@@ -54,4 +54,14 @@ public class TransactionManager extends HashMap<UUID, Transaction>{
     public void add(Transaction transaction){
         this.put(transaction.getId(), transaction);
     }
+
+    public UUID getid(Transaction transaction){
+        for (Map.Entry<UUID, Transaction> entry : instance.entrySet()) {
+            if(entry.getValue() == transaction){
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
 }

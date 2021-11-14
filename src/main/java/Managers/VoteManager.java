@@ -26,7 +26,7 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
 
     /**
      * Gets the singleton instance
-     * @returns the instance
+     * @return the instance
      */
     public static VoteManager getInstance() {
         return instance;
@@ -36,7 +36,7 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
      * Gets the vote for a transaction based on UUID
      * @param transaction is the queried transaction
      * @param id is the UUID associated with the desired vote
-     * @returns the vote object
+     * @return the vote object
      */
     public Vote getVoteFor(Transaction transaction, UUID id){
         for (Vote vote : this.get(transaction)){
@@ -49,10 +49,44 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
     /**
      * Returns information in string format on votes for a given transaction
      * @param transaction is the queried transaction
-     * @returns information
+     * @return information
      */
+
     public String votesFor(Transaction transaction){
-        return ""; // TODO : return information about the votes
+        StringBuilder res = new StringBuilder();
+        List<Vote> votes = this.get(transaction);
+
+        return ""; // TODO : return information about the votes, finish this method
+    }
+
+    /**
+     * Returns number of upVoters for a given transaction
+     * @param transaction is the queried transaction
+     * @return the number of upvoters in double
+     */
+    public double upVoters(Transaction transaction) {
+        double result = 0;
+        for (Vote vote : this.get(transaction)) {
+            if (vote.isUpvote()) {
+                result += 1;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns number of downVoters for a given transaction
+     * @param transaction is the queried transaction
+     * @return the number of downVoters in double
+     */
+    public double downVoters(Transaction transaction) {
+        double result = 0;
+        for (Vote vote : this.get(transaction)) {
+            if (!(vote.isUpvote())) {
+                result += 1;
+            }
+        }
+        return result;
     }
 
 }
