@@ -2,8 +2,9 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.io.*;
 
-public  class UserPortfolio {
+public  class UserPortfolio implements Serializable {
     public ArrayList<Asset> assets;
 
     public UserPortfolio(){
