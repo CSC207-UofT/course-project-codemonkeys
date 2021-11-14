@@ -14,6 +14,6 @@ public class CheckPrice implements Command{
 
     @Override
     public String help() {
-        return "this is info for the upvote command";
+        return "this is info for the check price command";
     }
 }

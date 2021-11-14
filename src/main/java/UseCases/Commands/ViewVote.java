@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class ViewVote implements Command{
 
-    public ViewVote() {
-    }
+    public ViewVote() {}
 
     @Override
     public boolean execute(ArrayList args) {

@@ -1,12 +1,13 @@
 package UseCases.Commands;
 
+import java.util.ArrayList;
+
 public class Buy implements Command{
 
-    public Buy() {
-    }
+    public Buy() {}
 
     @Override
-    public boolean execute() {
+    public boolean execute(ArrayList args) {
         return false;
     }
 

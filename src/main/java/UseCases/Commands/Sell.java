@@ -1,12 +1,14 @@
 package UseCases.Commands;
 
+import java.util.ArrayList;
+
 public class Sell implements Command{
 
     public Sell() {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(ArrayList args) {
         return false;
     }
 

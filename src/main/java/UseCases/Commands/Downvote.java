@@ -3,7 +3,6 @@ package UseCases.Commands;
 import java.util.ArrayList;
 
 public class Downvote implements Command{
-
     public Downvote() {
     }
 
