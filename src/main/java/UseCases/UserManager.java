@@ -1,16 +1,16 @@
 package UseCases;
 
-import Entities.User;
+import Entities.ConcreteUser;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserManager {
-    private Map<String, User> userMap;
+    private Map<String, ConcreteUser> userMap;
 
     private UserManager() {
-        this.userMap = new HashMap<String, User>();
+        this.userMap = new HashMap<String, ConcreteUser>();
     }
 
     private static UserManager instance = null;
@@ -22,23 +22,23 @@ public class UserManager {
         return UserManager.instance;  // UserManager only initiated for once
     }
 
-  //  public void addUser(User u) {
-  //      this.userMap.put(u.getName(), u);
-  //  }
+    public void addUser(ConcreteUser u) {
+        this.userMap.put(u.getName(), u);
+    }
 
-  //  public void delUser(User u) {
-     //   this.userMap.remove(u.getName());
-   // }
+    public void delUser(ConcreteUser u) {
+        this.userMap.remove(u.getName());
+    }
 
     public void delUser(String name) {
         this.userMap.remove(name);
     }
 
-    public Collection<User> getAllUsers(){
+    public Collection<ConcreteUser> getAllUsers(){
         return this.userMap.values();
     }
 
-    public User getUser(String name){
+    public ConcreteUser getUser(String name){
         return this.userMap.get(name);
     }
 
@@ -61,7 +61,7 @@ public class UserManager {
         return this.userMap.size();
     }
 
-    public void addAsset(String username, String AssetName) {  //TODO change return type to boolean
-        this.getUser(username).addAsset(AssetName);
-    }
+    //public void addAsset(String username, String AssetName) {  //TODO change return type to boolean
+        //this.getUser(username).addAsset(AssetName);
+    //}
 }

@@ -1,9 +1,8 @@
 package Entities;
 
-import java.util.List;
 import java.util.UUID;
 
-public class ConcreteUser extends User {
+public class ConcreteUser implements User {
     private String name;
     private UUID id;
     private boolean banned;
