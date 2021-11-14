@@ -1,40 +1,58 @@
 package Entities;
-import java.util.Date;
+
 import java.util.UUID;
+import java.io.*;
+import java.time.LocalDateTime;
 
-public class Transaction {
-    private final UUID id;
-    private final User initializer;
-    private final Date time;
-    private final Asset from_asset;
-    private final Asset to_asset;
+public class Transaction implements Serializable{
+    private UUID id;
+    private String from_type;
+    private String to_type;
+    private double value;  // the price of the to_type
+    // private double quantity;  // the quantity of the to_type
+    private LocalDateTime time;
 
-    public Transaction(UUID id, String from, User initializer, String to,
-                        Asset from_asset, Asset to_asset, Date time){
+    private Transaction(UUID id, String from, String to, double val){
         this.id = id;
-        this.from_asset = from_asset;
-        this.to_asset = to_asset;
-        this.initializer = initializer;
-        this.time = time;
+        this.from_type = from;
+        this.to_type = to;
+        this.value = val;
+        this.time = LocalDateTime.now();
     }
 
+    public static Transaction[] generateTransactionPair(String from, String to, double val) {
+        UUID id = UUID.randomUUID();
+        Transaction[] t = new Transaction[2];
+        t[0] = new Transaction(id, to, from, -val);  // transfering from
+        t[1] = new Transaction(id, from, to, val);  // transfering to
+        return t;
+    }
 
     public UUID getId() {
+
         return this.id;
     }
 
-    public Asset getFrom_asset() {
-        return from_asset;
+    public String getFrom_type() {
+
+        return this.from_type;
     }
 
-    public Asset getTo_asset() {
-        return to_asset;
+    public String getTo_type() {
+
+        return this.to_type;
     }
 
-    public User getInitializer(){return this.initializer;}
+    public double getValue() {
 
-    public Date getTime(){
+        return this.value;
+    }
+
+    public LocalDateTime getTime(){
         return this.time;
     }
 
+    public void setTime(String time){
+        this.time = LocalDateTime.parse(time);
+    }
 }
