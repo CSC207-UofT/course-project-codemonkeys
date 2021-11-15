@@ -26,7 +26,6 @@ public class Main {
         UserManager.getInstance().addUser(user2);
         UserManager.getInstance().addUser(user3);
 
-
         Portfolio.getInstance().add(currency);
         Portfolio.getInstance().add(stock);
         Portfolio.getInstance().add(stock);
