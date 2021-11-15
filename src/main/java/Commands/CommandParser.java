@@ -9,12 +9,12 @@ public class CommandParser {
         String[] argList = args.split(" ");
         String cmdName = argList[0];
         for (Command c : commandList) {
-            if (cmdName.equals(c.name())) {
-                boolean result = c.execute(user, argList);
-                if(result) return true;
-                System.out.println("No such command");
-                return false;
-            }
+//            if (cmdName.equals(c.name())) {
+//                boolean result = c.execute(user, argList);
+//                if(result) return true;
+//                System.out.println("No such command");
+//                return false;
+//            }
         }
         System.out.println("No such command");
         return false;
