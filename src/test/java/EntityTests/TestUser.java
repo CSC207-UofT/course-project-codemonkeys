@@ -7,7 +7,8 @@ import static org.junit.Assert.*;
 
 public class TestUser {
     User tested_user;
-    final static String user_name = "test";
+    final static int test_Authority_Level = 4;
+    final static double test_Voting_Power = 2.4;
 
     @Before
     public void set_up() {
@@ -15,20 +16,30 @@ public class TestUser {
     }
 
     @Test(timeout = 50)
-    public void testUsergetName() {
-        assertEquals(this.tested_user.getName(), "test");
-    }
-
-    @Test(timeout = 50)
-    public void testUsersetName() {
-        this.tested_user.setName("test2");
-        assertEquals(this.tested_user.getName(), "test2");
+    public void testUserName() {
+        assertEquals(tested_user.getName(), "test");
+        tested_user.setName("test2");
+        assertEquals(tested_user.getName(), "test2");
     }
 
     @Test(timeout = 50)
     public void testUsergetPortfolio() {
-        Portfolio port = this.tested_user.getPortfolio();
+        Portfolio port = tested_user.getPortfolio();
         assert (port.values().isEmpty());
     }
+
+    @Test(timeout = 50)
+    public void testUserAuthorityLevel() {
+        tested_user.setAuthorityLevel(test_Authority_Level);
+        assert(tested_user.getAuthorityLevel() == test_Authority_Level);
+    }
+
+    @Test(timeout = 50)
+    public void testUserVotingPower() {
+        assert(tested_user.getVotingPower() == 1);
+        tested_user.setVotingPower(test_Voting_Power);
+        assert(tested_user.getVotingPower() == test_Voting_Power);
+    }
+
 
 }
