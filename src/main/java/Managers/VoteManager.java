@@ -3,6 +3,7 @@ package Managers;
 import Containers.PendingDecision;
 import Containers.Transaction;
 import Containers.Vote;
+import Helpers.VotingPowerHelper;
 import Users.User;
 
 import java.util.*;
@@ -80,14 +81,14 @@ public class VoteManager {
         PendingDecision pendingDecision = this.storage.get(transaction.id);
         if(pendingDecision == null) return Double.NaN;
         double votingPowerSum = 0;
-        for(Vote vote : pendingDecision.votes) {
-            double votingPower = TransactionManager.getInstance().getVotingPower(vote.initiator);
-            if(vote.isUpvote)
-                votingPowerSum += votingPower;
-            else
-                votingPowerSum -= votingPower;
-        }
+        for(Vote vote : pendingDecision.votes) votingPowerSum = VotingPowerHelper.countVote(votingPowerSum, TransactionManager.getInstance().getVotingPower(vote.initiator), vote.isUpvote);
         return votingPowerSum;
+    }
+
+    public int checkVote(Transaction transaction) {
+        PendingDecision pendingDecision = this.storage.get(transaction.id);
+        if(pendingDecision == null) return 0;
+        return
     }
 
     // Perform the pending transaction and remove the transaction from the internal registry.
@@ -102,6 +103,6 @@ public class VoteManager {
         return true;
     }
 
-    // Check all pending decision and if
+
 
 }

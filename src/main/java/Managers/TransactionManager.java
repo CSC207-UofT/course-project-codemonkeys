@@ -4,6 +4,7 @@ import Assets.Asset;
 import Assets.AssetType;
 import Containers.Portfolio;
 import Containers.Transaction;
+import Helpers.VotingPowerHelper;
 import Users.User;
 
 import java.util.*;
@@ -64,11 +65,7 @@ public class TransactionManager {
             // TODO: buy value must equal sell value
             value += transaction.buy.getValue();
         }
-        return TransactionManager.calcVotingPower(value);
-    }
-
-    private static double calcVotingPower(double amount) {
-        return Math.atan(amount) * 2 / 3.14;
+        return VotingPowerHelper.fromTransactionAmount(value);
     }
 
 }
