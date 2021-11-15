@@ -37,4 +37,10 @@ public class User extends Identifiable {
     public Portfolio getPortfolio() {
         return portfolio;
     }
+
+    public void setVotingPower(double power) {this.votingPower = power;}
+
+    public double getVotingPower() {return votingPower;}
+
+    public int getAuthorityLevel() {return authorityLevel;}
 }

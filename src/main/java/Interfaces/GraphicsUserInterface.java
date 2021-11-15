@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Containers.Portfolio;
 import Interfaces.GraphicsPresenter.*;
+import Managers.UserManager;
 
 public class GraphicsUserInterface {
     public static void presentGraphics(Portfolio portfolio){

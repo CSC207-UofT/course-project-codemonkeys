@@ -1,6 +1,7 @@
 package Interfaces.GraphicsPresenter;
 
 import Containers.Portfolio;
+import Managers.UserManager;
 
 import javax.swing.*;
 
@@ -8,6 +9,7 @@ public class PanelFactory {
 
     //____________________ Variables ___________________________________________________________________________________
     Portfolio portfolio;
+    UserManager userManager;
 
 
     //____________________ Constructors ________________________________________________________________________________

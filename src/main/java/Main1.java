@@ -8,6 +8,8 @@ import Interfaces.CommandLine;
 import Interfaces.GraphicsUserInterface;
 import Interfaces.YahooFinanceAPI;
 import Managers.AssetMangers.AssetPriceManager;
+import Managers.UserManager;
+import Users.User;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -41,6 +43,27 @@ public class Main1 {
         portfolio.add(googleStock);
         portfolio.add(teslaStock);
         portfolio.updateAllAssets(yahoo);
+
+        User alice = new User("Alice");
+        alice.setVotingPower(1000);
+        User bob = new User("Bob");
+        bob.setVotingPower(1200);
+        User charlie = new User("Charlie");
+        charlie.setVotingPower(1000);
+        User diane = new User("Diane");
+        diane.setVotingPower(900);
+        User edward = new User("Edward");
+        edward.setVotingPower(2010);
+
+        UserManager userManager = Managers.UserManager.getInstance();
+        userManager.addUser(alice);
+        userManager.addUser(bob);
+        userManager.addUser(charlie);
+        userManager.addUser(diane);
+        userManager.addUser(edward);
+
+
+
 
         GraphicsUserInterface.presentGraphics(portfolio);
 
