@@ -3,6 +3,8 @@ package Containers;
 import Assets.Asset;
 import Assets.AssetType;
 import Assets.Currency;
+import Interfaces.DataAccessInterface;
+import Managers.AssetMangers.AssetPriceManager;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.*;
@@ -36,4 +38,10 @@ public class Portfolio extends HashMap<UUID, Asset> {
         return assetList;
     }
 
+    public void updateAllAssets(DataAccessInterface source) {
+        for (UUID id: this.keySet()) {
+            Asset asset = this.get(id);
+            AssetPriceManager.updateAssetPrice(asset, source);
+        }
+    }
 }

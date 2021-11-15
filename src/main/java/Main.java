@@ -18,10 +18,10 @@ public class Main {
         Stock tesla = new Stock();
         tesla.name = "Tesla";
         tesla.symbol = "TSLA";
-
-        Currency usd = new Currency();
-        usd.name = "United States Dollar";
-        usd.symbol = "USD";
+//
+//        Currency usd = new Currency();
+//        usd.name = "United States Dollar";
+//        usd.symbol = "USD";
 
         /**
          * Make an asset for that stock
