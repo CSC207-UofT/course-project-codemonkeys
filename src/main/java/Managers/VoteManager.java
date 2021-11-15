@@ -36,18 +36,30 @@ public class VoteManager {
         this.storage.put(transaction.id, pendingDecision);
     }
 
+    // Obtain a snapshop of all pending transaction ids.
+    public UUID[] getAllTransactions() {
+        return this.storage.keySet().toArray(new UUID[0]);
+    }
+    // Obtain the pending transaction associated with a UUID.
+    // WARNING: This method EXPOSES the actual object reference
+    // If the uuid is invalid this method will return null.
+
+    public PendingDecision getPendingDecision(UUID id) {
+        return this.storage.get(id);
+    }
+
     // Obtain a snapshot of all votes currently associated with a pending decision.
     // If the transaction is not in the registry the method will return null.
-    public Vote[] getVotes(Transaction transaction) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    public Vote[] getVotes(UUID id) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return null;
         return pendingDecision.votes.toArray(new Vote[0]);
     }
 
     // Obtain the number of votes currently associated with a pending decision.
     // If the transaction is not in the registry the method will return -1.
-    public int getVoteCount(Transaction transaction) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    public int getVoteCount(UUID id) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return -1;
         return pendingDecision.votes.size();
     }
@@ -55,20 +67,20 @@ public class VoteManager {
     // Performs an up vote on a pending transaction.
     // If the transaction is not registered it will return false,
     // otherwise it will return true.
-    public boolean doUpVote(Transaction transaction, User user) {
-        return this.doVote(transaction, new Vote(user, true));
+    public boolean doUpVote(UUID id, User user) {
+        return this.doVote(id, new Vote(user, true));
     }
 
     // Performs a down vote on a pending transaction.
     // If the transaction is not registered it will return false,
     // otherwise it will return true.
-    public boolean doDownVote(Transaction transaction, User user) {
-        return this.doVote(transaction, new Vote(user, false));
+    public boolean doDownVote(UUID id, User user) {
+        return this.doVote(id, new Vote(user, false));
     }
 
     // Internal method to append a vote to a pending decision.
-    private boolean doVote(Transaction transaction, Vote vote) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    private boolean doVote(UUID id, Vote vote) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return false;
         pendingDecision.votes.add(vote);
         return true;
@@ -77,8 +89,8 @@ public class VoteManager {
     // Calculate the total voting power for a specific pending decision.
     // If the transaction is not registered it will return NaN.
     // This method uses the voting power obtained from TransactionManager.
-    public double calcVotingPower(Transaction transaction) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    public double calcVotingPower(UUID id) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return Double.NaN;
         double votingPowerSum = 0;
         for(Vote vote : pendingDecision.votes) {
@@ -91,21 +103,21 @@ public class VoteManager {
 
     // Make a decision about this pending transaction.
     // This method does not perform the actual transaction. performTransaction method should be separately called.
-    public int makeDecision(Transaction transaction) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    public int makeDecision(UUID id) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return 0;
-        return VotingPowerHelper.decide(this.calcVotingPower(transaction), this.getVoteCount(transaction));
+        return VotingPowerHelper.decide(this.calcVotingPower(id), this.getVoteCount(id));
     }
 
     // Perform the pending transaction and remove the transaction from the internal registry.
     // If the transaction is not registered, or errors occured while performing, it will return false. The pending transaction will not be removed from internal registry.
     // If the transaction is successfully performed, the pending transaction will be removed from internal registry and the method will return true.
     // This method uses the perform transaction method from TransactionManager.
-    public boolean performTransaction(Transaction transaction) {
-        PendingDecision pendingDecision = this.storage.get(transaction.id);
+    public boolean performTransaction(UUID id) {
+        PendingDecision pendingDecision = this.storage.get(id);
         if(pendingDecision == null) return false;
-        if(!TransactionManager.getInstance().performTransaction(transaction)) return false;
-        this.storage.remove(transaction.id);
+        if(!TransactionManager.getInstance().performTransaction(pendingDecision.transaction)) return false;
+        this.storage.remove(pendingDecision.transaction.id);
         return true;
     }
 
@@ -116,8 +128,8 @@ public class VoteManager {
             PendingDecision decision = this.storage.get(key);
             Transaction transaction = decision.transaction;
             sb.append(key.toString()).append(" (").append(transaction.initiator.getName()).append(") ");
-            sb.append(this.calcVotingPower(transaction)).append('\n');
-            for(Vote vote : this.getVotes(transaction)) {
+            sb.append(this.calcVotingPower(transaction.id)).append('\n');
+            for(Vote vote : this.getVotes(transaction.id)) {
                 sb.append("    ");
                 sb.append(vote.id.toString()).append(": ");
                 sb.append(vote.initiator.getName()).append(' ');
