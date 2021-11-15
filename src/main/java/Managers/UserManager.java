@@ -3,10 +3,7 @@ package Managers;
 import Users.Admin;
 import Users.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class UserManager extends HashMap<UUID, User>{
     //_______________________________________________ Variables ________________________________________________________
@@ -26,6 +23,19 @@ public class UserManager extends HashMap<UUID, User>{
     //_________________________________________________ Methods ________________________________________________________
     public void addUser(User u) {
         instance.put(u.getId(), u);
+    }
+
+    public void addUser(String u) {
+        User user = new User(u);
+        instance.put(user.getId(), user);
+    }
+
+    public void delUser(String u) {
+        for (User user: instance.values()) {
+            if (Objects.equals(user.getName(), u)) {
+                instance.remove(user.getId());
+            }
+        }
     }
 
     public void delUser(User u) {
