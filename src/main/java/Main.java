@@ -32,7 +32,7 @@ public class Main {
         System.out.println(asset.getType().symbol);
         System.out.println(asset.getPrice());
         System.out.println(asset.getVolume());
-        System.out.println(asset.getId());
+        System.out.println(asset.id);
 
         /**
          * Test the help command

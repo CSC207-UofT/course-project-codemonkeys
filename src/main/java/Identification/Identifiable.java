@@ -1,75 +1,45 @@
 package Identification;
 
-
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Identifiable<T> {
+// A class that represents an identifiable object.
+// Identification is done via UUID. If no cloning object is specified, the class will create a random UUID.
+// The identifier is immutable.
+public abstract class Identifiable {
 
-    private UUID id; // unique id
-    private T type; // user defined type for the object
+    public final UUID id;
 
-
-    public Identifiable(){
+    // Create a random UUID
+    public Identifiable() {
         this.id = UUID.randomUUID();
     }
 
-    public Identifiable(T type){
-        this.type = type;
-        this.id = UUID.randomUUID();
+    // Create an UUID from String
+    public Identifiable(String str) {
+        this.id = UUID.fromString("IDENTIFIABLE:" + str);
     }
 
-    //____________________________________________ Getters and Setters__________________________________________________
-
-    public T getType(){
-        return this.type;
+    // Clone another identifiable object
+    public Identifiable(Identifiable clonee) {
+        this.id = clonee.id;
     }
 
-    public void setType(T type) {
-        this.type = type;
-    }
-
+    /*
     public UUID getId() {
-        return id;
+        return this.id;
     }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    //____________________________________________ Generic Overrides ___________________________________________________
-
-    /**
-     * Checks for equivalency between the UUIDs
-     * @param other is the other object
-     * @returns whether the two objects are equal
      */
     @Override
     public boolean equals(Object other) {
         if(other instanceof Identifiable)
-            return this.getId().equals(((Identifiable) other).getId());
+            return this.id.equals(((Identifiable) other).id);
         return false;
     }
 
-    /**
-     * Hash the id instead
-     * @returns the hash
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id);
     }
 
-
-    /**
-     * Gets the string representation of the type if it exists.
-     * @returns the toString() for Type
-     */
-    @Override
-    public String toString() {
-        if (type != null){
-            return type.toString();
-        }
-        return Objects.toString(this);
-    }
 }

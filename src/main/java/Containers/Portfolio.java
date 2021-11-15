@@ -6,44 +6,77 @@ import Assets.Currency;
 
 import java.util.*;
 
-public class Portfolio extends HashMap<UUID, Asset> {
+// Portfolio is a manager and data storage class for managing common wealth among all users.
+// TODO: change its name to WealthManager and move it into package Managers.
+// The common wealth among all users is stored in the form of individual assets.
+// More assets can be added, or be subtracted from the system. The manager will only perform operation on the same type of assets.
+// The manager can calculate the value of one or all assets.
+// The manager is also responsible for updating the price of an asset to correctly calculate its value.
+public class Portfolio {
 
-    public Portfolio(){
-        super();
+    private static Portfolio commonPortfolio;
+
+    static {
+        Portfolio.commonPortfolio = new Portfolio();
     }
 
-    /**
-     * Quick add for the portfolio
-     * @param asset is the asset we want to add
-     */
-    public void add(Asset asset){
-        this.put(asset.getId(), asset);
+    public static Portfolio getCommonPortfolio() {
+        return Portfolio.commonPortfolio;
     }
 
-    /**
-     * Returns all assets of a given type
-     * @param type is the class of the AssetType
-     * @param <T> is an AssetType
-     * @returns a List of Assets with the AssetType <T>
-     */
-    public <T extends AssetType> List<Asset<T>> getAssetsOfType(Class<T> type){
-        List<Asset<T>> assetList = new ArrayList<>(); // Create a list
-        for (Asset asset : this.values()){ // Iterate though the Portfolio
-            if(type.isInstance(asset.getType())) //If the asset has the same type as <type> then
-                assetList.add(asset); // Add it
+    // Storage: The UUID of asset and the reference of asset
+    private final HashMap<UUID, Asset> storage;
+
+    private Portfolio() {
+        this.storage = new LinkedHashMap<UUID, Asset>();
+    }
+
+    // Add an asset to the system.
+    // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
+    public void add(Asset asset0) {
+        Asset asset = this.storage.get(asset0.id);
+        if(asset == null) {
+            asset = new Asset(0, asset0.getPrice(), asset0.getType());
+            this.storage.put(asset.id, asset);
         }
-        return assetList;
+        asset.setVolume(asset.getVolume() + asset0.getVolume());
     }
 
-    /**
-     * Sums up the values of all the assets in the portfolio
-     * @returns the total value
-     */
-    public double getTotalValue(){
-        double totalValue = 0;
-        for (Asset asset : this.values()){
-            totalValue += asset.getValue();
-        }
-        return totalValue;
+    // Subtracts an asset from the system.
+    // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
+    public void sub(Asset asset0) {
+        Asset asset = this.storage.get(asset0.id);
+        if(asset == null) asset = new Asset(0, asset0.getPrice(), asset0.getType());
+        asset.setVolume(asset.getVolume() - asset0.getVolume());
     }
+
+    // Calculates the value of a specific asset.
+    // If the asset is not found, this method will return zero.
+    public double getValue(Class assetType) {
+        double value = 0;
+        Collection<Asset> assets = this.storage.values();
+        for(Asset asset : assets) {
+            if(!assetType.isAssignableFrom(asset.getType().getClass())) continue;
+            value += asset.getValue();
+        }
+        return value;
+    }
+
+    // Calculates the value of all assets in the system.
+    // If there's no asset in the system, this method will return zero.
+    public double getValue() {
+        return getValue(AssetType.class);
+    }
+
+    // Update the price of a specific asset.
+    public void updatePrice(Class assetType, double price) {
+        Collection<Asset> assets = this.storage.values();
+        for(Asset asset : assets) {
+            if(!assetType.isAssignableFrom(asset.getType().getClass())) continue;
+            asset.setPrice(price);
+        }
+    }
+
 }
+
+

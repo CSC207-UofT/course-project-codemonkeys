@@ -5,12 +5,14 @@ import Users.User;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Buy implements Command{
-    public Buy() {
+public class Transfer implements Command{
+    public Transfer() {
     }
 
     @Override
+    // User: transaction CURRENCY CNY 100 STOCK GOOGLE
     public boolean execute(User user, String[] args) {
+        new Currency(..);
         return true;
     }
 

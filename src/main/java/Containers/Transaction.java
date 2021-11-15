@@ -6,30 +6,23 @@ import Users.User;
 
 import java.util.Date;
 
-public class Transaction extends Identifiable {
+// An immutable decision for a transaction.
+// A transaction has an initiator, buying and selling assets, and a timestamp.
+// The buying and selling value should be equal.
+// TODO: check buying and selling value and make sure they are equal.
+public final class Transaction extends Identifiable {
 
-    private final User initiator;
-    private final Asset sell;
-    private final Asset buy;
-    private final Date date;
+    public final User initiator;
+    public final Asset sell;
+    public final Asset buy;
+    public final Date date;
 
     public Transaction(User initiator, Asset sell, Asset buy){
-        super(null);
+        super();
         this.initiator = initiator;
         this.sell = sell;
         this.buy = buy;
         this.date = new Date();
     }
 
-    public Asset getSell() {
-        return sell;
-    }
-
-    public Asset getBuy() {
-        return buy;
-    }
-
-    public User getInitiator() {
-        return initiator;
-    }
 }

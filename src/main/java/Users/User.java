@@ -1,14 +1,18 @@
 package Users;
 
 import Containers.Portfolio;
+import Containers.Transaction;
 import Identification.Identifiable;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class User extends Identifiable {
 
     //____________________ Variables ___________________________________________________________________________________
 
     private String name; // Name of the User
-    private Portfolio portfolio; // The personal/shadow portfolio of the User
+    private Queue<Transaction> latestTransaction;
     private double votingPower = 1;
     private int authorityLevel;
 
@@ -19,9 +23,9 @@ public class User extends Identifiable {
      * @param name is the name of the User
      */
     public User(String name) {
-        super(null);
+        super();
         this.name = name;
-        this.portfolio = new Portfolio();
+        this.latestTransaction = new LinkedList<Transaction>();
     }
 
     //____________________ Methods _____________________________________________________________________________________
@@ -34,10 +38,6 @@ public class User extends Identifiable {
         this.name = name;
     }
 
-    public Portfolio getPortfolio() {
-        return portfolio;
-    }
-
     public int getAuthorityLevel() {
         return authorityLevel;
     }
@@ -45,4 +45,5 @@ public class User extends Identifiable {
     public void setAuthorityLevel(int authorityLevel) {
         this.authorityLevel = authorityLevel;
     }
+
 }

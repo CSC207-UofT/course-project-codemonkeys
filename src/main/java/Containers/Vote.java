@@ -3,40 +3,17 @@ package Containers;
 import Identification.Identifiable;
 import Users.User;
 
-public class Vote extends Identifiable {
+// An immutable contaner for a vote.
+// A vote has an initiating user, and could be either an upvote or a downvote.
+public final class Vote extends Identifiable {
 
-    //____________________ Variables ___________________________________________________________________________________
+    public final User initiator;
+    public final boolean isUpvote;
 
-    private final User initiator;
-    private final Transaction transaction;
-    private final boolean upvote;
-
-    //____________________ Constructors ________________________________________________________________________________
-
-    /**
-     * Basic constructor for a Vote
-     * @param initiator is the User who started the vote
-     * @param transaction is the transaction to vote for
-     * @param upvote is true if it's an upvote or false for downvote
-     */
-    public Vote(User initiator, Transaction transaction, boolean upvote){
+    public Vote(User initiator, boolean upvote){
         this.initiator = initiator;
-        this.transaction = transaction;
-        this.upvote = upvote;
+        this.isUpvote = upvote;
     }
 
-    //____________________ Methods _____________________________________________________________________________________
-
-    public User getInitiator() {
-        return initiator;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public boolean isUpvote() {
-        return upvote;
-    }
 }
 
