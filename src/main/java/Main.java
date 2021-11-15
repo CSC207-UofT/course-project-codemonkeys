@@ -1,6 +1,5 @@
 import Assets.Asset;
 import Assets.AssetType;
-import Assets.Currency;
 import Assets.Stock;
 import Commands.*;
 import Interfaces.CommandLine;

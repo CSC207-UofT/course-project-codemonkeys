@@ -9,24 +9,24 @@ import java.util.Date;
 public class Transaction extends Identifiable {
 
     private final User initiator;
-    private final Asset sell;
-    private final Asset buy;
+    private final Asset in;
+    private final Asset out;
     private final Date date;
 
-    public Transaction(User initiator, Asset sell, Asset buy){
+    public Transaction(User initiator, Asset in, Asset out){
         super(null);
         this.initiator = initiator;
-        this.sell = sell;
-        this.buy = buy;
+        this.in = in;
+        this.out = out;
         this.date = new Date();
     }
 
-    public Asset getSell() {
-        return sell;
+    public Asset getIn() {
+        return in;
     }
 
-    public Asset getBuy() {
-        return buy;
+    public Asset getOut() {
+        return out;
     }
 
     public User getInitiator() {
