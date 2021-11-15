@@ -1,4 +1,6 @@
-import Entities.User;
+package EntityTests;
+
+import Users.User;
 import org.junit.*;
 import static org.junit.Assert.*;
 
