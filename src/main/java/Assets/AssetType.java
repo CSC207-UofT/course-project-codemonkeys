@@ -1,5 +1,8 @@
 package Assets;
 
-public abstract class AssetType {
 
+public interface AssetType {
+    public String getName();
+
+    public String getSymbol();
 }
