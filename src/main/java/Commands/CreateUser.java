@@ -1,5 +1,4 @@
 package Commands;
-import Users.User;
 import Managers.UserManager;
 
 import java.util.ArrayList;
@@ -19,8 +18,7 @@ public class CreateUser implements Command{
             UserManager um = UserManager.getInstance(); //get the UserManager
 
             for(Object o : args){ //loop through the arguments
-                if (!(o instanceof User)){ //if not create before
-                    um.addUser((User) o);
+                if (!(o instanceof UUID)){ //if not create before
                 }
                 else {return false;
                 }

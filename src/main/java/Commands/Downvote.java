@@ -1,7 +1,4 @@
 package Commands;
-import Containers.Vote;
-import Managers.VoteManager;
-
 import java.util.ArrayList;
 
 public class Downvote implements Command{
@@ -14,17 +11,7 @@ public class Downvote implements Command{
      */
 
     @Override
-    public boolean execute(ArrayList args) {
-        VoteManager um = VoteManager.getInstance(); //get the UserManager
-
-        for(Object o : args){ //loop through the arguments
-            if (!(o instanceof Downvote)){ //if not create before
-                um.downUser((User) o);
-            }
-            else {return false;
-            }
-        }
-        return true;
+    public boolean execute(ArrayList args) {return false;
     }
 
     @Override
