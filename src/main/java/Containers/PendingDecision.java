@@ -13,6 +13,7 @@ public final class PendingDecision extends Identifiable {
 
     public final Transaction transaction;
     public final List<Vote> votes;
+//  TODO: add expiration
 //  public final Date expiresOn;
 
     public PendingDecision(Transaction transaction) {

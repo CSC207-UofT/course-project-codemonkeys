@@ -2,6 +2,7 @@ package Managers;
 
 import Containers.Portfolio;
 import Containers.Transaction;
+import Helpers.VotingPowerHelper;
 import Users.User;
 
 import java.util.*;
@@ -68,11 +69,7 @@ public class TransactionManager {
     public double getVotingPower(User user) {
         double value = this.getTransactionAmount(user);
         if(value == Double.NaN) return Double.NaN;
-        return TransactionManager.calcVotingPower(value);
-    }
-
-    private static double calcVotingPower(double amount) {
-        return Math.atan(amount) * 2 / 3.14;
+        return VotingPowerHelper.fromAmount(value);
     }
 
     @Override

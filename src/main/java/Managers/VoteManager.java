@@ -3,6 +3,7 @@ package Managers;
 import Containers.PendingDecision;
 import Containers.Transaction;
 import Containers.Vote;
+import Helpers.VotingPowerHelper;
 import Users.User;
 
 import java.util.*;
@@ -83,12 +84,17 @@ public class VoteManager {
         for(Vote vote : pendingDecision.votes) {
             double votingPower = TransactionManager.getInstance().getVotingPower(vote.initiator);
             if(Double.isNaN(votingPower)) continue;
-            if(vote.isUpvote)
-                votingPowerSum += votingPower;
-            else
-                votingPowerSum -= votingPower;
+            votingPowerSum = VotingPowerHelper.calcVote(votingPowerSum, votingPower, vote.isUpvote);
         }
         return votingPowerSum;
+    }
+
+    // Make a decision about this pending transaction.
+    // This method does not perform the actual transaction. performTransaction method should be separately called.
+    public int makeDecision(Transaction transaction) {
+        PendingDecision pendingDecision = this.storage.get(transaction.id);
+        if(pendingDecision == null) return 0;
+        return VotingPowerHelper.decide(this.calcVotingPower(transaction), this.getVoteCount(transaction));
     }
 
     // Perform the pending transaction and remove the transaction from the internal registry.
