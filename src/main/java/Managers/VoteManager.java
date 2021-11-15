@@ -30,8 +30,8 @@ public class VoteManager {
     }
 
     // Register a new transaction to be pending and enabling the voting process.
-    public void createVote(Transaction transaction, Date expiresOn) {
-        PendingDecision pendingDecision = new PendingDecision(transaction, expiresOn);
+    public void createVote(Transaction transaction) {
+        PendingDecision pendingDecision = new PendingDecision(transaction);
         this.storage.put(transaction.id, pendingDecision);
     }
 
@@ -82,6 +82,7 @@ public class VoteManager {
         double votingPowerSum = 0;
         for(Vote vote : pendingDecision.votes) {
             double votingPower = TransactionManager.getInstance().getVotingPower(vote.initiator);
+            if(Double.isNaN(votingPower)) continue;
             if(vote.isUpvote)
                 votingPowerSum += votingPower;
             else
@@ -102,6 +103,28 @@ public class VoteManager {
         return true;
     }
 
-    // Check all pending decision and if
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Vote Manager Debug Report: \n");
+        for(UUID key : this.storage.keySet()) {
+            PendingDecision decision = this.storage.get(key);
+            Transaction transaction = decision.transaction;
+            sb.append(key.toString()).append(" (").append(transaction.initiator.getName()).append(") ");
+            sb.append(this.calcVotingPower(transaction)).append('\n');
+            for(Vote vote : this.getVotes(transaction)) {
+                sb.append("    ");
+                sb.append(vote.id.toString()).append(": ");
+                sb.append(vote.initiator.getName()).append(' ');
+                if(vote.isUpvote) sb.append("+1");
+                else sb.append("-1");
+                sb.append('\n');
+            }
+        }
+        if(this.storage.keySet().size() == 0)
+            sb.append("Nothing in history. \n");
+        return sb.toString();
+    }
 
 }
+
+// All tests passed

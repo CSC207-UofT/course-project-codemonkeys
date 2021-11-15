@@ -1,7 +1,5 @@
 package Managers;
 
-import Assets.Asset;
-import Assets.AssetType;
 import Containers.Portfolio;
 import Containers.Transaction;
 import Users.User;
@@ -24,10 +22,10 @@ public class TransactionManager {
     }
 
     // The UUID of user and the transaction history of user
-    private HashMap<UUID, Queue<Transaction>> transactionHistory;
+    private HashMap<UUID, Queue<Transaction>> storage;
 
     private TransactionManager() {
-        this.transactionHistory = new LinkedHashMap<UUID, Queue<Transaction>>();
+        this.storage = new LinkedHashMap<UUID, Queue<Transaction>>();
     }
 
     // The transaction is immediately performed by subtracting and adding assets in the common protfolio.
@@ -43,27 +41,33 @@ public class TransactionManager {
         common.sub(transaction.sell);
         common.add(transaction.buy);
         // Record transaction history
-        Queue<Transaction> history = this.transactionHistory.get(transaction.initiator.id);
+        Queue<Transaction> history = this.storage.get(transaction.initiator.id);
         if (history == null) {
             history = new LinkedList<Transaction>();
-            this.transactionHistory.put(transaction.initiator.id, history);
+            this.storage.put(transaction.initiator.id, history);
         }
         history.add(transaction);
         while (history.size() > TransactionManager.HISTORY_LENGTH) history.remove();
         return true;
     }
 
-    // This method calculates the voting power of a specific user.
-    // It applies a non-linear shaping to the user's latest aggregate transaction value.
-    // If the user has no history the method will return NaN.
-    public double getVotingPower(User user) {
-        Queue<Transaction> history = this.transactionHistory.get(user.id);
+    private double getTransactionAmount(User user) {
+        Queue<Transaction> history = this.storage.get(user.id);
         if(history == null) return Double.NaN;
         double value = 0;
         for(Transaction transaction : history) {
             // TODO: buy value must equal sell value
             value += transaction.buy.getValue();
         }
+        return value;
+    }
+
+    // This method calculates the voting power of a specific user.
+    // It applies a non-linear shaping to the user's latest aggregate transaction value.
+    // If the user has no history the method will return NaN.
+    public double getVotingPower(User user) {
+        double value = this.getTransactionAmount(user);
+        if(value == Double.NaN) return Double.NaN;
         return TransactionManager.calcVotingPower(value);
     }
 
@@ -71,4 +75,34 @@ public class TransactionManager {
         return Math.atan(amount) * 2 / 3.14;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Transaction Manager Debug Report: \n");
+        for(UUID key : this.storage.keySet()) {
+            User user = UserManager.getInstance().getUser(key);
+            sb.append(key.toString()).append(" - ");
+            sb.append(user.getName()).append(": ");
+            sb.append(this.getVotingPower(user)).append(" ($");
+            sb.append(this.getTransactionAmount(user)).append(")\n");
+            Queue<Transaction> history = this.storage.get(key);
+            for(Transaction transaction : history) {
+                sb.append("    ");
+                sb.append(transaction.id.toString()).append(": ");
+                sb.append(transaction.sell.getType().getClass().getSimpleName());
+                sb.append('[').append(transaction.sell.getVolume()).append(" x $");
+                sb.append(transaction.sell.getPrice()).append(" (= $");
+                sb.append(transaction.sell.getValue()).append(")] -> ");
+                sb.append(transaction.buy.getType().getClass().getSimpleName());
+                sb.append('[').append(transaction.buy.getVolume()).append(" x $");
+                sb.append(transaction.buy.getPrice()).append(" (= $");
+                sb.append(transaction.buy.getValue()).append(")]\n");
+            }
+        }
+        if(this.storage.keySet().size() == 0)
+            sb.append("Nothing in history. \n");
+        return sb.toString();
+    }
+
 }
+
+// All tests passed

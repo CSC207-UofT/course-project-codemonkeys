@@ -72,4 +72,21 @@ public class UserManager {
     public List<User> getUserList() {
         return new ArrayList<User>(this.storage.values());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("User Manager Debug Report: \n");
+        for(UUID key : this.storage.keySet()) {
+            User user = this.storage.get(key);
+            sb.append(key.toString()).append(": ");
+            sb.append(user.getName()).append(" ");
+            if(this.isAdmin(user)) sb.append("(Admin)");
+            sb.append('\n');
+        }
+        sb.append("User count: ").append(this.storage.size()).append('\n');
+        return sb.toString();
+    }
+
 }
+
+// All tests passed

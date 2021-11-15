@@ -25,19 +25,19 @@ public class Portfolio {
     }
 
     // Storage: The UUID of asset and the reference of asset
-    private final HashMap<UUID, Asset> storage;
+    private final HashMap<Class, Asset> storage;
 
     private Portfolio() {
-        this.storage = new LinkedHashMap<UUID, Asset>();
+        this.storage = new LinkedHashMap<Class, Asset>();
     }
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void add(Asset asset0) {
-        Asset asset = this.storage.get(asset0.id);
+        Asset asset = this.storage.get(asset0.getType().getClass());
         if(asset == null) {
             asset = new Asset(0, asset0.getPrice(), asset0.getType());
-            this.storage.put(asset.id, asset);
+            this.storage.put(asset.getType().getClass(), asset);
         }
         asset.setVolume(asset.getVolume() + asset0.getVolume());
     }
@@ -45,8 +45,11 @@ public class Portfolio {
     // Subtracts an asset from the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void sub(Asset asset0) {
-        Asset asset = this.storage.get(asset0.id);
-        if(asset == null) asset = new Asset(0, asset0.getPrice(), asset0.getType());
+        Asset asset = this.storage.get(asset0.getType().getClass());
+        if(asset == null) {
+            asset = new Asset(0, asset0.getPrice(), asset0.getType());
+            this.storage.put(asset.getType().getClass(), asset);
+        }
         asset.setVolume(asset.getVolume() - asset0.getVolume());
     }
 
@@ -77,6 +80,18 @@ public class Portfolio {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
+        for(Class clazz : this.storage.keySet()) {
+            Asset asset = this.storage.get(clazz);
+            sb.append(asset.getType().getClass().getSimpleName()).append('[');
+            sb.append(asset.getVolume()).append(" x $").append(asset.getPrice());
+            sb.append(" (= $").append(asset.getValue()).append(")]\n");
+        }
+        sb.append("Total value: $").append(this.getValue()).append('\n');
+        return sb.toString();
+    }
 }
 
-
+// All tests passed

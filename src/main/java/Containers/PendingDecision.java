@@ -13,12 +13,11 @@ public final class PendingDecision extends Identifiable {
 
     public final Transaction transaction;
     public final List<Vote> votes;
-    public final Date expiresOn;
+//  public final Date expiresOn;
 
-    public PendingDecision(Transaction transaction, Date expiresOn) {
+    public PendingDecision(Transaction transaction) {
         super(transaction);
         this.transaction = transaction;
-        this.expiresOn = expiresOn;
         this.votes = new ArrayList<Vote>();
     }
 
