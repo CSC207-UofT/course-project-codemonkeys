@@ -6,12 +6,13 @@ import Containers.Vote;
 import Helpers.VotingPowerHelper;
 import Users.User;
 
+import java.io.Serializable;
 import java.util.*;
 
 // VoteManager is a management and storage class for all pending decisions and their related votes.
 // A pending transaction is a transaction that is not carried out and undergoing a voting process.
 // The pending transaction's identifier is the transaction's identifier. No user is involved in storage.
-public class VoteManager {
+public class VoteManager implements Serializable {
 
     private static VoteManager instance;
 

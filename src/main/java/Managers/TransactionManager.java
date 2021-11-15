@@ -6,10 +6,11 @@ import Helpers.VotingPowerHelper;
 import Users.User;
 
 import java.util.*;
+import java.io.*;
 
 // TransactionManager is a manager and data storage class for managing transaction history.
 // It can also calculate voting power from transaction history.
-public class TransactionManager {
+public class TransactionManager implements Serializable{
 
     private static final int HISTORY_LENGTH = 25;
     private static TransactionManager instance;

@@ -2,6 +2,7 @@ package Containers;
 
 import Assets.Asset;
 
+import java.io.Serializable;
 import java.util.*;
 
 // Portfolio is a manager and data storage class for managing common wealth among all users.
@@ -10,7 +11,7 @@ import java.util.*;
 // More assets can be added, or be subtracted from the system. The manager will only perform operation on the same type of assets.
 // The manager can calculate the value of one or all assets.
 // The manager is also responsible for updating the price of an asset to correctly calculate its value.
-public class Portfolio {
+public class Portfolio implements Serializable {
 
     private static Portfolio commonPortfolio;
 

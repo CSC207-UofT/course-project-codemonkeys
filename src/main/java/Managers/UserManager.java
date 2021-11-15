@@ -4,11 +4,12 @@ import Identification.Identifiable;
 import Users.Admin;
 import Users.User;
 
+import java.io.Serializable;
 import java.util.*;
 
 // The user manager records user and their corresponding id.
 // It also integrates permission query interfaces.
-public class UserManager {
+public class UserManager implements Serializable {
 
     private static UserManager instance;
 
