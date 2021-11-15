@@ -19,6 +19,7 @@ public class Upvote implements Command{
         return "this is info for the upvote command";
     }
 
+    @Override
     public String name() {
         return "upvote";
     }

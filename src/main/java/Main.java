@@ -4,6 +4,7 @@ import Assets.Currency;
 import Assets.Stock;
 import Commands.*;
 import Interfaces.CommandLine;
+import Managers.UserManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -39,15 +40,8 @@ public class Main {
          * TODO: implement functionality for other commands
          */
 
-        Object[] a = {Kick.class, Help.class};
 
-        // new Help().execute(new ArrayList(Arrays.asList(a)));
-
-        CommandLine cmd = new CommandLine();
-        boolean flag = true;
-        while(flag) {
-            flag = cmd.getCommand();
-        }
+        new CommandLine().start();
 
 //        Asset teslaStock = new Asset("TSLA", 3.123);
 //        YahooFinanceAPI yahoo = new YahooFinanceAPI();

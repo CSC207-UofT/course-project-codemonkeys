@@ -16,12 +16,9 @@ public class CreateUser implements Command{
 
     @Override
     public boolean execute(User user, String[] args) {
-        if (! argCheck(args)) {
-            System.out.println("The argument number is wrong. Use help to get syntax.");
-            return false;
-        }
-        UserManager um = UserManager.getInstance(); //get the UserManager
-        um.addUser(new User(args[0]));
+        if(args.length != 1) return false;
+        UserManager.getInstance().addUser(new User(args[0]));
+        System.out.println("New user created!");
         return true;
     }
 
@@ -32,10 +29,7 @@ public class CreateUser implements Command{
 
     @Override
     public String name() {
-        return "createUser";
+        return "createuser";
     }
 
-    public boolean argCheck(String[] args) {
-        return args.length == 2;
-    }
 }

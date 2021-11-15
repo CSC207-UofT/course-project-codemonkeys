@@ -19,14 +19,18 @@ public class Kick implements Command{
      */
     @Override
     public boolean execute(User user, String[] args) {
-        UserManager um = UserManager.getInstance(); //get the UserManager
-
-        for(Object o : args){ //loop through the arguments
-            if(o instanceof UUID){
-
-            }
+        if (! UserManager.getInstance().isAdmin(user)) {
+            System.out.println("You are not an Admin and have no permission!");
         }
-
+        if (args.length != 1) return false;
+        if(args[0].equals(user.getName())) {
+            System.out.println("You cannot kick yourself!");
+            return true;
+        }
+        User del = UserManager.getInstance().find(args[0]);
+        if (del == null) System.out.println("User does not exist");
+        UserManager.getInstance().delUser(user);
+        System.out.println("Successfully delete the user!");
         return true;
     }
 

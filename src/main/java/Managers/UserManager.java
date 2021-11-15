@@ -1,5 +1,6 @@
 package Managers;
 
+import Identification.Identifiable;
 import Users.Admin;
 import Users.User;
 
@@ -41,11 +42,12 @@ public class UserManager {
     public List<Admin> getAdminList(){
         List<Admin> admins = new ArrayList<>();
         for (User user : this.values()){
-            if (user instanceof Admin)
+            if (this.isAdmin(user))
                 admins.add((Admin) user);
         }
         return admins;
     }
+<<<<<<< Updated upstream
     */
     public boolean isAdmin(UUID id){
         User user = this.getUser(id);
@@ -53,8 +55,34 @@ public class UserManager {
         return this.isAdmin(this.getUser(id));
     }
 
+=======
+
+    public List<User> getUserList(){
+        List<User> users = new ArrayList<>();
+        for (User user : this.values())
+            users.add(user);
+        return users;
+    }
+
+    /**
+     * Checks if a UUID is associated with an admin
+     * @param id is the UUID
+     * @returns whether that user, if they exist, is an admin
+     */
+    public boolean isAdmin(UUID id){
+        return isAdmin(this.get(id));
+    }
+>>>>>>> Stashed changes
     public boolean isAdmin(User user) {
         return user instanceof Admin;
     }
 
+    public User find(String name) {
+        Collection<? extends User> users = this.values();
+        for(User user : users) {
+            if(!user.getName().equals(name)) continue;
+            return user;
+        }
+        return null;
+    }
 }
