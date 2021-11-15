@@ -1,10 +1,8 @@
 package Assets;
 
-public class Stock extends AssetType{
-    public int rank;
+public class Stock implements AssetType{
     public String name;
     public String symbol;
-
     public boolean liquid;
 
     @Override
@@ -16,18 +14,9 @@ public class Stock extends AssetType{
     public String getSymbol() {
         return this.symbol;
     }
-
-    public String company;
-    public double marketCap;
-
     /**
      * add more information about the stock
      */
 
-
-    @Override
-    public String toString() {
-        return name + " (" + symbol + ") " + "Stock. " + company;
-    }
 }
 

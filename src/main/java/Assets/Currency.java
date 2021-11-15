@@ -1,6 +1,7 @@
 package Assets;
 
-public class Currency extends AssetType {
+public class Currency implements AssetType {
+
     public String name;
     public String symbol;
 
@@ -13,7 +14,4 @@ public class Currency extends AssetType {
     public String getSymbol() {
         return this.symbol;
     }
-
-    public double usdPerUnit;
-
 }
