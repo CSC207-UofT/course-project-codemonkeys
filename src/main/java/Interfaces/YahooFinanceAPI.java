@@ -1,6 +1,5 @@
 package Interfaces;
 
-import UseCases.DataAccessInterface;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
