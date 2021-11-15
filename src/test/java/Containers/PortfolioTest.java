@@ -1,9 +1,6 @@
 package Containers;
 
 import Assets.Asset;
-import Assets.Currency;
-import Assets.Stock;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.*;
 
 import java.util.List;

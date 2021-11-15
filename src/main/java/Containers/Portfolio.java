@@ -1,8 +1,6 @@
 package Containers;
 
 import Assets.Asset;
-import Assets.AssetType;
-import Assets.Currency;
 
 import java.util.*;
 
@@ -20,24 +18,24 @@ public class Portfolio {
         Portfolio.commonPortfolio = new Portfolio();
     }
 
-    public static Portfolio getCommonPortfolio() {
+    public static Portfolio getInstance() {
         return Portfolio.commonPortfolio;
     }
 
     // Storage: The UUID of asset and the reference of asset
-    private final HashMap<Class, Asset> storage;
+    private final HashMap<String, Asset> storage;
 
     private Portfolio() {
-        this.storage = new LinkedHashMap<Class, Asset>();
+        this.storage = new LinkedHashMap<String, Asset>();
     }
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void add(Asset asset0) {
-        Asset asset = this.storage.get(asset0.getType().getClass());
+        Asset asset = this.storage.get(asset0.getType());
         if(asset == null) {
-            asset = new Asset(0, asset0.getPrice(), asset0.getType());
-            this.storage.put(asset.getType().getClass(), asset);
+            asset = new Asset(0, asset0.getPrice(), asset0.getType(), asset0.getSymbol());
+            this.storage.put(asset.getType(), asset);
         }
         asset.setVolume(asset.getVolume() + asset0.getVolume());
     }
@@ -45,47 +43,47 @@ public class Portfolio {
     // Subtracts an asset from the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void sub(Asset asset0) {
-        Asset asset = this.storage.get(asset0.getType().getClass());
+        Asset asset = this.storage.get(asset0.getType());
         if(asset == null) {
-            asset = new Asset(0, asset0.getPrice(), asset0.getType());
-            this.storage.put(asset.getType().getClass(), asset);
+            asset = new Asset(0, asset0.getPrice(), asset0.getType(), asset0.getSymbol());
+            this.storage.put(asset.getType(), asset);
         }
         asset.setVolume(asset.getVolume() - asset0.getVolume());
     }
 
     // Calculates the value of a specific asset.
     // If the asset is not found, this method will return zero.
-    public double getValue(Class assetType) {
+    public double getValue(String type) {
         double value = 0;
-        Collection<Asset> assets = this.storage.values();
-        for(Asset asset : assets) {
-            if(!assetType.isAssignableFrom(asset.getType().getClass())) continue;
-            value += asset.getValue();
-        }
-        return value;
+        Asset asset = this.storage.get(type);
+        if(asset == null) return 0;
+        return asset.getValue();
     }
 
     // Calculates the value of all assets in the system.
     // If there's no asset in the system, this method will return zero.
     public double getValue() {
-        return getValue(AssetType.class);
+        double value = 0;
+        Collection<Asset> assets = this.storage.values();
+        for(Asset asset : assets) {
+            value += asset.getValue();
+        }
+        return value;
     }
 
     // Update the price of a specific asset.
-    public void updatePrice(Class assetType, double price) {
-        Collection<Asset> assets = this.storage.values();
-        for(Asset asset : assets) {
-            if(!assetType.isAssignableFrom(asset.getType().getClass())) continue;
-            asset.setPrice(price);
-        }
+    public void updatePrice(String type, double price) {
+        Asset asset = this.storage.get(type);
+        if(asset == null) return;
+        asset.setPrice(price);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
-        for(Class clazz : this.storage.keySet()) {
-            Asset asset = this.storage.get(clazz);
-            sb.append(asset.getType().getClass().getSimpleName()).append('[');
+        for(String type : this.storage.keySet()) {
+            Asset asset = this.storage.get(type);
+            sb.append(asset.getType()).append('[');
             sb.append(asset.getVolume()).append(" x $").append(asset.getPrice());
             sb.append(" (= $").append(asset.getValue()).append(")]\n");
         }

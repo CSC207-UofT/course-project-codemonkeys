@@ -1,12 +1,6 @@
 import Assets.Asset;
-import Assets.AssetType;
-import Assets.Currency;
-import Assets.Stock;
-import Commands.*;
 import Containers.Portfolio;
 import Containers.Transaction;
-import Containers.Vote;
-import Interfaces.CommandLine;
 import Managers.TransactionManager;
 import Managers.UserManager;
 import Managers.VoteManager;
@@ -15,8 +9,6 @@ import Users.User;
 
 import javax.sound.sampled.Port;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Main {
@@ -26,8 +18,8 @@ public class Main {
         User  user2 = new User ("User2");
         User  user3 = new User ("User3");
 
-        Asset currency = new Asset(10, 1.0, new Currency());
-        Asset stock = new Asset(10, 2.0, new Stock());
+        Asset currency = new Asset(10, 1.0, "USD", "$");
+        Asset stock = new Asset(10, 2.0, "GOOGLE", "SS");
 
         UserManager.getInstance().addUser(admin);
         UserManager.getInstance().addUser(user1);
@@ -35,11 +27,15 @@ public class Main {
         UserManager.getInstance().addUser(user3);
 
 
-        Portfolio.getCommonPortfolio().add(currency);
-        Portfolio.getCommonPortfolio().add(stock);
+        Portfolio.getInstance().add(currency);
+        Portfolio.getInstance().add(stock);
+        Portfolio.getInstance().add(stock);
 
-        Asset currencySpent = new Asset(4, 1.0, new Currency());
-        Asset stockGained = new Asset(2, 2.0, new Stock());
+        System.out.println(Portfolio.getInstance());
+
+/*
+        Asset currencySpent = new Asset(4, 1.0, "USD", "$");
+        Asset stockGained = new Asset(2, 2.0, "GOOGLE", "SS");
 
         Transaction transaction = new Transaction(admin, currencySpent, stockGained);
         VoteManager.getInstance().createVote(transaction);
@@ -59,7 +55,7 @@ public class Main {
 
         System.out.println(Portfolio.getCommonPortfolio());
         System.out.println(TransactionManager.getInstance());
-        System.out.println(VoteManager.getInstance());
+        System.out.println(VoteManager.getInstance());*/
 
     }
 }

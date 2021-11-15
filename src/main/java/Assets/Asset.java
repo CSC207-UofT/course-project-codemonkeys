@@ -1,24 +1,33 @@
 package Assets;
 
-import Users.User;
 import Identification.Identifiable;
 
-public class Asset<T extends AssetType> extends Identifiable {
+public class Asset extends Identifiable {
 
     private double volume; // The volume of the asset: ex. how many shares of X stock
     private double price; // The price per unit volume of the asset
-    private final T type; // The ? extends AssetType indicating the type of this particular asset
+    private final String type; // The string indicating the type of this particular asset
+    private final String symbol;
 
-    public Asset(double volume, double price, T type) {
+    // We do not use symbol for now
+    // TODO: add type to symbol database
+    public Asset(double volume, double price, String type) {
+        this(volume, price, type, null);
+    }
+
+    public Asset(double volume, double price, String type, String symbol) {
         this.type = type;
         this.volume = volume;
         this.price = price;
+        this.symbol = symbol;
     }
 
-    public T getType() {
+    public String getType() {
         return this.type;
     }
-
+    public String getSymbol() {
+        return this.symbol;
+    }
     public double getVolume() {
         return volume;
     }

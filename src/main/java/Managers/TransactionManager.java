@@ -35,8 +35,8 @@ public class TransactionManager {
     // Node: this method will not complain about unbalanced transactions.
     public boolean performTransaction(Transaction transaction) {
         // Verify balance
-        Portfolio common = Portfolio.getCommonPortfolio();
-        double availableValue = common.getValue(transaction.sell.getType().getClass());
+        Portfolio common = Portfolio.getInstance();
+        double availableValue = common.getValue(transaction.sell.getType());
         if (availableValue < transaction.buy.getValue()) return false;
         // Perform transaction
         common.sub(transaction.sell);
@@ -85,12 +85,12 @@ public class TransactionManager {
             for(Transaction transaction : history) {
                 sb.append("    ");
                 sb.append(transaction.id.toString()).append(": ");
-                sb.append(transaction.sell.getType().getClass().getSimpleName());
-                sb.append('[').append(transaction.sell.getVolume()).append(" x $");
+                sb.append(transaction.sell.getType()).append('[');
+                sb.append(transaction.sell.getVolume()).append(" x $");
                 sb.append(transaction.sell.getPrice()).append(" (= $");
                 sb.append(transaction.sell.getValue()).append(")] -> ");
-                sb.append(transaction.buy.getType().getClass().getSimpleName());
-                sb.append('[').append(transaction.buy.getVolume()).append(" x $");
+                sb.append(transaction.buy.getType()).append('[');
+                sb.append(transaction.buy.getVolume()).append(" x $");
                 sb.append(transaction.buy.getPrice()).append(" (= $");
                 sb.append(transaction.buy.getValue()).append(")]\n");
             }
