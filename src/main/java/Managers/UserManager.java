@@ -47,42 +47,29 @@ public class UserManager {
         }
         return admins;
     }
-<<<<<<< Updated upstream
+
     */
-    public boolean isAdmin(UUID id){
+    public boolean isAdmin(UUID id) {
         User user = this.getUser(id);
         if(user == null) return false;
         return this.isAdmin(this.getUser(id));
     }
 
-=======
-
-    public List<User> getUserList(){
-        List<User> users = new ArrayList<>();
-        for (User user : this.values())
-            users.add(user);
-        return users;
-    }
-
-    /**
-     * Checks if a UUID is associated with an admin
-     * @param id is the UUID
-     * @returns whether that user, if they exist, is an admin
-     */
-    public boolean isAdmin(UUID id){
-        return isAdmin(this.get(id));
-    }
->>>>>>> Stashed changes
     public boolean isAdmin(User user) {
         return user instanceof Admin;
     }
 
     public User find(String name) {
-        Collection<? extends User> users = this.values();
+        Collection<? extends User> users = this.storage.values();
         for(User user : users) {
             if(!user.getName().equals(name)) continue;
             return user;
         }
         return null;
+    }
+
+    // WARNING: This method EXPOSES the real reference of User object.
+    public List<User> getUserList() {
+        return new ArrayList<User>(this.storage.values());
     }
 }

@@ -30,7 +30,6 @@ public class TransactionManager {
         this.transactionHistory = new LinkedHashMap<UUID, Queue<Transaction>>();
     }
 
-<<<<<<< Updated upstream
     // The transaction is immediately performed by subtracting and adding assets in the common protfolio.
     // If there's not enough asset to sell, this method will return false.
     // If the operation is successfully performed, this method will return true.
@@ -39,30 +38,19 @@ public class TransactionManager {
         // Verify balance
         Portfolio common = Portfolio.getCommonPortfolio();
         double availableValue = common.getValue(transaction.sell.getType().getClass());
-        if(availableValue < transaction.buy.getValue()) return false;
+        if (availableValue < transaction.buy.getValue()) return false;
         // Perform transaction
         common.sub(transaction.sell);
         common.add(transaction.buy);
         // Record transaction history
         Queue<Transaction> history = this.transactionHistory.get(transaction.initiator.id);
-        if(history == null) {
+        if (history == null) {
             history = new LinkedList<Transaction>();
             this.transactionHistory.put(transaction.initiator.id, history);
         }
         history.add(transaction);
-        while(history.size() > TransactionManager.HISTORY_LENGTH) history.remove();
+        while (history.size() > TransactionManager.HISTORY_LENGTH) history.remove();
         return true;
-=======
-    /**
-     * Initiate a transaction component-wise
-     * @param initiator is the person who is starting the transaction
-     * @param in is the Asset to be exchanged
-     * @param out is the Asset to be exchanged for
-     */
-    public void add(User initiator, Asset in, Asset out){
-        Transaction transaction = new Transaction(initiator, in, out);
-        this.add(transaction);
->>>>>>> Stashed changes
     }
 
     // This method calculates the voting power of a specific user.

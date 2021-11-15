@@ -12,7 +12,7 @@ public class Transfer implements Command{
     @Override
     // User: transaction CURRENCY CNY 100 STOCK GOOGLE
     public boolean execute(User user, String[] args) {
-        new Currency(..);
+
         return true;
     }
 
