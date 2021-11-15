@@ -42,6 +42,15 @@ public class UserManager extends HashMap<UUID, User>{
         instance.remove(u.getId());
     }
 
+    public User findUser(String s){
+        for (User user: instance.values()) {
+            if (Objects.equals(user.getName(), s)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the singleton instance of UserManager
      * @returns the instance
