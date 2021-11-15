@@ -19,6 +19,25 @@ public abstract class Identifiable<T> {
         this.id = UUID.randomUUID();
     }
 
+    //____________________________________________ Getters and Setters__________________________________________________
+
+    public T getType(){
+        return this.type;
+    }
+
+    public void setType(T type) {
+        this.type = type;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    //____________________________________________ Generic Overrides ___________________________________________________
 
     /**
      * Checks for equivalency between the UUIDs
@@ -41,19 +60,16 @@ public abstract class Identifiable<T> {
         return Objects.hash(getId());
     }
 
-    public T getType(){
-        return this.type;
-    }
 
-    public void setType(T type) {
-        this.type = type;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    /**
+     * Gets the string representation of the type if it exists.
+     * @returns the toString() for Type
+     */
+    @Override
+    public String toString() {
+        if (type != null){
+            return type.toString();
+        }
+        return Objects.toString(this);
     }
 }

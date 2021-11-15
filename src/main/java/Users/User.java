@@ -9,8 +9,10 @@ public class User extends Identifiable {
 
     private String name; // Name of the User
     private Portfolio portfolio; // The personal/shadow portfolio of the User
+    private double votingPower = 1;
+    private int authorityLevel;
 
-    //____________________ Constructors ________________________________________________________________________________
+//____________________ Constructors ________________________________________________________________________________
 
     /**
      * Basic constructor for User
@@ -34,5 +36,21 @@ public class User extends Identifiable {
 
     public Portfolio getPortfolio() {
         return portfolio;
+    }
+
+    public double getVotingPower(){
+        return this.votingPower;
+    }
+
+    public void setVotingPower(double num){
+        this.votingPower = num;
+    }
+
+    public int getAuthorityLevel() {
+        return authorityLevel;
+    }
+
+    public void setAuthorityLevel(int authorityLevel) {
+        this.authorityLevel = authorityLevel;
     }
 }
