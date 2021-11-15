@@ -1,11 +1,12 @@
 package Commands;
+import Users.User;
 
 public class depositMoney implements Command{
     public depositMoney() {
     }
 
     @Override
-    public boolean execute(String user, String[] args) {
+    public boolean execute(User user, String[] args) {
         return true;
     }
 

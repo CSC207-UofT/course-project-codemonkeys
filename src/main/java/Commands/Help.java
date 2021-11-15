@@ -1,5 +1,7 @@
 package Commands;
 
+import Users.User;
+
 import java.util.ArrayList;
 
 public class Help implements Command {
@@ -8,7 +10,7 @@ public class Help implements Command {
 
     }
 
-    public boolean execute(String user, String[] args){
+    public boolean execute(User user, String[] args){
 //        CommandManager cm = CommandManager.getInstance();
 //
 //        for(Command c : cm.getTemplates()){

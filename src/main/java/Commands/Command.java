@@ -1,6 +1,7 @@
 package Commands;
 
 import java.util.ArrayList;
+import Users.User;
 
 public interface Command {
     /**
@@ -8,7 +9,7 @@ public interface Command {
      * @returns true if successfully exectued, false otherwise
      * @param args
      */
-    public boolean execute(String user, String[] args);
+    public boolean execute(User user, String[] args);
 
     /**
      * Gives help
