@@ -1,7 +1,6 @@
-package Commands;
+package UseCases.Commands;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Sell implements Command{
     public Sell() {
@@ -9,7 +8,7 @@ public class Sell implements Command{
 
     @Override
     public boolean execute(ArrayList args) {
-       return false;
+        return false;
     }
 
     @Override
