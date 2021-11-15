@@ -1,6 +1,7 @@
 import Assets.Asset;
 import Containers.Portfolio;
 import Containers.Transaction;
+import Interfaces.GraphicsPresenterDemo.GraphicsUserInterface;
 import Managers.TransactionManager;
 import Managers.UserManager;
 import Managers.VoteManager;
@@ -30,6 +31,7 @@ public class Main {
         Portfolio.getInstance().add(stock);
         Portfolio.getInstance().add(stock);
 
+        new GraphicsUserInterface().presentGraphics();
         System.out.println(Portfolio.getInstance());
 
 /*
