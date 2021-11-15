@@ -41,9 +41,13 @@ public class Main {
 
         Object[] a = {Kick.class, Help.class};
 
-        new Help().execute(new ArrayList(Arrays.asList(a)));
+        // new Help().execute(new ArrayList(Arrays.asList(a)));
 
         CommandLine cmd = new CommandLine();
+        boolean flag = true;
+        while(flag) {
+            flag = cmd.getCommand();
+        }
 
 //        Asset teslaStock = new Asset("TSLA", 3.123);
 //        YahooFinanceAPI yahoo = new YahooFinanceAPI();

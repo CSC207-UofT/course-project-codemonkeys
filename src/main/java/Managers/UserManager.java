@@ -55,4 +55,6 @@ public class UserManager extends HashMap<UUID, User>{
         return this.get(id) instanceof Admin;
     }
 
+    public void addUser(User o) {
+    }
 }

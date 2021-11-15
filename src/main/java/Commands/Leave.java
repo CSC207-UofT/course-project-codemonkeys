@@ -8,12 +8,17 @@ public class Leave implements Command{
     }
 
     @Override
-    public boolean execute(ArrayList args) {
+    public boolean execute(String user, String[] args) {
         return false;
     }
 
     @Override
     public String help() {
         return "this is info fo rhte leave command";
+    }
+
+    @Override
+    public String name() {
+        return "help";
     }
 }

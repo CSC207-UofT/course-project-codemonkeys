@@ -1,10 +1,10 @@
 package Commands;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class Upvote implements Command{
-
-    public Upvote() {
+public class Viewvote implements Command{
+    public Viewvote() {
     }
 
     @Override
@@ -14,10 +14,12 @@ public class Upvote implements Command{
 
     @Override
     public String help() {
-        return "this is info for the upvote command";
+        return "this is info for the viewvote command";
     }
 
+    @Override
     public String name() {
-        return "upvote";
+        return "viewvote";
     }
+
 }

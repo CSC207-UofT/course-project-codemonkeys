@@ -69,6 +69,4 @@ public class CommandManager {
     public List<Command> getTemplates(){
         return this.cmdTemplates;
     }
-
-
 }

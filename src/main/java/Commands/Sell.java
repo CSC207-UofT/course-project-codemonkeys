@@ -1,23 +1,24 @@
 package Commands;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class Upvote implements Command{
-
-    public Upvote() {
+public class Sell implements Command{
+    public Sell() {
     }
 
     @Override
     public boolean execute(String user, String[] args) {
-        return false;
+       return false;
     }
 
     @Override
     public String help() {
-        return "this is info for the upvote command";
+        return "this is info for the sell command";
     }
 
+    @Override
     public String name() {
-        return "upvote";
+        return "sell";
     }
 }

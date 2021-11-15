@@ -8,19 +8,24 @@ public class Help implements Command {
 
     }
 
-    public boolean execute(ArrayList args){
-        CommandManager cm = CommandManager.getInstance();
-
-        for(Command c : cm.getTemplates()){
-            if(args == null || args.contains(c.getClass()))
-                System.out.println(c.help());
-        }
+    public boolean execute(String user, String[] args){
+//        CommandManager cm = CommandManager.getInstance();
+//
+//        for(Command c : cm.getTemplates()){
+//            if(args == null || args.contains(c.getClass()))
+//                System.out.println(c.help());
+//        }
         return true;
     }
 
     @Override
     public String help() {
         return "this is info for the Help command";
+    }
+
+    @Override
+    public String name() {
+        return "help";
     }
 
 }
