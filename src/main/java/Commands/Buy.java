@@ -3,23 +3,25 @@ package Commands;
 import Users.User;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class Upvote implements Command{
-
-    public Upvote() {
+public class Buy implements Command{
+    public Buy() {
     }
 
     @Override
     public boolean execute(User user, String[] args) {
-        return false;
+        return true;
     }
 
     @Override
     public String help() {
-        return "this is info for the upvote command";
+            return "this is info for the create user command";
+        }
+
+    @Override
+    public String name() {
+        return "buy";
     }
 
-    public String name() {
-        return "upvote";
-    }
 }

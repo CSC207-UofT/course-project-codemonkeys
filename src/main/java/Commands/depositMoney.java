@@ -1,26 +1,23 @@
 package Commands;
-
 import Users.User;
 
-import java.util.ArrayList;
-
-public class Leave implements Command{
-
-    public Leave() {
+public class depositMoney implements Command{
+    public depositMoney() {
     }
 
     @Override
     public boolean execute(User user, String[] args) {
-        return false;
+        return true;
     }
 
     @Override
     public String help() {
-        return "this is info fo rhte leave command";
-    }
+            return "this is info for the create user command";
+        }
 
     @Override
     public String name() {
-        return "help";
+        return "depositmoney";
     }
+
 }

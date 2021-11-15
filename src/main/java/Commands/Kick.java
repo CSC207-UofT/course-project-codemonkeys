@@ -18,7 +18,7 @@ public class Kick implements Command{
      * @returns whether the execution was successful
      */
     @Override
-    public boolean execute(ArrayList args) {
+    public boolean execute(User user, String[] args) {
         UserManager um = UserManager.getInstance(); //get the UserManager
 
         for(Object o : args){ //loop through the arguments
@@ -34,5 +34,9 @@ public class Kick implements Command{
     @Override
     public String help() {
         return "this is information for the Kick command";
+    }
+
+    public String name() {
+        return "kick";
     }
 }
