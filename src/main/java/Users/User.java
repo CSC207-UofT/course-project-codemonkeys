@@ -10,7 +10,7 @@ public class User extends Identifiable {
     private String name; // Name of the User
     private Portfolio portfolio; // The personal/shadow portfolio of the User
     private double votingPower = 1;
-    private int authorityLevel;
+    private int authorityLevel = 1;
 
 //____________________ Constructors ________________________________________________________________________________
 
