@@ -24,6 +24,13 @@ public class UserManager extends HashMap<UUID, User>{
     }
 
     //_________________________________________________ Methods ________________________________________________________
+    public void addUser(User u) {
+        instance.put(u.getId(), u);
+    }
+
+    public void delUser(User u) {
+        instance.remove(u.getId());
+    }
 
     /**
      * Gets the singleton instance of UserManager
@@ -55,6 +62,4 @@ public class UserManager extends HashMap<UUID, User>{
         return this.get(id) instanceof Admin;
     }
 
-    public void addUser(User o) {
-    }
 }

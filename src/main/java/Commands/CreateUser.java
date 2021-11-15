@@ -16,25 +16,26 @@ public class CreateUser implements Command{
 
     @Override
     public boolean execute(String user, String[] args) {
-        UserManager um = UserManager.getInstance(); //get the UserManager
-
-        for(Object o : args){ //loop through the arguments
-            if (!(o instanceof User)){ //if not create before
-                um.addUser((User) o);
-            }
-            else {return false;
-            }
+        if (! argCheck(args)) {
+            System.out.println("The argument number is wrong. Use help to get syntax.");
+            return false;
         }
+        UserManager um = UserManager.getInstance(); //get the UserManager
+        um.addUser(new User(args[0]));
         return true;
     }
 
     @Override
     public String help() {
-        return "this is info for the create user command";
+        return "To create a new user, type 'your_name: createuser new_user_name'";
     }
 
     @Override
     public String name() {
         return "createUser";
+    }
+
+    public boolean argCheck(String[] args) {
+        return args.length == 2;
     }
 }
