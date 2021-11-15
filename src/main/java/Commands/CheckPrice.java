@@ -1,5 +1,7 @@
 package Commands;
 
+import Users.User;
+
 import java.util.ArrayList;
 
 public class CheckPrice implements Command{
@@ -8,7 +10,7 @@ public class CheckPrice implements Command{
     }
 
     @Override
-    public boolean execute(String user, String[] args) {
+    public boolean execute(User user, String[] args) {
         return false;
     }
 

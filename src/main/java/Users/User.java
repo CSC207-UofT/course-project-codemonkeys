@@ -12,7 +12,7 @@ public class User extends Identifiable {
     private double votingPower = 1;
     private int authorityLevel = 1;
 
-//____________________ Constructors ________________________________________________________________________________
+    //____________________ Constructors ________________________________________________________________________________
 
     /**
      * Basic constructor for User
@@ -36,13 +36,5 @@ public class User extends Identifiable {
 
     public Portfolio getPortfolio() {
         return portfolio;
-    }
-
-    public int getAuthorityLevel() {
-        return authorityLevel;
-    }
-
-    public void setAuthorityLevel(int authorityLevel) {
-        this.authorityLevel = authorityLevel;
     }
 }

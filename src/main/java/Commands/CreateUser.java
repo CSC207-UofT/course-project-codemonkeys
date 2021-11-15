@@ -15,7 +15,7 @@ public class CreateUser implements Command{
      */
 
     @Override
-    public boolean execute(String user, String[] args) {
+    public boolean execute(User user, String[] args) {
         if (! argCheck(args)) {
             System.out.println("The argument number is wrong. Use help to get syntax.");
             return false;
