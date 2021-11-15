@@ -53,7 +53,7 @@ public class UserManager extends HashMap<UUID, User>{
 
     /**
      * Gets the singleton instance of UserManager
-     * @returns the instance
+     * @return the instance
      */
     public static UserManager getInstance(){
         return instance;
@@ -61,7 +61,7 @@ public class UserManager extends HashMap<UUID, User>{
 
     /**
      * Gets a list of all admins
-     * @return
+     * @return the list of all admins
      */
     public List<Admin> getAdminList(){
         List<Admin> admins = new ArrayList<>();
@@ -75,7 +75,7 @@ public class UserManager extends HashMap<UUID, User>{
     /**
      * Checks if a UUID is associated with an admin
      * @param id is the UUID
-     * @returns whether that user, if they exist, is an admin
+     * @return whether that user, if they exist, is an admin
      */
     public boolean isAdmin(UUID id){
         return this.get(id) instanceof Admin;

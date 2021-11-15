@@ -1,7 +1,9 @@
 package Managers;
 
+import Assets.Asset;
 import Containers.Transaction;
 import Containers.Vote;
+import Users.User;
 
 import java.util.*;
 
@@ -32,6 +34,16 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
         return instance;
     }
 
+    public  void addUpVote(Transaction transaction, User u){
+        Vote vote = new Vote(u, transaction, true);
+        instance.get(transaction).add(vote);
+    }
+
+    public  void addDownVote(Transaction transaction, User u){
+        Vote vote = new Vote(u, transaction, false);
+        instance.get(transaction).add(vote);
+    }
+
     /**
      * Gets the vote for a transaction based on UUID
      * @param transaction is the queried transaction
@@ -39,7 +51,7 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
      * @return the vote object
      */
     public Vote getVoteFor(Transaction transaction, UUID id){
-        for (Vote vote : this.get(transaction)){
+        for (Vote vote : instance.get(transaction)){
             if (vote.getId() == id)
                 return vote;
         }
@@ -52,11 +64,15 @@ public class VoteManager extends HashMap<Transaction, List<Vote>> {
      * @return information
      */
 
-    public String votesFor(Transaction transaction){
+    public String viewVote(Transaction transaction){
         StringBuilder res = new StringBuilder();
-        List<Vote> votes = this.get(transaction);
-
-        return ""; // TODO : return information about the votes, finish this method
+        double u = instance.upVoters(transaction);
+        double d = instance.downVoters(transaction);
+        Asset a = transaction.getBuy();
+        res.append("transaction id: ").append(transaction.getId()).append(", name: ").append(a.getType().toString()).
+                append(", value: ").append(a.getValue()).append(", number of upVoters: ").append(u).
+                append(", number of upVoters: ").append(d);
+        return res.toString();
     }
 
     /**
