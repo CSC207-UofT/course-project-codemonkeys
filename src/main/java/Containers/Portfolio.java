@@ -23,67 +23,116 @@ public class Portfolio implements Serializable {
         return Portfolio.commonPortfolio;
     }
 
-    // Storage: The UUID of asset and the reference of asset
-    private final HashMap<String, Asset> storage;
+
+
+    // assetList: a list of asset in the portfolio
+    private List<Asset> assetList;
+    // transactionList: a list of transaction in the portfolio
+    private List<Transaction> transactionList;
+    // votingHistory: a history of votes in the portfolio
+    private List<Vote> votingHistory;
+    private double profitability;
 
     private Portfolio() {
-        this.storage = new LinkedHashMap<String, Asset>();
+        this.assetList = new ArrayList<>();
+        this.transactionList = new ArrayList<>();
+        this.votingHistory = new ArrayList<>();
+        this.profitability = 0.0;
+    }
+    // Getter and Setter for profitability
+    public double getProfitability() {
+        return profitability;
+    }
+
+    public void setProfitability(double profitability) {
+        this.profitability = profitability;
+    }
+
+    // Getter and Setter for assets, transactions, and votes
+
+    public List<Asset> getAssetList() {
+        return assetList;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public List<Vote> getVotingHistory() {
+        return votingHistory;
     }
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void add(Asset asset0) {
-        Asset asset = this.storage.get(asset0.getType());
-        if(asset == null) {
-            asset = new Asset(0, asset0.getPrice(), asset0.getType(), asset0.getSymbol());
-            this.storage.put(asset.getType(), asset);
-        }
-        asset.setVolume(asset.getVolume() + asset0.getVolume());
+        this.assetList.add(asset0);
+    }
+
+    // Add an asset to the system.
+    public void add(Transaction transaction0) {
+        this.transactionList.add(transaction0);
+    }
+
+    // Add a vote to the system.
+    public void add(Vote vote0) {
+        this.votingHistory.add(vote0);
     }
 
     // Subtracts an asset from the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void sub(Asset asset0) {
-        Asset asset = this.storage.get(asset0.getType());
-        if(asset == null) {
-            asset = new Asset(0, asset0.getPrice(), asset0.getType(), asset0.getSymbol());
-            this.storage.put(asset.getType(), asset);
+        if (this.assetList.contains(asset0)) {
+            this.assetList.remove(asset0);
         }
-        asset.setVolume(asset.getVolume() - asset0.getVolume());
+        else{
+            System.out.println("Current portfolio does not contain " + asset0);
+        }
+    }
+
+    public void sub(Transaction transaction0) {
+        if (this.transactionList.contains(transaction0)) {
+            this.transactionList.remove(transaction0);
+        }
+        else{
+            System.out.println("Current portfolio does not contain " + transaction0);
+        }
+    }
+
+    public void sub(Vote vote0) {
+        if (this.votingHistory.contains(vote0)) {
+            this.votingHistory.remove(vote0);
+        }
+        else{
+            System.out.println("Current portfolio does not contain " + vote0);
+        }
     }
 
     // Calculates the value of a specific asset.
     // If the asset is not found, this method will return zero.
-    public double getValue(String type) {
+    public double getValue(String symbol) {
         double value = 0;
-        Asset asset = this.storage.get(type);
-        if(asset == null) return 0;
-        return asset.getValue();
+        for (Asset a: this.assetList){
+            if (a.getSymbol().equals(symbol)){
+                value += a.getValue();
+            }
+        }
+       return value;
     }
 
     // Calculates the value of all assets in the system.
     // If there's no asset in the system, this method will return zero.
     public double getValue() {
         double value = 0;
-        Collection<Asset> assets = this.storage.values();
-        for(Asset asset : assets) {
-            value += asset.getValue();
+        for (Asset a: this.assetList){
+            value += a.getValue();
         }
         return value;
-    }
-
-    // Update the price of a specific asset.
-    public void updatePrice(String type, double price) {
-        Asset asset = this.storage.get(type);
-        if(asset == null) return;
-        asset.setPrice(price);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
-        for(String type : this.storage.keySet()) {
-            Asset asset = this.storage.get(type);
+        for(Asset asset : this.assetList) {
             sb.append(asset.getType()).append('[');
             sb.append(asset.getVolume()).append(" x $").append(asset.getPrice());
             sb.append(" (= $").append(asset.getValue()).append(")]\n");

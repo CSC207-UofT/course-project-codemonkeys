@@ -25,4 +25,8 @@ public final class Transaction extends Identifiable {
         this.date = new Date();
     }
 
+    // Check the validity of the transaction
+    public boolean checkIsValid(){
+        return this.sell.getValue() == this.buy.getValue();
+    }
 }
