@@ -20,8 +20,8 @@ public class AssetTest {
         String currencyName = "Pool";
         String currencySymbol = "USD";
 
-        Asset asset = new Asset(10, 1, tesla_name, tesla_symbol);
-        Asset asset2 = new Asset(15, 1, tesla_name,tesla_symbol);
+        asset = new Asset(10, 1, tesla_name, tesla_symbol);
+        asset2 = new Asset(15, 1, tesla_name,tesla_symbol);
         Currency c1 = new Currency(10, 1, currencyName, currencySymbol);
 
         User bob = new User("Bob");
@@ -69,23 +69,23 @@ public class AssetTest {
         assertEquals(this.asset.getPrice(), 1000);
         assertEquals(this.asset2.getPrice(), 100);
         // rollback
-        this.asset.setPrice(10);
-        this.asset2.setPrice(15);
-        assertEquals(this.asset.getPrice(), 10);
-        assertEquals(this.asset2.getPrice(), 15);
+        this.asset.setPrice(1);
+        this.asset2.setPrice(1);
+        assertEquals(this.asset.getPrice(), 1);
+        assertEquals(this.asset2.getPrice(), 1);
     }
 
     @Test(timeout = 500)
     public void testInitialPrice(){
-        assertEquals(this.asset.getInitialPrice(), 10);
-        assertEquals(this.asset2.getInitialPrice(), 15);
+        assertEquals(this.asset.getInitialPrice(), 1);
+        assertEquals(this.asset2.getInitialPrice(), 1);
         asset.setPrice(100);
         asset2.setPrice(100);
-        assertEquals(this.asset.getInitialPrice(), 10);
-        assertEquals(this.asset2.getInitialPrice(), 15);
+        assertEquals(this.asset.getInitialPrice(), 1);
+        assertEquals(this.asset2.getInitialPrice(), 1);
         // rollback
-        asset.setPrice(10);
-        asset2.setPrice(15);
+        asset.setPrice(1);
+        asset2.setPrice(1);
     }
 
     @Test(timeout = 500)

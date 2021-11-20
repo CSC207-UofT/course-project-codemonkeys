@@ -21,6 +21,7 @@ public class Asset extends Identifiable {
         this.volume = volume;
         this.symbol = symbol;
         this.initialPrice = price;
+        this.currentPrice = price;
     }
 
     public String getType() {
