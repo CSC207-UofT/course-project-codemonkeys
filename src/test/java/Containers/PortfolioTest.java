@@ -23,12 +23,12 @@ public class PortfolioTest {
         currency2 = new Currency(200, 1, "Chinese Yuan", "CNY");
         stock = new Stock(100, 124, "Tesla", "TSLA");
         stock2 = new Stock(200, 524, "Apple", "APLE");
-        portfolio = new Portfolio();
+        portfolio = Portfolio.getInstance();
         portfolio.add(currency);
         portfolio.add(currency2);
         portfolio.add(stock);
         portfolio.add(stock2);
-        portfolio2 = new Portfolio();
+        portfolio2 = Portfolio.getInstance();
         portfolio2.add(currency);
     }
 
