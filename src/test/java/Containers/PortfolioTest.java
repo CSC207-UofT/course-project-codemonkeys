@@ -1,14 +1,17 @@
 package Containers;
 
 import Assets.Asset;
+import Assets.CryptoCurrency;
+import Assets.Currency;
+import Assets.Stock;
 import org.junit.*;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PortfolioTest {
     Portfolio portfolio;
+    Portfolio portfolio2;
     Asset currency;
     Asset currency2;
     Asset stock;
@@ -16,43 +19,50 @@ public class PortfolioTest {
 
     @Before
     public void setUp() {
-        /**
-         * Setup:
-         * 1. Make some new assets
-         * 2. Make a new portfolio
-         * 3. Add the assets to the portfolio
-         */
-//        currency = new Asset(111, 1, new Currency());
-//        currency2 = new Asset(222, 1, new Currency());
-//        stock = new Asset(333, 2, new Stock());
-//        stock2 = new Asset(444, 2, new Stock());
-//        portfolio = new Portfolio();
-//        portfolio.put(currency.getId(), currency);
-//        portfolio.put(currency2.getId(), currency2);
-//        portfolio.put(stock.getId(), stock);
-//        portfolio.put(stock2.getId(), stock2);
+        currency = new Currency(120, 7, "American Dollar", "USD");
+        currency2 = new Currency(200, 1, "Chinese Yuan", "CNY");
+        stock = new Stock(100, 124, "Tesla", "TSLA");
+        stock2 = new Stock(200, 524, "Apple", "APLE");
+        portfolio = new Portfolio();
+        portfolio.add(currency);
+        portfolio.add(currency2);
+        portfolio.add(stock);
+        portfolio.add(stock2);
+        portfolio2 = new Portfolio();
+        portfolio2.add(currency);
     }
 
     @After
     public void tearDown() {
+        this.portfolio = null;
+        this.currency = null;
+        this.currency2 = null;
+        this.stock = null;
+        this.stock2 = null;
     }
 
     @Test(timeout = 500)
-    public void testGetTypes(){
-        /**
-         * Testing:
-         * 1. Get all assets of Currency type from the portfolio
-         * 2. Test if the portfolio is empty
-         * 3. Test if assets contains currency
-         * 4. and currency2
-         * 5. Test if assets does not contain stock
-         * 6. and stock2
-         */
-//        List<Asset<Currency>> assets = portfolio.getAssetsOfType(Currency.class); // 1
-//        assertEquals(false, portfolio.isEmpty()); // 2
-//        assertEquals(true, assets.contains(currency)); // 3
-//        assertEquals(true, assets.contains(currency2)); // 4
-//        assertEquals(false, assets.contains(stock)); // 5
-//        assertEquals(false, assets.contains(stock2)); // 6
+    public void testSpecificValue(){
+        double actual = portfolio.getValue("TSLA");
+        double expected = 100 * 124;
+        assertEquals(actual, expected);
+    }
+
+    @Test(timeout = 500)
+    public void testTotalValue(){
+        double actual = portfolio.getValue();
+        double expected = 120 * 7 + 200 + 100 * 124 + 200 * 524;
+        assertEquals(actual, expected);
+    }
+
+
+    @Test(timeout = 500)
+    public void testsubAsset(){
+        // Since the sub methods are the same for asset, transaction and vote, we only
+        // need to test one of them.
+        portfolio2.sub(currency);
+        assert(portfolio2.getAssetList().isEmpty());
+
+
     }
 }

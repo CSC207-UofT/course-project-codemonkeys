@@ -1,10 +1,8 @@
 package Assets;
 
-import Assets.*;
-
 import Containers.Transaction;
 import Containers.Vote;
-import Users.User;
+import Users.CommonUser;
 import org.junit.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +22,7 @@ public class AssetTest {
         asset2 = new Asset(15, 1, tesla_name,tesla_symbol);
         Currency c1 = new Currency(10, 1, currencyName, currencySymbol);
 
-        User bob = new User("Bob");
+        CommonUser bob = new CommonUser("Bob");
 
         Transaction trans = new Transaction(bob, c1, asset);
     }

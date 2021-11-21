@@ -33,7 +33,7 @@ public class Portfolio implements Serializable {
     private List<Vote> votingHistory;
     private double profitability;
 
-    private Portfolio() {
+    Portfolio() {
         this.assetList = new ArrayList<>();
         this.transactionList = new ArrayList<>();
         this.votingHistory = new ArrayList<>();

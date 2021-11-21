@@ -1,27 +1,35 @@
-package Users;
 
+package Users;
 import Containers.Portfolio;
-import Containers.Transaction;
 import Identification.Identifiable;
 
-import java.util.LinkedList;
-import java.util.Queue;
+public abstract class User extends Identifiable {      // Apply the decoration design pattern.
+    private Portfolio user_portfolio; // portfolio of the user
+    private String name; // name of the user
 
-public class User extends Identifiable {
-
-    //____________________ Variables ___________________________________________________________________________________
-
-    private String name; // Name of the User
-
-    public User(String name) {
-        super();
+    public User(String name){
+        super(name);  // create user's UUID from the user's name
         this.name = name;
+
     }
-
-    //____________________ Methods _____________________________________________________________________________________
-
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUser_portfolio(Portfolio user_portfolio) {
+        this.user_portfolio = user_portfolio;
+    }
+
+    public Portfolio getUser_portfolio(){
+        return this.user_portfolio;
+    }
+
+    public Boolean Check_Authority(String Authority) {
+        // Check if the user has the corresponding authorities.
+        return false;  // Since an ordinary User has no authorities.
+    }
 }

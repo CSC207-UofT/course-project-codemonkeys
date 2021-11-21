@@ -1,26 +1,26 @@
 package Containers;
 
-import Users.Admin;
-import Users.User;
+import Users.CommonUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class VoteTest {
     Vote testVote;
-    User u1;
+    CommonUser u1;
 
     @Before
     public void setUp() {
-        u1 = new User("test");
+        u1 = new CommonUser("test");
         testVote = new Vote(u1, true);
     }
 
     @After
     public void tearDown() {
+        this.testVote = null;
+        this.u1 = null;
     }
 
     @Test(timeout = 500)
