@@ -1,9 +1,5 @@
-package EntityTests;
+package Users;
 
-import Users.BanAuthority;
-import Users.CommonUser;
-import Users.ControlVoteAuthority;
-import Users.User;
 import org.junit.*;
 import static org.junit.Assert.*;
 
