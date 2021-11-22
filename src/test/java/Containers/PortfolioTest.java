@@ -5,13 +5,14 @@ import Assets.CryptoCurrency;
 import Assets.Currency;
 import Assets.Stock;
 import org.junit.*;
+
+import javax.sound.sampled.Port;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PortfolioTest {
     Portfolio portfolio;
-    Portfolio portfolio2;
     Asset currency;
     Asset currency2;
     Asset stock;
@@ -28,17 +29,19 @@ public class PortfolioTest {
         portfolio.add(currency2);
         portfolio.add(stock);
         portfolio.add(stock2);
-        portfolio2 = Portfolio.getInstance();
-        portfolio2.add(currency);
+
     }
 
     @After
     public void tearDown() {
-        this.portfolio = null;
-        this.currency = null;
-        this.currency2 = null;
-        this.stock = null;
-        this.stock2 = null;
+        portfolio.sub(currency);
+        portfolio.sub(currency2);
+        portfolio.sub(stock2);
+        portfolio.sub(stock);
+        currency = null;
+        currency2 = null;
+        stock = null;
+        stock2 = null;
     }
 
     @Test(timeout = 500)
@@ -51,7 +54,7 @@ public class PortfolioTest {
     @Test(timeout = 500)
     public void testTotalValue(){
         double actual = portfolio.getValue();
-        double expected = 120 * 7 + 200 + 100 * 124 + 200 * 524;
+        double expected = (120 * 7) + 200 + (100 * 124) + (200 * 524);
         assertEquals(actual, expected);
     }
 
@@ -60,8 +63,8 @@ public class PortfolioTest {
     public void testsubAsset(){
         // Since the sub methods are the same for asset, transaction and vote, we only
         // need to test one of them.
-        portfolio2.sub(currency);
-        assert(portfolio2.getAssetList().isEmpty());
+        portfolio.sub(currency);
+        assertFalse(portfolio.getAssetList().contains(currency));
 
 
     }

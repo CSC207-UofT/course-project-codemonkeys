@@ -27,15 +27,15 @@ public class Portfolio implements Serializable {
 
     // assetList: a list of asset in the portfolio
     private List<Asset> assetList;
-    // transactionList: a list of transaction in the portfolio
-    private List<Transaction> transactionList;
+    // transactionHistory: a list of historical transaction in the portfolio
+    private List<Transaction> transactionHistory;
     // votingHistory: a history of votes in the portfolio
     private List<Vote> votingHistory;
     private double profitability;
 
     private Portfolio() {
         this.assetList = new ArrayList<>();
-        this.transactionList = new ArrayList<>();
+        this.transactionHistory = new ArrayList<>();
         this.votingHistory = new ArrayList<>();
         this.profitability = 0.0;
     }
@@ -43,18 +43,26 @@ public class Portfolio implements Serializable {
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
-    public void add(Asset asset0) {
-        this.assetList.add(asset0);
+    public void add(Asset asset) {
+        if(asset != null){
+            this.assetList.add(asset);
+        }
+
     }
 
-    // Add an asset to the system.
-    public void add(Transaction transaction0) {
-        this.transactionList.add(transaction0);
+    // Add an transaction to the system.
+    public void add(Transaction transaction) {
+        if(transaction != null){
+            this.transactionHistory.add(transaction);
+        }
     }
 
     // Add a vote to the system.
-    public void add(Vote vote0) {
-        this.votingHistory.add(vote0);
+    public void add(Vote vote) {
+        if (vote != null) {
+            this.votingHistory.add(vote);
+        }
+
     }
 
     // Subtracts an asset from the system.
@@ -69,8 +77,8 @@ public class Portfolio implements Serializable {
     }
 
     public void sub(Transaction transaction0) {
-        if (this.transactionList.contains(transaction0)) {
-            this.transactionList.remove(transaction0);
+        if (this.transactionHistory.contains(transaction0)) {
+            this.transactionHistory.remove(transaction0);
         }
         else{
             System.out.println("Current portfolio does not contain " + transaction0);
@@ -124,7 +132,7 @@ public class Portfolio implements Serializable {
     }
 
     public List<Transaction> getTransactionList() {
-        return transactionList;
+        return transactionHistory;
     }
 
     public List<Vote> getVotingHistory() {
@@ -133,6 +141,9 @@ public class Portfolio implements Serializable {
 
     @Override
     public String toString() {
+        /* Refactor the string representation to show the details about assets in the portfolio.
+          @return A string of assets information in the portfolio.
+         */
         StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
         for(Asset asset : this.assetList) {
             sb.append(asset.getType()).append('[');
