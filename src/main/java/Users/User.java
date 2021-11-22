@@ -4,7 +4,7 @@ import Containers.Portfolio;
 import Identification.Identifiable;
 
 public abstract class User extends Identifiable {      // Apply the decoration design pattern.
-    private Portfolio user_portfolio; // portfolio of the user
+    private Portfolio userPortfolio; // portfolio of the user
     private String name; // name of the user
 
     public User(String name){
@@ -20,15 +20,15 @@ public abstract class User extends Identifiable {      // Apply the decoration d
         this.name = name;
     }
 
-    public void setUser_portfolio(Portfolio user_portfolio) {
-        this.user_portfolio = user_portfolio;
+    public void setUserPortfolio(Portfolio userPortfolio) {
+        this.userPortfolio = userPortfolio;
     }
 
-    public Portfolio getUser_portfolio(){
-        return this.user_portfolio;
+    public Portfolio getUserPortfolio(){
+        return this.userPortfolio;
     }
 
-    public Boolean Check_Authority(String Authority) {
+    public Boolean checkAuthority(String Authority) {
         // Check if the user has the corresponding authorities.
         return false;  // Since an ordinary User has no authorities.
     }

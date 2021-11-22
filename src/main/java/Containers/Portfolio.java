@@ -39,28 +39,7 @@ public class Portfolio implements Serializable {
         this.votingHistory = new ArrayList<>();
         this.profitability = 0.0;
     }
-    // Getter and Setter for profitability
-    public double getProfitability() {
-        return profitability;
-    }
 
-    public void setProfitability(double profitability) {
-        this.profitability = profitability;
-    }
-
-    // Getter and Setter for assets, transactions, and votes
-
-    public List<Asset> getAssetList() {
-        return assetList;
-    }
-
-    public List<Transaction> getTransactionList() {
-        return transactionList;
-    }
-
-    public List<Vote> getVotingHistory() {
-        return votingHistory;
-    }
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
@@ -129,6 +108,29 @@ public class Portfolio implements Serializable {
         return value;
     }
 
+    // Getter and Setter for profitability
+    public double getProfitability() {
+        return profitability;
+    }
+
+    public void setProfitability(double profitability) {
+        this.profitability = profitability;
+    }
+
+    // Getter and Setter for assets, transactions, and votes
+
+    public List<Asset> getAssetList() {
+        return assetList;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public List<Vote> getVotingHistory() {
+        return votingHistory;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
@@ -142,4 +144,4 @@ public class Portfolio implements Serializable {
     }
 }
 
-// All tests passed
+

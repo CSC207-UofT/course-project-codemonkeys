@@ -13,13 +13,13 @@ public class AssetTest {
     private Asset asset2;
     @Before
     public void setUp() {
-        String tesla_name = "Tesla";
-        String tesla_symbol = "TSLA";
+        String teslaName = "Tesla";
+        String teslaSymbol = "TSLA";
         String currencyName = "Pool";
         String currencySymbol = "USD";
 
-        asset = new Asset(10, 1, tesla_name, tesla_symbol);
-        asset2 = new Asset(15, 1, tesla_name,tesla_symbol);
+        asset = new Asset(10, 1, teslaName, teslaSymbol);
+        asset2 = new Asset(15, 1, teslaName,teslaSymbol);
         Currency c1 = new Currency(10, 1, currencyName, currencySymbol);
 
         CommonUser bob = new CommonUser("Bob");

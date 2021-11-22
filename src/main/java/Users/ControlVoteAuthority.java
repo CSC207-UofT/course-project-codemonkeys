@@ -3,14 +3,14 @@ package Users;
 public class ControlVoteAuthority extends UserAuthorities {
 
 
-    public ControlVoteAuthority(CommonUser authorized_user) {
-        super(authorized_user);
+    public ControlVoteAuthority(User authorizedUser) {
+        super(authorizedUser);
     }
 
     @Override
-    public  Boolean Check_Authority(String Authority) {
+    public  Boolean checkAuthority(String Authority) {
         // Authority can be selected.
-        if(authorized_user.Check_Authority(Authority)){ // Check if the authorized user have the authority first
+        if(authorizedUser.checkAuthority(Authority)){ // Check if the authorized user have the authority first
             return true;
         }
         return Authority.equals("Vote");

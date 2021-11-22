@@ -4,8 +4,8 @@ public class BanAuthority  extends UserAuthorities{
 
     // Authorize an user to ban or unban other users.
 
-    public BanAuthority(User authorized_user){
-        super(authorized_user);
+    public BanAuthority(User authorizedUser){
+        super(authorizedUser);
     }
 
    // public void Ban_User(User user){
@@ -23,9 +23,9 @@ public class BanAuthority  extends UserAuthorities{
    // }
 
     @Override
-    public  Boolean Check_Authority(String Authority) {
+    public  Boolean checkAuthority(String Authority) {
         // Authority can be selected.
-        if(authorized_user.Check_Authority(Authority)){ // Check if the authorized user have the authority first
+        if(authorizedUser.checkAuthority(Authority)){ // Check if the authorized user have the authority first
             return true;
         }
         return Authority.equals("Ban");
