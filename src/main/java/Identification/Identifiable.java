@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public abstract class Identifiable {
 
-    public final UUID id;
+    public UUID id;
 
     /**
      * Default Constructor
@@ -24,11 +24,12 @@ public abstract class Identifiable {
         this.id = UUID.randomUUID();
     }
 
+
     /**
      * Compares this Object's UUID with another Object's UUID.
      * If [other] is not an Identifiable Object, return false.
      * @param other is the Object to compare to
-     * @returns whether this is equal to [other]
+     * @return whether this is equal to [other]
      */
     @Override
     public boolean equals(Object other) {
@@ -40,11 +41,23 @@ public abstract class Identifiable {
     /**
      * Hashes the UUID instead so that we can use Identifiable Objects as
      * keys in a HashMap without worrying about mutability.
-     * @returns the hashed this.id
+     * @return the hashed this.id
      */
     @Override
     public int hashCode() {
         return Objects.hash(this.id);
     }
 
+    /**
+     * Setter for the Identifiable object's UUID.
+     */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId(){
+        return this.id;
+    }
+
 }
+

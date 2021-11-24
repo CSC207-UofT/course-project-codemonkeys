@@ -139,11 +139,12 @@ public class Portfolio implements Serializable {
         return votingHistory;
     }
 
+    /**
+     * Refactor the string representation to show the details about assets in the portfolio.
+     @return A string of assets information in the portfolio.
+    */
     @Override
     public String toString() {
-        /* Refactor the string representation to show the details about assets in the portfolio.
-          @return A string of assets information in the portfolio.
-         */
         StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
         for(Asset asset : this.assetList) {
             sb.append(asset.getType()).append('[');

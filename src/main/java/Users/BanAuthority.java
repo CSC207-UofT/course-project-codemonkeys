@@ -8,6 +8,11 @@ public class BanAuthority  extends UserAuthorities{
         super(authorizedUser);
     }
 
+    /**
+     * Overwrite checkAuthority so that when given "Ban" it returns true.
+     * @param Authority: A string representing a certain authority
+     * @return true if user has the authority, and false otherwise.
+     */
     @Override
     public  Boolean checkAuthority(String Authority) {
         // Authority can be selected.

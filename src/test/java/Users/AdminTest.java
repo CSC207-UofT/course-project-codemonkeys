@@ -1,5 +1,6 @@
 package Users;
 
+import Containers.Portfolio;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -43,5 +44,24 @@ public class AdminTest {
         User BothAdmin = new BanAuthority(VoteAdmin);
         assert(BothAdmin.checkAuthority("Ban"));
         assert(BothAdmin.checkAuthority("Vote"));
+    }
+
+    @Test(timeout = 500)
+    public void testConstantUUID(){
+        User BothAdmin = new BanAuthority(VoteAdmin);
+        assert(BothAdmin.getId() == VoteAdmin.getId());
+    }
+
+    @Test(timeout = 500)
+    public void testConstantPortfolio(){
+        VoteAdmin.setUserPortfolio(Portfolio.getInstance());
+        User BothAdmin = new BanAuthority(VoteAdmin);
+        assert(BothAdmin.getUserPortfolio().equals(VoteAdmin.getUserPortfolio()));
+    }
+
+    @Test(timeout = 500)
+    public void testConstantName(){
+        User BothAdmin = new BanAuthority(VoteAdmin);
+        assert(BothAdmin.getName().equals("Leon"));
     }
 }
