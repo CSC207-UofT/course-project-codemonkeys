@@ -3,32 +3,32 @@ package Identification;
 import java.util.Objects;
 import java.util.UUID;
 
-// A class that represents an identifiable object.
-// Identification is done via UUID. If no cloning object is specified, the class will create a random UUID.
-// The identifier is immutable.
+/**
+ * This is a tagging class that provides the ability for implemented instances
+ * to be uniquely identified and compared using UUID's. The UUID is automatically
+ * assigned upon calling the constructor.
+ *
+ * Author: Langson Zhang
+ * Date: Nov 21 2021
+ * Version: 2.0
+ */
+
 public abstract class Identifiable {
 
     public final UUID id;
 
-    // Create a random UUID
+    /**
+     * Default Constructor
+     */
     public Identifiable() {
         this.id = UUID.randomUUID();
     }
 
-    // Create an UUID from String
-    public Identifiable(String str) {
-        this.id = UUID.fromString("IDENTIFIABLE:" + str);
-    }
-
-    // Clone another identifiable object
-    public Identifiable(Identifiable clonee) {
-        this.id = clonee.id;
-    }
-
-    /*
-    public UUID getId() {
-        return this.id;
-    }
+    /**
+     * Compares this Object's UUID with another Object's UUID.
+     * If [other] is not an Identifiable Object, return false.
+     * @param other is the Object to compare to
+     * @returns whether this is equal to [other]
      */
     @Override
     public boolean equals(Object other) {
@@ -37,9 +37,14 @@ public abstract class Identifiable {
         return false;
     }
 
+    /**
+     * Hashes the UUID instead so that we can use Identifiable Objects as
+     * keys in a HashMap without worrying about mutability.
+     * @returns the hashed this.id
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.id);
     }
 
 }
