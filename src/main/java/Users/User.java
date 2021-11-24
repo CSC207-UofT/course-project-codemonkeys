@@ -8,7 +8,7 @@ public abstract class User extends Identifiable {      // Apply the decoration d
     private String name; // name of the user
 
     public User(String name){
-        super();  // create user's UUID from the user's name
+        super();
         this.name = name;
 
     }

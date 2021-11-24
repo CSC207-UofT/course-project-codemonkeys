@@ -40,8 +40,8 @@ public class AdminTest {
 
     @Test(timeout = 500)
     public void testDoubleAuthority() {
-        User Both_admin = new BanAuthority(VoteAdmin);
-        assert(Both_admin.checkAuthority("Ban"));
-        assert(Both_admin.checkAuthority("Vote"));
+        User BothAdmin = new BanAuthority(VoteAdmin);
+        assert(BothAdmin.checkAuthority("Ban"));
+        assert(BothAdmin.checkAuthority("Vote"));
     }
 }
