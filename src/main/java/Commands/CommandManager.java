@@ -5,6 +5,7 @@ import org.reflections.Reflections;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -20,8 +21,8 @@ import java.util.Set;
 public class CommandManager {
     private static CommandManager instance; // The instance
 
-    Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
-    List<Command> cmdTemplates; // Template instances of the commands
+    private Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
+    private List<Command> cmdTemplates; // Template instances of the commands
 
     //______________________________________________ Constructors ______________________________________________________
 
@@ -39,8 +40,8 @@ public class CommandManager {
         }
     }
 
-    static {
-        instance = new CommandManager(); // Static initializer
+    static { // Static initializer
+        instance = new CommandManager();
     }
 
     //_________________________________________________ Methods ________________________________________________________
@@ -49,7 +50,7 @@ public class CommandManager {
      * Generates and returns an instance of a Command given the Class Object.
      * @param cmdClass is the Class Object associated with [T]
      * @param <T> is the Command subclass to be generated
-     * @returns a Command of subclass [T]
+     * @returns a Command of subclass [T], null if failed
      */
     public <T extends Command> T generate(Class<T> cmdClass){
         try{
@@ -57,6 +58,20 @@ public class CommandManager {
         }
         catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e){
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Finds the Command that is associated with the given String
+     * @param cmdString is the String identifier/name of the Command
+     * @returns the Class of the Command if matched successfully, null if not
+     */
+    public Class<? extends Command> find(String cmdString){
+        for (Command cmd : this.cmdTemplates) {
+            if (cmd.name().trim().toLowerCase() == cmdString.trim().toLowerCase()){
+                return cmd.getClass();
+            }
         }
         return null;
     }
@@ -70,10 +85,5 @@ public class CommandManager {
     public static CommandManager getInstance(){
         return instance;
     }
-
-    public List<Command> getTemplates(){
-        return this.cmdTemplates;
-    }
-
 
 }
