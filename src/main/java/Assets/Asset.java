@@ -60,6 +60,11 @@ public class Asset extends Identifiable {
         return this.volume * this.initialPrice;
     }
 
-    public void updatePrice(DataAccessInterface source) {this.setPrice(source.update(this.symbol));}
+    public void updatePrice(DataAccessInterface source) {
+        /*
+          Updates asset price data from the provided data source.
+         */
+        this.setPrice(source.update(this.symbol));
+    }
 
 }

@@ -22,6 +22,9 @@ public class YahooFinanceStockAPI implements DataAccessInterface {
 
     @Override
     public double update(String symbol) {
+        /**
+         * Updates stock price data given stock symbol.
+         */
         try {
             Stock stock = YahooFinance.get(symbol);
             return stock.getQuote().getPrice().doubleValue();
