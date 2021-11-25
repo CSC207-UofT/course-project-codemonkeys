@@ -2,6 +2,7 @@ package Assets;
 
 import Containers.Transaction;
 import Containers.Vote;
+import Interfaces.YahooFinanceStockAPI;
 import Users.User;
 import org.junit.*;
 
