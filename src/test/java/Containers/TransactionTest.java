@@ -1,22 +1,21 @@
 package Containers;
 
-import Assets.Asset;
 import Assets.Stock;
-import Users.CommonUser;
+import Users.User;
 import org.junit.*;
 import Assets.Currency;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TransactionTest {
-    CommonUser u1;
+    User u1;
     Currency currency;
     Stock stock;
     Transaction transaction;
 
     @Before
     public void setUp() {
-        u1 = new CommonUser("test");
+        u1 = new User("test");
         currency = new Currency(120, 7, "American Dollar", "USD");
         stock = new Stock(100, 124, "Tesla", "TSLA");
         transaction = new Transaction(u1, currency, stock);

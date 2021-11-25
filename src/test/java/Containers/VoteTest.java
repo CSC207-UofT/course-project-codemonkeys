@@ -1,6 +1,6 @@
 package Containers;
 
-import Users.CommonUser;
+import Users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 
 public class VoteTest {
     Vote testVote;
-    CommonUser u1;
+    User u1;
 
     @Before
     public void setUp() {
-        u1 = new CommonUser("test");
+        u1 = new User("test");
         testVote = new Vote(u1, true);
     }
 
@@ -21,14 +21,5 @@ public class VoteTest {
     public void tearDown() {
         this.testVote = null;
         this.u1 = null;
-    }
-
-    @Test(timeout = 500)
-    public void testVoteCreate() {
-    }
-
-    @Test(timeout = 500)
-    public void testUser2() {
-
     }
 }
