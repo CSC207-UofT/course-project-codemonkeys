@@ -1,14 +1,13 @@
 package Interfaces;
 
-public class CommandLine implements ClientInterface{
-
+public class DiscordClient implements ClientInterface{
     @Override
     public void input(String s) {
-
+        //TODO
     }
 
     @Override
     public void output(String s) {
-        System.out.println(s);
+        //TODO
     }
 }

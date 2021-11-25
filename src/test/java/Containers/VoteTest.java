@@ -1,13 +1,11 @@
 package Containers;
 
-import Users.Admin;
 import Users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class VoteTest {
     Vote testVote;
@@ -21,14 +19,7 @@ public class VoteTest {
 
     @After
     public void tearDown() {
-    }
-
-    @Test(timeout = 500)
-    public void testVoteCreate() {
-    }
-
-    @Test(timeout = 500)
-    public void testUser2() {
-
+        this.testVote = null;
+        this.u1 = null;
     }
 }
