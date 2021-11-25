@@ -1,7 +1,6 @@
 package Containers;
 
 import Identification.Identifiable;
-import Users.CommonUser;
 import Users.User;
 
 // An immutable container for a vote.
