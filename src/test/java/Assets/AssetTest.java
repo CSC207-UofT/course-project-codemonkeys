@@ -97,7 +97,7 @@ public class AssetTest {
     public void testUpdatePrice(){
         YahooFinanceStockAPI dataSource = new YahooFinanceStockAPI();
         asset.updatePrice(dataSource);
-        assertEquals(this.asset.getPrice(), dataSource.update(asset.getSymbol()));
+        assert(this.asset.getPrice() == dataSource.update(asset.getSymbol()));
     }
 
 }
