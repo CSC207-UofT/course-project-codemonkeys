@@ -2,6 +2,7 @@ package Assets;
 
 import Containers.Transaction;
 import Containers.Vote;
+import Interfaces.YahooFinanceStockAPI;
 import Users.User;
 import org.junit.*;
 
@@ -90,6 +91,13 @@ public class AssetTest {
     public void testInitialValue(){
         assertEquals(this.asset.getInitialValue(), 10);
         assertEquals(this.asset2.getInitialValue(), 15);
+    }
+
+    @Test(timeout = 500)
+    public void testUpdatePrice(){
+        YahooFinanceStockAPI dataSource = new YahooFinanceStockAPI();
+        asset.updatePrice(dataSource);
+        assertEquals(this.asset.getPrice(), dataSource.update(asset.getSymbol()));
     }
 
 }

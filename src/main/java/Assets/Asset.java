@@ -27,12 +27,15 @@ public class Asset extends Identifiable {
     public String getType() {
         return this.type;
     }
+
     public String getSymbol() {
         return this.symbol;
     }
+
     public double getVolume() {
         return volume;
     }
+
     public void setVolume(double volume) {
         this.volume = volume;
     }
@@ -40,6 +43,7 @@ public class Asset extends Identifiable {
     public double getPrice() {
         return this.currentPrice;
     }
+
     public void setPrice(double price) {
         this.currentPrice = price;
     }
@@ -55,5 +59,7 @@ public class Asset extends Identifiable {
     public double getInitialValue() {
         return this.volume * this.initialPrice;
     }
+
+    public void updatePrice(DataAccessInterface source) {this.setPrice(source.update(this.symbol));}
 
 }
