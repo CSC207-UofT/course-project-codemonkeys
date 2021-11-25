@@ -93,11 +93,4 @@ public class AssetTest {
         assertEquals(this.asset2.getInitialValue(), 15);
     }
 
-    @Test(timeout = 500)
-    public void testUpdatePrice(){
-        YahooFinanceStockAPI dataSource = new YahooFinanceStockAPI();
-        asset.updatePrice(dataSource);
-        assertTrue(this.asset.getPrice() == dataSource.update(asset.getSymbol()));
-    }
-
 }
