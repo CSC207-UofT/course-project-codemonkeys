@@ -22,8 +22,8 @@ public class UserManager {
      * creat and add user without authorities
      * @param name name of the user
      */
-    public void addCommonUser(String name){
-        User user = new CommonUser(name);
+    public void addUser(String name){
+        User user = new User(name);
         this.userMap.put(user.id, user);
     }
 
@@ -32,16 +32,41 @@ public class UserManager {
      * @param name name of the user
      * @param authorities the authorities a user has
      */
-    public void addUserAuthorities(String name, String authorities){
-        if (authorities.equalsIgnoreCase("Vote")){
-            User user = new ControlVoteAuthority(new CommonUser(name));
+    public void addUserAuthorities(String name, String[] authorities){
+        User user = new User(name);
+        for (String authority: authorities){
+            user.addAuthority(authority);
         }
-        if (authorities.equalsIgnoreCase("Ban")){
-            User user = new BanAuthority(new CommonUser(name));
+        this.userMap.put(user.id, user);
+    }
+
+    /**
+     * give a user in userMap authorities
+     * @param name name of the user
+     * @param authorities the authorities a user is given
+     */
+    public void giveUserAuthorities(String name, String[] authorities){
+        for (User user: this.userMap.values()){
+            if (Objects.equals(user.getName(), name)) {
+                for (String authority: authorities){
+                    user.addAuthority(authority);
+                }
+            }
         }
-        if (authorities.equalsIgnoreCase("Vote Ban") ||
-                authorities.equalsIgnoreCase("Ban Vote")){
-            User user = new BanAuthority(new ControlVoteAuthority(new CommonUser(name)));
+    }
+
+    /**
+     * remove a user's authorities
+     * @param name name of the user
+     * @param authorities the authorities a user is to be removed
+     */
+    public void removeUserAuthorities(String name, String[] authorities){
+        for (User user: this.userMap.values()){
+            if (Objects.equals(user.getName(), name)) {
+                for (String authority: authorities){
+                    user.removeAuthority(authority);
+                }
+            }
         }
     }
 
@@ -71,6 +96,4 @@ public class UserManager {
         return null;
     }
 
-
-// Todo: Add method give user authority
 }

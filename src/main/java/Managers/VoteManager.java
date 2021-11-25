@@ -21,6 +21,18 @@ public class VoteManager {
     /**
      * add vote to a transaction
      * @param trans transaction is which the vote is voting for
+     * @param vote the vote
+     */
+    public void addVote(Transaction trans, Vote vote){
+        if (!this.voteMap.containsKey(trans)) {
+            this.voteMap.put(trans, new ArrayList<>());
+        }
+        this.voteMap.get(trans).add(vote);
+    }
+
+    /**
+     * creat and add vote to a transaction
+     * @param trans transaction is which the vote is voting for
      * @param initiator the initiator of the vote
      * @param decision the vote is an upvote or a down vote
      */
@@ -68,12 +80,42 @@ public class VoteManager {
     }
 
     /**
+     * return a list of UpVoters for a given transaction
+     * @param trans the transaction is the queried transaction
+     * @return the UpVoters of the transaction
+     */
+    public List<User> getUpVoters(Transaction trans) {
+        List<User> voters = new ArrayList<>();
+        for (Vote vote: this.voteMap.get(trans)){
+            if (vote.isUpvote){
+                voters.add(vote.initiator);
+            }
+        }
+        return voters;
+    }
+
+    /**
+     * return a list of DownVoters for a given transaction
+     * @param trans the transaction is the queried transaction
+     * @return the DownVoters of the transaction
+     */
+    public List<User> getDownVoters(Transaction trans) {
+        List<User> voters = new ArrayList<>();
+        for (Vote vote: this.voteMap.get(trans)){
+            if (!vote.isUpvote){
+                voters.add(vote.initiator);
+            }
+        }
+        return voters;
+    }
+
+    /**
      * Returns number of upVoters for a given transaction
      * @param trans the transaction is the queried transaction
      * @return the number of upVoters in double
      */
-    public double upVoters(Transaction trans){
-        double result = 0;
+    public int numUpVoters(Transaction trans){
+        int result = 0;
         for (Vote vote: this.voteMap.get(trans)){
             if (vote.isUpvote) {
                 result += 1;
@@ -87,8 +129,8 @@ public class VoteManager {
      * @param trans the transaction is the queried transaction
      * @return the number of downVoters in double
      */
-    public double downVoters(Transaction trans){
-        double result = 0;
+    public int numDownVoters(Transaction trans){
+        int result = 0;
         for (Vote vote: this.voteMap.get(trans)){
             if (!vote.isUpvote) {
                 result += 1;
@@ -104,8 +146,8 @@ public class VoteManager {
      */
     public String viewVote(Transaction trans){
         StringBuilder sb = new StringBuilder();
-        double up = this.upVoters(trans);
-        double down = this.downVoters(trans);
+        int up = this.numUpVoters(trans);
+        int down = this.numDownVoters(trans);
         Asset a = trans.buy;
         sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol())
                 .append(", value: ").append(a.getValue()).append(", number of upVoters: ")
@@ -120,13 +162,18 @@ public class VoteManager {
     public String viewVote(){
         StringBuilder sb = new StringBuilder();
         for (Transaction trans: this.voteMap.keySet()){
-            double up = this.upVoters(trans);
-            double down = this.downVoters(trans);
+            int up = this.numUpVoters(trans);
+            int down = this.numDownVoters(trans);
             Asset a = trans.buy;
             sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol())
                     .append(", value: ").append(a.getValue()).append(", number of upVoters: ")
                     .append(up).append(", number of downVoters: ").append(down).append(System.lineSeparator());
         }
         return sb.toString();
+    }
+
+    // for testing
+    public void removeTrans(Transaction trans){
+        this.voteMap.remove(trans);
     }
 }
