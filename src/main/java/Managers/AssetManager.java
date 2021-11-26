@@ -71,11 +71,12 @@ public class AssetManager {
         return volume;
     }
 
-    /**Return the information of all type of asset, includes the symbol of each type of asset and the total volume and
+    /**
+     * Return the information of all type of asset, includes the symbol of each type of asset and the total volume and
      * total value of each type of asset.
      * @return A map, which Key is the symbol of the asset and the value is a double array, the first element in the
-     * array is the total volume of this type of asset and the second element in the array is the total value of this
-     * type of asset
+     * array is the total volume of this type of asset and the second element in the array is the total initialValue of
+     * this type of asset
      */
     public Map<String, double[]> getInitialAssetInfo(){
         Map<String, double[]> result = new HashMap<>();
@@ -88,8 +89,14 @@ public class AssetManager {
         return result;
     }
 
+    /**
+     * Return am AssetSnapshot, which gives the information of the symbol of each type of asset and the total real
+     * value of each type of asset
+     * @param api YahooFinanceStockAPI
+     * @return A Map, which Key is the symbol of the asset and the value is the total real value of this type of asset
+     */
     public Map<String, Double> getAssetSnapshot(DataAccessInterface api){
-        Map<String, Double> result = new HashMap<String, Double>();
+        Map<String, Double> result = new HashMap<>();
         for (Asset a: this.assetMap.values()){
             if(a instanceof Currency){
                 if (!result.containsKey(a.getSymbol())){
