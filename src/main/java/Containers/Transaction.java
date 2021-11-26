@@ -2,7 +2,7 @@ package Containers;
 
 import Assets.Asset;
 import Identification.Identifiable;
-import Users.CommonUser;
+import Users.User;
 
 import java.util.Date;
 
@@ -11,12 +11,12 @@ import java.util.Date;
 // The buying and selling value should be equal.
 public final class Transaction extends Identifiable {
 
-    public final CommonUser initiator;
+    public final User initiator;
     public final Asset sell;
     public final Asset buy;
     public final Date date;
 
-    public Transaction(CommonUser initiator, Asset sell, Asset buy){
+    public Transaction(User initiator, Asset sell, Asset buy){
         super();
         this.initiator = initiator;
         this.sell = sell;

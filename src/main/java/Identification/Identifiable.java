@@ -28,7 +28,7 @@ public abstract class Identifiable {
      * Compares this Object's UUID with another Object's UUID.
      * If [other] is not an Identifiable Object, return false.
      * @param other is the Object to compare to
-     * @returns whether this is equal to [other]
+     * @return whether this is equal to [other]
      */
     @Override
     public boolean equals(Object other) {
@@ -38,9 +38,17 @@ public abstract class Identifiable {
     }
 
     /**
+     * Getter for UUID.
+     * @return the UUID of the object.
+     */
+    public UUID getId(){
+        return this.id;
+    }
+
+    /**
      * Hashes the UUID instead so that we can use Identifiable Objects as
      * keys in a HashMap without worrying about mutability.
-     * @returns the hashed this.id
+     * @return the hashed this.id
      */
     @Override
     public int hashCode() {

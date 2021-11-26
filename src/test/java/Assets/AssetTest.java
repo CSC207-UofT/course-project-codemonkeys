@@ -2,7 +2,8 @@ package Assets;
 
 import Containers.Transaction;
 import Containers.Vote;
-import Users.CommonUser;
+import Interfaces.YahooFinanceStockAPI;
+import Users.User;
 import org.junit.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ public class AssetTest {
         asset2 = new Asset(15, 1, teslaName,teslaSymbol);
         Currency c1 = new Currency(10, 1, currencyName, currencySymbol);
 
-        CommonUser bob = new CommonUser("Bob");
+        User bob = new User("Bob");
 
         Transaction trans = new Transaction(bob, c1, asset);
     }

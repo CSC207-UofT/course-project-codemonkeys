@@ -4,44 +4,62 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class AdminTest {
-    private BanAuthority BanAdmin;
-    private ControlVoteAuthority VoteAdmin;
+    private User banAdmin;
+    private User voteAdmin;
 
     @Before
     public void setUp() {
-        BanAdmin  = new BanAuthority(new CommonUser("Bob"));
-        VoteAdmin = new ControlVoteAuthority(new CommonUser("Leon"));
+        banAdmin  = new User("test1");
+        voteAdmin = new User("test2");
+        banAdmin.addAuthority("Ban");
+        voteAdmin.addAuthority("Vote");
     }
 
     @After
     public void tearDown() {
-        BanAdmin = null;
-        VoteAdmin = null;
+        banAdmin = null;
+        voteAdmin = null;
     }
 
     @Test(timeout = 500)
     public void testNames() {
-        assertEquals("Bob", BanAdmin.getName());
-        assertEquals("Leon", VoteAdmin.getName());
+        assertEquals("test1", banAdmin.getName());
+        assertEquals("test2", voteAdmin.getName());
     }
 
     @Test(timeout = 500)
-    public void testSingleAuthority(){
-        assert(BanAdmin.checkAuthority("Ban"));
-        assert(VoteAdmin.checkAuthority("Vote"));
+    public void testCheckAuthority(){
+        assert(banAdmin.checkAuthority("Ban"));
+        assert(voteAdmin.checkAuthority("Vote"));
     }
 
     @Test(timeout = 500)
     public void testNotHaveAuthority(){
-        assertFalse(BanAdmin.checkAuthority("Vote"));
-        assertFalse(VoteAdmin.checkAuthority("Ban"));
-
+        assertFalse(banAdmin.checkAuthority("Vote"));
+        assertFalse(voteAdmin.checkAuthority("Ban"));
     }
 
     @Test(timeout = 500)
     public void testDoubleAuthority() {
-        User BothAdmin = new BanAuthority(VoteAdmin);
-        assert(BothAdmin.checkAuthority("Ban"));
-        assert(BothAdmin.checkAuthority("Vote"));
+        voteAdmin.addAuthority("Ban");
+        assert(voteAdmin.checkAuthority("Ban"));
+        assert(voteAdmin.checkAuthority("Vote"));
+    }
+
+    @Test(timeout = 500)
+    public void testRemoveAuthority(){
+        assert(voteAdmin.removeAuthority("Vote"));
+        assertFalse(voteAdmin.removeAuthority("Ban"));
+        assert(banAdmin.removeAuthority("Ban"));
+        assertFalse(banAdmin.removeAuthority("Vote"));
+    }
+
+    @Test(timeout = 500)
+    public void testAddAuthority(){
+        assert(voteAdmin.addAuthority("Ban"));
+        assertFalse(voteAdmin.addAuthority("Vote"));
+        assertFalse(banAdmin.addAuthority("Ban"));
+        assert(banAdmin.addAuthority("Vote"));
+
     }
 }
