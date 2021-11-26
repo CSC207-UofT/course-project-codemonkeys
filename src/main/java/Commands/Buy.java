@@ -12,10 +12,6 @@ import java.util.function.ToDoubleBiFunction;
 /**
  * Command to initiate buy orders. A buy order is a Transaction from Currency (like USD) to
  * an Asset (like Google stock).
- *
- * Author: Langson Zhang
- * Date: Nov 26 2021
- * Version: 1.0
  */
 public class Buy extends Command{
 

@@ -14,10 +14,6 @@ import java.util.UUID;
 
 /**
  * Command to initiate sell orders. A sell order is a Transaction from an Asset to USD.
- *
- * Author: Langson Zhang
- * Date: Nov 26 2021
- * Version: 1.0
  */
 public class Sell extends Command{
 
