@@ -6,10 +6,6 @@ import Users.User;
 
 /**
  * This is the Command Interface. All communications to business logic should be done through a Command.
- *
- * Author: Langson Zhang
- * Date: Nov 26 2021
- * Version: 2.0
  */
 public abstract class Command {
 

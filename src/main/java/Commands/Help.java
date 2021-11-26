@@ -9,10 +9,6 @@ import java.util.Locale;
 
 /**
  * The "Help" Command. This command returns information on how to use Commands
- *
- * Author Langson Zhang
- * Date: Nov 24 2021
- * Version: 1.0
  */
 public class Help extends Command {
 
