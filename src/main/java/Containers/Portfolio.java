@@ -40,6 +40,19 @@ public class Portfolio implements Serializable {
         this.profitability = 0.0;
     }
 
+    /**
+     * Looks for an Asset in the Portfolio by UUID
+     * @param id is the UUID
+     * @returns if the Asset if found, null otherwise
+     */
+    public Asset get(UUID id){
+        for (Asset asset : this.assetList){
+            if (asset.getId().equals(id))
+                return asset;
+        }
+        return null;
+    }
+
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
