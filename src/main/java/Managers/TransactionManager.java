@@ -1,5 +1,6 @@
 package Managers;
 
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 
 import java.util.*;
@@ -104,5 +105,8 @@ public class TransactionManager {
         return transactionMap.size();
     }
 
+    public void executeTransaction(boolean executable, Transaction transaction, DataAccessInterface api){
+        new TransactionExecutor().execute(executable, transaction, api);
+    }
 
 }
