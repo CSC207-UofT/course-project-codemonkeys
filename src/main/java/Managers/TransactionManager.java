@@ -2,10 +2,7 @@ package Managers;
 
 import Containers.Transaction;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Queue;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * This is a Class for managing the Transactions that have not yet completed.
@@ -45,7 +42,7 @@ public class TransactionManager {
      * Gets the singleton instance
      * @return instance
      */
-    public TransactionManager getInstance(){
+    public static TransactionManager getInstance(){
         return TransactionManager.instance;
     }
 
@@ -71,8 +68,14 @@ public class TransactionManager {
      * @param transaction is a non completed Transaction
      * @return the id of given Transaction
      */
-    public Transaction getId(Transaction transaction){
-        return this.transactionMap.get(transaction);
+    public UUID getId(Transaction transaction){
+        UUID answer = null;
+        for (Map.Entry<UUID, Transaction> t : this.transactionMap.entrySet()) {
+            if (t.getValue().equals(transaction)) {
+                answer = t.getKey();
+            }
+        }
+        return answer;
     }
 
     /**
@@ -93,6 +96,13 @@ public class TransactionManager {
         return this.transactionMap.containsValue(transaction);
     }
 
+    /**
+     * return the number of transaction contains in the manager
+     * @return the number of transaction contained
+     */
+    public int size(){
+        return transactionMap.size();
+    }
 
 
 }
