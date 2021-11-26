@@ -36,10 +36,10 @@ public class AssetManagerTest {
     }
 
     @Test
-    public void testGetTypeValue(){
-        assertEquals(14500, am.getTypeValue("TSLA"));
-        assertEquals(2000, am.getTypeValue("AAPL"));
-        assertEquals(6000, am.getTypeValue("USD"));
+    public void testGetInitialTypeValue(){
+        assertEquals(14500, am.getTypeInitialValue("TSLA"));
+        assertEquals(2000, am.getTypeInitialValue("AAPL"));
+        assertEquals(6000, am.getTypeInitialValue("USD"));
     }
 
     @Test
@@ -50,12 +50,13 @@ public class AssetManagerTest {
     }
 
     @Test
-    public void testGetAssetInfo(){
-        assertTrue(am.getAssetInfo().containsKey("TSLA"));
-        assertTrue(am.getAssetInfo().containsKey("AAPL"));
-        assertTrue(am.getAssetInfo().containsKey("USD"));
-        assertArrayEquals(new double[]{15, 14500}, am.getAssetInfo().get("TSLA"));
-        assertArrayEquals(new double[]{10, 2000}, am.getAssetInfo().get("AAPL"));
-        assertArrayEquals(new double[]{6000, 6000}, am.getAssetInfo().get("USD"));
+    public void testGetInitialAssetInfo(){
+        assertTrue(am.getInitialAssetInfo().containsKey("TSLA"));
+        assertTrue(am.getInitialAssetInfo().containsKey("AAPL"));
+        assertTrue(am.getInitialAssetInfo().containsKey("USD"));
+        assertArrayEquals(new double[]{15, 14500}, am.getInitialAssetInfo().get("TSLA"));
+        assertArrayEquals(new double[]{10, 2000}, am.getInitialAssetInfo().get("AAPL"));
+        assertArrayEquals(new double[]{6000, 6000}, am.getInitialAssetInfo().get("USD"));
     }
+
 }

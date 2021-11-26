@@ -1,6 +1,8 @@
 package Managers;
 
 import Assets.Asset;
+import Assets.Currency;
+import Assets.DataAccessInterface;
 
 import java.util.*;
 
@@ -24,14 +26,30 @@ public class AssetManager {
     }
 
     /**
-     * Return the value of a specific type of asset
+     * Return the InitialValue of a specific type of asset
      * @param symbol the symbol of the queried type of asset
      * @return the total value of the queried type of asset
      */
-    public double getTypeValue(String symbol){
+    public double getTypeInitialValue(String symbol){
         double value = 0;
         for (Asset a: this.assetMap.values()){
             if(Objects.equals(a.getSymbol(), symbol)){
+                value += a.getInitialValue();
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Return the RealValue of a specific type of asset
+     * @param symbol the symbol of the queried type of asset
+     * @return the total real value of the queried type of asset
+     */
+    public double getTypeRealValue(String symbol, DataAccessInterface api){
+        double value = 0;
+        for (Asset a: this.assetMap.values()){
+            if(Objects.equals(a.getSymbol(), symbol)){
+                a.updatePrice(api);
                 value += a.getValue();
             }
         }
@@ -59,16 +77,29 @@ public class AssetManager {
      * array is the total volume of this type of asset and the second element in the array is the total value of this
      * type of asset
      */
-    public Map<String, double[]> getAssetInfo(){
+    public Map<String, double[]> getInitialAssetInfo(){
         Map<String, double[]> result = new HashMap<>();
         for (Asset a: this.assetMap.values()){
             if(!result.containsKey(a.getSymbol())){
                 result.put(a.getSymbol(),
-                        new double[]{this.getTypeVolume(a.getSymbol()), this.getTypeValue(a.getSymbol())});
+                        new double[]{this.getTypeVolume(a.getSymbol()), this.getTypeInitialValue(a.getSymbol())});
             }
         }
         return result;
     }
-    // Todo: Add method to calculate global profit once the API is added
 
+    public Map<String, Double> getAssetSnapshot(DataAccessInterface api){
+        Map<String, Double> result = new HashMap<String, Double>();
+        for (Asset a: this.assetMap.values()){
+            if(a instanceof Currency){
+                if (!result.containsKey(a.getSymbol())){
+                    result.put(a.getSymbol(), this.getTypeInitialValue(a.getSymbol()));
+                }
+            }
+            if (!result.containsKey(a.getSymbol())){
+                result.put(a.getSymbol(), this.getTypeRealValue(a.getSymbol(), api));
+            }
+        }
+        return result;
+    }
 }
