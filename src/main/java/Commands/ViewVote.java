@@ -31,7 +31,7 @@ public class ViewVote extends Command{
 
     @Override
     public String help() {
-        return "this is info for the View-vote command";
+        return "";
     }
 
     @Override

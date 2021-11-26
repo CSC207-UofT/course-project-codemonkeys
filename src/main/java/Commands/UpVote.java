@@ -36,7 +36,7 @@ public class UpVote extends Command{
     }
     @Override
     public String help() {
-        return "UpVote: ";
+        return "UpVote:";
     }
 
     @Override

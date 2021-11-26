@@ -38,7 +38,7 @@ public class DownVote extends Command{
 
     @Override
     public String help() {
-        return "this is info for the Down-vote command";
+        return "";
     }
 
     @Override
