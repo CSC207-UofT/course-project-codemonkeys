@@ -8,15 +8,16 @@ import Users.User;
 
 import java.util.UUID;
 
-public class UpVote extends Command{
-    public UpVote(User initiator, ClientInterface client, String[] args) {
+public class DownVote extends Command{
+    public DownVote(User initiator, ClientInterface client, String[] args) {
         super(initiator, client, args);
     }
     /**
      * Fetches and displays price information to the Client.
-     * this.args syntax: [String: symbol] Contain UUID of the given transaction or null
-     * @return if successful
+     * this.args syntax: [String: symbol] Contain UUID of the given transaction
+     * @returns if successful
      */
+
     @Override
     public boolean execute() {
         if(this.args.length != 1) {return false;}
@@ -30,17 +31,18 @@ public class UpVote extends Command{
             return true;
         }
         Transaction tran = tm.getTransactions(UUID.fromString(this.args[0]));
-        VoteManager.getInstance().addVote(tran, this.initiator, true);
-        System.out.println("Successfully add UpVote");
+        VoteManager.getInstance().addVote(tran, this.initiator, false);
+        System.out.println("Successfully add DownVote");
         return true;
     }
+
     @Override
     public String help() {
-        return "UpVote: ";
+        return "this is info for the Down-vote command";
     }
 
     @Override
     public String name() {
-        return "upvote";
+        return "down-vote";
     }
 }
