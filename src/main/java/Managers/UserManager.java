@@ -96,4 +96,8 @@ public class UserManager {
         return null;
     }
 
+    public int numUser(){
+        return this.userMap.size();
+    }
+
 }
