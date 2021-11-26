@@ -1,9 +1,6 @@
 package Commands;
 
 
-import Interfaces.ClientInterface;
-import Users.User;
-
 /**
  * This is the Command Interface. All communications to business logic should be done through a Command.
  *
@@ -16,10 +13,8 @@ public interface Command {
     /**
      * Executes the functionality of a Command
      * @returns true if successfully exectued, false otherwise
-     * @param client
-     * @param args
      */
-    public boolean execute(User user, ClientInterface client, String[] args);
+    public boolean execute();
 
     /**
      * Gets the help string for this Command
