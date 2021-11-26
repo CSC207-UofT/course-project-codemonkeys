@@ -110,9 +110,18 @@ public class VoteManager {
     }
 
     /**
+     * Returns number of Voters for a given transaction
+     * @param trans the transaction is the queried transaction
+     * @return the number of Voters in int
+     */
+    public int numVoters(Transaction trans){
+        return this.numDownVoters(trans) + this.numUpVoters(trans);
+    }
+
+    /**
      * Returns number of upVoters for a given transaction
      * @param trans the transaction is the queried transaction
-     * @return the number of upVoters in double
+     * @return the number of upVoters in int
      */
     public int numUpVoters(Transaction trans){
         int result = 0;
@@ -127,7 +136,7 @@ public class VoteManager {
     /**
      * Returns number of downVoters for a given transaction
      * @param trans the transaction is the queried transaction
-     * @return the number of downVoters in double
+     * @return the number of downVoters in int
      */
     public int numDownVoters(Transaction trans){
         int result = 0;
