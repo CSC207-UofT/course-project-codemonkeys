@@ -1,6 +1,7 @@
 package Commands;
 
 
+import Interfaces.ClientInterface;
 import Users.User;
 
 /**
@@ -15,9 +16,10 @@ public interface Command {
     /**
      * Executes the functionality of a Command
      * @returns true if successfully exectued, false otherwise
+     * @param client
      * @param args
      */
-    public boolean execute(User user, String[] args);
+    public boolean execute(User user, ClientInterface client, String[] args);
 
     /**
      * Gets the help string for this Command

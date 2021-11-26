@@ -3,10 +3,7 @@ package Commands;
 import org.reflections.Reflections;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This is a Class for centralized manipulation of Commands.
@@ -74,6 +71,15 @@ public class CommandManager {
             }
         }
         return null;
+    }
+
+
+    /**
+     * Gets all the Command templates.
+     * @returns a copied List of templates. Note that Commands immutable.
+     */
+    public List<Command> getCmdTemplates(){
+        return List.copyOf(this.cmdTemplates);
     }
 
     //_________________________________________________ Getters and Setters ____________________________________________
