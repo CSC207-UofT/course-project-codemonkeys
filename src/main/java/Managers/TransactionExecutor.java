@@ -26,12 +26,12 @@ public class TransactionExecutor {
             bought.updatePrice(api);
             bought.setInitialPrice(bought.getPrice());
 
-            double new_volume = sold.getPrice() / bought.getPrice();
+            double new_volume = -1 * sold.getValue() / bought.getPrice();
 
             bought.setVolume(new_volume);
 
             am.addAsset(bought);
-            am.delAsset(sold);
+            am.addAsset(sold);
 
             transaction.initiator.getUserPortfolio().add(bought);
             for (User user : vm.getVoters(transaction)) {
