@@ -1,7 +1,10 @@
 package Commands;
 
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
+import Managers.ExecutionChecker;
+import Managers.TransactionExecutor;
 import Managers.TransactionManager;
 import Managers.VoteManager;
 import Users.User;
@@ -9,12 +12,12 @@ import Users.User;
 import java.util.UUID;
 
 public class DownVote extends Command{
-    public DownVote(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public DownVote(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
     /**
      * Fetches and displays price information to the Client.
-     * this.args syntax: [String: symbol] Contain UUID of the given transaction
+     * this.args syntax: [String: symbol] Contain UUID of the given transaction or null
      * @returns if successful
      */
 
@@ -33,12 +36,26 @@ public class DownVote extends Command{
         Transaction tran = tm.getTransactions(UUID.fromString(this.args[0]));
         VoteManager.getInstance().addVote(tran, this.initiator, false);
         System.out.println("Successfully add DownVote");
+
+        //check if the transaction is able to execute and execute it if possible
+        ExecutionChecker checker = new ExecutionChecker(tran, api);
+        boolean check;
+        if (tran.sell.getType().equals("Currency")){
+            check = checker.buyExecutable();
+        }
+        else {
+            check = checker.sellExecutable();
+        }
+        if (check){
+            new TransactionExecutor().execute(tran, api);
+        }
         return true;
     }
 
     @Override
     public String help() {
-        return "";
+        return "Downvote: add an Downvote(against this transaction) Vote to an existing transaction\n"+
+                "Syntax: Downvote [symbol]\n";
     }
 
     @Override

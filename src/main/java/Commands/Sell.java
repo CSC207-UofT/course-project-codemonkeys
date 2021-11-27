@@ -2,10 +2,9 @@ package Commands;
 
 import Assets.Asset;
 import Assets.Currency;
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
-import Managers.AssetManager;
-import Managers.UserManager;
 import Users.User;
 
 import java.util.List;
@@ -17,8 +16,8 @@ import java.util.UUID;
  */
 public class Sell extends Command{
 
-    public Sell(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public Sell(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
     /**

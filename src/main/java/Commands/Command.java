@@ -1,6 +1,7 @@
 package Commands;
 
 
+import Assets.DataAccessInterface;
 import Interfaces.ClientInterface;
 import Users.User;
 
@@ -12,6 +13,7 @@ public abstract class Command {
     protected final User initiator; // who
     protected final ClientInterface client; // where
     protected final String[] args; // what
+    protected final DataAccessInterface api; // How
 
     /**
      * Basic constructor for a Command.
@@ -19,10 +21,11 @@ public abstract class Command {
      * @param client is "where" the call came from
      * @param args is "what" to do
      */
-    public Command(User initiator, ClientInterface client, String[] args) {
+    public Command(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
         this.initiator = initiator;
         this.client = client;
         this.args = args;
+        this.api = api;
     }
 
     /**

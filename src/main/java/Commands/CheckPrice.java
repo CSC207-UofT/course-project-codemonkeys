@@ -1,5 +1,6 @@
 package Commands;
 
+import Assets.DataAccessInterface;
 import Interfaces.ClientInterface;
 import Users.User;
 
@@ -9,8 +10,8 @@ import Users.User;
  */
 public class CheckPrice extends Command{
 
-    public CheckPrice(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public CheckPrice(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
     /**
