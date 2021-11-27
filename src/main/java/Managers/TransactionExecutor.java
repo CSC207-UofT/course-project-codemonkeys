@@ -10,7 +10,6 @@ public class TransactionExecutor {
     /**
      * execute a Transaction
      *
-     * @param executable  check the transaction could be executed
      * @param transaction a transaction to be executed
      * @param api         from yahoo finance to update price
      */
@@ -34,6 +33,7 @@ public class TransactionExecutor {
             am.addAsset(bought);
             am.delAsset(sold);
 
+            transaction.initiator.getUserPortfolio().add(bought);
             for (User user : vm.getVoters(transaction)) {
                 user.getUserPortfolio().add(transaction);
             }
@@ -48,6 +48,7 @@ public class TransactionExecutor {
             am.delAsset(sold);                      // remove the asset from the group
             transaction.sold();
 
+            transaction.initiator.getUserPortfolio().sub(sold);
             vm.removeTrans(transaction);            // remove the transaction to indicate vote is completed
             tm.remove(transaction.getId());         // remove the transaction to indicate transaction is complete
 

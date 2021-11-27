@@ -33,7 +33,7 @@ public class TransactionExecutorTest {
         am.addAsset(assetCash);
         assetStock2.updatePrice(api);
         double actual = 1000 / assetStock2.getPrice();
-        tm.executeTransaction(true, transactionBuy, api);
+        tm.executeTransaction(transactionBuy, api);
         assertEquals(actual, am.getTypeVolume("AMD"), 0 );
     }
 
@@ -48,7 +48,7 @@ public class TransactionExecutorTest {
         double actual = 1000/ assetStock2.getPrice() + 7;
         assertEquals(actual, am.getTypeVolume("AMD"), 0 );
 
-        tm.executeTransaction(true, transactionSell, api);
+        tm.executeTransaction( transactionSell, api);
         assertEquals(original, am.getTypeVolume("AMD"), 0 );
     }
 }
