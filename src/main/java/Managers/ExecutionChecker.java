@@ -56,10 +56,11 @@ public class ExecutionChecker {
     }
 
     public double getVotingPower(User user, DataAccessInterface api){
+        AssetManager assetManager = AssetManager.getInstance();
         List<Transaction> transactionList = user.getUserPortfolio().getTransactionList();
         List<Transaction> transactionList1 = new ArrayList<>();
         for (Transaction trans: transactionList){
-            if (!trans.checkState()){
+            if (assetManager.containAsset(trans.buy)){
                 transactionList1.add(trans);
             }
         }
@@ -144,14 +145,26 @@ public class ExecutionChecker {
     }
 
     /**
-     * check if the transaction passes, a transaction will pass if it reached the accepting vote number and the total
+     * check if the buy transaction passes, a transaction will pass if it reached the accepting vote number and the total
      * of upVoter's voting power is greater than the total of downVoter's voting power
      * @param trans the pending transaction
      * @param yahoo yahoo finance stock API
-     * @return true if the transaction is able to execute
+     * @return true if the buy transaction is able to execute
      */
-    public boolean executable(Transaction trans, DataAccessInterface yahoo){
+    public boolean buyExecutable(Transaction trans, DataAccessInterface yahoo){
         return getTransactionValueRatio(trans, yahoo) < 1 && reachVoteNum(trans, yahoo)
                 && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
+    }
+
+    /**
+     * check if the sell transaction passes, a transaction will pass if its number of voter is greater than three and
+     * the total of upVoter's voting power is greater than the total of downVoter's voting power
+     * @param trans the pending transaction
+     * @param yahoo yahoo finance stock API
+     * @return true if the sell transaction is able to execute
+     */
+    public boolean sellExecutable(Transaction trans, DataAccessInterface yahoo) {
+        VoteManager vm = VoteManager.getInstance();
+        return vm.numVoters(trans) > 3 && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
     }
 }

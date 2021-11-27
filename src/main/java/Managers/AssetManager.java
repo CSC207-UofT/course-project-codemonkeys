@@ -17,6 +17,14 @@ public class AssetManager {
     //Get the only object available
     public static AssetManager getInstance() {return instance;}
 
+    public boolean containAsset(Asset asset){
+        return this.assetMap.containsValue(asset);
+    }
+
+    public List<Asset> assetList () {
+        return (List<Asset>) this.assetMap.values();
+    }
+
     public void addAsset(Asset a){
         this.assetMap.put(a.id, a);
     }
