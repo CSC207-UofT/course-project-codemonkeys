@@ -21,6 +21,7 @@ public class TransactionExecutor {
         VoteManager vm = VoteManager.getInstance();
         TransactionManager tm = TransactionManager.getInstance();
 
+        // remove the transaction from TransactionManager to indicate transaction is complete
         if (sold.getType().equals("Currency")) {        //buy stock
 
             bought.updatePrice(api);
@@ -42,17 +43,16 @@ public class TransactionExecutor {
             // preform transaction by modify asset
             sold.updatePrice(api);                  // update into newest price
             double new_value = sold.getValue();     // get the newest price
-            bought.setInitialPrice(new_value);      // reset the price
+            bought.setVolume(new_value);      // reset the price
 
             am.addAsset(bought);                    // Add the bought asset into the group
             am.delAsset(sold);                      // remove the asset from the group
-            transaction.sold();
 
             transaction.initiator.getUserPortfolio().sub(sold);
-            vm.removeTrans(transaction);            // remove the transaction to indicate vote is completed
-            tm.remove(transaction.getId());         // remove the transaction to indicate transaction is complete
+            //vm.removeTrans(transaction);            // remove the transaction to indicate vote is completed
 
         }
+        tm.remove(transaction.getId());
 
     }
 }

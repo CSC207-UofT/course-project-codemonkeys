@@ -4,6 +4,7 @@ import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Users.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,12 +16,10 @@ public class ExecutionChecker {
      * @param yahoo yahoo finance stock API
      * @return the user's instantaneous voting power
      */
-    public double votingPower(User user, DataAccessInterface yahoo){
+    public double votingPowerCalculator(User user, List<Transaction> transactionList, DataAccessInterface yahoo){
         double result = 1.0;
-        List<Transaction> transactionList = user.getUserPortfolio().getTransactionList();
         VoteManager vm = VoteManager.getInstance();
-        for (int i = transactionList.size() - 10; i < transactionList.size(); i++){
-            Transaction trans = transactionList.get(i);
+        for (Transaction trans : transactionList){
             double a = trans.buy.getInitialPrice();
             trans.buy.updatePrice(yahoo);
             double b = trans.buy.getPrice();
@@ -56,6 +55,24 @@ public class ExecutionChecker {
         return result;
     }
 
+    public double getVotingPower(User user, DataAccessInterface api){
+        AssetManager assetManager = AssetManager.getInstance();
+        List<Transaction> transactionList = user.getUserPortfolio().getTransactionList();
+        List<Transaction> transactionList1 = new ArrayList<>();
+        for (Transaction trans: transactionList){
+            if (assetManager.containAsset(trans.buy)){
+                transactionList1.add(trans);
+            }
+        }
+        if (transactionList1.size() < 10){
+            return votingPowerCalculator(user, transactionList1, api);
+        }
+        else {
+            return votingPowerCalculator(user,
+                    transactionList1.subList(transactionList1.size()-10, transactionList1.size()-1), api);
+        }
+    }
+
     /**
      * @param trans the pending transaction
      * @param yahoo yahoo finance stock API
@@ -66,7 +83,7 @@ public class ExecutionChecker {
         double result = 0;
         User[] users = vm.getUpVoters(trans).toArray(new User[0]);
         for (User user: users){
-            result += votingPower(user, yahoo);
+            result += getVotingPower(user, yahoo);
         }
         return result;
     }
@@ -81,7 +98,7 @@ public class ExecutionChecker {
         double result = 0;
         User[] users = vm.getDownVoters(trans).toArray(new User[0]);
         for (User user: users){
-            result += votingPower(user, yahoo);
+            result += getVotingPower(user, yahoo);
         }
         return result;
     }
@@ -101,27 +118,53 @@ public class ExecutionChecker {
     }
 
     /**
+     * the number of votes needed for the transaction to pass is greater than or equal to 3 and greater than the
+     * TransactionValueRatio times the total number of users
+     * @param trans the pending transaction
+     * @param yahoo yahoo finance stock API
+     * @return the number of votes needed for the transaction to pass
+     */
+    public int needNumVote(Transaction trans, DataAccessInterface yahoo){
+        UserManager um = UserManager.getInstance();
+        int numVotes = (int)(um.numUser() * getTransactionValueRatio(trans, yahoo));
+        return Math.max(numVotes, 3);
+    }
+
+    /**
      * check if the number of votes for the transaction reached the accepting state, the accepting state is the number
      * of votes is greater than 3 and greater than the TransactionValueRatio times the total number of users
      * @param trans the pending transaction
      * @param yahoo yahoo finance stock API
-     * @return the money to be spent on the transaction as a percentage of the total amount of USD in the pool
+     * @return true if the number of votes for the transaction is greater than or equal to the number of votes needed
+     * for the transaction to pass
      */
     public boolean reachVoteNum(Transaction trans, DataAccessInterface yahoo){
         VoteManager vm = VoteManager.getInstance();
-        UserManager um = UserManager.getInstance();
-        int numVotes = (int)(um.numUser() * getTransactionValueRatio(trans, yahoo));
-        return vm.numVoters(trans) >= 3 && vm.numVoters(trans) >= numVotes;
+        int numVotes = needNumVote(trans, yahoo);
+        return vm.numVoters(trans) >= numVotes;
     }
 
     /**
-     * check if the transaction passes, a transaction will pass if it reached the accepting vote number and the total
+     * check if the buy transaction passes, a transaction will pass if it reached the accepting vote number and the total
      * of upVoter's voting power is greater than the total of downVoter's voting power
      * @param trans the pending transaction
      * @param yahoo yahoo finance stock API
-     * @return true if the transaction is able to execute
+     * @return true if the buy transaction is able to execute
      */
-    public boolean executable(Transaction trans, DataAccessInterface yahoo){
-        return reachVoteNum(trans, yahoo) && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
+    public boolean buyExecutable(Transaction trans, DataAccessInterface yahoo){
+        return getTransactionValueRatio(trans, yahoo) < 1 && reachVoteNum(trans, yahoo)
+                && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
+    }
+
+    /**
+     * check if the sell transaction passes, a transaction will pass if its number of voter is greater than three and
+     * the total of upVoter's voting power is greater than the total of downVoter's voting power
+     * @param trans the pending transaction
+     * @param yahoo yahoo finance stock API
+     * @return true if the sell transaction is able to execute
+     */
+    public boolean sellExecutable(Transaction trans, DataAccessInterface yahoo) {
+        VoteManager vm = VoteManager.getInstance();
+        return vm.numVoters(trans) > 3 && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
     }
 }
