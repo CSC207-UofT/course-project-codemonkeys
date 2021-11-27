@@ -8,7 +8,7 @@ public class Asset extends Identifiable {
     private double currentPrice; // The price per unit volume of the asset
     private final String type; // The string indicating the type of this particular asset
     private final String symbol;
-    private final double initialPrice;
+    private double initialPrice;
 
     // We do not use symbol for now
     // TODO: add type to symbol database
@@ -54,6 +54,10 @@ public class Asset extends Identifiable {
 
     public double getInitialPrice() {
         return initialPrice;
+    }
+
+    public void setInitialPrice(double price){
+        this.initialPrice = price;
     }
 
     public double getInitialValue() {
