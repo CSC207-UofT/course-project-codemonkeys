@@ -22,20 +22,21 @@ public class TransactionExecutor {
 
         if(executable){
             if(sold.getType().equals("Currency")) {        //buy stock
+
                 bought.updatePrice(api);
+                bought.setInitialPrice(bought.getPrice());
+
                 double new_volume = sold.getPrice() / bought.getPrice();
+
                 bought.setVolume(new_volume);
 
                 am.addAsset(bought);
                 am.delAsset(sold);
-
-                vm.removeTrans(transaction);
-                tm.remove(transaction.getId());
             }else{                                      //sell stock
                 // preform transaction by modify asset
                 sold.updatePrice(api);                  // update into newest price
                 double new_value = sold.getValue();     // get the newest price
-                bought.setPrice(new_value);             // reset the price
+                bought.setInitialPrice(new_value);      // reset the price
 
                 am.addAsset(bought);                    // Add the bought asset into the group
                 am.delAsset(sold);                      // remove the asset from the group
