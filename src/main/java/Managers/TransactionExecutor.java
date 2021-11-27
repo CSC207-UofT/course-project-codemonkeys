@@ -1,6 +1,7 @@
 package Managers;
 
 import Assets.Asset;
+import Assets.Currency;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Users.User;
@@ -22,7 +23,7 @@ public class TransactionExecutor {
         TransactionManager tm = TransactionManager.getInstance();
 
         // remove the transaction from TransactionManager to indicate transaction is complete
-        if (sold.getType().equals("Currency")) {        //buy stock
+        if (sold instanceof Currency) {        //buy stock
 
             bought.updatePrice(api);
             bought.setInitialPrice(bought.getPrice());

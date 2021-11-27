@@ -89,7 +89,7 @@ public class ExecutionChecker {
     public double upVotePower(Transaction trans, DataAccessInterface yahoo){
         VoteManager vm = VoteManager.getInstance();
         double result = 0;
-        User[] users = vm.getUpVoters(trans).toArray(new User[0]);
+        List<User> users = vm.getUpVoters(trans);
         for (User user: users){
             result += getVotingPower(user, yahoo);
         }
@@ -104,7 +104,7 @@ public class ExecutionChecker {
     public double downVotePower(Transaction trans, DataAccessInterface yahoo){
         VoteManager vm = VoteManager.getInstance();
         double result = 0;
-        User[] users = vm.getDownVoters(trans).toArray(new User[0]);
+        List<User> users = vm.getDownVoters(trans);
         for (User user: users){
             result += getVotingPower(user, yahoo);
         }
@@ -114,14 +114,12 @@ public class ExecutionChecker {
     /**
      * get amount of money to be spent on the transaction as a percentage of the total amount of USD in the pool
      * @param trans the pending transaction
-     * @param yahoo yahoo finance stock API
      * @return the money to be spent on the transaction as a percentage of the total amount of USD in the pool
      */
-    public double getTransactionValueRatio(Transaction trans, DataAccessInterface yahoo){
+    public double getTransactionValueRatio(Transaction trans){
         AssetManager am = AssetManager.getInstance();
         double usd = am.getTypeInitialValue("USD");
-        trans.buy.updatePrice(yahoo);
-        double buy = trans.buy.getValue();
+        double buy = - trans.sell.getValue();
         return buy/usd;
     }
 
@@ -134,7 +132,7 @@ public class ExecutionChecker {
      */
     public int needNumVote(Transaction trans, DataAccessInterface yahoo){
         UserManager um = UserManager.getInstance();
-        int numVotes = (int)(um.numUser() * getTransactionValueRatio(trans, yahoo));
+        int numVotes = (int)(um.numUser() * getTransactionValueRatio(trans));
         return Math.max(numVotes, 3);
     }
 
@@ -158,7 +156,7 @@ public class ExecutionChecker {
      * @return true if the buy transaction is able to execute
      */
     public boolean buyExecutable(){
-        return getTransactionValueRatio(trans, api) < 1 && reachVoteNum(trans, api)
+        return getTransactionValueRatio(trans) < 1 && reachVoteNum(trans, api)
                 && upVotePower(trans, api) > downVotePower(trans, api);
     }
 

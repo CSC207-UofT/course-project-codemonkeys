@@ -21,6 +21,7 @@ public class User extends Identifiable {      // Apply the decoration design pat
         super();
         this.name = name;
         this.authorities = new ArrayList<>();
+        this.userPortfolio = new Portfolio();
     }
 
     /**
