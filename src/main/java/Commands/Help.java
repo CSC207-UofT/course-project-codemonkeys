@@ -1,10 +1,10 @@
 package Commands;
 
+import Assets.DataAccessInterface;
 import Interfaces.ClientInterface;
 import Users.User;
 
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -12,8 +12,8 @@ import java.util.Locale;
  */
 public class Help extends Command {
 
-    public Help(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public Help(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
     /**

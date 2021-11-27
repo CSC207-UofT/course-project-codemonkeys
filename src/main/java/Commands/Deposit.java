@@ -1,6 +1,7 @@
 package Commands;
 
 import Assets.Currency;
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
 import Users.User;
@@ -12,8 +13,8 @@ import Users.User;
  */
 public class Deposit extends Command{
 
-    public Deposit(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public Deposit(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
     /**

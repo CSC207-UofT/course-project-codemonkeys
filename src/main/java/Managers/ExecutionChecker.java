@@ -9,6 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class ExecutionChecker {
+
+    public Transaction trans;
+    public DataAccessInterface api;
+
+    public ExecutionChecker(Transaction trans, DataAccessInterface api){
+        this.trans = trans;
+        this.api = api;
+    }
     /**
      * Get the instantaneous voting power of a user based on if each of the recent 10 buy transaction the user
      * participated are profitable.
@@ -147,24 +155,20 @@ public class ExecutionChecker {
     /**
      * check if the buy transaction passes, a transaction will pass if it reached the accepting vote number and the total
      * of upVoter's voting power is greater than the total of downVoter's voting power
-     * @param trans the pending transaction
-     * @param yahoo yahoo finance stock API
      * @return true if the buy transaction is able to execute
      */
-    public boolean buyExecutable(Transaction trans, DataAccessInterface yahoo){
-        return getTransactionValueRatio(trans, yahoo) < 1 && reachVoteNum(trans, yahoo)
-                && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
+    public boolean buyExecutable(){
+        return getTransactionValueRatio(trans, api) < 1 && reachVoteNum(trans, api)
+                && upVotePower(trans, api) > downVotePower(trans, api);
     }
 
     /**
      * check if the sell transaction passes, a transaction will pass if its number of voter is greater than three and
      * the total of upVoter's voting power is greater than the total of downVoter's voting power
-     * @param trans the pending transaction
-     * @param yahoo yahoo finance stock API
      * @return true if the sell transaction is able to execute
      */
-    public boolean sellExecutable(Transaction trans, DataAccessInterface yahoo) {
+    public boolean sellExecutable() {
         VoteManager vm = VoteManager.getInstance();
-        return vm.numVoters(trans) > 3 && upVotePower(trans, yahoo) > downVotePower(trans, yahoo);
+        return vm.numVoters(trans) > 3 && upVotePower(trans, api) > downVotePower(trans, api);
     }
 }

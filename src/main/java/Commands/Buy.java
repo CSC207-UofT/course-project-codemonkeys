@@ -2,11 +2,10 @@ package Commands;
 
 import Assets.Asset;
 import Assets.Currency;
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
 import Users.User;
-
-import java.util.function.ToDoubleBiFunction;
 
 
 /**
@@ -16,8 +15,8 @@ import java.util.function.ToDoubleBiFunction;
 public class Buy extends Command{
 
 
-    public Buy(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public Buy(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
 

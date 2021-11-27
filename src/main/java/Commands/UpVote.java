@@ -1,7 +1,10 @@
 package Commands;
 
+import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
+import Managers.ExecutionChecker;
+import Managers.TransactionExecutor;
 import Managers.TransactionManager;
 import Managers.VoteManager;
 import Users.User;
@@ -9,8 +12,8 @@ import Users.User;
 import java.util.UUID;
 
 public class UpVote extends Command{
-    public UpVote(User initiator, ClientInterface client, String[] args) {
-        super(initiator, client, args);
+    public UpVote(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
     /**
      * Fetches and displays price information to the Client.
@@ -32,11 +35,25 @@ public class UpVote extends Command{
         Transaction tran = tm.getTransactions(UUID.fromString(this.args[0]));
         VoteManager.getInstance().addVote(tran, this.initiator, true);
         System.out.println("Successfully add UpVote");
+
+        //check if the transaction is able to execute and execute it if possible
+        ExecutionChecker checker = new ExecutionChecker(tran, api);
+        boolean check;
+        if (tran.sell.getType().equals("Currency")){
+            check = checker.buyExecutable();
+        }
+        else {
+            check = checker.sellExecutable();
+        }
+        if (check){
+            new TransactionExecutor().execute(tran, api);
+        }
         return true;
     }
     @Override
     public String help() {
-        return "UpVote:";
+        return "Upvote: add an Upvote(support this transaction) Vote to an existing transaction\n"+
+                "Syntax: Upvote [symbol]\n";
     }
 
     @Override
