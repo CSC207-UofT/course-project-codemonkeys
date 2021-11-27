@@ -109,4 +109,8 @@ public class TransactionManager {
         new TransactionExecutor().execute(executable, transaction, api);
     }
 
+    public List<Transaction> view(){
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>(this.transactionMap.values());
+        return transactions;
+    }
 }
