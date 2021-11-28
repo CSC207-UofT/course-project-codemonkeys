@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TransactionManagerTest {
+/*
     private Transaction[] transactions;
     private Asset[] assets;
     private TransactionManager tm = TransactionManager.getInstance();
@@ -25,7 +26,7 @@ public class TransactionManagerTest {
          * 3. Make assets with volume = i and price = i*10
          * 4. Make transactions with those assets
          * 5. Put those transactions in the transaction manager
-         */
+         * /
         transactions = new Transaction[10];
         assets = new Asset[10];
 
@@ -52,7 +53,7 @@ public class TransactionManagerTest {
          * 4. Test to see if TransactionManager now has only 9 transactions
          * 5. Test to see if TransactionManager return the correct UUID.
          * 6. Add a transaction
-         */
+         * /
         tm.remove(transactions[0].getId()); // 1
         assertEquals(false, tm.checkTransactions(transactions[0]) ||
                 tm.checkTransactions(transactions[0].getId())); // 2
@@ -62,4 +63,5 @@ public class TransactionManagerTest {
         tm.addTransaction(new Transaction(null, assets[1], assets[2])); //6
         assertEquals(10, tm.size()); //6
     }
+*/
 }
