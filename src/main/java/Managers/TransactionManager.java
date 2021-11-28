@@ -1,5 +1,6 @@
 package Managers;
 
+import Assets.Asset;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 
@@ -112,4 +113,14 @@ public class TransactionManager {
     public List<Transaction> view(){
         return new ArrayList<>(this.transactionMap.values());
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Current Transactions In Progress: \n");
+        for(Transaction t: this.transactionMap.values()){
+            sb.append(t.toString());
+        }
+        return sb.toString();
+    }
+
 }
