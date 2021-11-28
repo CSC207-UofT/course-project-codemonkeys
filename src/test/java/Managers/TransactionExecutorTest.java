@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 
 public class TransactionExecutorTest {
 
-/*
     private Asset assetCash = new Asset(1,1000, "Currency", "USD");
     private Asset assetStock = new Asset(1, 140, "Stock", "AMD");
     private Asset assetStock2 = new Asset(1, 140, "Stock", "AMD");
@@ -52,5 +51,5 @@ public class TransactionExecutorTest {
         tm.executeTransaction( transactionSell, api);
         assertEquals(original, am.getTypeVolume("AMD"), 0 );
     }
-*/
+
 }
