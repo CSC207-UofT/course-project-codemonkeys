@@ -28,9 +28,13 @@ public class TransactionExecutorTest {
 
     private TransactionManager tm = TransactionManager.getInstance();
     private AssetManager am = AssetManager.getInstance();
+    private VoteManager vm = VoteManager.getInstance();
 
     @Test
     public void testTransactionExecutor(){
+        vm.addVote(transactionBuy, user1, true);
+        vm.addVote(transactionSell, user1, true);
+
         tm.addTransaction(transactionBuy);
         tm.addTransaction(transactionSell);
 
