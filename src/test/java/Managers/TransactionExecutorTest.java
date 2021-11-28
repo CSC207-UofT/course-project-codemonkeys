@@ -51,4 +51,5 @@ public class TransactionExecutorTest {
         tm.executeTransaction( transactionSell, api);
         assertEquals(original, am.getTypeVolume("AMD"), 0 );
     }
+
 }

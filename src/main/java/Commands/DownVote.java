@@ -1,5 +1,6 @@
 package Commands;
 
+import Assets.Currency;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
@@ -40,7 +41,7 @@ public class DownVote extends Command{
         //check if the transaction is able to execute and execute it if possible
         ExecutionChecker checker = new ExecutionChecker(tran, api);
         boolean check;
-        if (tran.sell.getType().equals("Currency")){
+        if (tran.sell instanceof Currency){
             check = checker.buyExecutable();
         }
         else {
