@@ -18,8 +18,8 @@ public class TransactionManager {
     private static TransactionManager instance;
     private HashMap<UUID, Transaction> transactionMap;
 
-    /**
-     * Default Constructors
+    /*
+      Default Constructors
      */
     static{
         TransactionManager.instance = new TransactionManager();
@@ -33,7 +33,7 @@ public class TransactionManager {
 
     /**
      * Add a new Transaction into the Transactions
-     * @param transaction
+     * @param transaction that need to be stored
      */
     public void addTransaction(Transaction transaction){
         this.transactionMap.put(transaction.id, transaction);
@@ -49,7 +49,7 @@ public class TransactionManager {
 
     /**
      * Remove the Transaction based on UUID provided
-     * @param uuid
+     * @param uuid is the uuid
      */
     public void remove(UUID uuid){
         this.transactionMap.remove(uuid);
@@ -105,16 +105,11 @@ public class TransactionManager {
         return transactionMap.size();
     }
 
-    public void executeTransaction( Transaction transaction, DataAccessInterface api){
-        new TransactionExecutor().execute(transaction, api);
-    }
-
     /**
      * return a list of pending transactions
      * @return list of transactions
      */
     public List<Transaction> view(){
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>(this.transactionMap.values());
-        return transactions;
+        return new ArrayList<>(this.transactionMap.values());
     }
 }
