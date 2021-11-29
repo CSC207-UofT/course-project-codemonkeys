@@ -28,4 +28,10 @@ public final class Transaction extends Identifiable {
     public boolean checkIsValid(){
         return this.sell.getValue() == this.buy.getValue();
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s: Initiator: %s, Long: %s, Short: %s, Total Price: %f \n", this.date.toString(),
+                this.initiator.getName(), this.buy.getSymbol(), this.sell.getSymbol(),  this.buy.getValue());
+    }
 }
