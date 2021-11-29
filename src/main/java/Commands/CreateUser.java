@@ -38,11 +38,11 @@ public class CreateUser extends Command{
 
     @Override
     public String help() {
-        return null;
+        return "To create a user, type 'createuser'";
     }
 
     @Override
     public String name() {
-        return null;
+        return "createuser";
     }
 }
