@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class TransactionExecutorTest {
 
-    private User user1 = new User("张三儿");
+    private User user1 = new User("zhangsan");
 
     private Asset assetCash = new Asset(1,-1000, "Currency", "USD");
     private Asset assetStock = new Asset(1, 140, "Stock", "AMD");
