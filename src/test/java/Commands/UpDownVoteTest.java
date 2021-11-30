@@ -71,6 +71,22 @@ public class UpDownVoteTest {
         upVote6 = new UpVote(user4, client, new String[]{transaction3.getId().toString()}, api);
     }
 
+    @After
+    public void tearDown() {
+        am.delAsset(asset1);
+        am.delAsset(asset2);
+        am.delAsset(asset3);
+        am.delAsset(asset4);
+        am.delAsset(asset5);
+        am.delAsset(asset6);
+        tm.remove(transaction1.getId());
+        tm.remove(transaction2.getId());
+        tm.remove(transaction3.getId());
+        vm.removeTrans(transaction1);
+        vm.removeTrans(transaction2);
+        vm.removeTrans(transaction3);
+    }
+
     @Test
     public void testExecuteVote(){
         // this is a buy transaction transaction1
