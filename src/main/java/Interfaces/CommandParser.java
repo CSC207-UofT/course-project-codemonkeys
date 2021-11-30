@@ -2,6 +2,7 @@ package Interfaces;
 
 import Commands.Command;
 import Commands.CommandManager;
+import Commands.CommandProtocol;
 import Managers.UserManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,7 +20,7 @@ import java.util.List;
  * Date: Nov 29 2021
  * Version: 1.0
  */
-public class CommandParser extends ListenerAdapter {
+public class CommandParser extends ListenerAdapter implements ClientInterface{
     private String prefix = "!";
     private CommandManager commandManager = CommandManager.getInstance();
     private UserManager userManager = UserManager.getInstance();
@@ -35,7 +36,8 @@ public class CommandParser extends ListenerAdapter {
         if (! event.getAuthor().isBot() && message[0].equals("!")) {
             String[] cmdArgs = new String[message.length - 1];
             System.arraycopy(message, 1, cmdArgs, 0, cmdArgs.length);
-            parseCommand(cmdArgs, event.getAuthor().getName());
+            String result = parseCommand(cmdArgs, event.getAuthor().getName());
+            event.getMessage().reply(result).queue();
         }
     }
 
@@ -44,33 +46,28 @@ public class CommandParser extends ListenerAdapter {
      *  @param cmdArgs is a list of all arguments accomplishing that command
      *  @param author is the person who send the command
      */
-    public void parseCommand(String[] cmdArgs, String author) {
+    public String parseCommand(String[] cmdArgs, String author) {
         String cmdName = cmdArgs[0];
-        CommandProtocol commandProtocol =
-
-
-        for (Command c : commandList) {
-            if (!cmdName.equals(c.name())) continue;
-            if(userObj == null) {
-                System.out.println("No such user");
-                continue;
-            }
-            boolean result = c.execute(userObj, cmdArgs);
-            if(result) return true;
-            System.out.println(c.help());
-            return false;
+        if(cmdName.equals("checkstatus")) return("This bot is working");
+        if(cmdName.equals("hello")) return("Hello"+author);
+        if(userManager.findUser(author) == null){
+            return("You are not a user of this system. Use createuser to create a new user.");
         }
-        System.out.println("No such command");
-        return false;
-
-
-
-        if (message[0].equalsIgnoreCase("$ hello bot")) {
-            event.getMessage().reply("Hello " + ).queue();
-        } else if (message.equalsIgnoreCase("$ check status")) {
-            //event.getChannel().sendMessage("This bot is working").queue();
-            event.getMessage().reply("This bot is working").queue();
-        }
+        CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), cmdArgs);
+        Command cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
+        if (cmd == null) return("No such command. Try again.");
+        boolean res = cmd.execute();
+        if (! res) return cmd.help();
+        return("command successfully executed!");
     }
 
+    @Override
+    public void input(String s) {
+
+    }
+
+    @Override
+    public void output(String s) {
+
+    }
 }
