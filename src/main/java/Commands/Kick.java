@@ -6,8 +6,8 @@ import Users.User;
 import Managers.UserManager;
 
 public class Kick extends Command{
-    public Kick(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
-        super(initiator, client, api, args);
+    public Kick(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
     /**
      * Fetches and displays price information to the Client.

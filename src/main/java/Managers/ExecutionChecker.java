@@ -31,7 +31,7 @@ public class ExecutionChecker {
             double a = trans.buy.getInitialPrice();
             trans.buy.updatePrice(yahoo);
             double b = trans.buy.getPrice();
-            // When the transaction is profitable, if the user is the INITIATOR of the transaction, his/her voting power
+            // When the transaction is profitable, if the user is the initiator of the transaction, his/her voting power
             // will increase by 40%, if the user is a upVoter, his/her voting power will increase by 20%, if the user
             // is a downVoter, his/her voting power will decrease by 10%
             if (a - b < 0){
@@ -45,7 +45,7 @@ public class ExecutionChecker {
                     else {result = result * 0.9;}
                 }
             }
-            // When the transaction is not profitable, if the user is the INITIATOR of the transaction, his/her voting
+            // When the transaction is not profitable, if the user is the initiator of the transaction, his/her voting
             // power will decrease by 20%, if the user is a upVoter, his/her voting power will decrease by 10%, if the
             // user is a downVoter, his/her voting power will increase by 20%
             if (a - b > 0){

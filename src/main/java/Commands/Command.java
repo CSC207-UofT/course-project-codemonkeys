@@ -21,7 +21,7 @@ public abstract class Command {
      * @param client is "where" the call came from
      * @param args is "what" to do
      */
-    public Command(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+    public Command(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
         this.initiator = initiator;
         this.client = client;
         this.args = args;

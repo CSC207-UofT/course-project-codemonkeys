@@ -1,6 +1,5 @@
 package Managers;
 
-import Assets.Asset;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 
@@ -19,8 +18,8 @@ public class TransactionManager {
     private static TransactionManager instance;
     private HashMap<UUID, Transaction> transactionMap;
 
-    /*
-      Default Constructors
+    /**
+     * Default Constructors
      */
     static{
         TransactionManager.instance = new TransactionManager();
@@ -34,7 +33,7 @@ public class TransactionManager {
 
     /**
      * Add a new Transaction into the Transactions
-     * @param transaction that need to be stored
+     * @param transaction
      */
     public void addTransaction(Transaction transaction){
         this.transactionMap.put(transaction.id, transaction);
@@ -50,7 +49,7 @@ public class TransactionManager {
 
     /**
      * Remove the Transaction based on UUID provided
-     * @param uuid is the uuid
+     * @param uuid
      */
     public void remove(UUID uuid){
         this.transactionMap.remove(uuid);
@@ -106,21 +105,16 @@ public class TransactionManager {
         return transactionMap.size();
     }
 
+    public void executeTransaction( Transaction transaction, DataAccessInterface api){
+        new TransactionExecutor().execute(transaction, api);
+    }
+
     /**
      * return a list of pending transactions
      * @return list of transactions
      */
     public List<Transaction> view(){
-        return new ArrayList<>(this.transactionMap.values());
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>(this.transactionMap.values());
+        return transactions;
     }
-
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder("Current Transactions In Progress: \n");
-        for(Transaction t: this.transactionMap.values()){
-            sb.append(t.toString());
-        }
-        return sb.toString();
-    }
-
 }

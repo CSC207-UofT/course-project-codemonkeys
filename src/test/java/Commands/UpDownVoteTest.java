@@ -4,6 +4,7 @@ import Assets.Currency;
 import Assets.DataAccessInterface;
 import Assets.Stock;
 import Containers.Transaction;
+import Containers.Vote;
 import Interfaces.ClientInterface;
 import Interfaces.YahooFinanceStockAPI;
 import Managers.AssetManager;
@@ -59,31 +60,15 @@ public class UpDownVoteTest {
         vm.addVote(transaction1, user1, true);
         vm.addVote(transaction2, user2, true);
         vm.addVote(transaction3, user1, true);
-        upVote1 = new UpVote(user2, client, api, new String[]{transaction1.getId().toString()});
-        upVote2 = new UpVote(user3, client, api, new String[]{transaction1.getId().toString()});
-        upVote3 = new UpVote(user4, client, api, new String[]{transaction1.getId().toString()});
-        downVote1 = new DownVote(user1, client, api, new String[]{transaction2.getId().toString()});
-        downVote2 = new DownVote(user3, client, api, new String[]{transaction2.getId().toString()});
-        downVote3 = new DownVote(user4, client, api, new String[]{transaction2.getId().toString()});
-        upVote4 = new UpVote(user2, client, api, new String[]{transaction3.getId().toString()});
-        upVote5 = new UpVote(user3, client, api, new String[]{transaction3.getId().toString()});
-        upVote6 = new UpVote(user4, client, api, new String[]{transaction3.getId().toString()});
-    }
-
-    @After
-    public void tearDown() {
-        am.delAsset(asset1);
-        am.delAsset(asset2);
-        am.delAsset(asset3);
-        am.delAsset(asset4);
-        am.delAsset(asset5);
-        am.delAsset(asset6);
-        tm.remove(transaction1.getId());
-        tm.remove(transaction2.getId());
-        tm.remove(transaction3.getId());
-        vm.removeTrans(transaction1);
-        vm.removeTrans(transaction2);
-        vm.removeTrans(transaction3);
+        upVote1 = new UpVote(user2, client, new String[]{transaction1.getId().toString()}, api);
+        upVote2 = new UpVote(user3, client, new String[]{transaction1.getId().toString()}, api);
+        upVote3 = new UpVote(user4, client, new String[]{transaction1.getId().toString()}, api);
+        downVote1 = new DownVote(user1, client, new String[]{transaction2.getId().toString()}, api);
+        downVote2 = new DownVote(user3, client, new String[]{transaction2.getId().toString()}, api);
+        downVote3 = new DownVote(user4, client, new String[]{transaction2.getId().toString()}, api);
+        upVote4 = new UpVote(user2, client, new String[]{transaction3.getId().toString()}, api);
+        upVote5 = new UpVote(user3, client, new String[]{transaction3.getId().toString()}, api);
+        upVote6 = new UpVote(user4, client, new String[]{transaction3.getId().toString()}, api);
     }
 
     @Test
@@ -97,7 +82,7 @@ public class UpDownVoteTest {
 
         assertFalse(user1.getUserPortfolio().getTransactionList().contains(transaction1));// transaction should not be added to user's portfolio if the transaction didn't execute
 
-        assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1)); // asset should not be added to INITIATOR's portfolio if the transaction didn't execute
+        assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1)); // asset should not be added to initiator's portfolio if the transaction didn't execute
 
         upVote2.execute(); // Vote added, reach the condition for a buy transaction to pass, transaction execute
 
@@ -106,7 +91,7 @@ public class UpDownVoteTest {
 
         assertFalse(tm.checkTransactions(transaction1)); // transaction is removed from the TransactionManager
 
-        assertTrue(user1.getUserPortfolio().getAssetList().contains(asset1)); // asset(stock bought) is added to INITIATOR's portfolio but not other voter's portfolio
+        assertTrue(user1.getUserPortfolio().getAssetList().contains(asset1)); // asset(stock bought) is added to initiator's portfolio but not other voter's portfolio
         assertFalse(user1.getUserPortfolio().getAssetList().contains(asset2));
         assertFalse(user2.getUserPortfolio().getAssetList().contains(asset1));
 
@@ -138,6 +123,6 @@ public class UpDownVoteTest {
         assertTrue(am.containAsset(asset6));
         assertTrue(am.containAsset(asset2));
 
-        assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1));// The sold stock is removed from the INITIATOR's portfolio
+        assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1));// The sold stock is removed from the initiator's portfolio
     }
 }

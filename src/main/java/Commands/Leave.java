@@ -6,8 +6,8 @@ import Managers.UserManager;
 import Users.User;
 
 public class Leave extends Command{
-    public Leave(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
-        super(initiator, client, api, args);
+    public Leave(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
 
     @Override
@@ -19,11 +19,11 @@ public class Leave extends Command{
 
     @Override
     public String help() {
-        return "This is the Leave command.";
+        return null;
     }
 
     @Override
     public String name() {
-        return "leave";
+        return null;
     }
 }

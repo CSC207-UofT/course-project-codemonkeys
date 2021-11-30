@@ -14,7 +14,7 @@ public class TestUser {
     @Before
     public void setUp() {
         user = new User("test");
-        portfolio = new Portfolio();
+        portfolio = Portfolio.getInstance();
     }
 
     @After

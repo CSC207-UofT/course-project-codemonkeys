@@ -13,8 +13,8 @@ import Users.User;
 import java.util.UUID;
 
 public class UpVote extends Command{
-    public UpVote(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
-        super(initiator, client, api, args);
+    public UpVote(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
     /**
      * Fetches and displays price information to the Client.
@@ -25,7 +25,7 @@ public class UpVote extends Command{
     public boolean execute() {
         if(this.args.length != 1) {return false;}
 //        May add is_ban method, so we have to check if this user can vote.
-//        if(this.INITIATOR.is_ban) {return false;}
+//        if(this.initiator.is_ban) {return false;}
 
         //get transaction manager and find the transaction we need
         TransactionManager tm = TransactionManager.getInstance();

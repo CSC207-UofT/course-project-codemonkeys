@@ -13,7 +13,17 @@ import java.util.*;
 // The manager is also responsible for updating the price of an asset to correctly calculate its value.
 public class Portfolio implements Serializable {
 
-    private Portfolio portfolio;
+    private static Portfolio commonPortfolio;
+
+    static {
+        Portfolio.commonPortfolio = new Portfolio();
+    }
+
+    public static Portfolio getInstance() {
+        return Portfolio.commonPortfolio;
+    }
+
+
 
     // assetList: a list of asset in the portfolio
     private List<Asset> assetList;

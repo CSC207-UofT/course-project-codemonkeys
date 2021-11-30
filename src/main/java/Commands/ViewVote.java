@@ -10,8 +10,8 @@ import Managers.TransactionManager;
 import java.util.UUID;
 
 public class ViewVote extends Command{
-    public ViewVote(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
-        super(initiator, client, api, args);
+    public ViewVote(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
+        super(initiator, client, args, api);
     }
     /**
      * Fetches and displays price information to the Client.
@@ -39,11 +39,11 @@ public class ViewVote extends Command{
 
     @Override
     public String help() {
-        return "This is the ViewVote command.";
+        return "";
     }
 
     @Override
     public String name() {
-        return "viewvote";
+        return "view-vote";
     }
 }

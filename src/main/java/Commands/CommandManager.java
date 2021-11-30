@@ -1,8 +1,5 @@
 package Commands;
 
-import Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
-import Users.User;
 import org.reflections.Reflections;
 
 import java.lang.reflect.*;
@@ -19,7 +16,6 @@ import java.util.*;
  * Version: 1.0
  */
 public class CommandManager {
-
     private static CommandManager instance; // The instance
 
     private Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
@@ -37,12 +33,11 @@ public class CommandManager {
         cmdTemplates = new ArrayList<Command>();
 
         for (Class c : cmdClasses){
-            cmdTemplates.add(generate(c, new CommandProtocol(null, null, null, null)));
+            cmdTemplates.add(generate(c));
         }
     }
 
-    // Static initializer
-    static {
+    static { // Static initializer
         instance = new CommandManager();
     }
 
@@ -54,16 +49,11 @@ public class CommandManager {
      * @param <T> is the Command subclass to be generated
      * @returns a Command of subclass [T], null if failed
      */
-    public <T extends Command> T generate(Class<T> cmdClass, CommandProtocol protocol){
+    public <T extends Command> T generate(Class<T> cmdClass){
         try{
-            return cmdClass.getConstructor(CommandProtocol.PROTOCOL).newInstance(protocol.PROFILE);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+            return cmdClass.getConstructor().newInstance();
+        }
+        catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e){
             e.printStackTrace();
         }
         return null;
