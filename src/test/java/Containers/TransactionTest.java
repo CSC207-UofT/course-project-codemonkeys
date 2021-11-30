@@ -34,4 +34,5 @@ public class TransactionTest {
         assertFalse(transaction.checkIsValid()); // Because the currency is not enough to buy the stock.
     }
 
+
 }

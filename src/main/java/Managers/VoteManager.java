@@ -33,7 +33,7 @@ public class VoteManager {
     /**
      * creat and add vote to a transaction
      * @param trans transaction is which the vote is voting for
-     * @param initiator the initiator of the vote
+     * @param initiator the INITIATOR of the vote
      * @param decision the vote is an upvote or a down vote
      */
     public void addVote(Transaction trans, User initiator, Boolean decision){

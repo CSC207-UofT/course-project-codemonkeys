@@ -1,5 +1,8 @@
 package Commands;
 
+import Assets.DataAccessInterface;
+import Interfaces.ClientInterface;
+import Users.User;
 import org.reflections.Reflections;
 
 import java.lang.reflect.*;
@@ -16,6 +19,7 @@ import java.util.*;
  * Version: 1.0
  */
 public class CommandManager {
+
     private static CommandManager instance; // The instance
 
     private Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
@@ -33,11 +37,12 @@ public class CommandManager {
         cmdTemplates = new ArrayList<Command>();
 
         for (Class c : cmdClasses){
-            cmdTemplates.add(generate(c));
+            cmdTemplates.add(generate(c, new CommandProtocol(null, null, null, null)));
         }
     }
 
-    static { // Static initializer
+    // Static initializer
+    static {
         instance = new CommandManager();
     }
 
@@ -49,11 +54,16 @@ public class CommandManager {
      * @param <T> is the Command subclass to be generated
      * @returns a Command of subclass [T], null if failed
      */
-    public <T extends Command> T generate(Class<T> cmdClass){
+    public <T extends Command> T generate(Class<T> cmdClass, CommandProtocol protocol){
         try{
-            return cmdClass.getConstructor().newInstance();
-        }
-        catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e){
+            return cmdClass.getConstructor(CommandProtocol.PROTOCOL).newInstance(protocol.PROFILE);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
         return null;
