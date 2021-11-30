@@ -56,7 +56,7 @@ public class CommandManager {
      */
     public <T extends Command> T generate(Class<T> cmdClass, CommandProtocol protocol){
         try{
-            return cmdClass.getConstructor(CommandProtocol.PROTOCOL).newInstance(protocol.PROFILE);
+            return cmdClass.getConstructor(protocol.PROTOCOL).newInstance(protocol.PROFILE);
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
