@@ -7,8 +7,8 @@ import Users.User;
 
 public class CreateUser extends Command{
 
-    public CreateUser(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
-        super(initiator, client, args, api);
+    public CreateUser(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+        super(initiator, client, api, args);
     }
 // arg[0] is the name of the user, the rest is the authorities
     @Override
@@ -38,11 +38,11 @@ public class CreateUser extends Command{
 
     @Override
     public String help() {
-        return null;
+        return "This is the CreateUser command.";
     }
 
     @Override
     public String name() {
-        return null;
+        return "createuser";
     }
 }

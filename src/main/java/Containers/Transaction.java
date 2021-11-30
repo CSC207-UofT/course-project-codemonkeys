@@ -7,7 +7,7 @@ import Users.User;
 import java.util.Date;
 
 // An immutable decision for a transaction.
-// A transaction has an initiator, buying and selling assets, and a timestamp.
+// A transaction has an INITIATOR, buying and selling assets, and a timestamp.
 // The buying and selling value should be equal.
 public final class Transaction extends Identifiable {
 
