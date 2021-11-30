@@ -16,8 +16,8 @@ import java.util.UUID;
  */
 public class Sell extends Command{
 
-    public Sell(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
-        super(initiator, client, args, api);
+    public Sell(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+        super(initiator, client, api, args);
     }
 
     /**
@@ -51,11 +51,11 @@ public class Sell extends Command{
 
     @Override
     public String help() {
-        return null;
+        return "This is the sell Command";
     }
 
     @Override
     public String name() {
-        return null;
+        return "sell";
     }
 }

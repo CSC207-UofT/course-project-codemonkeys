@@ -5,6 +5,8 @@ import Assets.Currency;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
+import Managers.AssetManager;
+import Managers.TransactionManager;
 import Users.User;
 
 
@@ -15,8 +17,8 @@ import Users.User;
 public class Buy extends Command{
 
 
-    public Buy(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
-        super(initiator, client, args, api);
+    public Buy(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+        super(initiator, client, api, args);
     }
 
 
@@ -27,49 +29,65 @@ public class Buy extends Command{
      */
     @Override
     public boolean execute() {
-        //TODO check if you have enough USD.
         if (this.args.length != 2) return false;
 
-        //Symbol
+        // Arguments
         String symbol = this.args[0];
         String volume = this.args[1];
 
-        Currency usd =  getCapital();
-        Asset buy;
+        // Convert to Asset objects
+        Asset buy = getBuyAsset(symbol, volume);
+        if (buy == null) return false;
 
+        Currency usd = getFunds(buy.getPrice());
         if (usd == null) return false;
-        try {
-            buy = new Asset(Double.valueOf(volume), getBuyAssetPrice(symbol), symbol, symbol);
-        }
-        catch (Exception e){
-            return false;
-        }
 
+        // Add transaction to the system
         Transaction trans = new Transaction(this.initiator, usd, buy);
-
-        //TODO add to TransactionManager
-        //TransactionManager.getInstance().add(trans);
+        TransactionManager.getInstance().addTransaction(trans);
 
         return true;
     }
 
-    public Currency getCapital(){
-        //TODO check if you have enough USD and return it.
-        return new Currency(1,1, "","");
+    /**
+     * Helper method to check if there is enough funds to proceed with the transaction
+     * @param volume is how much USD
+     * @returns a USD Currency object that has negative volume (to indicate sold) or null if insufficient funds
+     */
+    public Currency getFunds(double volume){
+
+        // Check if we have enough USD
+        if (AssetManager.getInstance().getTypeVolume("USD") < volume) return null;
+
+        return new Currency(-volume,1, "USD","USD");
     }
 
-    public Double getBuyAssetPrice(String symbol){
-        //TODO use API to get the Asset price
-        return 1.0;
+
+    /**
+     * Helper method for getting the buy Asset object
+     * @param symbol is the symbol of the asset to buy
+     * @param volume is how much to buy (not in $)
+     * @returns a corresponding Asset object if successful, otherwise null
+     */
+    public Asset getBuyAsset(String symbol, String volume){
+        try {
+            double price = this.api.update(symbol);
+            if(price == 0) return null;
+            return new Asset(Double.valueOf(volume), price, symbol, symbol);
+        }
+        catch (NumberFormatException e){
+            return null;
+        }
     }
+
 
     @Override
     public String help() {
-        return null;
+        return "This is the Buy command.";
     }
 
     @Override
     public String name() {
-        return null;
+        return "buy";
     }
 }
