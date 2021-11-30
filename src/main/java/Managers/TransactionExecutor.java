@@ -50,7 +50,7 @@ public class TransactionExecutor {
             am.delAsset(sold);                      // remove the asset from the group
 
             transaction.initiator.getUserPortfolio().sub(sold);
-            //vm.removeTrans(transaction);            // remove the transaction to indicate vote is completed
+            // remove the transaction to indicate vote is completed
 
         }
         tm.remove(transaction.getId());

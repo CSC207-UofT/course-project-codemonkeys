@@ -13,8 +13,8 @@ import Users.User;
  */
 public class Deposit extends Command{
 
-    public Deposit(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
-        super(initiator, client, args, api);
+    public Deposit(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+        super(initiator, client, api, args);
     }
 
     /**
@@ -28,14 +28,16 @@ public class Deposit extends Command{
 
         Double depositVolume;
 
-        // get funds
+        // Parse
         try {
             depositVolume = Double.valueOf(this.args[0]);
-            if(!fundsTransfer(depositVolume)) return false;
         }
-        catch (Exception e){
+        catch (NumberFormatException e){
             return false;
         }
+
+        // Get in-real-life funds
+        if(fundsTransfer(depositVolume) == false) return false;
 
         // Create Asset and Transaction
         Currency usd = new Currency(depositVolume, 1, "USD", "USD");

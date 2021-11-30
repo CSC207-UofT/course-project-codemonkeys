@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class Help extends Command {
 
-    public Help(User initiator, ClientInterface client, String[] args, DataAccessInterface api) {
-        super(initiator, client, args, api);
+    public Help(User initiator, ClientInterface client, DataAccessInterface api, String[] args) {
+        super(initiator, client, api, args);
     }
 
     /**
