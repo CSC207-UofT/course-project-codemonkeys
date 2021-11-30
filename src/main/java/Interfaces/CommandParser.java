@@ -2,9 +2,11 @@ package Interfaces;
 
 import Commands.Command;
 import Commands.CommandManager;
+import Managers.UserManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.net.CookieManager;
 import java.util.List;
 
 /**
@@ -17,9 +19,10 @@ import java.util.List;
  * Date: Nov 29 2021
  * Version: 1.0
  */
-public class CommandLine extends ListenerAdapter {
+public class CommandParser extends ListenerAdapter {
     private String prefix = "!";
-    private List<Command> commandList= CommandManager.getInstance().getCmdTemplates();
+    private CommandManager commandManager = CommandManager.getInstance();
+    private UserManager userManager = UserManager.getInstance();
 
     /**
      * Callback method when the bot receives message from users
@@ -43,9 +46,11 @@ public class CommandLine extends ListenerAdapter {
      */
     public void parseCommand(String[] cmdArgs, String author) {
         String cmdName = cmdArgs[0];
+        CommandProtocol commandProtocol =
+
+
         for (Command c : commandList) {
             if (!cmdName.equals(c.name())) continue;
-            User userObj = UserManager.getInstance().find(user);
             if(userObj == null) {
                 System.out.println("No such user");
                 continue;
