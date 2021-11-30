@@ -1,6 +1,7 @@
 package Managers;
 
 import Assets.Asset;
+import Assets.Currency;
 import Containers.Transaction;
 import Interfaces.YahooFinanceStockAPI;
 import Users.User;
@@ -14,7 +15,7 @@ public class TransactionExecutorTest {
 
     private User user1 = new User("zhangsan");
 
-    private Asset assetCash = new Asset(1,-1000, "Currency", "USD");
+    private Asset assetCash = new Currency(1,-1000, "Currency", "USD");
     private Asset assetStock = new Asset(1, 140, "Stock", "AMD");
     private Asset assetStock2 = new Asset(1, 140, "Stock", "AMD");
     private Asset assetStock3 = new Asset(7, 140, "Stock", "AMD");
@@ -39,6 +40,7 @@ public class TransactionExecutorTest {
         tm.addTransaction(transactionSell);
 
         am.addAsset(assetCash);
+        assertEquals(0, am.getTypeVolume("AMD"),0);
         assetStock2.updatePrice(api);
         double actual = 1000 / assetStock2.getPrice();
         te.execute(transactionBuy, api);
