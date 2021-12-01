@@ -1,6 +1,7 @@
 package Interfaces.GraphicsPresenter;
 
 import Assets.Asset;
+import Assets.DataAccessInterface;
 import Containers.Portfolio;
 import Assets.Asset;
 import org.jfree.chart.ChartFactory;
@@ -22,12 +23,14 @@ class PortfolioPieChartPanel implements Panel {
     // Generate a pie chart showing the portfolio composition
 
     //____________________ Variables ___________________________________________________________________________________
-    Portfolio portfolio;
+    private final Portfolio portfolio;
+    private final DataAccessInterface api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PortfolioPieChartPanel(Portfolio portfolio){
+    public PortfolioPieChartPanel(Portfolio portfolio, DataAccessInterface api){
         this.portfolio = portfolio;
+        this.api = api;
     };
 
     public PieDataset getData() {
@@ -37,6 +40,7 @@ class PortfolioPieChartPanel implements Panel {
 
         for (Asset asset: assetList) {
             String symbol = asset.getSymbol();
+            asset.updatePrice(api);
             double value = asset.getValue();
             series.setValue(symbol , value);
         }

@@ -1,5 +1,6 @@
 package Interfaces.GraphicsPresenter;
 
+import Assets.DataAccessInterface;
 import Containers.Portfolio;
 import Managers.UserManager;
 
@@ -9,12 +10,13 @@ public class PanelFactory {
 
     //____________________ Variables ___________________________________________________________________________________
     Portfolio portfolio;
-    UserManager userManager;
+    DataAccessInterface api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PanelFactory(Portfolio portfolio){
+    public PanelFactory(Portfolio portfolio, DataAccessInterface api){
         this.portfolio = portfolio;
+        this.api = api;
     };
 
 
@@ -28,7 +30,7 @@ public class PanelFactory {
             PortfolioValueChartPanel growthChart = new PortfolioValueChartPanel();
             return growthChart.getPanel(x, y, width, height);
         } else if (type == "Portfolio Composition Chart") {
-            PortfolioPieChartPanel pieChart = new PortfolioPieChartPanel(portfolio);
+            PortfolioPieChartPanel pieChart = new PortfolioPieChartPanel(portfolio, api);
             return pieChart.getPanel(x, y, width, height);
         } else if (type == "Asset Growth Chart") {
             AssetGrowthChartPanel barChart = new AssetGrowthChartPanel();
@@ -37,7 +39,7 @@ public class PanelFactory {
             PortfolioGrowthChartPanel barChart = new PortfolioGrowthChartPanel();
             return barChart.getPanel(x, y, width, height);
         } else if (type == "User Leaderboard") {
-            UserLeaderboardChartPanel barChart = new UserLeaderboardChartPanel();
+            UserLeaderboardChartPanel barChart = new UserLeaderboardChartPanel(api);
             return barChart.getPanel(x, y, width, height);
         }
         return null;

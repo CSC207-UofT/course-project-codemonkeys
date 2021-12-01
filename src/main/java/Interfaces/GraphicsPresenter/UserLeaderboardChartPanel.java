@@ -1,6 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
+import Assets.DataAccessInterface;
+import Managers.ExecutionChecker;
 import Managers.UserManager;
+import Users.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -12,12 +15,19 @@ import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 class UserLeaderboardChartPanel implements Panel {
 
+
+    private final DataAccessInterface api;
+
+    public UserLeaderboardChartPanel(DataAccessInterface api) {
+        this.api = api;
+    }
 
     public DefaultCategoryDataset getData() {
         /**
@@ -32,11 +42,13 @@ class UserLeaderboardChartPanel implements Panel {
 
         TreeMap<Double, ArrayList<String>> votingPowerMap = new TreeMap<>();
 
-        // sort users accroding to voting power
+        // sort users according to voting power
+        Map<UUID, User> userMap = userManager.getUserMap();
 
-        for (UUID id : userManager.keySet()) {
-            double votingPower = userManager.get(id).getVotingPower();
-            String name = userManager.get(id).getName();
+        for (UUID id : userMap.keySet()) {
+            User user = userMap.get(id);
+            double votingPower = ExecutionChecker.getVotingPower(user, api);
+            String name = user.getName();
 
             if (!votingPowerMap.containsKey(votingPower)) {
                 votingPowerMap.put(votingPower, new ArrayList<String>(List.of(name)));

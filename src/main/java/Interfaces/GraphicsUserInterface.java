@@ -2,18 +2,19 @@ package Interfaces;
 
 import javax.swing.*;
 
+import Assets.DataAccessInterface;
 import Containers.Portfolio;
 import Interfaces.GraphicsPresenter.*;
 
 public class GraphicsUserInterface {
-    public static void presentGraphics(Portfolio portfolio){
+    public static void generateGraphics(Portfolio portfolio, DataAccessInterface api){
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
 
-        PanelFactory pf = new PanelFactory(portfolio);
+        PanelFactory pf = new PanelFactory(portfolio, api);
 
         frame.add(pf.makePanel("Text", 0, 0, 500, 250));
         frame.add(pf.makePanel("Portfolio Value Chart", 0, 250, 500, 250));
