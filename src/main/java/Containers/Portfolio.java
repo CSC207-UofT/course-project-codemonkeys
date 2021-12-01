@@ -15,19 +15,19 @@ public class Portfolio implements Serializable {
 
     private Portfolio portfolio;
 
-    // assetList: a list of asset in the portfolio
-    private List<Asset> assetList;
-    // transactionHistory: a list of historical transaction in the portfolio
-    private List<Transaction> transactionHistory;
-    // votingHistory: a history of votes in the portfolio
-    private List<Vote> votingHistory;
-    private double profitability;
+    //Facade: Create processor for asset, transaction, and vote
+    private AssetProcessor assetProcessor;
+    private VoteProcessor voteProcessor;
+    private TransactionProcessor transactionProcessor;
+    private ProfitabilityCalculator profitabilityCalculator;
+
 
     public Portfolio() {
-        this.assetList = new ArrayList<>();
-        this.transactionHistory = new ArrayList<>();
-        this.votingHistory = new ArrayList<>();
-        this.profitability = 0.0;
+        // TODO refactor to be in the param list to avoid hard dependency, but use case needs to be modified
+        this.transactionProcessor = new TransactionProcessor();
+        this.voteProcessor = new VoteProcessor();
+        this.assetProcessor = new AssetProcessor();
+        this.profitabilityCalculator = new ProfitabilityCalculator();
     }
 
     /**
@@ -36,110 +36,73 @@ public class Portfolio implements Serializable {
      * @returns if the Asset if found, null otherwise
      */
     public Asset get(UUID id){
-        for (Asset asset : this.assetList){
-            if (asset.getId().equals(id))
-                return asset;
-        }
-        return null;
+        return this.assetProcessor.get(id);
     }
 
 
     // Add an asset to the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void add(Asset asset) {
-        if(asset != null){
-            this.assetList.add(asset);
-        }
-
+        this.assetProcessor.add(asset);
     }
 
     // Add an transaction to the system.
     public void add(Transaction transaction) {
-        if(transaction != null){
-            this.transactionHistory.add(transaction);
-        }
+        this.transactionProcessor.add(transaction);
     }
 
     // Add a vote to the system.
     public void add(Vote vote) {
-        if (vote != null) {
-            this.votingHistory.add(vote);
-        }
-
+        this.voteProcessor.add(vote);
     }
 
     // Subtracts an asset from the system.
     // This method only takes a snapshot of its parameter, the parameter object can be safely modified afterwards.
     public void sub(Asset asset0) {
-        if (this.assetList.contains(asset0)) {
-            this.assetList.remove(asset0);
-        }
-        else{
-            System.out.println("Current portfolio does not contain " + asset0);
-        }
+        this.assetProcessor.sub(asset0);
     }
 
     public void sub(Transaction transaction0) {
-        if (this.transactionHistory.contains(transaction0)) {
-            this.transactionHistory.remove(transaction0);
-        }
-        else{
-            System.out.println("Current portfolio does not contain " + transaction0);
-        }
+        this.transactionProcessor.sub(transaction0);
     }
 
     public void sub(Vote vote0) {
-        if (this.votingHistory.contains(vote0)) {
-            this.votingHistory.remove(vote0);
-        }
-        else{
-            System.out.println("Current portfolio does not contain " + vote0);
-        }
+        this.voteProcessor.sub(vote0);
     }
 
     // Calculates the value of a specific asset.
     // If the asset is not found, this method will return zero.
     public double getValue(String symbol) {
-        double value = 0;
-        for (Asset a: this.assetList){
-            if (a.getSymbol().equals(symbol)){
-                value += a.getValue();
-            }
-        }
-       return value;
+        return this.assetProcessor.getValue(symbol);
     }
 
     // Calculates the value of all assets in the system.
     // If there's no asset in the system, this method will return zero.
     public double getValue() {
-        double value = 0;
-        for (Asset a: this.assetList){
-            value += a.getValue();
-        }
-        return value;
+        return this.assetProcessor.getValue();
     }
 
     // Getter and Setter for profitability
     public double getProfitability() {
-        return profitability;
+        return this.profitabilityCalculator.getProfitability();
     }
 
     public void setProfitability(double profitability) {
-        this.profitability = profitability;
+        this.profitabilityCalculator.setProfitability(profitability);
     }
 
     // Getter and Setter for assets, transactions, and votes
 
     public List<Asset> getAssetList() {
-        return assetList;
+        return this.assetProcessor.getAssetList();
     }
 
     public List<Transaction> getTransactionList() {
-        return transactionHistory;
+        return this.transactionProcessor.getTransactionList();
     }
 
     public List<Vote> getVotingHistory() {
-        return votingHistory;
+        return this.voteProcessor.getVotingHistory();
     }
 
     /**
@@ -148,14 +111,7 @@ public class Portfolio implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
-        for(Asset asset : this.assetList) {
-            sb.append(asset.getType()).append('[');
-            sb.append(asset.getVolume()).append(" x $").append(asset.getPrice());
-            sb.append(" (= $").append(asset.getValue()).append(")]\n");
-        }
-        sb.append("Total value: $").append(this.getValue()).append('\n');
-        return sb.toString();
+       return this.assetProcessor.toString();
     }
 }
 

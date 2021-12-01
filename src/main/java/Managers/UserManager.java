@@ -1,13 +1,18 @@
 package Managers;
 import Users.*;
-
+import java.io.Serializable;
 import java.util.*;
 
-public class UserManager {
-    private final Map<UUID, User> userMap;
+public class UserManager implements Serializable{
+    private Map<UUID, User> userMap;
 
     //create an object of UserManager
     private static final UserManager instance = new UserManager();
+
+
+    public Map<UUID, User> getUserMap() {
+        return this.userMap;
+    }
 
     private UserManager() {this.userMap = new HashMap<>();}
 
