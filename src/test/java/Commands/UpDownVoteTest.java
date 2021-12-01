@@ -140,4 +140,12 @@ public class UpDownVoteTest {
 
         assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1));// The sold stock is removed from the INITIATOR's portfolio
     }
+
+    @Test
+    public void testBannedInitiator(){
+        user1.setBanned(true);
+        assertFalse(downVote1.execute());
+        user1.setBanned(false);
+        assertTrue(downVote1.execute());
+    }
 }
