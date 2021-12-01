@@ -15,7 +15,6 @@ import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
