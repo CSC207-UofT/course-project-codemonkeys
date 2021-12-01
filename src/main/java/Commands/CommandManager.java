@@ -76,7 +76,7 @@ public class CommandManager {
      */
     public Class<? extends Command> find(String cmdString){
         for (Command cmd : this.cmdTemplates) {
-            if (cmd.name().trim().toLowerCase() == cmdString.trim().toLowerCase()){
+            if (cmd.name().trim().toLowerCase().equals(cmdString.trim().toLowerCase())){
                 return cmd.getClass();
             }
         }

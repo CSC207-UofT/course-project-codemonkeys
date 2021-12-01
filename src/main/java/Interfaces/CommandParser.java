@@ -47,14 +47,30 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
      *  @param author is the person who send the command
      */
     public String parseCommand(String[] cmdArgs, String author) {
+        if(cmdArgs.length == 0) return("Your command is empty.");
         String cmdName = cmdArgs[0];
-        if(cmdName.equals("checkstatus")) return("This bot is working");
-        if(cmdName.equals("hello")) return("Hello"+author);
-        if(userManager.findUser(author) == null){
-            return("You are not a user of this system. Use createuser to create a new user.");
+        System.out.println(cmdName);
+        String[] ArgWithoutCmd = new String[cmdArgs.length - 1];
+        // ArgWithoutCmd[0] = author;
+        for (int i=1; i<cmdArgs.length; i++)
+        {
+            ArgWithoutCmd[i] = cmdArgs[i];
         }
-        CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), cmdArgs);
-        Command cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
+        if(cmdName.equals("checkstatus")) return("This bot is working");
+        if(cmdName.equals("hello")) return("Hello! " + author);
+//        if(userManager.findUser(author) != null){
+//            return("You are not a user of this system. Use createuser to create a new user.");
+//        }
+        CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
+        if(cmdName.equals("createuser")) {
+            String[] argForCreateUser = new String[ArgWithoutCmd.length + 1];
+            argForCreateUser[0] = author;
+            System.arraycopy(ArgWithoutCmd, 0, argForCreateUser, 1, ArgWithoutCmd.length);
+            commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
+        }
+        System.out.println(cmdName);
+        System.out.println(cmdName.equals("createuser"));
+        Command cmd = commandManager.generate(commandManager.find("createuser"), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
         boolean res = cmd.execute();
         if (! res) return cmd.help();
