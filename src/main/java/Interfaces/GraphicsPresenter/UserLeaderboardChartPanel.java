@@ -1,8 +1,6 @@
 package Interfaces.GraphicsPresenter;
 
-import Containers.Portfolio;
 import Managers.UserManager;
-import Users.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,6 +20,12 @@ class UserLeaderboardChartPanel implements Panel {
 
 
     public DefaultCategoryDataset getData() {
+        /**
+         * Prepares data for graphing.
+         *
+         * Iterate through all registered users, then calculate their voting power and sort the users by their voting
+         * powers.
+         */
 
         UserManager userManager = UserManager.getInstance();
         DefaultCategoryDataset series = new DefaultCategoryDataset( );

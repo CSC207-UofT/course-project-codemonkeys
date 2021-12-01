@@ -1,9 +1,8 @@
 package Interfaces.GraphicsPresenter;
 
 import Assets.Asset;
-import Assets.AssetType;
 import Containers.Portfolio;
-import Managers.AssetMangers.AssetPriceHistoryManager;
+import Assets.Asset;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,7 +13,9 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 import java.awt.*;
+import java.util.*;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.UUID;
 
 class PortfolioPieChartPanel implements Panel {
@@ -30,10 +31,13 @@ class PortfolioPieChartPanel implements Panel {
     };
 
     public PieDataset getData() {
-        DefaultPieDataset series = new DefaultPieDataset( );
-        for (UUID id: portfolio.keySet()) {
-            String symbol = ((AssetType) portfolio.get(id).getType()).getSymbol();
-            double value = portfolio.get(id).getValue();
+        DefaultPieDataset series = new DefaultPieDataset();
+
+        List<Asset> assetList = portfolio.getAssetList();
+
+        for (Asset asset: assetList) {
+            String symbol = asset.getSymbol();
+            double value = asset.getValue();
             series.setValue(symbol , value);
         }
 
