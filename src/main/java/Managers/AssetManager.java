@@ -3,10 +3,11 @@ package Managers;
 import Assets.Asset;
 import Assets.Currency;
 import Assets.DataAccessInterface;
+import java.io.Serializable;
 
 import java.util.*;
 
-public class AssetManager {
+public class AssetManager implements Serializable{
     private final Map<UUID, Asset> assetMap;
 
     //create an object of AssetManager

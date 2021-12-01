@@ -32,7 +32,7 @@ public class TransactionManagerTest {
         user = new User("狗");
 
         for (int i = 0; i < 10; i++){
-            assets[i] = new Asset(i, 10*i, "stock", "ABC");
+            assets[i] = new Stock(i, 10*i, "stock", "ABC");
             transactions[i] = new Transaction(user, assets[i], assets[i]);
             tm.addTransaction( transactions[i]);
         }

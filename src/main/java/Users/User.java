@@ -1,14 +1,13 @@
-
 package Users;
 import Containers.Portfolio;
 import Identification.Identifiable;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A user class that stores a portfolio, name and a list of authorities.
  */
-public class User extends Identifiable {      // Apply the decoration design pattern.
+public class User extends Identifiable implements Serializable{      // Apply the decoration design pattern.
     private Portfolio userPortfolio; // portfolio of the user
     private String name; // name of the user
     private final ArrayList<String> authorities;
