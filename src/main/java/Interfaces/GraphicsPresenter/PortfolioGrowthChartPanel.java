@@ -1,7 +1,7 @@
 package Interfaces.GraphicsPresenter;
 
 import Assets.DataAccessInterface;
-import Containers.PerformanceHistories.PortfolioPerformanceHistory;
+import Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
 import Containers.Portfolio;
 import Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
@@ -44,7 +44,7 @@ class PortfolioGrowthChartPanel implements Panel {
         int half = Math.round(history.size() / 2);
 
         double currentValue = portfolio.getValue(api);
-        double totalInvestment = PortfolioPerformanceHistory.getInstance().getTotalDeposit();
+        double totalInvestment = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();
         double fullTime = (Double) history.get(history.firstKey());
         double halfTime = (Double) history.values().toArray()[half];
 

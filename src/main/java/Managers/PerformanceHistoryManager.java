@@ -4,7 +4,7 @@ import Assets.Asset;
 import Assets.Currency;
 import Assets.DataAccessInterface;
 import Containers.PerformanceHistories.AssetPerformanceHistory;
-import Containers.PerformanceHistories.PortfolioPerformanceHistory;
+import Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
 import Containers.Portfolio;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class PerformanceHistoryManager {
      */
 
     public static void updateTotalDeposite(double depositeVolume) {
-        PortfolioPerformanceHistory pph = PortfolioPerformanceHistory.getInstance();
+        CommunalPortfolioPerformanceHistory pph = CommunalPortfolioPerformanceHistory.getInstance();
         pph.setTotalDeposit(pph.getTotalDeposit() + depositeVolume);
     }
 
@@ -38,7 +38,7 @@ public class PerformanceHistoryManager {
             }
         }
 
-        PortfolioPerformanceHistory.getInstance().recordHistory(portfolioValue);
+        CommunalPortfolioPerformanceHistory.getInstance().recordHistory(portfolioValue);
         AssetPerformanceHistory.getInstance().recordHistory(priceHistory);
 
     }
@@ -48,7 +48,7 @@ public class PerformanceHistoryManager {
     }
 
     public static TreeMap<Date, Object> getPortfolioHistory() {
-        return PortfolioPerformanceHistory.getInstance().getHistory();
+        return CommunalPortfolioPerformanceHistory.getInstance().getHistory();
     }
 
 

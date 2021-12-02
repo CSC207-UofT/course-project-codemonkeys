@@ -1,18 +1,17 @@
 package Containers.PerformanceHistories;
 
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.Date;
 
 //TODO: add tests and serialize
 
-public class PortfolioPerformanceHistory {
+public class CommunalPortfolioPerformanceHistory {
     private final TreeMap<Date, Object> treeQueue = new TreeMap<>();
     private final int size;
-    private static final PortfolioPerformanceHistory instance = new PortfolioPerformanceHistory();
+    private static final CommunalPortfolioPerformanceHistory instance = new CommunalPortfolioPerformanceHistory();
     private double totalDeposit = 0;
 
-    private PortfolioPerformanceHistory() {
+    private CommunalPortfolioPerformanceHistory() {
         size = 168; // Hours in a week
     }
 
@@ -24,7 +23,7 @@ public class PortfolioPerformanceHistory {
         }
     }
 
-    public static PortfolioPerformanceHistory getInstance() { return instance; }
+    public static CommunalPortfolioPerformanceHistory getInstance() { return instance; }
 
     public double getTotalDeposit() {
         return totalDeposit;

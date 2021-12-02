@@ -2,7 +2,6 @@ package Commands;
 
 import Assets.Currency;
 import Assets.DataAccessInterface;
-import Containers.PerformanceHistories.PortfolioPerformanceHistory;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
 import Managers.PerformanceHistoryManager;

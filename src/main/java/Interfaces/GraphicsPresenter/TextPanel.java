@@ -1,13 +1,11 @@
 package Interfaces.GraphicsPresenter;
 
 import Assets.DataAccessInterface;
-import Containers.PerformanceHistories.PortfolioPerformanceHistory;
+import Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
 import Containers.Portfolio;
 import Managers.UserManager;
 
-import javax.sound.sampled.Port;
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.Date;
 
@@ -27,7 +25,7 @@ public class TextPanel implements Panel{
         // Return the text displayed on the panel
         // TODO Connect with lower levels to get actual data
 
-        double totalDeposit = PortfolioPerformanceHistory.getInstance().getTotalDeposit();
+        double totalDeposit = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();
         double portfolioWorth = portfolio.getValue(api);
         double netProfit = portfolioWorth - totalDeposit;
         double profitPercent = netProfit / totalDeposit;
