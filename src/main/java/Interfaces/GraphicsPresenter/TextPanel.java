@@ -1,11 +1,13 @@
 package Interfaces.GraphicsPresenter;
 
+import Assets.DataAccessInterface;
 import Containers.PerformanceHistories.PortfolioPerformanceHistory;
 import Containers.Portfolio;
 import Managers.UserManager;
 
 import javax.sound.sampled.Port;
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.Date;
 
@@ -13,9 +15,11 @@ import java.util.Date;
 
 public class TextPanel implements Panel{
     Portfolio portfolio;
+    DataAccessInterface api;
 
-    public TextPanel(Portfolio portfolio) {
+    public TextPanel(Portfolio portfolio, DataAccessInterface api) {
         this.portfolio = portfolio;
+        this.api = api;
     }
 
     public String getData() {
@@ -24,33 +28,39 @@ public class TextPanel implements Panel{
         // TODO Connect with lower levels to get actual data
 
         double totalDeposit = PortfolioPerformanceHistory.getInstance().getTotalDeposit();
-        double portfolioWorth = portfolio.getValue();
+        double portfolioWorth = portfolio.getValue(api);
         double netProfit = portfolioWorth - totalDeposit;
         double profitPercent = netProfit / totalDeposit;
         int numUsers = UserManager.getInstance().numUser();
 
         String text = """
+                        <html>
                                         
-                        US ${0, number, currency} Total Investment Deposited
+                        Total Investment DepositedP:<br>
+                        US {0, number, currency}<br><br>
                                         
-                        Current Portfolio Net Worth: US ${1, number, currency}
+                        Current Portfolio Net Worth:<br>
+                        US {1, number, currency}<br><br>
                                         
-                        Current Net Profit: US ${2, number, currency} ({3, number, percent}%)
+                        Current Net Profit:<br>
+                        US {2, number, currency} ({3, number, percent})<br><br>
                                         
-                        Total Invested Users: {4, number, integer}
-                                        
+                        Total Invested Users: {4, number, integer}<br><br>
+                        <html>
                         """;
 
         text = java.text.MessageFormat.format(text, totalDeposit, portfolioWorth,
                 netProfit, profitPercent, numUsers);
+
+        System.out.println(text);
 
         return text + "Timestamp: " + date.toString();
     }
 
     public JPanel getPanel(int x, int y, int width, int height) {
         JPanel panel = new JPanel();
-        JLabel label = new JLabel( getData());
-        label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
+        JLabel label = new JLabel(getData());
+        label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
         label.setForeground(Color.black);
         panel.add(label);
         panel.setBounds(x, y, width, height);

@@ -1,6 +1,7 @@
 package Containers;
 
 import Assets.Asset;
+import Assets.DataAccessInterface;
 
 import java.io.Serializable;
 import java.util.*;
@@ -80,6 +81,12 @@ public class Portfolio implements Serializable {
     // If there's no asset in the system, this method will return zero.
     public double getValue() {
         return this.assetProcessor.getValue();
+    }
+
+    // Calculates the updated value of all assets in the system through the provided data access interface.
+    // If there's no asset in the system, this method will return zero.
+    public double getValue(DataAccessInterface api) {
+        return this.assetProcessor.getValue(api);
     }
 
     // Getter and Setter for profitability

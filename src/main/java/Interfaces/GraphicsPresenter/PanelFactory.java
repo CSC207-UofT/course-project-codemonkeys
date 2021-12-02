@@ -24,7 +24,7 @@ public class PanelFactory {
     public JPanel makePanel(String type, int x, int y, int width, int height) {
 
         if (type == "Text") {
-            TextPanel text = new TextPanel(portfolio);
+            TextPanel text = new TextPanel(portfolio, api);
             return text.getPanel(x, y, width, height);
         } else if (type == "Portfolio Value Chart") {
             PortfolioValueChartPanel growthChart = new PortfolioValueChartPanel();

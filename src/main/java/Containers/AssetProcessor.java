@@ -1,6 +1,7 @@
 package Containers;
 
 import Assets.Asset;
+import Assets.DataAccessInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,17 @@ public class AssetProcessor extends Processor{
     public double getValue() {
         double value = 0;
         for (Asset a: this.assetList){
+            value += a.getValue();
+        }
+        return value;
+    }
+
+    // Calculates the updated value of all assets in the system through the provided data access interface..
+    // If there's no asset in the system, this method will return zero.
+    public double getValue(DataAccessInterface api) {
+        double value = 0;
+        for (Asset a: this.assetList){
+            a.updatePrice(api);
             value += a.getValue();
         }
         return value;
