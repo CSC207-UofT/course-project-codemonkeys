@@ -16,7 +16,7 @@ public class PortfolioPerformanceHistory {
         size = 168; // Hours in a week
     }
 
-    public void recordHistory(Map<String, Double> history) {
+    public void recordHistory(Double history) {
         treeQueue.put(new Date(), history);
 
         if (treeQueue.size() > size) {
@@ -33,4 +33,7 @@ public class PortfolioPerformanceHistory {
     public void setTotalDeposit(double totalDeposit) {
         this.totalDeposit = totalDeposit;
     }
+
+    public TreeMap<Date, Object> getHistory() {return this.treeQueue;}
+
 }

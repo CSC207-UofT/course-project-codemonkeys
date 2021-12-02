@@ -36,7 +36,7 @@ public class TextPanel implements Panel{
         String text = """
                         <html>
                                         
-                        Total Investment DepositedP:<br>
+                        Total Deposited Investment:<br>
                         US {0, number, currency}<br><br>
                                         
                         Current Portfolio Net Worth:<br>
@@ -52,7 +52,6 @@ public class TextPanel implements Panel{
         text = java.text.MessageFormat.format(text, totalDeposit, portfolioWorth,
                 netProfit, profitPercent, numUsers);
 
-        System.out.println(text);
 
         return text + "Timestamp: " + date.toString();
     }

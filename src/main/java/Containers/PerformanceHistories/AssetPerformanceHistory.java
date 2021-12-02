@@ -26,4 +26,6 @@ public class AssetPerformanceHistory {
     }
 
     public static AssetPerformanceHistory getInstance() { return instance; }
+
+    public TreeMap<Date, Object> getHistory() {return this.treeQueue;}
 }

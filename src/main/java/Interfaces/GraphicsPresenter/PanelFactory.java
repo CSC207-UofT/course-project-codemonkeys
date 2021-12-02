@@ -36,7 +36,7 @@ public class PanelFactory {
             AssetGrowthChartPanel barChart = new AssetGrowthChartPanel();
             return barChart.getPanel(x, y, width, height);
         } else if (type == "Portfolio Growth Chart") {
-            PortfolioGrowthChartPanel barChart = new PortfolioGrowthChartPanel();
+            PortfolioGrowthChartPanel barChart = new PortfolioGrowthChartPanel(portfolio, api);
             return barChart.getPanel(x, y, width, height);
         } else if (type == "User Leaderboard") {
             UserLeaderboardChartPanel barChart = new UserLeaderboardChartPanel(api);

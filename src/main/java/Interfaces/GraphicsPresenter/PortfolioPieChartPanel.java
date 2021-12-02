@@ -70,19 +70,26 @@ class PortfolioPieChartPanel implements Panel {
                 "{0}: ${1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.00%"));
         plot.setLabelGenerator(generator);
 
-        // Calculate greyscale according to percentage
+        // Calculate greyscale according to percentage for accessibility concerns
         double max = 0.0;
-        for (int i = 0; i < dataset.getItemCount(); i++) {
+        for (int i = 0; i <= dataset.getItemCount(); i++) {
             Number value = dataset.getValue(i);
-            if ((Double) value > max) {
+            if (value != null && (Double) value > max) {
                 max = (Double) value;
             }
         }
+
+        Color newColor;
+
         for (int i = 0; i < dataset.getItemCount(); i++) {
-                plot.setSectionPaint(dataset.getKey(i), new Color(
-                        (float) (1-(double) (dataset.getValue(i)) / max),
-                        (float) (1-(double) (dataset.getValue(i)) / max),
-                        (float) (1-(double) (dataset.getValue(i)) / max)));
+            try {newColor = new Color(
+                    (float) (1-(double) (dataset.getValue(i)) / max),
+                    (float) (1-(double) (dataset.getValue(i)) / max),
+                    (float) (1-(double) (dataset.getValue(i)) / max));}
+            catch(Exception e) {
+                newColor = Color.black;
+            }
+                plot.setSectionPaint(dataset.getKey(i), newColor);
             }
 
         // Create chart panel

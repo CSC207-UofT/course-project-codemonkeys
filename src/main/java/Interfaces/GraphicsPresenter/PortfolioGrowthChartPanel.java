@@ -1,5 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
+import Assets.DataAccessInterface;
+import Containers.PerformanceHistories.PortfolioPerformanceHistory;
+import Containers.Portfolio;
+import Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,30 +18,50 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
+import java.util.Date;
+import java.util.TreeMap;
 
 class PortfolioGrowthChartPanel implements Panel {
     // Assemble the chart displaying growth rate of the portfolio at different time frames as a bar chart.
+
+    Portfolio portfolio;
+    DataAccessInterface api;
+
+    public PortfolioGrowthChartPanel(Portfolio portfolio, DataAccessInterface api) {
+        this.portfolio = portfolio;
+        this.api = api;
+    }
+
     public DefaultCategoryDataset getData() {
         // TODO Connect with lower levels to get actual data
-        String portfolio = "Portfolio";
+        String p = "Portfolio";
 
-        String hour = "Hour";
-        String day = "Day";
-        String sincePurchase = "Since Transaction";
 
         DefaultCategoryDataset series = new DefaultCategoryDataset( );
 
-        series.addValue( -1.0 , hour , portfolio);
-        series.addValue( 3.0  , day, portfolio );
-        series.addValue( -5.0  , sincePurchase, portfolio );
+        TreeMap<Date, Object> history = PerformanceHistoryManager.getPortfolioHistory();
 
+        int half = Math.round(history.size() / 2);
+
+        double currentValue = portfolio.getValue(api);
+        double totalInvestment = PortfolioPerformanceHistory.getInstance().getTotalDeposit();
+        double fullTime = (Double) history.get(history.firstKey());
+        double halfTime = (Double) history.values().toArray()[half];
+
+        String fullTimeLabel = history.size() + " Hours";
+        String halfTimeLabel = half + " Hours";
+        String totalInvestmentLabel = "Total Investment";
+
+        series.addValue( (currentValue - halfTime) / halfTime * 100, halfTimeLabel , p);
+        series.addValue((currentValue - fullTime) / fullTime  * 100, fullTimeLabel, p);
+        series.addValue( (currentValue - totalInvestment) / totalInvestment * 100, totalInvestmentLabel, p );
 
         return series;
     }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
         JFreeChart barChart = ChartFactory.createBarChart("Portfolio Growth Chart", "Time Frame",
-                "Growth", getData(), PlotOrientation.VERTICAL, true, true, false);
+                "% Growth", getData(), PlotOrientation.VERTICAL, true, true, false);
 
         // Render chart styles
         CategoryPlot plot = barChart.getCategoryPlot();

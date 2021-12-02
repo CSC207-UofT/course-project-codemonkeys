@@ -1,5 +1,6 @@
 package Interfaces.GraphicsPresenter;
 
+import Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -9,6 +10,10 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.util.Date;
+import java.util.TreeMap;
 
 class PortfolioValueChartPanel implements Panel {
 // Create a ChartPanel displaying the value of the portfolio over time.
@@ -17,22 +22,24 @@ class PortfolioValueChartPanel implements Panel {
         // Format the data as needed by JFreeChart
         // TODO Connect with lower levels to get actual data
 
-        var series = new XYSeries("Portfolio Value");
-        series.add(1, 1000.35);
-        series.add(2, 1012.67);
-        series.add(3, 1077.35);
-        series.add(4, 1100.60);
-        series.add(5, 1115.35);
-        series.add(6, 999.35);
-        series.add(7, 1110.35);
-        series.add(8, 1300.35);
+        var series = new XYSeries("Portfolio Value (US $)");
+
+        TreeMap<Date, Object> history = PerformanceHistoryManager.getPortfolioHistory();
+
+        Date timeNow = new Date();
+
+        for (Date date : history.keySet()) {
+            double diff = date.getTime() - timeNow.getTime();
+            series.add(diff, (Double) history.get(date));
+        }
+
         return series;
     }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
         var dataset = new XYSeriesCollection();
         dataset.addSeries(getData());
-        JFreeChart lineChart = ChartFactory.createXYLineChart("Portfolio Value", "Time (Days)", "US$", dataset);
+        JFreeChart lineChart = ChartFactory.createXYLineChart("Portfolio Value", "Time (Milliseconds from Timestamp)", "US$", dataset);
         lineChart.removeLegend();
 
         XYPlot plot = (XYPlot) lineChart.getPlot();
