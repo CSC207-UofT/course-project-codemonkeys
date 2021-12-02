@@ -2,8 +2,10 @@ package Commands;
 
 import Assets.Currency;
 import Assets.DataAccessInterface;
+import Containers.PerformanceHistories.PortfolioPerformanceHistory;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
+import Managers.PerformanceHistoryManager;
 import Users.User;
 
 /**
@@ -42,6 +44,9 @@ public class Deposit extends Command{
         // Create Asset and Transaction
         Currency usd = new Currency(depositVolume, 1, "USD", "USD");
         Transaction trans = new Transaction(this.initiator, null, usd);
+
+        // Record Deposite in portfolio history
+        PerformanceHistoryManager.updateTotalDeposite(depositVolume);
 
         //TODO: add transaction to TransactionManager and execute it
         //TransactionManager.getInstance.add(trans);

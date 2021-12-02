@@ -4,12 +4,13 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Date;
 
-//TODO: add tests
+//TODO: add tests and serialize
 
 public class PortfolioPerformanceHistory {
     private final TreeMap<Date, Object> treeQueue = new TreeMap<>();
     private final int size;
     private static final PortfolioPerformanceHistory instance = new PortfolioPerformanceHistory();
+    private double totalDeposit = 0;
 
     private PortfolioPerformanceHistory() {
         size = 168; // Hours in a week
@@ -23,5 +24,13 @@ public class PortfolioPerformanceHistory {
         }
     }
 
-    public PortfolioPerformanceHistory getInstance() { return instance; }
+    public static PortfolioPerformanceHistory getInstance() { return instance; }
+
+    public double getTotalDeposit() {
+        return totalDeposit;
+    }
+
+    public void setTotalDeposit(double totalDeposit) {
+        this.totalDeposit = totalDeposit;
+    }
 }
