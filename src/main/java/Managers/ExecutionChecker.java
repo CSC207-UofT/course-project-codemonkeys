@@ -24,7 +24,7 @@ public class ExecutionChecker {
      * @param yahoo yahoo finance stock API
      * @return the user's instantaneous voting power
      */
-    public double votingPowerCalculator(User user, List<Transaction> transactionList, DataAccessInterface yahoo){
+    public static double votingPowerCalculator(User user, List<Transaction> transactionList, DataAccessInterface yahoo){
         double result = 1.0;
         VoteManager vm = VoteManager.getInstance();
         for (Transaction trans : transactionList){
@@ -63,7 +63,7 @@ public class ExecutionChecker {
         return result;
     }
 
-    public double getVotingPower(User user, DataAccessInterface api){
+    public static double getVotingPower(User user, DataAccessInterface api){
         AssetManager assetManager = AssetManager.getInstance();
         List<Transaction> transactionList = user.getUserPortfolio().getTransactionList();
         List<Transaction> transactionList1 = new ArrayList<>();
