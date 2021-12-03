@@ -54,10 +54,10 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
         }
         String cmdName = cmdArgs[0];
         String[] ArgWithoutCmd = new String[cmdArgs.length - 1];
-        for (int i=1; i<cmdArgs.length; i++)
-        {
-            ArgWithoutCmd[i] = cmdArgs[i];
-        }
+//        for (int i=1; i<cmdArgs.length; i++)
+//        {
+//            ArgWithoutCmd[i] = cmdArgs[i];
+//        }
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
         if(cmdName.equals("createuser")) {
@@ -67,7 +67,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
             if (cmd == null) return("No such command. Try again.");
             res = cmd.execute();
             if (! res) return cmd.help();
-            return("user" + author + "successfully created!");
+            return("user " + author + " successfully created!");
         }
 //        if(userManager.findUser(author) != null){
 //            return("You are not a user of this system. Use createuser to create a new user.");
