@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TransactionProcessor extends Processor{
     // transactionHistory: a list of historical transaction in the portfolio
-    private List<Transaction> transactionHistory;
+    private final List<Transaction> transactionHistory;
 
     public TransactionProcessor(){
         this.transactionHistory = new ArrayList<>();

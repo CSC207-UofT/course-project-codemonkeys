@@ -4,16 +4,6 @@ import Managers.UserManager;
 import java.io.*;
 
 public abstract class ReadWriter<T> {
-//    /**
-//     * @param filepath location of ser file
-//     * @param o object to be serialized
-//     */
-//    void saveToFile(String filepath, Object o) throws IOException;
-//
-//    /**
-//     * @param filepath location of ser file
-//     */
-//    T readFromFile(String filepath) throws IOException, ClassNotFoundException;
 
     /**
      * Writes the users to file at filePath.
