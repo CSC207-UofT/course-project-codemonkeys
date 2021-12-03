@@ -2,10 +2,11 @@ package Containers.PerformanceHistories;
 
 import java.util.TreeMap;
 import java.util.Date;
+import java.io.Serializable;
 
-//TODO: add tests and serialize
+//TODO: add tests
 
-public class CommunalPortfolioPerformanceHistory {
+public class CommunalPortfolioPerformanceHistory implements Serializable{
     private final TreeMap<Date, Object> treeQueue = new TreeMap<>();
     private final int size;
     private static final CommunalPortfolioPerformanceHistory instance = new CommunalPortfolioPerformanceHistory();

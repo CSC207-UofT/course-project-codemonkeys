@@ -1,11 +1,10 @@
 package Containers;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class VoteProcessor extends Processor{
     // votingHistory: a history of votes in the portfolio
-    private List<Vote> votingHistory;
+    private final List<Vote> votingHistory;
 
     public VoteProcessor(){
         this.votingHistory = new ArrayList<>();

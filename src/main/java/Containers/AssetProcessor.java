@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class AssetProcessor extends Processor{
     // assetList: a list of asset in the portfolio
-    private List<Asset> assetList;
+    private final List<Asset> assetList;
 
     public AssetProcessor(){
         this.assetList = new ArrayList<>();

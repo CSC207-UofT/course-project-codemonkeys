@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class UserManager implements Serializable{
-    private Map<UUID, User> userMap;
+    private final Map<UUID, User> userMap;
 
     //create an object of UserManager
     private static final UserManager instance = new UserManager();

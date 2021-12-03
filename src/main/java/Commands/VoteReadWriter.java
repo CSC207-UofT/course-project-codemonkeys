@@ -1,2 +1,6 @@
-package Commands;public class VoteReadWriter {
+package Commands;
+
+import Managers.VoteManager;
+
+public class VoteReadWriter extends ReadWriter<VoteManager>{
 }

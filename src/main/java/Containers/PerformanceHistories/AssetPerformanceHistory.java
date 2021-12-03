@@ -3,10 +3,11 @@ package Containers.PerformanceHistories;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Date;
+import java.io.Serializable;
 
 //TODO: add tests and serialize
 
-public class AssetPerformanceHistory {
+public class AssetPerformanceHistory implements Serializable{
     private final TreeMap<Date, Object> treeQueue = new TreeMap<>();
     private final int size;
     private static final AssetPerformanceHistory instance = new AssetPerformanceHistory();
