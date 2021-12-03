@@ -92,4 +92,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 src/main/java/Main.java
-src/main/java/Interfaces/discord_secret_key.txt
+
+src/main/java/Interfaces/discord_secret_key
