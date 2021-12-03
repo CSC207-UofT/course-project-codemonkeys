@@ -31,21 +31,18 @@ public class TextPanel implements Panel{
         double profitPercent = netProfit / totalDeposit;
         int numUsers = UserManager.getInstance().numUser();
 
-        String text = """
-                        <html>
-                                        
-                        Total Deposited Investment:<br>
-                        US {0, number, currency}<br><br>
-                                        
-                        Current Portfolio Net Worth:<br>
-                        US {1, number, currency}<br><br>
-                                        
-                        Current Net Profit:<br>
-                        US {2, number, currency} ({3, number, percent})<br><br>
-                                        
-                        Total Invested Users: {4, number, integer}<br><br>
-                        <html>
-                        """;
+        String text = "<html>" +
+                        "Total Deposited Investment:<br>" +
+                        "US {0, number, currency}<br><br>" +
+
+                        "Current Portfolio Net Worth:<br>" +
+                        "US {1, number, currency}<br><br>" +
+
+                        "Current Net Profit:<br>" +
+                        "US {2, number, currency} ({3, number, percent})<br><br>" +
+
+                        "Total Invested Users: {4, number, integer}<br><br>" +
+                        "<html>";
 
         text = java.text.MessageFormat.format(text, totalDeposit, portfolioWorth,
                 netProfit, profitPercent, numUsers);
