@@ -54,13 +54,11 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
         }
         String cmdName = cmdArgs[0];
         String[] ArgWithoutCmd = new String[cmdArgs.length - 1];
-//        for (int i=1; i<cmdArgs.length; i++)
-//        {
-//            ArgWithoutCmd[i] = cmdArgs[i];
-//        }
+        System.arraycopy(cmdArgs, 1, ArgWithoutCmd, 0, cmdArgs.length - 1);
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
         if(cmdName.equals("createuser")) {
+            if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
             CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), argForCreateUser);
             cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
@@ -69,9 +67,9 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
             if (! res) return cmd.help();
             return("user " + author + " successfully created!");
         }
-//        if(userManager.findUser(author) != null){
-//            return("You are not a user of this system. Use createuser to create a new user.");
-//        }
+        if(userManager.findUser(author) == null){
+            return("You are not a user of this system. Use createuser to create a new user.");
+        }
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
