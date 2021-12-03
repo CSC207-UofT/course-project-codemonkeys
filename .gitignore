@@ -93,4 +93,4 @@ fabric.properties
 
 src/main/java/Main.java
 
-.discord_secret_key
+src/main/java/Interfaces/discord_secret_key
