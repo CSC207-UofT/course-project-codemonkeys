@@ -9,7 +9,7 @@ import javax.security.auth.login.LoginException;
 public class DiscordClient implements ClientInterface{
 
     public DiscordClient() throws LoginException{
-        JDABuilder jda = JDABuilder.createDefault("OTEyMTQ0NTE2NTc0NzQ4Njcy.YZrqxw.OsJ6bsev8SVdRuUSMbcdUP4Br5g");
+        JDABuilder jda = JDABuilder.createDefault("OTEyMTQ0NTE2NTc0NzQ4Njcy.YZrqxw.RgXlPR8NqYFDqjnxdcvmEzet0KU");
         jda.setActivity(Activity.watching("Stock Market"));
         jda.setStatus(OnlineStatus.ONLINE);
         jda.addEventListeners(new CommandParser());

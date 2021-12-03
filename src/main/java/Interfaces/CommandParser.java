@@ -49,7 +49,6 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
     public String parseCommand(String[] cmdArgs, String author) {
         if(cmdArgs.length == 0) return("Your command is empty.");
         String cmdName = cmdArgs[0];
-        System.out.println(cmdName);
         String[] ArgWithoutCmd = new String[cmdArgs.length - 1];
         // ArgWithoutCmd[0] = author;
         for (int i=1; i<cmdArgs.length; i++)
@@ -68,9 +67,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
             System.arraycopy(ArgWithoutCmd, 0, argForCreateUser, 1, ArgWithoutCmd.length);
             commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         }
-        System.out.println(cmdName);
-        System.out.println(cmdName.equals("createuser"));
-        Command cmd = commandManager.generate(commandManager.find("createuser"), commandProtocol);
+        Command cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
         boolean res = cmd.execute();
         if (! res) return cmd.help();
