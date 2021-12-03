@@ -24,8 +24,8 @@ public class UpVote extends Command{
     @Override
     public boolean execute() {
         if(this.args.length != 1) {return false;}
-//        May add is_ban method, so we have to check if this user can vote.
-//        if(this.INITIATOR.is_ban) {return false;}
+        // When the initiator is banned, the command cannot be executed.
+        if(this.initiator.isBanned()) {return false;}
 
         //get transaction manager and find the transaction we need
         TransactionManager tm = TransactionManager.getInstance();
