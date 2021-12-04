@@ -104,5 +104,4 @@ public class UserManager implements Serializable{
     public int numUser(){
         return this.userMap.size();
     }
-
 }

@@ -29,7 +29,7 @@ public class TransactionManagerTest {
          */
         transactions = new Transaction[10];
         assets = new Asset[10];
-        user = new User("狗");
+        user = new User("dog");
 
         for (int i = 0; i < 10; i++){
             assets[i] = new Stock(i, 10*i, "stock", "ABC");

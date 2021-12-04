@@ -178,6 +178,7 @@ public class VoteManager {
                     .append(", value: ").append(a.getValue()).append(", number of upVoters: ")
                     .append(up).append(", number of downVoters: ").append(down).append(System.lineSeparator());
         }
+
         return sb.toString();
     }
 

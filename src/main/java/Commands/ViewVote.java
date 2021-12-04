@@ -39,7 +39,8 @@ public class ViewVote extends Command{
 
     @Override
     public String help() {
-        return "This is the ViewVote command.";
+        return "This is the ViewVote command." +
+                "Syntax: '! viewvote' or '! viewvote [symbol]'";
     }
 
     @Override
