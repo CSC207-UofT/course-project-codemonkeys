@@ -23,9 +23,6 @@ public class CommandParserTest {
     private final VoteManager vm = VoteManager.getInstance();
     private final UserManager um = UserManager.getInstance();
     private final CommandManager cm = CommandManager.getInstance();
-    Asset asset1, asset2, asset3, asset4, asset5, asset6;
-    User user1, user2, user3, user4;
-    Transaction transaction1, transaction2, transaction3;
 
     @Test
     public void testCreateMultipleUser() {
@@ -41,12 +38,4 @@ public class CommandParserTest {
         assertTrue(res);
         assertTrue(res2);
     }
-
-    @After
-    public void teardown(){
-        um.delUser("Edward");
-        um.delUser("Java");
-    }
-
-
 }
