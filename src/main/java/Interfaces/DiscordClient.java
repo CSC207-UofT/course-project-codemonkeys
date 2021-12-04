@@ -16,7 +16,6 @@ public class DiscordClient implements ClientInterface{
     public DiscordClient() throws LoginException, IOException {
         Path path = Paths.get("src/main/java/Interfaces/discord_secret_key");
         String token = Files.readString(path, StandardCharsets.US_ASCII);
-        System.out.println(token);
         JDABuilder jda = JDABuilder.createDefault(token);
         jda.setActivity(Activity.watching("Stock Market"));
         jda.setStatus(OnlineStatus.ONLINE);

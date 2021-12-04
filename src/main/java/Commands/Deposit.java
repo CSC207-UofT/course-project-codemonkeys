@@ -1,9 +1,13 @@
 package Commands;
 
+import Assets.Asset;
 import Assets.Currency;
 import Assets.DataAccessInterface;
 import Containers.Transaction;
 import Interfaces.ClientInterface;
+import Managers.AssetManager;
+import Managers.TransactionExecutor;
+import Managers.TransactionManager;
 import Users.User;
 
 /**
@@ -41,11 +45,7 @@ public class Deposit extends Command{
 
         // Create Asset and Transaction
         Currency usd = new Currency(depositVolume, 1, "USD", "USD");
-        Transaction trans = new Transaction(this.initiator, null, usd);
-
-        //TODO: add transaction to TransactionManager and execute it
-        //TransactionManager.getInstance.add(trans);
-        //TransactionManager.getInstance.execute(trans);
+        AssetManager.getInstance().addAsset(usd);
         return true;
     }
 

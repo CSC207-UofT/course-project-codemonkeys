@@ -7,6 +7,7 @@ import Containers.Transaction;
 import Interfaces.ClientInterface;
 import Managers.AssetManager;
 import Managers.TransactionManager;
+import Managers.VoteManager;
 import Users.User;
 
 
@@ -37,15 +38,17 @@ public class Buy extends Command{
 
         // Convert to Asset objects
         Asset buy = getBuyAsset(symbol, volume);
+        System.out.println(buy);
         if (buy == null) return false;
 
         Currency usd = getFunds(buy.getPrice());
+        System.out.println(usd);
         if (usd == null) return false;
 
         // Add transaction to the system
         Transaction trans = new Transaction(this.initiator, usd, buy);
         TransactionManager.getInstance().addTransaction(trans);
-
+        VoteManager.getInstance().addVote(trans, initiator, true);
         return true;
     }
 
@@ -73,7 +76,7 @@ public class Buy extends Command{
         try {
             double price = this.api.update(symbol);
             if(price == 0) return null;
-            return new Asset(Double.valueOf(volume), price, symbol, symbol);
+            return new Asset(Double.parseDouble(volume), price, symbol, symbol);
         }
         catch (NumberFormatException e){
             return null;
@@ -83,7 +86,7 @@ public class Buy extends Command{
 
     @Override
     public String help() {
-        return "This is the Buy command.";
+        return "Fail to buy or wrong Syntax\nSyntax: ! buy [symbol] [amount]";
     }
 
     @Override

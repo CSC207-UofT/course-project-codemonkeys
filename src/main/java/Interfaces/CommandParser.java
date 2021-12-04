@@ -3,7 +3,10 @@ package Interfaces;
 import Commands.Command;
 import Commands.CommandManager;
 import Commands.CommandProtocol;
+import Managers.AssetManager;
+import Managers.TransactionManager;
 import Managers.UserManager;
+import Managers.VoteManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -24,6 +27,8 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
     private String prefix = "!";
     private CommandManager commandManager = CommandManager.getInstance();
     private UserManager userManager = UserManager.getInstance();
+    private VoteManager voteManager = VoteManager.getInstance();
+    private TransactionManager transactionManager = TransactionManager.getInstance();
 
     /**
      * Callback method when the bot receives message from users
@@ -55,8 +60,11 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
         String cmdName = cmdArgs[0];
         String[] ArgWithoutCmd = new String[cmdArgs.length - 1];
         System.arraycopy(cmdArgs, 1, ArgWithoutCmd, 0, cmdArgs.length - 1);
+        if(cmdName.equals("GOODJOB")) return("Thanks:)");
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
+        if(cmdName.equals("listallcommand")) return("createuser\nbuy\nviewalltransaction\n" +
+                "viewvote\nviewallvote\nviewassetvolume\nGOODJOB");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
@@ -65,10 +73,24 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
             if (cmd == null) return("No such command. Try again.");
             res = cmd.execute();
             if (! res) return cmd.help();
-            return("user " + author + " successfully created!");
+            return("user " + author + " successfully created!\nUser '! listallcommand' to check all commands");
         }
         if(userManager.findUser(author) == null){
             return("You are not a user of this system. Use createuser to create a new user.");
+        }
+        if(cmdName.equals("viewalltransaction")) {
+            if(transactionManager.size() == 0) return("There is no votes currently.");
+            String transList = transactionManager.toString();
+            return(transList);
+        }
+        if(cmdName.equals("viewallvote")) {
+            System.out.println(voteManager.viewVote());
+            return(voteManager.viewVote());
+        }
+        if(cmdName.equals("viewassetvolume")) {
+            if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
+            AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
+            return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
         }
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);

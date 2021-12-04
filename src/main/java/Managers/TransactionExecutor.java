@@ -15,7 +15,7 @@ public class TransactionExecutor {
      * @param api         from yahoo finance to update price
      */
 
-    public void execute(Transaction transaction, DataAccessInterface api) {
+    public static void execute(Transaction transaction, DataAccessInterface api) {
         Asset bought = transaction.buy;
         Asset sold = transaction.sell;
         AssetManager am = AssetManager.getInstance();
