@@ -21,6 +21,7 @@ public class Kick extends Command{
 
         if (!initiator.checkAuthority("Kick")) {
         System.out.println("You have no permission to kick person!");
+        return true;
         }
 
         if(args[0].equals(initiator.getName())) {
