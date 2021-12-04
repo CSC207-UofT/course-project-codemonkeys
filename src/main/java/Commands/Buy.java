@@ -25,7 +25,7 @@ public class Buy extends Command{
 
     /**
      * Initiates a buy order. Uses USD to buy an Asset.
-     * this.args syntax: [symbol] [volume]
+     * this.args syntax: [symbol] [value]
      * @returns if successful
      */
     @Override
@@ -34,16 +34,16 @@ public class Buy extends Command{
 
         // Arguments
         String symbol = this.args[0];
-        String volume = this.args[1];
+        String value = this.args[1];
 
-        // Convert to Asset objects
-        Asset buy = getBuyAsset(symbol, volume);
-        System.out.println(buy);
-        if (buy == null) return false;
-
-        Currency usd = getFunds(buy.getPrice());
+        Currency usd = getFunds(Double.parseDouble(value));
         System.out.println(usd);
         if (usd == null) return false;
+
+        // Convert to Asset objects
+        Asset buy = getBuyAsset(symbol, value);
+        System.out.println(buy);
+        if (buy == null) return false;
 
         // Add transaction to the system
         Transaction trans = new Transaction(this.initiator, usd, buy);
@@ -72,11 +72,11 @@ public class Buy extends Command{
      * @param volume is how much to buy (not in $)
      * @returns a corresponding Asset object if successful, otherwise null
      */
-    public Asset getBuyAsset(String symbol, String volume){
+    public Asset getBuyAsset(String symbol, String value){
         try {
             double price = this.api.update(symbol);
             if(price == 0) return null;
-            return new Asset(Double.parseDouble(volume), price, symbol, symbol);
+            return new Asset(Double.parseDouble(value)/price, price, symbol, symbol);
         }
         catch (NumberFormatException e){
             return null;

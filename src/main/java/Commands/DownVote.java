@@ -61,6 +61,6 @@ public class DownVote extends Command{
 
     @Override
     public String name() {
-        return "down-vote";
+        return "downvote";
     }
 }

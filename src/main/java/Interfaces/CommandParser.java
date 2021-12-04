@@ -64,7 +64,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
         if(cmdName.equals("listallcommand")) return("createuser\nbuy\nviewalltransaction\n" +
-                "viewvote\nviewallvote\nviewassetvolume\nGOODJOB");
+                "viewvote\nviewallvote\nviewassetvolume\nGOODJOB\nviewmyasset");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
@@ -88,6 +88,11 @@ public class CommandParser extends ListenerAdapter implements ClientInterface{
             return(voteManager.viewVote());
         }
         if(cmdName.equals("viewassetvolume")) {
+            if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
+            AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
+            return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
+        }
+        if(cmdName.equals("viewmyasset")) {
             if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
             AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
             return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
