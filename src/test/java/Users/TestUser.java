@@ -39,5 +39,11 @@ public class TestUser {
         assert(user.getUserPortfolio().equals(portfolio));
     }
 
+    @Test(timeout = 500)
+    public void testisBanned(){
+        user.setBanned(true);
+        assert(user.isBanned());
+    }
+
 
 }

@@ -5,4 +5,11 @@ public class Currency extends Asset{
     public Currency(double volume, double price, String type, String symbol) {
         super(volume, price, type, symbol);
     }
+
+    @Override
+    public void updatePrice(DataAccessInterface source) {
+        /*
+          Do nothing upon price update for the time being
+         */
+    }
 }
