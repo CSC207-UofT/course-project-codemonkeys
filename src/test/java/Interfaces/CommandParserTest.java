@@ -40,6 +40,13 @@ public class CommandParserTest {
         boolean res2 = cmd.execute();
         assertTrue(res);
         assertTrue(res2);
-        assert(um.numUser() == 2);
     }
+
+    @After
+    public void teardown(){
+        um.delUser("Edward");
+        um.delUser("Java");
+    }
+
+
 }
