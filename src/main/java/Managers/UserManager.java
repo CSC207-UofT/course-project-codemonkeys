@@ -20,7 +20,9 @@ public class UserManager implements Serializable{
     public static UserManager getInstance() {return instance;}
 
     public void addUser(User u) {
-        this.userMap.put(u.id, u);
+        if (!this.userMap.containsValue(u)){
+            this.userMap.put(u.id, u);
+        }
     }
 
     /**
@@ -28,8 +30,10 @@ public class UserManager implements Serializable{
      * @param name name of the user
      */
     public void addUser(String name){
-        User user = new User(name);
-        this.userMap.put(user.id, user);
+        if(findUser(name) == null){
+            User user = new User(name);
+            this.userMap.put(user.id, user);
+        }
     }
 
     /**
@@ -38,11 +42,13 @@ public class UserManager implements Serializable{
      * @param authorities the authorities a user has
      */
     public void addUserAuthorities(String name, String[] authorities){
-        User user = new User(name);
-        for (String authority: authorities){
-            user.addAuthority(authority);
+        if(findUser(name) == null) {
+            User user = new User(name);
+            for (String authority : authorities) {
+                user.addAuthority(authority);
+            }
+            this.userMap.put(user.id, user);
         }
-        this.userMap.put(user.id, user);
     }
 
     /**
@@ -103,5 +109,9 @@ public class UserManager implements Serializable{
 
     public int numUser(){
         return this.userMap.size();
+    }
+
+    public String viewUserAsset(User u){
+        return u.getUserPortfolio().toString();
     }
 }

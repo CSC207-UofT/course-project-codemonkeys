@@ -90,11 +90,14 @@ public class AssetProcessor extends Processor{
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Wealth Manager Debug Report: \n");
+        StringBuilder sb = new StringBuilder("Your assets: \n");
         for(Asset asset : this.assetList) {
-            sb.append(asset.getType()).append('[');
-            sb.append(asset.getVolume()).append(" x $").append(asset.getPrice());
-            sb.append(" (= $").append(asset.getValue()).append(")]\n");
+            sb.append("Asset ID: ").append(asset.id).append(", Symbol: ");
+            sb.append(asset.getSymbol()).append(", Volume: ").append(asset.getVolume());
+            sb.append(", booking price: ").append(asset.getInitialPrice());
+            sb.append(", booking value: ").append(asset.getInitialValue());
+            sb.append(", present price: ").append(asset.getPrice());
+            sb.append(", present value: ").append(asset.getValue()).append(System.lineSeparator());
         }
         sb.append("Total value: $").append(this.getValue()).append('\n');
         return sb.toString();
