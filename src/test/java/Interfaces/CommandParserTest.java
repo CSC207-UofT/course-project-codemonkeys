@@ -28,19 +28,6 @@ public class CommandParserTest {
     Transaction transaction1, transaction2, transaction3;
 
     @Test
-    public void testCreateUser() {
-        String cmdName = "createuser";
-        String[] argForCreateUser = {"Edward"};
-        CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), argForCreateUser);
-        Command cmd = cm.generate(cm.find(cmdName), commandProtocol);
-        boolean res = cmd.execute();
-        assertTrue(res);
-        assert(um.numUser() == 1);
-        assert(um.findUser("Edward") != null);
-        assert(um.findUser("jack") == null);
-    }
-
-    @Test
     public void testCreateMultipleUser() {
         String cmdName = "createuser";
         String[] argForCreateUser = {"Edward"};
