@@ -4,20 +4,41 @@ import Entities.Assets.Asset;
 import Entities.Containers.Transaction;
 import Entities.Containers.Vote;
 import Entities.Users.User;
+import UseCase.Commands.ReadWriter;
+import UseCase.Commands.TransactionReadWriter;
+import UseCase.Commands.VoteReadWriter;
 
+import java.io.IOException;
 import java.util.*;
 
 public class VoteManager {
     private final Map<Transaction, List<Vote>> voteMap;
+    private static final ReadWriter<VoteManager> rw = new VoteReadWriter();
 
     //create an object of VoteManager
-    private static final VoteManager instance = new VoteManager();
+    private static VoteManager instance = new VoteManager();
 
     private VoteManager() {this.voteMap = new HashMap<>();}
 
     //Get the only object available
-    public static VoteManager getInstance() {return instance;}
+    public static VoteManager getInstance() {
+        try{
+            instance = rw.readFromFile("./voteManager.ser");
+        }
+        catch (IOException | ClassNotFoundException e){
+            System.out.println("Read Vote Manager Error: " + e.getMessage());
+        }
+        return instance;
+    }
 
+    public void save() {
+        try {
+            rw.saveToFile("./voteManager.ser", this);
+        }
+        catch (IOException e){
+            System.out.println("Save Vote Manager Error: " + e.getMessage());
+        }
+    }
     /**
      * add vote to a transaction
      * @param trans transaction is which the vote is voting for

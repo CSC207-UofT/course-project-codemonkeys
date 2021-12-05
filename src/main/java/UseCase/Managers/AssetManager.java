@@ -4,21 +4,42 @@ import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Assets.Stock;
+import UseCase.Commands.AssetReadWriter;
+import UseCase.Commands.ReadWriter;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import java.util.*;
 
 public class AssetManager implements Serializable{
     private final Map<UUID, Asset> assetMap;
+    private static final ReadWriter<AssetManager> rw = new AssetReadWriter();
 
     //create an object of AssetManager
-    private static final AssetManager instance = new AssetManager();
+    private static AssetManager instance = new AssetManager();
 
     private AssetManager() {this.assetMap = new HashMap<>();}
 
     //Get the only object available
-    public static AssetManager getInstance() {return instance;}
+    public static AssetManager getInstance() {
+        try{
+            instance = rw.readFromFile("./assetManager.ser");
+        }
+        catch (IOException | ClassNotFoundException e){
+            System.out.println("Read Asset Manager Error: " + e.getMessage());
+        }
+        return instance;
+    }
+
+    public void save() {
+        try {
+            rw.saveToFile("./assetManager.ser", this);
+        }
+        catch (IOException e){
+            System.out.println("Save Asset Manager Error: " + e.getMessage());
+        }
+    }
 
     public boolean containAsset(Asset asset){
         return this.assetMap.containsValue(asset);

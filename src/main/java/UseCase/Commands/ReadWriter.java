@@ -9,7 +9,6 @@ public abstract class ReadWriter<T> {
      *
      * @param filePath the file to write the records to
      * @param o    stores the list of users to be serialized
-     * @throws IOException
      */
     public void saveToFile(String filePath, T o) throws IOException {
 
@@ -28,7 +27,6 @@ public abstract class ReadWriter<T> {
      *
      * @param filePath file where the user list is stored
      * @return list of users
-     * @throws IOException
      */
     public T readFromFile(String filePath) throws IOException, ClassNotFoundException {
 
@@ -37,8 +35,8 @@ public abstract class ReadWriter<T> {
         ObjectInput input = new ObjectInputStream(buffer);
 
         // serialize the Map
-        T users = (T) input.readObject();
+        T obj = (T) input.readObject();
         input.close();
-        return users;
+        return obj;
     }
 }

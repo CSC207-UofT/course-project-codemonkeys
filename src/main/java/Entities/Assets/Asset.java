@@ -1,8 +1,9 @@
 package Entities.Assets;
 
 import Entities.Identification.Identifiable;
+import java.io.Serializable;
 
-public class Asset extends Identifiable {
+public class Asset extends Identifiable implements Serializable{
 
     private double volume; // The volume of the asset: ex. how many shares of X stock
     private double currentPrice; // The price per unit volume of the asset

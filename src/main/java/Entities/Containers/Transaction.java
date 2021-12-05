@@ -3,13 +3,13 @@ package Entities.Containers;
 import Entities.Assets.Asset;
 import Entities.Identification.Identifiable;
 import Entities.Users.User;
-
+import java.io.Serializable;
 import java.util.Date;
 
 // An immutable decision for a transaction.
 // A transaction has an INITIATOR, buying and selling assets, and a timestamp.
 // The buying and selling value should be equal.
-public final class Transaction extends Identifiable {
+public final class Transaction extends Identifiable implements Serializable{
 
     public final User initiator;
     public final Asset sell;
