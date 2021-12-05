@@ -1,14 +1,12 @@
 package Controller;
 
+import Interfaces.GraphicsUserInterface;
 import UseCase.Commands.Command;
 import UseCase.Commands.CommandManager;
 import UseCase.Commands.CommandProtocol;
 import Interfaces.ClientInterface;
 import Interfaces.YahooFinanceStockAPI;
-import UseCase.Managers.AssetManager;
-import UseCase.Managers.TransactionManager;
-import UseCase.Managers.UserManager;
-import UseCase.Managers.VoteManager;
+import UseCase.Managers.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -95,6 +93,10 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
             AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
             return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
+        }
+        if(cmdName.equals("getGraph")) {
+            PerformanceHistoryManager.updateTotalDeposite(UserManager.getInstance().findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
+            GraphicsUserInterface.generateGraphics(UserManager.getInstance().findUser(author).getUserPortfolio(), new YahooFinanceStockAPI());
         }
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);

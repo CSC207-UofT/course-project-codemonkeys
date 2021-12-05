@@ -61,7 +61,6 @@ public class graphicsDemo {
 
 
         }
-
         GraphicsUserInterface.generateGraphics(portfolio, api);
 
     }

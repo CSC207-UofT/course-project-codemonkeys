@@ -41,7 +41,7 @@ class PortfolioGrowthChartPanel implements Panel {
 
         TreeMap<Date, Object> history = PerformanceHistoryManager.getPortfolioHistory();
 
-        int half = Math.round(history.size() / 2);
+        int half = (int) Math.floor(history.size() / 2);
 
         double currentValue = portfolio.getValue(api);
         double totalInvestment = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();

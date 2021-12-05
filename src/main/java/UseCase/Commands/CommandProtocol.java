@@ -29,6 +29,4 @@ public class CommandProtocol {
         this.ARGS = args;
         this.PROFILE = new Object[]{initiator, client, api,  (Object) args};
     }
-
-
 }

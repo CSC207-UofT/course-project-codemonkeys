@@ -20,7 +20,7 @@ public class GraphicsUserInterface {
         frame.add(pf.makePanel("Portfolio Value Chart", 0, 500, 500, 500));
         frame.add(pf.makePanel("Portfolio Composition Chart", 500, 250, 500, 500));
         frame.add(pf.makePanel("Asset Growth Chart", 500, 750, 500, 250));
-        frame.add(pf.makePanel("Portfolio Growth Chart", 0, 250, 500, 250));
         frame.add(pf.makePanel("User Leaderboard", 500, 0, 500, 250));
+        frame.add(pf.makePanel("Portfolio Growth Chart", 0, 250, 500, 250));
     }
 }
