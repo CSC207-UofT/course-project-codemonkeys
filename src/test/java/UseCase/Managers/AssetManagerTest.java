@@ -27,15 +27,14 @@ public class AssetManagerTest {
 
     @After
     public void tearDown() {
-        am.delAsset(asset1);
-        am.delAsset(asset2);
-        am.delAsset(asset3);
-        am.delAsset(asset4);
-        am.delAsset(asset5);
+        for (Asset asset: am.getAssetList()){
+            am.removeAsset(asset);
+        }
     }
 
     @Test
     public void testGetInitialTypeValue(){
+        System.out.println(am.viewAssets());
         assertEquals(14500, am.getTypeInitialValue("TSLA"));
         assertEquals(2000, am.getTypeInitialValue("AAPL"));
         assertEquals(6000, am.getTypeInitialValue("USD"));

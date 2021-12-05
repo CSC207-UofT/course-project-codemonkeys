@@ -49,7 +49,7 @@ public class TransactionExecutor {
             am.addAsset(bought);                    // Add the bought asset into the group
             am.delAsset(sold);                      // remove the asset from the group
 
-            transaction.initiator.getUserPortfolio().sub(sold);
+//            transaction.initiator.getUserPortfolio().sub(sold);
             // remove the transaction to indicate vote is completed
 
         }

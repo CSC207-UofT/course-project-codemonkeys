@@ -37,22 +37,55 @@ public class AssetManager implements Serializable{
     public void addAsset(Asset a){
         for (Asset asset : assetMap.values()) {
             if (asset.getSymbol().equals(a.getSymbol()) && a.getClass() == asset.getClass()){
-                asset.setVolume(asset.getVolume() + a.getVolume());
+                double volume = asset.getVolume() + a.getVolume();
+                double bookingPrice = (asset.getInitialValue() + a.getInitialValue()) / volume;
+                if (a instanceof Currency){
+                    Asset newAsset = new Currency(volume, bookingPrice, a.getType(), a.getSymbol());
+                    this.assetMap.remove(asset.id);
+                    this.assetMap.put(newAsset.id, newAsset);
+                }
+                if (a instanceof Stock){
+                    Asset newAsset = new Stock(volume, bookingPrice, a.getType(), a.getSymbol());
+                    this.assetMap.remove(asset.id);
+                    this.assetMap.put(newAsset.id, newAsset);
+                }
                 return;
             }
         }
         this.assetMap.put(a.id, a);
     }
 
-    public void delAsset(Asset a){
+    public void removeAsset(Asset a) {
         this.assetMap.remove(a.id);
     }
 
+    public void delAsset(Asset a) {
+        for (Asset asset : assetMap.values()) {
+            if (asset.getSymbol().equals(a.getSymbol()) && a.getClass() == asset.getClass()) {
+                double volume = asset.getVolume() - a.getVolume();
+                if (volume == 0) {
+                    this.assetMap.remove(a.id);
+                    return;
+                }
+                if (a instanceof Currency){
+                    Asset newAsset = new Currency(volume, asset.getInitialPrice(), a.getType(), a.getSymbol());
+                    this.assetMap.remove(asset.id);
+                    this.assetMap.put(newAsset.id, newAsset);
+                }
+                if (a instanceof Stock){
+                    Asset newAsset = new Stock(volume, asset.getInitialPrice(), a.getType(), a.getSymbol());
+                    this.assetMap.remove(asset.id);
+                    this.assetMap.put(newAsset.id, newAsset);
+                }
+                return;
+            }
+        }
+    }
     /**
      * @param api the YahooFinanceStockAPI
      * @return the total value of assets in the group
      */
-    public double getValue(DataAccessInterface api) {
+    public double getValue (DataAccessInterface api) {
         double value = 0;
         for (Asset a: this.getAssetList()){
             if (a instanceof Stock){
@@ -146,5 +179,25 @@ public class AssetManager implements Serializable{
             }
         }
         return result;
+    }
+
+    /**
+     *the string representation to show the details about assets in the assetManager.
+     @return A string of assets information in the assetManager.
+     */
+    public String viewAssets() {
+        StringBuilder sb = new StringBuilder("Your assets: \n");
+        for(Asset asset : this.getAssetList()) {
+            sb.append("Asset ID: ").append(asset.id);
+            sb.append(", Symbol: ");
+            sb.append(asset.getSymbol());
+            sb.append(", Volume: ").append(asset.getVolume());
+            sb.append(", booking price: ").append(asset.getInitialPrice());
+            sb.append(", booking value: ").append(asset.getInitialValue());
+            sb.append(", present price: ").append(asset.getPrice());
+            sb.append(", present value: ").append(asset.getValue()).append(System.lineSeparator());
+        }
+//        sb.append("Total value: $").append(this.getValue(api)).append('\n');
+        return sb.toString();
     }
 }

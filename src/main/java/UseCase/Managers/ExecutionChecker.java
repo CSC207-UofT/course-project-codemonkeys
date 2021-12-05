@@ -66,18 +66,18 @@ public class ExecutionChecker {
     public static double getVotingPower(User user, DataAccessInterface api){
         AssetManager assetManager = AssetManager.getInstance();
         List<Transaction> transactionList = user.getUserPortfolio().getTransactionList();
-        List<Transaction> transactionList1 = new ArrayList<>();
-        for (Transaction trans: transactionList){
-            if (assetManager.containAsset(trans.buy)){
-                transactionList1.add(trans);
-            }
-        }
-        if (transactionList1.size() < 10){
-            return votingPowerCalculator(user, transactionList1, api);
+//        List<Transaction> transactionList1 = new ArrayList<>();
+//        for (Transaction trans: transactionList){
+//            if (assetManager.containAsset(trans.buy)){
+//                transactionList1.add(trans);
+//            }
+//        }
+        if (transactionList.size() < 10){
+            return votingPowerCalculator(user, transactionList, api);
         }
         else {
             return votingPowerCalculator(user,
-                    transactionList1.subList(transactionList1.size()-10, transactionList1.size()-1), api);
+                    transactionList.subList(transactionList.size()-10, transactionList.size()-1), api);
         }
     }
 
