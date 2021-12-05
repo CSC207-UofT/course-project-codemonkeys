@@ -2,8 +2,8 @@ package Interfaces;
 
 import javax.swing.*;
 
-import Assets.DataAccessInterface;
-import Containers.Portfolio;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.Portfolio;
 import Interfaces.GraphicsPresenter.*;
 
 public class GraphicsUserInterface {

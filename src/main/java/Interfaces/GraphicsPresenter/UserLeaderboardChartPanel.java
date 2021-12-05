@@ -1,9 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.DataAccessInterface;
-import Managers.ExecutionChecker;
-import Managers.UserManager;
-import Users.User;
+import Entities.Assets.DataAccessInterface;
+import UseCase.Managers.ExecutionChecker;
+import UseCase.Managers.UserManager;
+import Entities.Users.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

@@ -1,10 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.Asset;
-import Assets.Currency;
-import Assets.DataAccessInterface;
-import Containers.Portfolio;
-import Managers.PerformanceHistoryManager;
+import Entities.Assets.Asset;
+import Entities.Assets.Currency;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.Portfolio;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -19,9 +18,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
-import java.util.Date;
 import java.util.List;
-import java.util.TreeMap;
 
 class AssetGrowthChartPanel implements Panel {
     // Asembles the chart panel for a bar chart representing the growth rate of each specific asset at different

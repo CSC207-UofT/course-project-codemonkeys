@@ -1,9 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.DataAccessInterface;
-import Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import Containers.Portfolio;
-import Managers.UserManager;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
+import Entities.Containers.Portfolio;
+import UseCase.Managers.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class TextPanel implements Panel{
                         "Current Net Profit:<br>" +
                         "US {2, number, currency} ({3, number, percent})<br><br>" +
 
-                        "Total Invested Users: {4, number, integer}<br><br>" +
+                        "Total Invested Entities.Users: {4, number, integer}<br><br>" +
                         "<html>";
 
         text = java.text.MessageFormat.format(text, totalDeposit, portfolioWorth,

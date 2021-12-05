@@ -1,13 +1,13 @@
-import Assets.Asset;
-import Assets.Currency;
-import Assets.Stock;
-import Containers.Portfolio;
-import Containers.Transaction;
+import Entities.Assets.Asset;
+import Entities.Assets.Currency;
+import Entities.Assets.Stock;
+import Entities.Containers.Portfolio;
+import Entities.Containers.Transaction;
 import Interfaces.GraphicsUserInterface;
 import Interfaces.YahooFinanceStockAPI;
-import Managers.PerformanceHistoryManager;
-import Managers.UserManager;
-import Users.User;
+import UseCase.Managers.PerformanceHistoryManager;
+import UseCase.Managers.UserManager;
+import Entities.Users.User;
 
 public class graphicsDemo {
     public static void main(String[] args) {

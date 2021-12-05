@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Assets.DataAccessInterface;
+import Entities.Assets.DataAccessInterface;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 

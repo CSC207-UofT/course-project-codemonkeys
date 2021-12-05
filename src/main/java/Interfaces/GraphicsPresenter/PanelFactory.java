@@ -1,8 +1,7 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.DataAccessInterface;
-import Containers.Portfolio;
-import Managers.UserManager;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.Portfolio;
 
 import javax.swing.*;
 
