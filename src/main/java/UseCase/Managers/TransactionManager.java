@@ -1,7 +1,12 @@
 package UseCase.Managers;
 
 import Entities.Containers.Transaction;
+import UseCase.Commands.AssetReadWriter;
+import UseCase.Commands.ReadWriter;
+import UseCase.Commands.TransactionReadWriter;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,10 +17,11 @@ import java.util.*;
  * Date: Nov 24 2021
  * Version: 1.0
  */
-public class TransactionManager {
+public class TransactionManager implements Serializable {
 
     private static TransactionManager instance;
     private HashMap<UUID, Transaction> transactionMap;
+    private static final ReadWriter<TransactionManager> rw = new TransactionReadWriter();
 
     /*
       Default Constructors
@@ -42,10 +48,25 @@ public class TransactionManager {
      * Gets the singleton instance
      * @return instance
      */
-    public static TransactionManager getInstance(){
-        return TransactionManager.instance;
+    public static TransactionManager getInstance() {
+        try{
+            instance = rw.readFromFile("./transactionManager.ser");
+        }
+        catch (IOException | ClassNotFoundException e){
+            System.out.println("Read Transaction Manager Error: " + e.getMessage());
+        }
+        return instance;
     }
 
+    // serialize the current transaction manager
+    public void save() {
+        try {
+            rw.saveToFile("./transactionManager.ser", this);
+        }
+        catch (IOException e){
+            System.out.println("Save Transaction Manager Error: " + e.getMessage());
+        }
+    }
     /**
      * Remove the Transaction based on UUID provided
      * @param uuid is the uuid

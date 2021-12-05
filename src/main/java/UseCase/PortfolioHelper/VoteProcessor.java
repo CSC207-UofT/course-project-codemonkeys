@@ -5,6 +5,15 @@ import Entities.Containers.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the concrete class for processing votes
+ * It includes getters, add and remove methods
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
+
 public class VoteProcessor extends Processor {
     // votingHistory: a history of votes in the portfolio
     private final List<Vote> votingHistory;

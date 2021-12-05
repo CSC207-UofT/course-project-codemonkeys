@@ -6,6 +6,15 @@ import Entities.Containers.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the concrete class for processing transactions
+ * It includes getters, add and remove methods
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
+
 public class TransactionProcessor extends Processor {
     // transactionHistory: a list of historical transaction in the portfolio
     private final List<Transaction> transactionHistory;

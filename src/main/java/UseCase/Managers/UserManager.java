@@ -1,13 +1,40 @@
 package UseCase.Managers;
 import Entities.Users.*;
+import UseCase.Commands.AssetReadWriter;
+import UseCase.Commands.ReadWriter;
+import UseCase.Commands.UserReadWriter;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
 public class UserManager implements Serializable{
     private final Map<UUID, User> userMap;
+    private static final ReadWriter<UserManager> rw = new UserReadWriter();
 
     //create an object of UserManager
-    private static final UserManager instance = new UserManager();
+    private static UserManager instance = new UserManager();
+
+    //Get the only object available
+    public static UserManager getInstance() {
+        try{
+            instance = rw.readFromFile("./userManager.ser");
+        }
+        catch (IOException | ClassNotFoundException e){
+            System.out.println("Read User Manager Error: " + e.getMessage());
+        }
+        return instance;
+    }
+
+    // serialize the current user manager
+    public void save() {
+        try {
+            rw.saveToFile("./userManager.ser", this);
+        }
+        catch (IOException e){
+            System.out.println("Save User Manager Error: " + e.getMessage());
+        }
+    }
 
 
     public Map<UUID, User> getUserMap() {
@@ -16,8 +43,6 @@ public class UserManager implements Serializable{
 
     private UserManager() {this.userMap = new HashMap<>();}
 
-    //Get the only object available
-    public static UserManager getInstance() {return instance;}
 
     public void addUser(User u) {
         if (!this.userMap.containsValue(u)){

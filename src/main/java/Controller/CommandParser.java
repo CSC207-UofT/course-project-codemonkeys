@@ -21,11 +21,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * Version: 1.0
  */
 public class CommandParser extends ListenerAdapter implements ClientInterface {
-    private String prefix = "!";
-    private CommandManager commandManager = CommandManager.getInstance();
-    private UserManager userManager = UserManager.getInstance();
-    private VoteManager voteManager = VoteManager.getInstance();
-    private TransactionManager transactionManager = TransactionManager.getInstance();
+    private final String prefix = "!";
+    private final CommandManager commandManager = CommandManager.getInstance();
+    private final UserManager userManager = UserManager.getInstance();
+    private final VoteManager voteManager = VoteManager.getInstance();
+    private final TransactionManager transactionManager = TransactionManager.getInstance();
+    private final AssetManager assetManager = AssetManager.getInstance();
 
     /**
      * Callback method when the bot receives message from users
@@ -86,22 +87,29 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         }
         if(cmdName.equals("viewassetvolume") || cmdName.equals("asv")) {
             if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
-            AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
-            return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
+            assetManager.getTypeVolume(ArgWithoutCmd[0]);
+            return(Double.toString(assetManager.getTypeVolume(ArgWithoutCmd[0])));
         }
         if(cmdName.equals("viewallasset") || cmdName.equals("vaa")) {
-            return(AssetManager.getInstance().viewAssets(new YahooFinanceStockAPI()));
+            return(assetManager.viewAssets(new YahooFinanceStockAPI()));
         }
         if(cmdName.equals("getGraph")) {
-            PerformanceHistoryManager.updateTotalDeposite(UserManager.getInstance().findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
+            PerformanceHistoryManager.updateTotalDeposite(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
             PerformanceHistoryManager.recordHistory(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateGraphics(new YahooFinanceStockAPI());
         }
+
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
         res = cmd.execute();
         if (! res) return cmd.help();
+
+        // can create save command to do these
+        assetManager.save();
+        transactionManager.save();
+        voteManager.save();
+        userManager.save();
         return("command successfully executed!");
     }
 

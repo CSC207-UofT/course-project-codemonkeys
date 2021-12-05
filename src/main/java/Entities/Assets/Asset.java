@@ -1,8 +1,9 @@
 package Entities.Assets;
 
 import Entities.Identification.Identifiable;
+import java.io.Serializable;
 
-public class Asset extends Identifiable {
+public class Asset extends Identifiable implements Serializable{
 
     private double volume; // The volume of the asset: ex. how many shares of X stock
     private double currentPrice; // The price per unit volume of the asset
@@ -10,8 +11,6 @@ public class Asset extends Identifiable {
     private final String symbol;
     private double initialPrice;
 
-    // We do not use symbol for now
-    // TODO: add type to symbol database
     public Asset(double volume, double price, String type) {
         this(volume, price, type, null);
     }
