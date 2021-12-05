@@ -34,7 +34,6 @@ public class AssetManagerTest {
 
     @Test
     public void testGetInitialTypeValue(){
-        System.out.println(am.viewAssets());
         assertEquals(14500, am.getTypeInitialValue("TSLA"));
         assertEquals(2000, am.getTypeInitialValue("AAPL"));
         assertEquals(6000, am.getTypeInitialValue("USD"));

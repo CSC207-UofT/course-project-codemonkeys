@@ -19,7 +19,7 @@ public class UpDownVoteTest {
     private final TransactionManager tm = TransactionManager.getInstance();
     private final VoteManager vm = VoteManager.getInstance();
     private final UserManager um = UserManager.getInstance();
-    Asset asset1, asset2, asset3, asset4, asset5, asset6;
+    Asset asset1, asset2, asset3, asset4, asset5, asset6, asset7;
     User user1, user2, user3, user4;
     Transaction transaction1, transaction2, transaction3;
     ClientInterface client = new ClientInterface() {
@@ -45,6 +45,7 @@ public class UpDownVoteTest {
         asset4 = new Currency(-500, 1, "usDollar", "USD");
         asset5 = new Currency(100000, 1, "usDollar", "USD");
         asset6 = new Currency(0, 1, "usDollar", "USD");
+        asset7 = new Stock(5, 0, "tesla", "TSLA");
         am.addAsset(asset5);
         user1 = new User("initiator1");
         user2 = new User("initiator2");
@@ -52,7 +53,7 @@ public class UpDownVoteTest {
         user4 = new User("voter2");
         transaction1 = new Transaction(user1, asset2, asset1);
         transaction2 = new Transaction(user2, asset4, asset3);
-        transaction3 = new Transaction(user1, asset1, asset6);
+        transaction3 = new Transaction(user1, asset7, asset6);
         tm.addTransaction(transaction1);
         tm.addTransaction(transaction2);
         tm.addTransaction(transaction3);
@@ -72,12 +73,9 @@ public class UpDownVoteTest {
 
     @After
     public void tearDown() {
-        am.delAsset(asset1);
-        am.delAsset(asset2);
-        am.delAsset(asset3);
-        am.delAsset(asset4);
-        am.delAsset(asset5);
-        am.delAsset(asset6);
+        for (Asset asset: am.getAssetList()){
+            am.removeAsset(asset);
+        }
         tm.remove(transaction1.getId());
         tm.remove(transaction2.getId());
         tm.remove(transaction3.getId());
@@ -102,7 +100,7 @@ public class UpDownVoteTest {
         upVote2.execute(); // Vote added, reach the condition for a buy transaction to pass, transaction execute
 
         assertTrue(am.containAsset(asset1)); // asset is added into AssetManager
-        assertTrue(am.containAsset(asset2));
+        assertEquals(90000, am.getTypeVolume("USD"));
 
         assertFalse(tm.checkTransactions(transaction1)); // transaction is removed from the TransactionManager
 
@@ -126,19 +124,16 @@ public class UpDownVoteTest {
         upVote5.execute();
         assertTrue(tm.checkTransactions(transaction3));
         assertTrue(am.containAsset(asset1));
-        assertTrue(am.containAsset(asset2));
+        assertEquals(90000, am.getTypeVolume("USD"));
         assertFalse(am.containAsset(asset6));
 
-
+        System.out.println(am.viewAssets(api));
         upVote6.execute();// one more vote added and reached the sell transaction pass condition, transaction executes
+        System.out.println(am.viewAssets(api));
 
         assertFalse(tm.checkTransactions(transaction3)); // transaction is removed from the TransactionManager after execute
 
-        assertFalse(am.containAsset(asset1)); // The sold stock asset is removed from the AssetManager, the USD we get from the transaction is added into the AssetManager
-        assertTrue(am.containAsset(asset6));
-        assertTrue(am.containAsset(asset2));
-
-        assertFalse(user1.getUserPortfolio().getAssetList().contains(asset1));// The sold stock is removed from the INITIATOR's portfolio
+        assertEquals(asset1.getVolume() - 5, am.getTypeVolume("TSLA")); // The sold stock volume is deducted from the AssetManager
     }
 
     @Test
