@@ -64,7 +64,7 @@ public class AssetManager implements Serializable{
             if (asset.getSymbol().equals(a.getSymbol()) && a.getClass() == asset.getClass()) {
                 double volume = asset.getVolume() - a.getVolume();
                 if (volume == 0) {
-                    this.assetMap.remove(a.id);
+                    this.assetMap.remove(asset.id);
                     return;
                 }
                 if (a instanceof Currency){

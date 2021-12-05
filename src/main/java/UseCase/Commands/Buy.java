@@ -3,6 +3,7 @@ package UseCase.Commands;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
+import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
 import Interfaces.ClientInterface;
 import UseCase.Managers.AssetManager;
@@ -76,7 +77,7 @@ public class Buy extends Command{
         try {
             double price = this.api.update(symbol);
             if(price == 0) return null;
-            return new Asset(Double.parseDouble(value)/price, price, symbol, symbol);
+            return new Stock(Double.parseDouble(value)/price, price, symbol, symbol);
         }
         catch (NumberFormatException e){
             return null;

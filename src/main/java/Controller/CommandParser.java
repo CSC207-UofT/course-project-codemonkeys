@@ -60,8 +60,8 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if(cmdName.equals("GOODJOB")) return("Thanks:)");
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
-        if(cmdName.equals("listallcommand")) return("createuser\nbuy\nviewalltransaction\n" +
-                "viewvote\nviewallvote\nviewassetvolume\nGOODJOB\nviewmyasset");
+        if(cmdName.equals("listallcommand")) return("createuser\nbuy\nviewtransaction\n" +
+                "viewvote\nGOODJOB\nviewallasset");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
@@ -75,24 +75,22 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if(userManager.findUser(author) == null){
             return("You are not a user of this system. Use createuser to create a new user.");
         }
-        if(cmdName.equals("viewalltransaction")) {
+        if(cmdName.equals("viewtransaction") || cmdName.equals("vt")) {
             if(transactionManager.size() == 0) return("There is no votes currently.");
             String transList = transactionManager.toString();
             return(transList);
         }
-        if(cmdName.equals("viewallvote")) {
+        if(cmdName.equals("viewvote") || cmdName.equals("vv")) {
             System.out.println(voteManager.viewVote());
             return(voteManager.viewVote());
         }
-        if(cmdName.equals("viewassetvolume")) {
+        if(cmdName.equals("viewassetvolume") || cmdName.equals("asv")) {
             if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
             AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
             return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
         }
-        if(cmdName.equals("viewmyasset")) {
-            if(ArgWithoutCmd.length != 1) return("You need to add symbol as argument.");
-            AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0]);
-            return(Double.toString(AssetManager.getInstance().getTypeVolume(ArgWithoutCmd[0])));
+        if(cmdName.equals("viewallasset") || cmdName.equals("vaa")) {
+            return(AssetManager.getInstance().viewAssets(new YahooFinanceStockAPI()));
         }
         if(cmdName.equals("getGraph")) {
             PerformanceHistoryManager.updateTotalDeposite(UserManager.getInstance().findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));

@@ -158,8 +158,8 @@ public class VoteManager {
         int up = this.numUpVoters(trans);
         int down = this.numDownVoters(trans);
         Asset a = trans.buy;
-        sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol())
-                .append(", value: ").append(a.getValue()).append(", number of upVoters: ")
+        sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol()).append(", sell:" +
+                        " ").append(trans.sell.getSymbol()).append(", value: ").append(a.getValue()).append(", number of upVoters: ")
                 .append(up).append(", number of downVoters: ").append(down);
         return sb.toString();
     }
@@ -174,7 +174,8 @@ public class VoteManager {
             int up = this.numUpVoters(trans);
             int down = this.numDownVoters(trans);
             Asset a = trans.buy;
-            sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol())
+            sb.append("transaction id: ").append(trans.id).append(", buy: ").append(a.getSymbol()).append(", sell:" +
+                            " ").append(trans.sell.getSymbol())
                     .append(", value: ").append(a.getValue()).append(", number of upVoters: ")
                     .append(up).append(", number of downVoters: ").append(down).append(System.lineSeparator());
         }

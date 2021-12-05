@@ -9,6 +9,7 @@ import Interfaces.ClientInterface;
 import Entities.Users.User;
 import UseCase.Managers.AssetManager;
 import UseCase.Managers.TransactionManager;
+import UseCase.Managers.VoteManager;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class Sell extends Command{
      */
     @Override
     public boolean execute() {
-        if (this.args.length != 1 | this.args.length != 2) return false;
+        if (this.args.length != 1 && this.args.length != 2) return false;
 
         UUID id;
         Asset sell;
@@ -51,12 +52,14 @@ public class Sell extends Command{
             Asset sell1 = new Stock(asset.getVolume(), asset.getPrice(), asset.getType(), asset.getSymbol());
             Currency usd = new Currency(sell1.getValue(), 1, "USD", "USD");
             Transaction trans = new Transaction(this.initiator, sell1, usd);
+            VoteManager.getInstance().addVote(trans, initiator, true);
             TransactionManager.getInstance().addTransaction(trans);
         }
         if (this.args.length == 2){
             Asset sell1 = new Stock(Double.parseDouble(this.args[1]), asset.getPrice(), asset.getType(), asset.getSymbol());
             Currency usd = new Currency(sell1.getValue(), 1, "USD", "USD");
             Transaction trans = new Transaction(this.initiator, sell1, usd);
+            VoteManager.getInstance().addVote(trans, initiator, true);
             TransactionManager.getInstance().addTransaction(trans);
         }
 
