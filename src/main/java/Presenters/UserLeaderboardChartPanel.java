@@ -1,4 +1,4 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
 import Entities.Assets.DataAccessInterface;
 import UseCase.Managers.ExecutionChecker;

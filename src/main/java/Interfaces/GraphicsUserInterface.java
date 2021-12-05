@@ -4,17 +4,17 @@ import javax.swing.*;
 
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.Portfolio;
-import Interfaces.GraphicsPresenter.*;
+import Presenters.PanelFactory;
 
 public class GraphicsUserInterface {
-    public static void generateGraphics(Portfolio portfolio, DataAccessInterface api){
+    public static void generateGraphics(DataAccessInterface api){
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
 
-        PanelFactory pf = new PanelFactory(portfolio, api);
+        PanelFactory pf = new PanelFactory(api);
 
         frame.add(pf.makePanel("Text", 0, 0, 500, 250));
         frame.add(pf.makePanel("Portfolio Value Chart", 0, 500, 500, 500));

@@ -1,8 +1,9 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
 import Entities.Assets.Asset;
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.Portfolio;
+import UseCase.Managers.AssetManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,20 +21,18 @@ class PortfolioPieChartPanel implements Panel {
     // Generate a pie chart showing the portfolio composition
 
     //____________________ Variables ___________________________________________________________________________________
-    private final Portfolio portfolio;
     private final DataAccessInterface api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PortfolioPieChartPanel(Portfolio portfolio, DataAccessInterface api){
-        this.portfolio = portfolio;
+    public PortfolioPieChartPanel(DataAccessInterface api){
         this.api = api;
     };
 
     public PieDataset getData() {
         DefaultPieDataset series = new DefaultPieDataset();
 
-        List<Asset> assetList = portfolio.getAssetList();
+        List<Asset> assetList = AssetManager.getInstance().getAssetList();
 
         for (Asset asset: assetList) {
             String symbol = asset.getSymbol();

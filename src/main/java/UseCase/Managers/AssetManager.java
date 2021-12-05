@@ -25,10 +25,22 @@ public class AssetManager implements Serializable{
     }
 
     public List<Asset> getAssetList () {
-        return (List<Asset>) this.assetMap.values();
+        ArrayList<Asset> assetList = new ArrayList<Asset>();
+
+        for (UUID id : assetMap.keySet()) {
+            assetList.add(assetMap.get(id));
+        }
+
+        return assetList;
     }
 
     public void addAsset(Asset a){
+        for (Asset asset : assetMap.values()) {
+            if (asset.getSymbol().equals(a.getSymbol()) && a.getClass() == asset.getClass()){
+                asset.setVolume(asset.getVolume() + a.getVolume());
+                return;
+            }
+        }
         this.assetMap.put(a.id, a);
     }
 

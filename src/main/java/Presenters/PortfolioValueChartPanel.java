@@ -1,4 +1,4 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
 import UseCase.Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
