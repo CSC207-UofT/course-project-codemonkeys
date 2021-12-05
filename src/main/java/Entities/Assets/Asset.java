@@ -11,8 +11,6 @@ public class Asset extends Identifiable implements Serializable{
     private final String symbol;
     private double initialPrice;
 
-    // We do not use symbol for now
-    // TODO: add type to symbol database
     public Asset(double volume, double price, String type) {
         this(volume, price, type, null);
     }

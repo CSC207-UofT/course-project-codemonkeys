@@ -21,12 +21,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * Version: 1.0
  */
 public class CommandParser extends ListenerAdapter implements ClientInterface {
-    private String prefix = "!";
-    private CommandManager commandManager = CommandManager.getInstance();
-    private UserManager userManager = UserManager.getInstance();
-    private VoteManager voteManager = VoteManager.getInstance();
-    private TransactionManager transactionManager = TransactionManager.getInstance();
-    private AssetManager assetManager = AssetManager.getInstance();
+    private final String prefix = "!";
+    private final CommandManager commandManager = CommandManager.getInstance();
+    private final UserManager userManager = UserManager.getInstance();
+    private final VoteManager voteManager = VoteManager.getInstance();
+    private final TransactionManager transactionManager = TransactionManager.getInstance();
+    private final AssetManager assetManager = AssetManager.getInstance();
 
     /**
      * Callback method when the bot receives message from users
