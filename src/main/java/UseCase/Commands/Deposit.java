@@ -41,6 +41,7 @@ public class Deposit extends Command{
 
         // Create Asset and Transaction
         Currency usd = new Currency(depositVolume, 1, "USD", "USD");
+        initiator.getUserPortfolio().add(usd);
         AssetManager.getInstance().addAsset(usd);
         return true;
     }

@@ -96,6 +96,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         }
         if(cmdName.equals("getGraph")) {
             PerformanceHistoryManager.updateTotalDeposite(UserManager.getInstance().findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
+            PerformanceHistoryManager.recordHistory(UserManager.getInstance().findUser(author).getUserPortfolio(), new YahooFinanceStockAPI());
             GraphicsUserInterface.generateGraphics(UserManager.getInstance().findUser(author).getUserPortfolio(), new YahooFinanceStockAPI());
         }
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
