@@ -86,7 +86,7 @@ public class AssetManager implements Serializable{
             if (asset.getSymbol().equals(a.getSymbol()) && a.getClass() == asset.getClass()) {
                 double volume = asset.getVolume() - a.getVolume();
                 if (volume == 0) {
-                    this.assetMap.remove(a.id);
+                    this.assetMap.remove(asset.id);
                     return;
                 }
                 if (a instanceof Currency){
@@ -207,9 +207,10 @@ public class AssetManager implements Serializable{
      *the string representation to show the details about assets in the assetManager.
      @return A string of assets information in the assetManager.
      */
-    public String viewAssets() {
+    public String viewAssets(DataAccessInterface api) {
         StringBuilder sb = new StringBuilder("Your assets: \n");
         for(Asset asset : this.getAssetList()) {
+            asset.updatePrice(api);
             sb.append("Asset ID: ").append(asset.id);
             sb.append(", Symbol: ");
             sb.append(asset.getSymbol());
@@ -219,7 +220,14 @@ public class AssetManager implements Serializable{
             sb.append(", present price: ").append(asset.getPrice());
             sb.append(", present value: ").append(asset.getValue()).append(System.lineSeparator());
         }
-//        sb.append("Total value: $").append(this.getValue(api)).append('\n');
         return sb.toString();
+    }
+
+    public boolean findAsset(UUID id){
+        return this.assetMap.containsKey(id);
+    }
+
+    public Asset getAsset(UUID id){
+        return this.assetMap.get(id);
     }
 }

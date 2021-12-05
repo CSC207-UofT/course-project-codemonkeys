@@ -3,6 +3,7 @@ package UseCase.Commands;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
+import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
 import Interfaces.ClientInterface;
 import UseCase.Managers.AssetManager;
@@ -69,14 +70,14 @@ public class Buy extends Command{
     /**
      * Helper method for getting the buy Asset object
      * @param symbol is the symbol of the asset to buy
-     * @param volume is how much to buy (not in $)
+     * @param value is how much to buy (not in $)
      * @returns a corresponding Asset object if successful, otherwise null
      */
     public Asset getBuyAsset(String symbol, String value){
         try {
             double price = this.api.update(symbol);
             if(price == 0) return null;
-            return new Asset(Double.parseDouble(value)/price, price, symbol, symbol);
+            return new Stock(Double.parseDouble(value)/price, price, symbol, symbol);
         }
         catch (NumberFormatException e){
             return null;
