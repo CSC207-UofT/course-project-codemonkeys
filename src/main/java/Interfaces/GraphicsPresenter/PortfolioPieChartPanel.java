@@ -1,9 +1,8 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.Asset;
-import Assets.DataAccessInterface;
-import Containers.Portfolio;
-import Assets.Asset;
+import Entities.Assets.Asset;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.Portfolio;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,10 +13,8 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 import java.awt.*;
-import java.util.*;
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.UUID;
 
 class PortfolioPieChartPanel implements Panel {
     // Generate a pie chart showing the portfolio composition

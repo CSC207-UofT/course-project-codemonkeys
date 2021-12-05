@@ -1,19 +1,9 @@
 package Interfaces;
-import Assets.Asset;
-import Assets.Currency;
-import Assets.DataAccessInterface;
-import Assets.Stock;
-import Commands.Command;
-import Commands.CommandManager;
-import Commands.CommandProtocol;
-import Containers.Transaction;
-import Interfaces.ClientInterface;
-import Interfaces.YahooFinanceStockAPI;
-import Managers.AssetManager;
-import Managers.TransactionManager;
-import Managers.UserManager;
-import Managers.VoteManager;
-import Users.User;
+import UseCase.Commands.Command;
+import UseCase.Commands.CommandManager;
+import UseCase.Commands.CommandProtocol;
+import Controller.CommandParser;
+import UseCase.Managers.*;
 import org.junit.*;
 import static org.junit.jupiter.api.Assertions.*;
 

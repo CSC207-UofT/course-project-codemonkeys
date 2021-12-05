@@ -1,6 +1,6 @@
 package Interfaces.GraphicsPresenter;
 
-import Managers.PerformanceHistoryManager;
+import UseCase.Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -10,8 +10,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import java.awt.*;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.TreeMap;
 

@@ -1,9 +1,9 @@
 package Interfaces.GraphicsPresenter;
 
-import Assets.DataAccessInterface;
-import Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import Containers.Portfolio;
-import Managers.PerformanceHistoryManager;
+import Entities.Assets.DataAccessInterface;
+import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
+import Entities.Containers.Portfolio;
+import UseCase.Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
