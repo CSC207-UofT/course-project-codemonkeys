@@ -32,6 +32,7 @@ public class AssetManager implements Serializable{
         return instance;
     }
 
+    // serialize the current asset manager
     public void save() {
         try {
             rw.saveToFile("./assetManager.ser", this);

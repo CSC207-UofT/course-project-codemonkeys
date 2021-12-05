@@ -26,6 +26,7 @@ public class UserManager implements Serializable{
         return instance;
     }
 
+    // serialize the current user manager
     public void save() {
         try {
             rw.saveToFile("./userManager.ser", this);

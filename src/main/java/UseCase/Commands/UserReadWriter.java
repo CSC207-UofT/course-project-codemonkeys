@@ -3,6 +3,15 @@ import UseCase.Managers.UserManager;
 import Entities.Users.User;
 import java.io.IOException;
 
+/**
+ * This is the concrete class for serializing and deserializing user manager
+ * It includes saveToFile and readFromFile methods
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
+
 public class UserReadWriter extends ReadWriter<UserManager>{
     // a brief demo code for using the read writer
     public static void main(String[] args) throws IOException {

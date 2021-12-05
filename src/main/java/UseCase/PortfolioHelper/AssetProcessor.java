@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * This is the concrete class for processing assets
+ * It includes getters, add and remove methods
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
+
 public class AssetProcessor extends Processor {
     // assetList: a list of asset in the portfolio
     private final List<Asset> assetList;

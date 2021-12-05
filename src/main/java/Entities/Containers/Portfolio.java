@@ -10,8 +10,20 @@ import UseCase.PortfolioHelper.VoteProcessor;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * This is the concrete class for the portfolio class
+ * It is a facade that instantiates and delegating to various processors
+ *  - AssetProcessor
+ *  - ProfitabilityCalculator
+ *  - TransactionProcessor
+ *  - VoteProcessor
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
+
 // Portfolio is a manager and data storage class for managing common wealth among all users.
-// TODO: change its name to WealthManager and move it into package UseCase.Managers.
 // The common wealth among all users is stored in the form of individual assets.
 // More assets can be added, or be subtracted from the system. The manager will only perform operation on the same type of assets.
 // The manager can calculate the value of one or all assets.
@@ -28,7 +40,6 @@ public class Portfolio implements Serializable {
 
 
     public Portfolio() {
-        // TODO refactor to be in the param list to avoid hard dependency, but use case needs to be modified
         this.transactionProcessor = new TransactionProcessor();
         this.voteProcessor = new VoteProcessor();
         this.assetProcessor = new AssetProcessor();

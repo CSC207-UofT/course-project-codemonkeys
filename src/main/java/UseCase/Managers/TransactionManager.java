@@ -58,6 +58,7 @@ public class TransactionManager implements Serializable {
         return instance;
     }
 
+    // serialize the current transaction manager
     public void save() {
         try {
             rw.saveToFile("./transactionManager.ser", this);

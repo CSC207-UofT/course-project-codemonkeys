@@ -31,6 +31,7 @@ public class VoteManager {
         return instance;
     }
 
+    // serialize the current vote manager
     public void save() {
         try {
             rw.saveToFile("./voteManager.ser", this);

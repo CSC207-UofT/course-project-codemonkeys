@@ -2,6 +2,14 @@ package UseCase.Commands;
 
 import java.io.*;
 
+/**
+ * This is an abstract class for module serializing and deserializing
+ * It includes saveToFile and readFromFile methods
+ *
+ * Author Zixin (Charlie) Guo
+ * Date: Dec 05 2021
+ * Version: 1.0
+ */
 public abstract class ReadWriter<T> {
 
     /**
