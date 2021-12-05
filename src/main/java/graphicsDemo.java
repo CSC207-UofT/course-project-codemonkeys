@@ -10,8 +10,10 @@ import UseCase.Managers.PerformanceHistoryManager;
 import UseCase.Managers.UserManager;
 import Entities.Users.User;
 
+import java.io.IOException;
+
 public class graphicsDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         YahooFinanceStockAPI api = new YahooFinanceStockAPI();
 
@@ -49,6 +51,7 @@ public class graphicsDemo {
             PerformanceHistoryManager.recordHistory(api);
         }
 
+        GraphicsUserInterface.generateImage(api);
         GraphicsUserInterface.generateGraphics(api);
 
     }
