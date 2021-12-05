@@ -23,12 +23,12 @@ public class PerformanceHistoryManager {
         pph.setTotalDeposit(pph.getTotalDeposit() + depositeVolume);
     }
 
-    public static void recordHistory(Portfolio portfolio, DataAccessInterface api) {
+    public static void recordHistory(DataAccessInterface api) {
 
         // Record both Asset and Portfolio performance histories.
 
-        double portfolioValue = portfolio.getValue(api);
-        List<Asset> assetList = portfolio.getAssetList();
+        double portfolioValue = AssetManager.getInstance().getValue(api);
+        List<Asset> assetList = AssetManager.getInstance().getAssetList();
         // Store a hashmap of all non-liquid assets
         HashMap<String, Double> priceHistory = new HashMap<String, Double>();
 

@@ -1,4 +1,4 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
 import javax.swing.*;
 

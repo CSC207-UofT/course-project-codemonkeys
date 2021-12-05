@@ -1,9 +1,10 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
-import Entities.Assets.Asset;
-import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
+import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
 import Entities.Containers.Portfolio;
+import UseCase.Managers.AssetManager;
+import UseCase.Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,53 +19,48 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
-import java.util.List;
+import java.util.Date;
+import java.util.TreeMap;
 
-class AssetGrowthChartPanel implements Panel {
-    // Asembles the chart panel for a bar chart representing the growth rate of each specific asset at different
-    // time frames.
+class PortfolioGrowthChartPanel implements Panel {
+    // Assemble the chart displaying growth rate of the portfolio at different time frames as a bar chart.
 
-    Portfolio portfolio;
     DataAccessInterface api;
 
-    public AssetGrowthChartPanel(Portfolio portfolio, DataAccessInterface api) {
-        this.portfolio = portfolio;
+    public PortfolioGrowthChartPanel(DataAccessInterface api) {
         this.api = api;
     }
 
     public DefaultCategoryDataset getData() {
         // TODO Connect with lower levels to get actual data
-//        String tesla = "TSLA";
-//        String apple = "APPL";
-//        String microsoft = "MSFT";
-//        String google = "GOOG";
-//
-//        String hour = "Hour";
-//        String day = "Day";
-//        String sincePurchase = "Since Transaction";
+        String p = "Portfolio";
+
 
         DefaultCategoryDataset series = new DefaultCategoryDataset( );
 
-        List<Asset> assetList = portfolio.getAssetList();
+        TreeMap<Date, Object> history = PerformanceHistoryManager.getPortfolioHistory();
 
-        for (Asset asset: assetList) {
-            if (! (asset instanceof Currency)) {
-                String symbol = asset.getSymbol();
-                asset.updatePrice(api);
-                double currentPrice = asset.getPrice();
-                double initialPrice = asset.getInitialPrice();
-                double growthRate = (currentPrice - initialPrice) / initialPrice;
-                series.addValue(growthRate * 100, "", symbol);
-            }
-        }
+        int half = (int) Math.floor(history.size() / 2);
+
+        double currentValue = AssetManager.getInstance().getValue(api);
+        double totalInvestment = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();
+        double fullTime = (Double) history.get(history.firstKey());
+        double halfTime = (Double) history.values().toArray()[half];
+
+        String fullTimeLabel = history.size() + " Hours";
+        String halfTimeLabel = half + " Hours";
+        String totalInvestmentLabel = "Total Investment";
+
+        series.addValue( (currentValue - halfTime) / halfTime * 100, halfTimeLabel , p);
+        series.addValue((currentValue - fullTime) / fullTime  * 100, fullTimeLabel, p);
+        series.addValue( (currentValue - totalInvestment) / totalInvestment * 100, totalInvestmentLabel, p );
 
         return series;
     }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
-        DefaultCategoryDataset dataSeries = getData();
-        JFreeChart barChart = ChartFactory.createBarChart("Non-liquid Asset Growth Chart", "Since Purchase",
-                "Growth", dataSeries , PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart barChart = ChartFactory.createBarChart("Portfolio Growth Chart", "Time Frame",
+                "% Growth", getData(), PlotOrientation.VERTICAL, true, true, false);
 
         // Render chart styles
         CategoryPlot plot = barChart.getCategoryPlot();
@@ -80,15 +76,14 @@ class AssetGrowthChartPanel implements Panel {
         renderer.setDefaultPositiveItemLabelPosition(position);
 
         // Set bar colors
-//        renderer.setSeriesPaint(0, new Color(200, 200, 200));
-//        renderer.setSeriesPaint(1, new Color(150, 150, 150));
-//        renderer.setSeriesPaint(2, new Color(100, 100, 100));
+        renderer.setSeriesPaint(0, new Color(200, 200, 200));
+        renderer.setSeriesPaint(1, new Color(150, 150, 150));
+        renderer.setSeriesPaint(2, new Color(100, 100, 100));
 
-
-        // Create chart panels
         ChartPanel cp = new ChartPanel(barChart);
         cp.setMouseWheelEnabled(true);
         cp.setBounds(x, y, width, height);
+
         return cp;
     }
 }

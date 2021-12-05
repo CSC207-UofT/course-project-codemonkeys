@@ -1,4 +1,4 @@
-package Interfaces.GraphicsPresenter;
+package Presenters;
 
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
@@ -8,15 +8,14 @@ import UseCase.Managers.UserManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
+import UseCase.Managers.AssetManager;
 
 // Generate a Jpanel containing a text summary of the current status of the communal portfolio
 
-public class TextPanel implements Panel{
-    Portfolio portfolio;
+public class TextPanel implements Panel {
     DataAccessInterface api;
 
-    public TextPanel(Portfolio portfolio, DataAccessInterface api) {
-        this.portfolio = portfolio;
+    public TextPanel(DataAccessInterface api) {
         this.api = api;
     }
 
@@ -26,7 +25,7 @@ public class TextPanel implements Panel{
         // TODO Connect with lower levels to get actual data
 
         double totalDeposit = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();
-        double portfolioWorth = portfolio.getValue(api);
+        double portfolioWorth = AssetManager.getInstance().getValue(api);
         double netProfit = portfolioWorth - totalDeposit;
         double profitPercent = netProfit / totalDeposit;
         int numUsers = UserManager.getInstance().numUser();
