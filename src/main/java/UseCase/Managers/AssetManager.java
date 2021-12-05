@@ -3,6 +3,8 @@ package UseCase.Managers;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
+import Entities.Assets.Stock;
+
 import java.io.Serializable;
 
 import java.util.*;
@@ -22,7 +24,7 @@ public class AssetManager implements Serializable{
         return this.assetMap.containsValue(asset);
     }
 
-    public List<Asset> assetList () {
+    public List<Asset> getAssetList () {
         return (List<Asset>) this.assetMap.values();
     }
 
@@ -32,6 +34,21 @@ public class AssetManager implements Serializable{
 
     public void delAsset(Asset a){
         this.assetMap.remove(a.id);
+    }
+
+    /**
+     * @param api the YahooFinanceStockAPI
+     * @return the total value of assets in the group
+     */
+    public double getValue(DataAccessInterface api) {
+        double value = 0;
+        for (Asset a: this.getAssetList()){
+            if (a instanceof Stock){
+                a.updatePrice(api);
+            }
+            value += a.getValue();
+        }
+        return value;
     }
 
     /**
