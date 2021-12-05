@@ -69,7 +69,7 @@ public class Buy extends Command{
     /**
      * Helper method for getting the buy Asset object
      * @param symbol is the symbol of the asset to buy
-     * @param volume is how much to buy (not in $)
+     * @param value is how much to buy (not in $)
      * @returns a corresponding Asset object if successful, otherwise null
      */
     public Asset getBuyAsset(String symbol, String value){
