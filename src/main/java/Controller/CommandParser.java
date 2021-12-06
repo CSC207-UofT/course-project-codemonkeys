@@ -71,8 +71,23 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if(cmdName.equals("GOODJOB")) return("Thanks:)");
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
-        if(cmdName.equals("listallcommand")) return("checkstatus\ncreateuser\nbuy\nviewtransaction\n" +
-                "viewvote\nGOODJOB\nviewassetvolume\nviewallasset\ngetGraph\nsavefile\nloadfile");s
+        if(cmdName.equals("getprice")){
+            YahooFinanceStockAPI api = new YahooFinanceStockAPI();
+            return("the price is " + api.update(ArgWithoutCmd[0]));
+        }
+        if(cmdName.equals("listallcommand")) return("""
+                getprice
+                checkstatus
+                createuser
+                buy
+                viewtransaction
+                viewvote
+                GOODJOB
+                viewassetvolume
+                viewallasset
+                getGraph
+                savefile
+                loadfile""");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
