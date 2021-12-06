@@ -72,7 +72,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
         if(cmdName.equals("listallcommand")) return("checkstatus\ncreateuser\nbuy\nviewtransaction\n" +
-                "viewvote\nGOODJOB\nviewassetvolume\nviewallasset\ngetGraph\nsavefile\nloadfile");s
+                "viewvote\nGOODJOB\nviewassetvolume\nviewallasset\ngetGraph\nsavefile\nloadfile");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
