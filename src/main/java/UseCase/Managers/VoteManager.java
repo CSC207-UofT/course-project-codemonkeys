@@ -7,11 +7,12 @@ import Entities.Users.User;
 import UseCase.Commands.ReadWriter;
 import UseCase.Commands.TransactionReadWriter;
 import UseCase.Commands.VoteReadWriter;
+import java.io.Serializable;
 
 import java.io.IOException;
 import java.util.*;
 
-public class VoteManager {
+public class VoteManager implements Serializable{
     private final Map<Transaction, List<Vote>> voteMap;
     private static final ReadWriter<VoteManager> rw = new VoteReadWriter();
 
@@ -22,19 +23,22 @@ public class VoteManager {
 
     //Get the only object available
     public static VoteManager getInstance() {
+        return instance;
+    }
+
+    public static void load(){
         try{
-            instance = rw.readFromFile("./voteManager.ser");
+            instance = rw.readFromFile("./output/voteManager.ser");
         }
         catch (IOException | ClassNotFoundException e){
             System.out.println("Read Vote Manager Error: " + e.getMessage());
         }
-        return instance;
     }
 
     // serialize the current vote manager
     public void save() {
         try {
-            rw.saveToFile("./voteManager.ser", this);
+            rw.saveToFile("./output/voteManager.ser", instance);
         }
         catch (IOException e){
             System.out.println("Save Vote Manager Error: " + e.getMessage());
