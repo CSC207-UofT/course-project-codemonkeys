@@ -117,18 +117,20 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             }
             return "Graph Presented";
         }
-
+        if(cmdName.equals("savefile")) {
+            assetManager.save();
+            transactionManager.save();
+            voteManager.save();
+            userManager.save();
+            return("saved!");
+        }
+        if(cmdName.equals("loadfile")) {
+        }
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
         res = cmd.execute();
         if (! res) return cmd.help();
-
-        // can create save command to do these
-        assetManager.save();
-        transactionManager.save();
-        voteManager.save();
-        userManager.save();
         return("command successfully executed!");
     }
 
