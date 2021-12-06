@@ -10,6 +10,10 @@ import UseCase.Managers.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
+
 /**
  * This is a Class for parsing command send from customers.
  * It recognizes wish command is being called and
@@ -39,7 +43,12 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if (! event.getAuthor().isBot() && message[0].equals("!")) {
             String[] cmdArgs = new String[message.length - 1];
             System.arraycopy(message, 1, cmdArgs, 0, cmdArgs.length);
-            String result = parseCommand(cmdArgs, event.getAuthor().getName());
+            String result = null;
+            try {
+                result = parseCommand(cmdArgs, event.getAuthor().getName(), event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             event.getMessage().reply(result).queue();
         }
     }
@@ -49,7 +58,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
      *  @param cmdArgs is a list of all arguments accomplishing that command
      *  @param author is the person who send the command
      */
-    public String parseCommand(String[] cmdArgs, String author) {
+    public String parseCommand(String[] cmdArgs, String author, GuildMessageReceivedEvent event) throws IOException {
         boolean res;
         Command cmd;
         if(cmdArgs.length == 0){
@@ -97,6 +106,16 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             PerformanceHistoryManager.updateTotalDeposite(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
             PerformanceHistoryManager.recordHistory(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateGraphics(new YahooFinanceStockAPI());
+            GraphicsUserInterface.generateImage(new YahooFinanceStockAPI());
+
+            File file = new File(".\\images\\image.png");
+
+            if (Objects.nonNull(file)) {
+                event.getChannel().sendMessage("Here is my image !").addFile(file).queue();
+            } else {
+                event.getChannel().sendMessage("Sorry, I can't found the image :c").queue();
+            }
+            return "Graph Presented";
         }
 
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
