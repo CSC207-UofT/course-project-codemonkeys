@@ -32,6 +32,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
     private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final AssetManager assetManager = AssetManager.getInstance();
 
+
     /**
      * Callback method when the bot receives message from users
      *  @param event represents a message from discord
@@ -71,7 +72,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if(cmdName.equals("checkstatus")) return("This bot is working");
         if(cmdName.equals("hello")) return("Hello! " + author);
         if(cmdName.equals("listallcommand")) return("createuser\nbuy\nviewtransaction\n" +
-                "viewvote\nGOODJOB\nviewallasset");
+                "viewvote\nGOODJOB\nviewallasset\nsavefile");
         if(cmdName.equals("createuser")) {
             if(ArgWithoutCmd.length != 0) return("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
@@ -117,20 +118,29 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             }
             return "Graph Presented";
         }
-        if(cmdName.equals("savefile")) {
-            assetManager.save();
-            transactionManager.save();
-            voteManager.save();
-            userManager.save();
-            return("saved!");
+
+        if (cmdName.equals("savefile")) {
+            AssetManager.getInstance().save();
+            TransactionManager.getInstance().save();
+            VoteManager.getInstance().save();
+            UserManager.getInstance().save();
+            return("Saved");
         }
-        if(cmdName.equals("loadfile")) {
-        }
+
         CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return("No such command. Try again.");
         res = cmd.execute();
         if (! res) return cmd.help();
+
+//        if(cmdName.equals("loadfile")) {
+//            assetManager.load();
+//            transactionManager.load();
+//            voteManager.load();
+//            userManager.load();
+//            return("Loaded!");
+//        }
+
         return("command successfully executed!");
     }
 

@@ -17,19 +17,22 @@ public class UserManager implements Serializable{
 
     //Get the only object available
     public static UserManager getInstance() {
+        return instance;
+    }
+
+    public static void load(){
         try{
-            instance = rw.readFromFile("./userManager.ser");
+            instance = rw.readFromFile("./output/userManager.ser");
         }
         catch (IOException | ClassNotFoundException e){
             System.out.println("Read User Manager Error: " + e.getMessage());
         }
-        return instance;
     }
 
     // serialize the current user manager
     public void save() {
         try {
-            rw.saveToFile("./userManager.ser", this);
+            rw.saveToFile("./output/userManager.ser", instance);
         }
         catch (IOException e){
             System.out.println("Save User Manager Error: " + e.getMessage());

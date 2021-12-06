@@ -23,19 +23,22 @@ public class AssetManager implements Serializable{
 
     //Get the only object available
     public static AssetManager getInstance() {
+        return instance;
+    }
+
+    public static void load(){
         try{
-            instance = rw.readFromFile("./assetManager.ser");
+            instance = rw.readFromFile("./output/assetManager.ser");
         }
         catch (IOException | ClassNotFoundException e){
             System.out.println("Read Asset Manager Error: " + e.getMessage());
         }
-        return instance;
     }
 
     // serialize the current asset manager
     public void save() {
         try {
-            rw.saveToFile("./assetManager.ser", this);
+            rw.saveToFile("./output/assetManager.ser", instance);
         }
         catch (IOException e){
             System.out.println("Save Asset Manager Error: " + e.getMessage());

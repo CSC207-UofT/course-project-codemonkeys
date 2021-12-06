@@ -49,19 +49,22 @@ public class TransactionManager implements Serializable {
      * @return instance
      */
     public static TransactionManager getInstance() {
+        return instance;
+    }
+
+    public static void load(){
         try{
-            instance = rw.readFromFile("./transactionManager.ser");
+            instance = rw.readFromFile("./output/transactionManager.ser");
         }
         catch (IOException | ClassNotFoundException e){
             System.out.println("Read Transaction Manager Error: " + e.getMessage());
         }
-        return instance;
     }
 
     // serialize the current transaction manager
     public void save() {
         try {
-            rw.saveToFile("./transactionManager.ser", this);
+            rw.saveToFile("./output/transactionManager.ser", instance);
         }
         catch (IOException e){
             System.out.println("Save Transaction Manager Error: " + e.getMessage());
