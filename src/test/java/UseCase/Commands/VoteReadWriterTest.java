@@ -67,6 +67,6 @@ public class VoteReadWriterTest {
     public void testReadWrite() throws IOException, ClassNotFoundException {
         vrw.saveToFile("./voteManager.ser", vm);
         VoteManager newManager = vrw.readFromFile("./voteManager.ser");
-      //  assert(newManager.viewVote().equals(vm.viewVote()));
+        assert(newManager != null);
     }
 }
