@@ -1,4 +1,5 @@
 package UseCase.Managers;
+import Entities.Assets.Asset;
 import Entities.Users.*;
 import UseCase.Commands.AssetReadWriter;
 import UseCase.Commands.ReadWriter;
@@ -42,6 +43,16 @@ public class UserManager implements Serializable{
 
     public Map<UUID, User> getUserMap() {
         return this.userMap;
+    }
+
+    public List<User> getUserList () {
+        ArrayList<User> userList = new ArrayList<User>();
+
+        for (UUID id : userMap.keySet()) {
+            userList.add(userMap.get(id));
+        }
+
+        return userList;
     }
 
     private UserManager() {this.userMap = new HashMap<>();}
