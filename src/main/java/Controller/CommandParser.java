@@ -24,6 +24,7 @@ import java.util.Objects;
  * Date: Nov 29 2021
  * Version: 1.0
  */
+@SuppressWarnings("ALL")
 public class CommandParser extends ListenerAdapter implements ClientInterface {
     private final String prefix = "!";
     private final CommandManager commandManager = CommandManager.getInstance();

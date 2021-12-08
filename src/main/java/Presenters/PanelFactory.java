@@ -1,7 +1,6 @@
 package Presenters;
 
 import Entities.Assets.DataAccessInterface;
-import Entities.Containers.Portfolio;
 
 import javax.swing.*;
 import java.util.Objects;

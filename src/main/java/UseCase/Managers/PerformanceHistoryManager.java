@@ -5,7 +5,6 @@ import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.PerformanceHistories.AssetPerformanceHistory;
 import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import Entities.Containers.Portfolio;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ public class PerformanceHistoryManager {
         double portfolioValue = AssetManager.getInstance().getValue(api);
         List<Asset> assetList = AssetManager.getInstance().getAssetList();
         // Store a hashmap of all non-liquid assets
-        HashMap<String, Double> priceHistory = new HashMap<String, Double>();
+        HashMap<String, Double> priceHistory = new HashMap<>();
 
         for (Asset a : assetList) {
             if (! (a instanceof Currency)) {

@@ -1,8 +1,6 @@
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.Stock;
-import Entities.Containers.Portfolio;
-import Entities.Containers.Transaction;
 import Interfaces.GraphicsUserInterface;
 import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.AssetManager;

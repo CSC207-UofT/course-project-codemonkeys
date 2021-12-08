@@ -45,7 +45,7 @@ public class Portfolio implements Serializable {
     /**
      * Looks for an Asset in the Portfolio by UUID
      * @param id is the UUID
-     * @returns if the Asset if found, null otherwise
+     * @returns if the Asset is found, null otherwise
      */
     public Asset get(UUID id){
         return this.assetProcessor.get(id);
@@ -58,7 +58,7 @@ public class Portfolio implements Serializable {
         this.assetProcessor.add(asset);
     }
 
-    // Add an transaction to the system.
+    // Add a transaction to the system.
     public void add(Transaction transaction) {
         this.transactionProcessor.add(transaction);
     }

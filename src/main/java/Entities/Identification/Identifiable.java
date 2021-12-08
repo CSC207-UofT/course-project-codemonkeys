@@ -49,7 +49,7 @@ public abstract class Identifiable implements Serializable{
     /**
      * Hashes the UUID instead so that we can use Identifiable Objects as
      * keys in a HashMap without worrying about mutability.
-     * @return the hashed this.id
+     * @return the hashed this.id.
      */
     @Override
     public int hashCode() {

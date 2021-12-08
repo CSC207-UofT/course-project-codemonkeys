@@ -42,7 +42,7 @@ public class TransactionExecutor {
 
         } else {                                      //sell stock
             // preform transaction by modify asset
-            sold.updatePrice(api);                  // update into newest price
+            sold.updatePrice(api);                  // update into the newest price
             double new_value = sold.getValue();     // get the newest price
             bought.setVolume(new_value);      // reset the price
 

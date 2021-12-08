@@ -1,6 +1,5 @@
 package Entities.Assets;
 
-import Entities.Containers.Transaction;
 import Entities.Containers.Vote;
 import Entities.Users.User;
 import org.junit.*;

@@ -23,7 +23,7 @@ public class TransactionProcessor extends Processor {
         this.transactionHistory = new ArrayList<>();
     }
 
-    // Add an transaction to the system.
+    // Add a transaction to the system.
     public void add(Transaction transaction) {
         if(transaction != null){
             this.transactionHistory.add(transaction);

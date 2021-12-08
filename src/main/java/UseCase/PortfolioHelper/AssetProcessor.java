@@ -28,7 +28,7 @@ public class AssetProcessor extends Processor {
     /**
      * Looks for an Asset in the Portfolio by UUID
      * @param id is the UUID
-     * @returns if the Asset if found, null otherwise
+     * @returns if the Asset is found, null otherwise
      */
     public Asset get(UUID id){
         for (Asset asset : this.assetList){
