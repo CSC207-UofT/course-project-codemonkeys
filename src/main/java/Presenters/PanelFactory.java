@@ -1,18 +1,24 @@
 package Presenters;
 
-import Entities.Assets.DataAccessInterface;
+import UseCase.DataAccessInterfaceRelay;
 
 import javax.swing.*;
 import java.util.Objects;
 
 public class PanelFactory {
+    /**
+     * Factory design pattern for creating JPanels to be used to display on the JFrame based GUI.
+     *
+     * Author: Andrew Zhang
+     * Version: 1.0
+     */
 
     //____________________ Variables ___________________________________________________________________________________
-    DataAccessInterface api;
+    DataAccessInterfaceRelay api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PanelFactory(DataAccessInterface api) {
+    public PanelFactory(DataAccessInterfaceRelay api) {
         this.api = api;
     }
 
@@ -24,7 +30,7 @@ public class PanelFactory {
             TextPanel text = new TextPanel(api);
             return text.getPanel(x, y, width, height);
         } else if (Objects.equals(type, "Portfolio Value Chart")) {
-            PortfolioValueChartPanel growthChart = new PortfolioValueChartPanel();
+            PortfolioValueChartPanel growthChart = new PortfolioValueChartPanel(api);
             return growthChart.getPanel(x, y, width, height);
         } else if (Objects.equals(type, "Portfolio Composition Chart")) {
             PortfolioPieChartPanel pieChart = new PortfolioPieChartPanel(api);

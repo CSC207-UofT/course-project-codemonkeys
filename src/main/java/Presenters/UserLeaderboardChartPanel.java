@@ -1,9 +1,8 @@
 package Presenters;
 
-import Entities.Assets.DataAccessInterface;
-import UseCase.Managers.ExecutionChecker;
-import UseCase.Managers.UserManager;
-import Entities.Users.User;
+import UseCase.DataAccessInterfaceRelay;
+import UseCase.GUIDataFetcher.UserLeaderboardChartFetcher;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -13,62 +12,24 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+
 
 class UserLeaderboardChartPanel implements Panel {
 
 
-    private final DataAccessInterface api;
+    private final DataAccessInterfaceRelay api;
 
-    public UserLeaderboardChartPanel(DataAccessInterface api) {
+    public UserLeaderboardChartPanel(DataAccessInterfaceRelay api) {
         this.api = api;
     }
 
-    public DefaultCategoryDataset getData() {
-        /*
-         * Prepares data for graphing.
-         *
-         * Iterate through all registered users, then calculate their voting power and sort the users by their voting
-         * powers.
-         */
-
-        UserManager userManager = UserManager.getInstance();
-        DefaultCategoryDataset series = new DefaultCategoryDataset( );
-
-        TreeMap<Double, ArrayList<String>> votingPowerMap = new TreeMap<>();
-
-        // sort users according to voting power
-        Map<UUID, User> userMap = userManager.getUserMap();
-
-        for (UUID id : userMap.keySet()) {
-            User user = userMap.get(id);
-            double votingPower = ExecutionChecker.getVotingPower(user, api);
-            String name = user.getName();
-
-            if (!votingPowerMap.containsKey(votingPower)) {
-                votingPowerMap.put(votingPower, new ArrayList<>(List.of(name)));
-            } else {
-                votingPowerMap.get(votingPower).add(name);
-            }
-        }
-
-        for (double votingPower : votingPowerMap.descendingKeySet()) {
-            for (String name : votingPowerMap.get(votingPower)) {
-                series.addValue(votingPower, "", name);
-            }
-        }
-        return series;
-
-    }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
 
         JFreeChart barChart = ChartFactory.createBarChart("User Leaderboard", "",
-                "Voting Power", getData(), PlotOrientation.VERTICAL, true, true, false);
+                "Voting Power", UserLeaderboardChartFetcher.getData(api), PlotOrientation.VERTICAL, true, true, false);
         barChart.removeLegend();
 
         // Render chart styles

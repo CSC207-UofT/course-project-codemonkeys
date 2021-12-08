@@ -1,50 +1,36 @@
 package Presenters;
 
-import Entities.Assets.Asset;
-import Entities.Assets.DataAccessInterface;
-import UseCase.Managers.AssetManager;
+
+import UseCase.DataAccessInterfaceRelay;
+import UseCase.GUIDataFetcher.PortfolioPieChartFetcher;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
-import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 import java.awt.*;
 import java.text.DecimalFormat;
-import java.util.List;
 
-class PortfolioPieChartPanel implements Panel {
+
+class PortfolioPieChartPanel {
     // Generate a pie chart showing the portfolio composition
 
     //____________________ Variables ___________________________________________________________________________________
-    private final DataAccessInterface api;
+    private final DataAccessInterfaceRelay api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PortfolioPieChartPanel(DataAccessInterface api){
+    public PortfolioPieChartPanel(DataAccessInterfaceRelay api){
         this.api = api;
     }
 
-    public PieDataset getData() {
-        DefaultPieDataset series = new DefaultPieDataset();
-
-        List<Asset> assetList = AssetManager.getInstance().getAssetList();
-
-        for (Asset asset: assetList) {
-            String symbol = asset.getSymbol();
-            asset.updatePrice(api);
-            double value = asset.getValue();
-            series.setValue(symbol , value);
-        }
-        return series;
-    }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
 
-        PieDataset dataset = getData();
+        PieDataset dataset = PortfolioPieChartFetcher.getData(api);
         JFreeChart pieChart = ChartFactory.createPieChart("Portfolio Composition", dataset);
         pieChart.removeLegend();
 
@@ -78,8 +64,8 @@ class PortfolioPieChartPanel implements Panel {
             catch(Exception e) {
                 newColor = Color.black;
             }
-                plot.setSectionPaint(dataset.getKey(i), newColor);
-            }
+            plot.setSectionPaint(dataset.getKey(i), newColor);
+        }
 
         // Create chart panel
         ChartPanel cp = new ChartPanel(pieChart);
