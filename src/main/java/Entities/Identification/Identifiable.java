@@ -2,6 +2,7 @@ package Entities.Identification;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.io.Serializable;
 
 /**
  * This is a tagging class that provides the ability for implemented instances
@@ -13,7 +14,7 @@ import java.util.UUID;
  * Version: 2.0
  */
 
-public abstract class Identifiable {
+public abstract class Identifiable implements Serializable {
 
     public final UUID id;
 

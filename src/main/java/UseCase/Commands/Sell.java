@@ -37,15 +37,14 @@ public class Sell extends Command{
         Asset sell;
 
         //Convert input to UUID. Look for Asset. Create Transaction.
-        try{
-            id = UUID.fromString(this.args[0]);
-        }
-        catch (IllegalArgumentException e){
-            return false;
-        }
-        if (!AssetManager.getInstance().findAsset(id)){
-            return false;
-        }
+        id = UUID.fromString(this.args[0]);
+        System.out.println(id);
+//        catch (IllegalArgumentException e){
+//            return false;
+//        }
+//        if (!AssetManager.getInstance().findAsset(id)){
+//            return false;
+//        }
         Asset asset = AssetManager.getInstance().getAsset(id);
         if (this.args.length == 1){
             asset.updatePrice(api);
