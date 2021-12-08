@@ -1,6 +1,7 @@
 package Interfaces;
 
 import Controller.CommandParser;
+import Controller.ClientInterfaceC;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -12,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class DiscordClient implements ClientInterface{
+public class DiscordClient implements ClientInterfaceC {
 
     public DiscordClient() throws LoginException, IOException {
         Path path = Paths.get("src/main/java/Interfaces/discord_secret_key");

@@ -1,7 +1,7 @@
 package UseCase.Commands;
 
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import UseCase.Managers.UserManager;
 import Entities.Users.User;
 

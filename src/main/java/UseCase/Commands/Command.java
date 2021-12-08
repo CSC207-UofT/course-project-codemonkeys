@@ -2,7 +2,7 @@ package UseCase.Commands;
 
 
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 
 /**
@@ -30,19 +30,19 @@ public abstract class Command {
 
     /**
      * Executes the functionality of a Command
-     * @returns true if successfully executed, false otherwise
+     * @return true if successfully executed, false otherwise
      */
     public abstract boolean execute();
 
     /**
      * Gets the help string for this Command
-     * @returns instructions on how to use this Command in String format
+     * @return instructions on how to use this Command in String format
      */
     public abstract String help();
 
     /**
      * Gets the name of this Command
-     * @returns a name that can be used to match an input string to this Command
+     * @return a name that can be used to match an input string to this Command
      */
     public abstract String name();
 }

@@ -2,7 +2,7 @@ package UseCase.Commands;
 
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import UseCase.Managers.AssetManager;
 import Entities.Users.User;
 
@@ -20,7 +20,7 @@ public class Deposit extends Command{
     /**
      * Gets funds from Client and adds it to the system as an Asset.
      * this.args syntax: [double: volume]
-     * @returns if successful
+     * @return if successful
      */
     @Override
     public boolean execute() {
@@ -49,7 +49,7 @@ public class Deposit extends Command{
     /**
      * Process for getting funds from the client.
      * @param volume is the amount of funds to request
-     * @returns if successful
+     * @return if successful
      */
     public boolean fundsTransfer(Double volume){
         return true;

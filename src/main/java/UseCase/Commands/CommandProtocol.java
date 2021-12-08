@@ -1,7 +1,7 @@
 package UseCase.Commands;
 
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 
 /**
@@ -27,6 +27,6 @@ public class CommandProtocol {
         this.CLIENT = client;
         this.API = api;
         this.ARGS = args;
-        this.PROFILE = new Object[]{initiator, client, api,  (Object) args};
+        this.PROFILE = new Object[]{initiator, client, api, args};
     }
 }

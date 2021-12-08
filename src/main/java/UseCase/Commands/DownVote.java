@@ -3,7 +3,7 @@ package UseCase.Commands;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.Transaction;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import UseCase.Managers.ExecutionChecker;
 import UseCase.Managers.TransactionExecutor;
 import UseCase.Managers.TransactionManager;

@@ -2,7 +2,7 @@ package UseCase.Commands;
 
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.Transaction;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 import UseCase.Managers.VoteManager;
 import UseCase.Managers.TransactionManager;

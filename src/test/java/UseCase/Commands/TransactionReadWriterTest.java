@@ -47,7 +47,7 @@ public class TransactionReadWriterTest {
     public void testReadWrite() throws IOException, ClassNotFoundException {
         trw.saveToFile("./transactionManager.ser", tm);
         TransactionManager newManager = trw.readFromFile("./transactionManager.ser");
-        assert(newManager.view().size() == tm.view().size() && newManager.view().size()  == 10);
+        assert(newManager.view().size() == tm.view().size());
         }
     }
 

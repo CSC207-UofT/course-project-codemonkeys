@@ -4,7 +4,7 @@ import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.AssetManager;
 import UseCase.Managers.TransactionManager;

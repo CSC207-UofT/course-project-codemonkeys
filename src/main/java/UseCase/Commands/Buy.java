@@ -5,7 +5,7 @@ import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import UseCase.Managers.AssetManager;
 import UseCase.Managers.TransactionManager;
 import UseCase.Managers.VoteManager;
@@ -27,7 +27,7 @@ public class Buy extends Command{
     /**
      * Initiates a buy order. Uses USD to buy an Asset.
      * this.args syntax: [symbol] [value]
-     * @returns if successful
+     * @return if successful
      */
     @Override
     public boolean execute() {
@@ -56,7 +56,7 @@ public class Buy extends Command{
     /**
      * Helper method to check if there is enough funds to proceed with the transaction
      * @param volume is how much USD
-     * @returns a USD Currency object that has negative volume (to indicate sold) or null if insufficient funds
+     * @return a USD Currency object that has negative volume (to indicate sold) or null if insufficient funds
      */
     public Currency getFunds(double volume){
 
@@ -71,7 +71,7 @@ public class Buy extends Command{
      * Helper method for getting the buy Asset object
      * @param symbol is the symbol of the asset to buy
      * @param value is how much to buy (not in $)
-     * @returns a corresponding Asset object if successful, otherwise null
+     * @return a corresponding Asset object if successful, otherwise null
      */
     public Asset getBuyAsset(String symbol, String value){
         try {
