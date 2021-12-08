@@ -19,7 +19,6 @@ public class CommandManager {
 
     private static CommandManager instance; // The instance
 
-    private Set<Class<? extends Command>> cmdClasses; // Class objects for the commands
     private List<Command> cmdTemplates; // Template instances of the commands
 
     //______________________________________________ Constructors ______________________________________________________
@@ -30,8 +29,9 @@ public class CommandManager {
      */
     private CommandManager() {
         // We use the reflection api to scan for all subtypes of Command
-        cmdClasses = new Reflections(Command.class).getSubTypesOf(Command.class);
-        cmdTemplates = new ArrayList<Command>();
+        // Class objects for the commands
+        Set<Class<? extends Command>> cmdClasses = new Reflections(Command.class).getSubTypesOf(Command.class);
+        cmdTemplates = new ArrayList<>();
 
         for (Class c : cmdClasses){
             cmdTemplates.add(generate(c, new CommandProtocol(null, null, null, null)));
@@ -53,14 +53,9 @@ public class CommandManager {
      */
     public <T extends Command> T generate(Class<T> cmdClass, CommandProtocol protocol){
         try{
-            return cmdClass.getConstructor(protocol.PROTOCOL).newInstance(protocol.PROFILE);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+            return cmdClass.getConstructor(CommandProtocol.PROTOCOL).newInstance(protocol.PROFILE);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e)
+        {
             e.printStackTrace();
         }
         return null;
@@ -73,7 +68,7 @@ public class CommandManager {
      */
     public Class<? extends Command> find(String cmdString){
         for (Command cmd : this.cmdTemplates) {
-            if (cmd.name().trim().toLowerCase().equals(cmdString.trim().toLowerCase())){
+            if (cmd.name().trim().equalsIgnoreCase(cmdString.trim())){
                 return cmd.getClass();
             }
         }

@@ -48,7 +48,8 @@ public class DownVote extends Command{
             check = checker.sellExecutable();
         }
         if (check){
-            new TransactionExecutor().execute(tran, api);
+            new TransactionExecutor();
+            TransactionExecutor.execute(tran, api);
         }
         return true;
     }

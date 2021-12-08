@@ -69,6 +69,8 @@ public class VoteManagerTest {
     public void testGetVotes(){
         assertEquals(new ArrayList<>(Arrays.asList(vote1, vote3, vote4, vote5)), vm.getVotes(transaction1));
         assertEquals(new ArrayList<>(Arrays.asList(vote2, vote6, vote7, vote8, vote9)), vm.getVotes(transaction2));
+        System.out.println(vm.viewVote());
+        System.out.println(vm.viewVote(transaction1));
     }
 
     @Test

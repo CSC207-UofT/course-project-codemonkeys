@@ -4,7 +4,6 @@ import Entities.Assets.Asset;
 import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
 import Entities.Users.User;
-import UseCase.Managers.AssetManager;
 import UseCase.Managers.TransactionManager;
 import org.junit.After;
 import org.junit.Before;

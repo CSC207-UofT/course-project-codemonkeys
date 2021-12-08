@@ -2,7 +2,6 @@ package Presenters;
 
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-
 import UseCase.Managers.UserManager;
 
 import javax.swing.*;
@@ -47,7 +46,7 @@ public class TextPanel implements Panel {
                 netProfit, profitPercent, numUsers);
 
 
-        return text + "Timestamp: " + date.toString();
+        return text + "Timestamp: " + date;
     }
 
     public JPanel getPanel(int x, int y, int width, int height) {

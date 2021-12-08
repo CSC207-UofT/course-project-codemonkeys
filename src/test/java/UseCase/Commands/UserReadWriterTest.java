@@ -1,10 +1,6 @@
 package UseCase.Commands;
 
-import Entities.Assets.Asset;
-import Entities.Assets.Stock;
-import Entities.Containers.Transaction;
 import Entities.Users.User;
-import UseCase.Managers.TransactionManager;
 import UseCase.Managers.UserManager;
 import org.junit.After;
 import org.junit.Before;

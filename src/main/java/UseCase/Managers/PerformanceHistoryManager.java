@@ -5,7 +5,6 @@ import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.PerformanceHistories.AssetPerformanceHistory;
 import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import Entities.Containers.Portfolio;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,9 +17,9 @@ public class PerformanceHistoryManager {
      * Contains variables and methods used to evaluate the performance of the communal portfolio.
      */
 
-    public static void updateTotalDeposite(double depositeVolume) {
+    public static void updateTotalDeposit(double depositVolume) {
         CommunalPortfolioPerformanceHistory pph = CommunalPortfolioPerformanceHistory.getInstance();
-        pph.setTotalDeposit(pph.getTotalDeposit() + depositeVolume);
+        pph.setTotalDeposit(pph.getTotalDeposit() + depositVolume);
     }
 
     public static void recordHistory(DataAccessInterface api) {
@@ -30,7 +29,7 @@ public class PerformanceHistoryManager {
         double portfolioValue = AssetManager.getInstance().getValue(api);
         List<Asset> assetList = AssetManager.getInstance().getAssetList();
         // Store a hashmap of all non-liquid assets
-        HashMap<String, Double> priceHistory = new HashMap<String, Double>();
+        HashMap<String, Double> priceHistory = new HashMap<>();
 
         for (Asset a : assetList) {
             if (! (a instanceof Currency)) {

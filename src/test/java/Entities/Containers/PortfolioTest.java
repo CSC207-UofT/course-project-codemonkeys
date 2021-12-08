@@ -3,6 +3,7 @@ package Entities.Containers;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.Stock;
+import Entities.Users.User;
 import org.junit.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +14,9 @@ public class PortfolioTest {
     Asset currency2;
     Asset stock;
     Asset stock2;
+    Transaction transaction;
+    User user;
+    Vote vote;
 
     @Before
     public void setUp() {
@@ -20,11 +24,16 @@ public class PortfolioTest {
         currency2 = new Currency(200, 1, "Chinese Yuan", "CNY");
         stock = new Stock(100, 124, "Tesla", "TSLA");
         stock2 = new Stock(200, 524, "Apple", "APLE");
+        user = new User("a");
+        transaction = new Transaction(user, currency, stock);
+        vote = new Vote(user, true);
         portfolio = new Portfolio();
         portfolio.add(currency);
         portfolio.add(currency2);
         portfolio.add(stock);
         portfolio.add(stock2);
+        portfolio.add(transaction);
+        portfolio.add(vote);
 
     }
 
@@ -34,6 +43,8 @@ public class PortfolioTest {
         portfolio.sub(currency2);
         portfolio.sub(stock2);
         portfolio.sub(stock);
+        portfolio.sub(transaction);
+        portfolio.sub(vote);
         currency = null;
         currency2 = null;
         stock = null;
@@ -56,12 +67,18 @@ public class PortfolioTest {
 
 
     @Test(timeout = 500)
-    public void testsubAsset(){
+    public void testSubAsset(){
         // Since the sub methods are the same for asset, transaction and vote, we only
         // need to test one of them.
         portfolio.sub(currency);
         assertFalse(portfolio.getAssetList().contains(currency));
+        assertNull(portfolio.get(currency.id));
+    }
 
-
+    @Test(timeout = 500)
+    public void testOther(){
+        portfolio.setProfitability(0);
+        assertEquals(0, portfolio.getProfitability());
+        assertEquals(1, portfolio.getVotingHistory().size());
     }
 }

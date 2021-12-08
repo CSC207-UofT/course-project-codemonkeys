@@ -5,7 +5,6 @@ import Entities.Containers.Transaction;
 import Entities.Containers.Vote;
 import Entities.Users.User;
 import UseCase.Commands.ReadWriter;
-import UseCase.Commands.TransactionReadWriter;
 import UseCase.Commands.VoteReadWriter;
 import java.io.Serializable;
 

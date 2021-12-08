@@ -33,8 +33,8 @@ public class Help extends Command {
         else {
             for (String s : this.args){
                 for (Command cmd : templates){
-                    if (s.trim().toLowerCase() == cmd.name().trim().toLowerCase())
-                        sb.append(cmd.help() + "\n");
+                    if (s.trim().equalsIgnoreCase(cmd.name().trim()))
+                        sb.append(cmd.help()).append("\n");
                 }
             }
         }

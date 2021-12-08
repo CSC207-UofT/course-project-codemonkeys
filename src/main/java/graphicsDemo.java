@@ -1,8 +1,6 @@
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.Stock;
-import Entities.Containers.Portfolio;
-import Entities.Containers.Transaction;
 import Interfaces.GraphicsUserInterface;
 import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.AssetManager;
@@ -42,7 +40,7 @@ public class graphicsDemo {
         UserManager.getInstance().addUser(debbie);
 
 
-        PerformanceHistoryManager.updateTotalDeposite(am.getValue(api));
+        PerformanceHistoryManager.updateTotalDeposit(am.getValue(api));
 
         for (int i = 0; i < 200; i++) {
             double randFluctuation = 10000 * (0.5-Math.random());

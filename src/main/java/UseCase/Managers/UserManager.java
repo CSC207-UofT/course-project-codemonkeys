@@ -1,7 +1,5 @@
 package UseCase.Managers;
-import Entities.Assets.Asset;
 import Entities.Users.*;
-import UseCase.Commands.AssetReadWriter;
 import UseCase.Commands.ReadWriter;
 import UseCase.Commands.UserReadWriter;
 
@@ -46,7 +44,7 @@ public class UserManager implements Serializable{
     }
 
     public List<User> getUserList () {
-        ArrayList<User> userList = new ArrayList<User>();
+        ArrayList<User> userList = new ArrayList<>();
 
         for (UUID id : userMap.keySet()) {
             userList.add(userMap.get(id));
@@ -134,7 +132,7 @@ public class UserManager implements Serializable{
 
     /**
      * Find the user in the system using the user's name
-     * @param name the user name
+     * @param name the username
      * @return User or null if did not find the user
      */
     public User findUser(String name) {
