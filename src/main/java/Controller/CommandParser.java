@@ -112,7 +112,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             return (assetManager.viewAssets(new YahooFinanceStockAPI()));
         }
         if (cmdName.equals("getGraph")) {
-            PerformanceHistoryManager.updateTotalDeposite(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
+            PerformanceHistoryManager.updateTotalDeposit(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
             PerformanceHistoryManager.recordHistory(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateGraphics(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateImage(new YahooFinanceStockAPI());

@@ -40,7 +40,7 @@ public class graphicsDemo {
         UserManager.getInstance().addUser(debbie);
 
 
-        PerformanceHistoryManager.updateTotalDeposite(am.getValue(api));
+        PerformanceHistoryManager.updateTotalDeposit(am.getValue(api));
 
         for (int i = 0; i < 200; i++) {
             double randFluctuation = 10000 * (0.5-Math.random());

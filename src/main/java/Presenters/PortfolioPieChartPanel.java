@@ -45,7 +45,7 @@ class PortfolioPieChartPanel implements Panel {
     public ChartPanel getPanel(int x, int y, int width, int height) {
 
         PieDataset dataset = getData();
-        JFreeChart pieChart = ChartFactory.createPieChart("Portfolio Compsition", dataset);
+        JFreeChart pieChart = ChartFactory.createPieChart("Portfolio Composition", dataset);
         pieChart.removeLegend();
 
         // Plot customization

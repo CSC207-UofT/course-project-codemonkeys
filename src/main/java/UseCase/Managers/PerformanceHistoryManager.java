@@ -17,9 +17,9 @@ public class PerformanceHistoryManager {
      * Contains variables and methods used to evaluate the performance of the communal portfolio.
      */
 
-    public static void updateTotalDeposite(double depositeVolume) {
+    public static void updateTotalDeposit(double depositVolume) {
         CommunalPortfolioPerformanceHistory pph = CommunalPortfolioPerformanceHistory.getInstance();
-        pph.setTotalDeposit(pph.getTotalDeposit() + depositeVolume);
+        pph.setTotalDeposit(pph.getTotalDeposit() + depositVolume);
     }
 
     public static void recordHistory(DataAccessInterface api) {

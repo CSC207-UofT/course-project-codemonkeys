@@ -79,7 +79,7 @@ public class AssetProcessor extends Processor {
         return value;
     }
 
-    // Calculates the updated value of all assets in the system through the provided data access interface..
+    // Calculates the updated value of all assets in the system through the provided data access interface.
     // If there's no asset in the system, this method will return zero.
     public double getValue(DataAccessInterface api) {
         double value = 0;
