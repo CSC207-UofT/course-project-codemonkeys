@@ -13,14 +13,17 @@ public class PerformanceHistoryManagerTest {
     public void testUpdateTotalDeposit(){
         PerformanceHistoryManager.updateTotalDeposit(10);
         assertEquals(10, CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit());
+        CommunalPortfolioPerformanceHistory.getInstance().setTotalDeposit(0);
     }
 
     @Test
     public void testHistory(){
         PerformanceHistoryManager.recordHistory(api);
-        assertEquals(1, PerformanceHistoryManager.getAssetHistory().size());
-        PerformanceHistoryManager.getAssetHistory().clear();
         assertEquals(1,  PerformanceHistoryManager.getPortfolioHistory().size());
+        assertEquals(1 , PerformanceHistoryManager.getAssetHistory().size());
+        PerformanceHistoryManager.getAssetHistory().clear();
+        assertEquals(0 , PerformanceHistoryManager.getAssetHistory().size());
         PerformanceHistoryManager.getPortfolioHistory().clear();
+        assertEquals(0,  PerformanceHistoryManager.getPortfolioHistory().size());
     }
 }
