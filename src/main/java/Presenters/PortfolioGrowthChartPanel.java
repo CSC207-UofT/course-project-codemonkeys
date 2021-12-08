@@ -2,7 +2,6 @@ package Presenters;
 
 import Entities.Assets.DataAccessInterface;
 import Entities.Containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import Entities.Containers.Portfolio;
 import UseCase.Managers.AssetManager;
 import UseCase.Managers.PerformanceHistoryManager;
 import org.jfree.chart.ChartFactory;

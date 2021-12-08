@@ -28,7 +28,7 @@ public class AssetProcessor extends Processor {
     /**
      * Looks for an Asset in the Portfolio by UUID
      * @param id is the UUID
-     * @returns if the Asset if found, null otherwise
+     * @returns if the Asset is found, null otherwise
      */
     public Asset get(UUID id){
         for (Asset asset : this.assetList){
@@ -79,7 +79,7 @@ public class AssetProcessor extends Processor {
         return value;
     }
 
-    // Calculates the updated value of all assets in the system through the provided data access interface..
+    // Calculates the updated value of all assets in the system through the provided data access interface.
     // If there's no asset in the system, this method will return zero.
     public double getValue(DataAccessInterface api) {
         double value = 0;

@@ -16,7 +16,7 @@ public class User extends Identifiable implements Serializable{      // Apply th
     /**
      * Constructor that sets the name of the user.
      * The user is not banned when created.
-     * @param name the name to be setted.
+     * @param name the name to be set.
      */
     public User(String name){
         super();

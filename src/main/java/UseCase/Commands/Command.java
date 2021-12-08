@@ -30,7 +30,7 @@ public abstract class Command {
 
     /**
      * Executes the functionality of a Command
-     * @returns true if successfully exectued, false otherwise
+     * @returns true if successfully executed, false otherwise
      */
     public abstract boolean execute();
 

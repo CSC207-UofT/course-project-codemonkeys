@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static org.junit.Assert.assertEquals;
-
 public class CommandManagerTest {
     private CommandManager cm = CommandManager.getInstance();
 

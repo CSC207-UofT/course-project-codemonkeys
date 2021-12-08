@@ -24,6 +24,7 @@ import java.util.Objects;
  * Date: Nov 29 2021
  * Version: 1.0
  */
+@SuppressWarnings("ALL")
 public class CommandParser extends ListenerAdapter implements ClientInterface {
     private final String prefix = "!";
     private final CommandManager commandManager = CommandManager.getInstance();
@@ -96,8 +97,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         }
         if (cmdName.equals("viewtransaction") || cmdName.equals("vt")) {
             if (transactionManager.size() == 0) return ("There is no votes currently.");
-            String transList = transactionManager.toString();
-            return (transList);
+            return (transactionManager.toString());
         }
         if (cmdName.equals("viewvote") || cmdName.equals("vv")) {
             System.out.println(voteManager.viewVote());
@@ -112,7 +112,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             return (assetManager.viewAssets(new YahooFinanceStockAPI()));
         }
         if (cmdName.equals("getGraph")) {
-            PerformanceHistoryManager.updateTotalDeposite(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
+            PerformanceHistoryManager.updateTotalDeposit(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
             PerformanceHistoryManager.recordHistory(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateGraphics(new YahooFinanceStockAPI());
             GraphicsUserInterface.generateImage(new YahooFinanceStockAPI());

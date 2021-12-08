@@ -3,7 +3,6 @@ package Presenters;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
-import Entities.Containers.Portfolio;
 import UseCase.Managers.AssetManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -22,7 +21,7 @@ import java.awt.*;
 import java.util.List;
 
 class AssetGrowthChartPanel implements Panel {
-    // Asembles the chart panel for a bar chart representing the growth rate of each specific asset at different
+    // Assembles the chart panel for a bar chart representing the growth rate of each specific asset at different
     // time frames.
 
     DataAccessInterface api;
@@ -69,7 +68,7 @@ class AssetGrowthChartPanel implements Panel {
                 TextAnchor.TOP_CENTER);
         renderer.setDefaultPositiveItemLabelPosition(position);
 
-        // Set bar colors
+        // Set bar colors'
 //        renderer.setSeriesPaint(0, new Color(200, 200, 200));
 //        renderer.setSeriesPaint(1, new Color(150, 150, 150));
 //        renderer.setSeriesPaint(2, new Color(100, 100, 100));

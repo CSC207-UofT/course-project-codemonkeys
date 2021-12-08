@@ -4,8 +4,6 @@ import Entities.Users.User;
 import org.junit.After;
 import org.junit.Before;
 
-import static org.junit.Assert.assertEquals;
-
 public class VoteTest {
     Vote testVote;
     User u1;

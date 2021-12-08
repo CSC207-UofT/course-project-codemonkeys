@@ -3,7 +3,7 @@ package UseCase.PortfolioHelper;
 import Entities.Containers.Processor;
 
 /**
- * This is the concrete class for calculating profitabilities
+ * This is the concrete class for calculating profitability
  * It includes getters, add and calculate methods
  *
  * Author Zixin (Charlie) Guo

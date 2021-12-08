@@ -5,14 +5,12 @@ import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
 import Entities.Containers.Vote;
 import Entities.Users.User;
-import UseCase.Managers.UserManager;
 import UseCase.Managers.VoteManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class VoteReadWriterTest {
     VoteManager vm = VoteManager.getInstance();

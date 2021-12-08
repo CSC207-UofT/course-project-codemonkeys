@@ -2,7 +2,6 @@ package Presenters;
 
 import Entities.Assets.Asset;
 import Entities.Assets.DataAccessInterface;
-import Entities.Containers.Portfolio;
 import UseCase.Managers.AssetManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -27,7 +26,7 @@ class PortfolioPieChartPanel implements Panel {
     //____________________ Constructors ________________________________________________________________________________
     public PortfolioPieChartPanel(DataAccessInterface api){
         this.api = api;
-    };
+    }
 
     public PieDataset getData() {
         DefaultPieDataset series = new DefaultPieDataset();
@@ -40,19 +39,13 @@ class PortfolioPieChartPanel implements Panel {
             double value = asset.getValue();
             series.setValue(symbol , value);
         }
-
-//        DefaultPieDataset series = new DefaultPieDataset( );
-//        series.setValue( "TSLA" , 2000 );
-//        series.setValue( "GOOG" , 3150  );
-//        series.setValue( "MSFT" , 400 );
-//        series.setValue( "AAPL" , 1000 );
         return series;
     }
 
     public ChartPanel getPanel(int x, int y, int width, int height) {
 
         PieDataset dataset = getData();
-        JFreeChart pieChart = ChartFactory.createPieChart("Portfolio Compsition", dataset);
+        JFreeChart pieChart = ChartFactory.createPieChart("Portfolio Composition", dataset);
         pieChart.removeLegend();
 
         // Plot customization
