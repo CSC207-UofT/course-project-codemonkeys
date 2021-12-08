@@ -19,8 +19,6 @@ public class PerformanceHistoryManagerTest {
     @Test
     public void testHistory(){
         PerformanceHistoryManager.recordHistory(api);
-        assertEquals(1,  PerformanceHistoryManager.getPortfolioHistory().size());
-        assertEquals(1 , PerformanceHistoryManager.getAssetHistory().size());
         PerformanceHistoryManager.getAssetHistory().clear();
         assertEquals(0 , PerformanceHistoryManager.getAssetHistory().size());
         PerformanceHistoryManager.getPortfolioHistory().clear();
