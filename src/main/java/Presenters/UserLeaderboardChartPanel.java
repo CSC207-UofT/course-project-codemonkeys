@@ -29,7 +29,7 @@ class UserLeaderboardChartPanel implements Panel {
     }
 
     public DefaultCategoryDataset getData() {
-        /**
+        /*
          * Prepares data for graphing.
          *
          * Iterate through all registered users, then calculate their voting power and sort the users by their voting
@@ -50,7 +50,7 @@ class UserLeaderboardChartPanel implements Panel {
             String name = user.getName();
 
             if (!votingPowerMap.containsKey(votingPower)) {
-                votingPowerMap.put(votingPower, new ArrayList<String>(List.of(name)));
+                votingPowerMap.put(votingPower, new ArrayList<>(List.of(name)));
             } else {
                 votingPowerMap.get(votingPower).add(name);
             }
@@ -62,9 +62,11 @@ class UserLeaderboardChartPanel implements Panel {
             }
         }
 
-//        series.addValue( 1000 , "" , "Alice");
-//        series.addValue( 1000  , "", "Bob" );
-//        series.addValue( 1010  , "", "Charles" );
+/*
+        series.addValue( 1000 , "" , "Alice");
+        series.addValue( 1000  , "", "Bob" );
+        series.addValue( 1010  , "", "Charles" );
+*/
 
         return series;
 

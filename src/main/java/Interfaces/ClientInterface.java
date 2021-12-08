@@ -2,7 +2,7 @@ package Interfaces;
 
 public interface ClientInterface {
 
-    public void input(String s);
+    void input(String s);
 
-    public void output(String s);
+    void output(String s);
 }

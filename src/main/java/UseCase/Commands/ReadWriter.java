@@ -50,8 +50,10 @@ public abstract class ReadWriter<T> {
         return obj;
     }
 
-//    public static void main(String[] args) throws IOException, ClassNotFoundException {
-//        AssetManager am = AssetManager.getInstance();
-//        am.save();
-//    }
+/*
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        AssetManager am = AssetManager.getInstance();
+        am.save();
+    }
+*/
 }

@@ -27,7 +27,7 @@ class PortfolioPieChartPanel implements Panel {
     //____________________ Constructors ________________________________________________________________________________
     public PortfolioPieChartPanel(DataAccessInterface api){
         this.api = api;
-    };
+    }
 
     public PieDataset getData() {
         DefaultPieDataset series = new DefaultPieDataset();
@@ -41,11 +41,13 @@ class PortfolioPieChartPanel implements Panel {
             series.setValue(symbol , value);
         }
 
-//        DefaultPieDataset series = new DefaultPieDataset( );
-//        series.setValue( "TSLA" , 2000 );
-//        series.setValue( "GOOG" , 3150  );
-//        series.setValue( "MSFT" , 400 );
-//        series.setValue( "AAPL" , 1000 );
+/*
+        DefaultPieDataset series = new DefaultPieDataset( );
+        series.setValue( "TSLA" , 2000 );
+        series.setValue( "GOOG" , 3150  );
+        series.setValue( "MSFT" , 400 );
+        series.setValue( "AAPL" , 1000 );
+*/
         return series;
     }
 

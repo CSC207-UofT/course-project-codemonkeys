@@ -26,18 +26,18 @@ public class Deposit extends Command{
     public boolean execute() {
         if (this.args.length != 1) return false;
 
-        Double depositVolume;
+        double depositVolume;
 
         // Parse
         try {
-            depositVolume = Double.valueOf(this.args[0]);
+            depositVolume = Double.parseDouble(this.args[0]);
         }
         catch (NumberFormatException e){
             return false;
         }
 
         // Get in-real-life funds
-        if(fundsTransfer(depositVolume) == false) return false;
+        if(!fundsTransfer(depositVolume)) return false;
 
         // Create Asset and Transaction
         Currency usd = new Currency(depositVolume, 1, "USD", "USD");

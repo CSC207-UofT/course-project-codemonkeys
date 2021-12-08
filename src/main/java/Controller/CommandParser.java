@@ -103,8 +103,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         }
         if(cmdName.equals("viewtransaction") || cmdName.equals("vt")) {
             if(transactionManager.size() == 0) return("There is no votes currently.");
-            String transList = transactionManager.toString();
-            return(transList);
+            return(transactionManager.toString());
         }
         if(cmdName.equals("viewvote") || cmdName.equals("vv")) {
             System.out.println(voteManager.viewVote());
@@ -148,13 +147,15 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         res = cmd.execute();
         if (! res) return cmd.help();
 
-//        if(cmdName.equals("loadfile")) {
-//            assetManager.load();
-//            transactionManager.load();
-//            voteManager.load();
-//            userManager.load();
-//            return("Loaded!");
-//        }
+/*
+        if(cmdName.equals("loadfile")) {
+            assetManager.load();
+            transactionManager.load();
+            voteManager.load();
+            userManager.load();
+            return("Loaded!");
+        }
+*/
 
         return("command successfully executed!");
     }

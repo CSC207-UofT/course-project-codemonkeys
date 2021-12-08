@@ -8,10 +8,9 @@ import org.junit.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssetTest {
-    private Vote vote;
     private Asset asset;
     private Asset asset2;
-    private Asset asset3;
+
     @Before
     public void setUp() {
         String teslaName = "Tesla";
@@ -22,7 +21,7 @@ public class AssetTest {
         asset = new Asset(10, 1, teslaName, teslaSymbol);
         asset2 = new Asset(15, 1, teslaName,teslaSymbol);
         Currency c1 = new Currency(10, 1, currencyName, currencySymbol);
-        asset3 = new CryptoCurrency(10, 1, "c", "Cryptocurrency");
+        Asset asset3 = new CryptoCurrency(10, 1, "c", "Cryptocurrency");
 
         User bob = new User("Bob");
 
@@ -31,7 +30,7 @@ public class AssetTest {
 
     @After
     public void tearDown() {
-        vote = null;
+        Vote vote = null;
     }
 
     @Test(timeout = 500)
