@@ -6,7 +6,6 @@ import javax.swing.*;
 import Entities.Assets.DataAccessInterface;
 import Presenters.PanelFactory;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

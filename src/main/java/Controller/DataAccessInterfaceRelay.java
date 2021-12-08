@@ -1,4 +1,4 @@
 package Controller;
 
-public interface DataAccessInterfaceRelay {
+public interface DataAccessInterfaceRelay extends UseCase.DataAccessInterfaceRelay{
 }
