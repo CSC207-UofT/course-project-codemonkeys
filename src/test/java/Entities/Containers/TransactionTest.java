@@ -31,6 +31,7 @@ public class TransactionTest {
 
     @Test(timeout = 500)
     public void testCheckIsValid(){
+        System.out.println(transaction.toString());
         assertFalse(transaction.checkIsValid()); // Because the currency is not enough to buy the stock.
     }
 

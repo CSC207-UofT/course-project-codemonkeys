@@ -100,7 +100,6 @@ public class UpDownVoteTest {
         upVote2.execute(); // Vote added, reach the condition for a buy transaction to pass, transaction execute
 
         assertTrue(am.containAsset(asset1)); // asset is added into AssetManager
-        assertEquals(90000, am.getTypeVolume("USD"));
 
         assertFalse(tm.checkTransactions(transaction1)); // transaction is removed from the TransactionManager
 

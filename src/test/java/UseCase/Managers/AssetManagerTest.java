@@ -2,13 +2,19 @@ package UseCase.Managers;
 
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
+import Entities.Assets.DataAccessInterface;
 import Entities.Assets.Stock;
+import Interfaces.YahooFinanceStockAPI;
 import org.junit.*;
+
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssetManagerTest {
     private final AssetManager am = AssetManager.getInstance();
     Asset asset1, asset2, asset3, asset4, asset5;
+    DataAccessInterface api = new YahooFinanceStockAPI();
 
     @Before
     public void setUp() {
@@ -54,6 +60,13 @@ public class AssetManagerTest {
         assertArrayEquals(new double[]{15, 14500}, am.getInitialAssetInfo().get("TSLA"));
         assertArrayEquals(new double[]{10, 2000}, am.getInitialAssetInfo().get("AAPL"));
         assertArrayEquals(new double[]{6000, 6000}, am.getInitialAssetInfo().get("USD"));
+    }
+
+    @Test
+    public void testOther(){
+        assertFalse(am.findAsset(UUID.randomUUID()));
+        assertNull(am.getAsset(UUID.randomUUID()));
+        assertEquals(3, am.getAssetSnapshot(api).size());
     }
 
 }
