@@ -61,13 +61,6 @@ class UserLeaderboardChartPanel implements Panel {
                 series.addValue(votingPower, "", name);
             }
         }
-
-/*
-        series.addValue( 1000 , "" , "Alice");
-        series.addValue( 1000  , "", "Bob" );
-        series.addValue( 1010  , "", "Charles" );
-*/
-
         return series;
 
     }

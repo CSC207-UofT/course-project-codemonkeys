@@ -3,7 +3,6 @@ package Presenters;
 import Entities.Assets.Asset;
 import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
-import Entities.Containers.Portfolio;
 import UseCase.Managers.AssetManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;

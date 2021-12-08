@@ -52,7 +52,6 @@ public class Deposit extends Command{
      * @returns if successful
      */
     public boolean fundsTransfer(Double volume){
-        //TODO: implement functionality to get funds from the client.
         return true;
     }
 

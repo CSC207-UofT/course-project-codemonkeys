@@ -49,11 +49,4 @@ public abstract class ReadWriter<T> {
         input.close();
         return obj;
     }
-
-/*
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        AssetManager am = AssetManager.getInstance();
-        am.save();
-    }
-*/
 }

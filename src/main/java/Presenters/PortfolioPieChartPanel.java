@@ -40,14 +40,6 @@ class PortfolioPieChartPanel implements Panel {
             double value = asset.getValue();
             series.setValue(symbol , value);
         }
-
-/*
-        DefaultPieDataset series = new DefaultPieDataset( );
-        series.setValue( "TSLA" , 2000 );
-        series.setValue( "GOOG" , 3150  );
-        series.setValue( "MSFT" , 400 );
-        series.setValue( "AAPL" , 1000 );
-*/
         return series;
     }
 

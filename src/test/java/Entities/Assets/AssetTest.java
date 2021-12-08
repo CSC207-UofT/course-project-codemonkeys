@@ -25,7 +25,6 @@ public class AssetTest {
 
         User bob = new User("Bob");
 
-        Transaction trans = new Transaction(bob, c1, asset);
     }
 
     @After
