@@ -1,4 +1,4 @@
-package Interfaces;
+package UseCase.ClientInterface;
 
 public interface ClientInterface {
 

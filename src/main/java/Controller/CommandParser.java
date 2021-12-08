@@ -4,7 +4,7 @@ import Interfaces.GraphicsUserInterface;
 import UseCase.Commands.Command;
 import UseCase.Commands.CommandManager;
 import UseCase.Commands.CommandProtocol;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

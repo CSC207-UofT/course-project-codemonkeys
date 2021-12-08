@@ -1,7 +1,7 @@
 package UseCase.Commands;
 
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 
 
@@ -17,7 +17,7 @@ public class CheckPrice extends Command{
     /**
      * Fetches and displays price information to the Client.
      * this.args syntax: [String: symbol]
-     * @returns if successful
+     * @return if successful
      */
     @Override
     public boolean execute() {

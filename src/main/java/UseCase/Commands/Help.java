@@ -1,7 +1,7 @@
 package UseCase.Commands;
 
 import Entities.Assets.DataAccessInterface;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class Help extends Command {
 
     /**
      * Collect and output information on UseCase.Commands
-     * @returns true if successful
+     * @return true if successful
      */
     @Override
     public boolean execute() {

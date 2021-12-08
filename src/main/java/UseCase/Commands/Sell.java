@@ -5,7 +5,7 @@ import Entities.Assets.Currency;
 import Entities.Assets.DataAccessInterface;
 import Entities.Assets.Stock;
 import Entities.Containers.Transaction;
-import Interfaces.ClientInterface;
+import UseCase.ClientInterface.ClientInterface;
 import Entities.Users.User;
 import UseCase.Managers.AssetManager;
 import UseCase.Managers.TransactionManager;
@@ -26,7 +26,7 @@ public class Sell extends Command{
     /**
      * Initiates a sell order. Sells an Asset in return for USD.
      * this.args syntax: [UUID String]
-     * @returns if successful
+     * @return if successful
      */
     @Override
     public boolean execute() {
