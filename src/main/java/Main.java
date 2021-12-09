@@ -1,5 +1,5 @@
-import Controller.Loader;
-import Interfaces.DiscordClient;
+import controller.Loader;
+import interfaces.DiscordClient;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
