@@ -38,7 +38,6 @@ and test the commands we used in our demo:)
 ## Potential bug caused by token
 After running the main.java, if you see error message like:
 ```bash
-109 [main] INFO org.reflections.Reflections - Reflections took 75 ms to scan 1 urls, producing 2 keys and 15 values
 Exception in thread "main" javax.security.auth.login.LoginException: The provided token is invalid!
 ```
 This means the token is expired.
