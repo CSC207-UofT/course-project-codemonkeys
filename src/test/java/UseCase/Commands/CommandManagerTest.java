@@ -1,6 +1,7 @@
 package UseCase.Commands;
 
 import Controller.CommandParser;
+import Interfaces.GraphicsUserInterface;
 import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.UserManager;
 import Entities.Users.User;
@@ -32,8 +33,8 @@ public class CommandManagerTest {
         String cmdString = "help";
 
         // Create some Command profiles
-        CommandProtocol profile1 = new CommandProtocol(new User("u"), new CommandParser(), new YahooFinanceStockAPI(), new String[]{"buy", "sell", "checkprice"});
-        CommandProtocol profile2 = new CommandProtocol(new User("u"), new CommandParser(), new YahooFinanceStockAPI(), null);
+        CommandProtocol profile1 = new CommandProtocol(new User("u"), new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()), new YahooFinanceStockAPI(), new String[]{"buy", "sell", "checkprice"});
+        CommandProtocol profile2 = new CommandProtocol(new User("u"), new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()), new YahooFinanceStockAPI(), null);
 
         // Generate some commands
         Command cmd1 = cm.generate(cm.find(cmdString), profile1);
@@ -57,7 +58,7 @@ public class CommandManagerTest {
         String cmdString = "createuser";
 
         // Create some Command profiles
-        CommandProtocol profile1 = new CommandProtocol(new User("u"), new CommandParser(), new YahooFinanceStockAPI(), new String[]{"Edward"});
+        CommandProtocol profile1 = new CommandProtocol(new User("u"), new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()), new YahooFinanceStockAPI(), new String[]{"Edward"});
 
         // Generate some commands
         Command cmd1 = cm.generate(cm.find(cmdString), profile1);

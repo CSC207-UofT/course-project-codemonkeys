@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Controller.DataAccessInterfaceRelay;
+import Controller.GraphicInterfaceRelay;
 import Presenters.PanelFactory;
 
 import java.awt.image.BufferedImage;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class GraphicsUserInterface {
+public class GraphicsUserInterface implements GraphicInterfaceRelay {
     /**
      * Contains methods for generating graph suite for visualizing portfolio information.
      */
@@ -31,7 +32,7 @@ public class GraphicsUserInterface {
 
     }
 
-    public static void generateGraphics(DataAccessInterfaceRelay api) {
+    public void generateGraphics(DataAccessInterfaceRelay api) {
 
         JFrame frame = generateJFrame(api);
 
@@ -41,7 +42,7 @@ public class GraphicsUserInterface {
 
     }
 
-    public static void generateImage(DataAccessInterfaceRelay api) throws IOException {
+    public void generateImage(DataAccessInterfaceRelay api) throws IOException {
     //Save an image representation to .\images\image.png
         JFrame frame = generateJFrame(api);
         frame.setLayout(null);
