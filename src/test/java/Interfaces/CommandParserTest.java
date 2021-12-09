@@ -18,11 +18,11 @@ public class CommandParserTest {
     public void testCreateMultipleUser() {
         String cmdName = "createuser";
         String[] argForCreateUser = {"Edward"};
-        CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), argForCreateUser);
+        CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()), new YahooFinanceStockAPI(), argForCreateUser);
         Command cmd = cm.generate(cm.find(cmdName), commandProtocol);
         boolean res = cmd.execute();
         String[] argForCreateUser2 = {"Java"};
-        CommandProtocol commandProtocol2 = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), argForCreateUser2);
+        CommandProtocol commandProtocol2 = new CommandProtocol(null, new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()), new YahooFinanceStockAPI(), argForCreateUser2);
         Command cmd2 = cm.generate(cm.find(cmdName), commandProtocol2);
         boolean res2 = cmd2.execute();
         assertTrue(res);

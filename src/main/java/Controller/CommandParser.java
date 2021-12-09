@@ -1,11 +1,9 @@
 package Controller;
 
-import Interfaces.GraphicsUserInterface;
 import UseCase.Commands.Command;
 import UseCase.Commands.CommandManager;
 import UseCase.Commands.CommandProtocol;
 import UseCase.ClientInterface.ClientInterface;
-import Interfaces.YahooFinanceStockAPI;
 import UseCase.Managers.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -32,6 +30,13 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
     private final VoteManager voteManager = VoteManager.getInstance();
     private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final AssetManager assetManager = AssetManager.getInstance();
+    private final DataAccessInterfaceRelay api;
+    private final GraphicInterfaceRelay graphicsUserInterface;
+
+    public CommandParser(DataAccessInterfaceRelay yahooapi, GraphicInterfaceRelay graphics){
+        this.api = yahooapi;
+        this.graphicsUserInterface = graphics;
+    }
 
 
     /**
@@ -75,7 +80,6 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if (cmdName.equals("checkstatus")) return ("This bot is working");
         if (cmdName.equals("hello")) return ("Hello! " + author);
         if (cmdName.equals("getprice")) {
-            YahooFinanceStockAPI api = new YahooFinanceStockAPI();
             return ("the price is " + api.update(ArgWithoutCmd[0]));
         }
         if (cmdName.equals("listallcommand"))
@@ -85,7 +89,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
         if (cmdName.equals("createuser")) {
             if (ArgWithoutCmd.length != 0) return ("Just type '! createuser' to create a user");
             String[] argForCreateUser = {author};
-            CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(), new YahooFinanceStockAPI(), argForCreateUser);
+            CommandProtocol commandProtocol = new CommandProtocol(null, new CommandParser(this.api, this.graphicsUserInterface), this.api, argForCreateUser);
             cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
             if (cmd == null) return ("No such command. Try again.");
             res = cmd.execute();
@@ -109,13 +113,13 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             return (Double.toString(assetManager.getTypeVolume(ArgWithoutCmd[0])));
         }
         if (cmdName.equals("viewallasset") || cmdName.equals("vaa")) {
-            return (assetManager.viewAssets(new YahooFinanceStockAPI()));
+            return (assetManager.viewAssets(this.api));
         }
         if (cmdName.equals("getGraph")) {
-            PerformanceHistoryManager.updateTotalDeposit(userManager.findUser(author).getUserPortfolio().getValue(new YahooFinanceStockAPI()));
-            PerformanceHistoryManager.recordHistory(new YahooFinanceStockAPI());
-            GraphicsUserInterface.generateGraphics(new YahooFinanceStockAPI());
-            GraphicsUserInterface.generateImage(new YahooFinanceStockAPI());
+            PerformanceHistoryManager.updateTotalDeposit(userManager.findUser(author).getUserPortfolio().getValue(this.api));
+            PerformanceHistoryManager.recordHistory(this.api);
+            this.graphicsUserInterface.generateGraphics(this.api);
+            this.graphicsUserInterface.generateImage(this.api);
 
             File file = new File(".\\images\\image.png");
 
@@ -135,7 +139,7 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
             return ("Saved");
         }
 
-        CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(), new YahooFinanceStockAPI(), ArgWithoutCmd);
+        CommandProtocol commandProtocol = new CommandProtocol(userManager.findUser(author), new CommandParser(this.api, this.graphicsUserInterface), this.api, ArgWithoutCmd);
         cmd = commandManager.generate(commandManager.find(cmdName), commandProtocol);
         if (cmd == null) return ("No such command. Try again.");
         res = cmd.execute();

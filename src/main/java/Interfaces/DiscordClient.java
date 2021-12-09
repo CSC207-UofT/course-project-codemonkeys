@@ -21,7 +21,7 @@ public class DiscordClient implements ClientInterfaceC {
         JDABuilder jda = JDABuilder.createDefault(token);
         jda.setActivity(Activity.watching("Stock Market"));
         jda.setStatus(OnlineStatus.ONLINE);
-        jda.addEventListeners(new CommandParser());
+        jda.addEventListeners(new CommandParser(new YahooFinanceStockAPI(), new GraphicsUserInterface()));
         jda.build();
     }
 
