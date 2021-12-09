@@ -1,7 +1,7 @@
 package usecase.GUIDataFetcher;
 
 import entities.containers.PerformanceHistories.CommunalPortfolioPerformanceHistory;
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.managers.AssetManager;
 import usecase.managers.UserManager;
 
@@ -17,7 +17,7 @@ public class TextFetcher {
      * Version: 1.0
      */
 
-    public static String getData(DataAccessInterfaceRelay api) {
+    public static String getData(DataAccessInterfaceUsecaseRelay api) {
         Date date = new Date();
 
         double totalDeposit = CommunalPortfolioPerformanceHistory.getInstance().getTotalDeposit();

@@ -30,10 +30,10 @@ public class CommandParser extends ListenerAdapter implements ClientInterface {
     private final VoteManager voteManager = VoteManager.getInstance();
     private final TransactionManager transactionManager = TransactionManager.getInstance();
     private final AssetManager assetManager = AssetManager.getInstance();
-    private final DataAccessInterfaceRelay api;
+    private final DataAccessInterfaceControllerRelay api;
     private final GraphicInterfaceRelay graphicsUserInterface;
 
-    public CommandParser(DataAccessInterfaceRelay yahooapi, GraphicInterfaceRelay graphics){
+    public CommandParser(DataAccessInterfaceControllerRelay yahooapi, GraphicInterfaceRelay graphics){
         this.api = yahooapi;
         this.graphicsUserInterface = graphics;
     }

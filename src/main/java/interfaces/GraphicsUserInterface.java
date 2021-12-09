@@ -3,7 +3,7 @@ package interfaces;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import controller.DataAccessInterfaceRelay;
+import controller.DataAccessInterfaceControllerRelay;
 import controller.GraphicInterfaceRelay;
 import presenters.PanelFactory;
 
@@ -17,7 +17,7 @@ public class GraphicsUserInterface implements GraphicInterfaceRelay {
      * Contains methods for generating graph suite for visualizing portfolio information.
      */
 
-    public static JFrame generateJFrame(DataAccessInterfaceRelay api) {
+    public static JFrame generateJFrame(DataAccessInterfaceControllerRelay api) {
         JFrame frame = new JFrame();
         PanelFactory pf = new PanelFactory(api);
 
@@ -32,7 +32,7 @@ public class GraphicsUserInterface implements GraphicInterfaceRelay {
 
     }
 
-    public void generateGraphics(DataAccessInterfaceRelay api) {
+    public void generateGraphics(DataAccessInterfaceControllerRelay api) {
 
         JFrame frame = generateJFrame(api);
 
@@ -42,7 +42,7 @@ public class GraphicsUserInterface implements GraphicInterfaceRelay {
 
     }
 
-    public void generateImage(DataAccessInterfaceRelay api) throws IOException {
+    public void generateImage(DataAccessInterfaceControllerRelay api) throws IOException {
     //Save an image representation to .\images\image.png
         JFrame frame = generateJFrame(api);
         frame.setLayout(null);

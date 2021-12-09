@@ -2,7 +2,7 @@ package usecase.GUIDataFetcher;
 
 import entities.assets.Asset;
 import entities.assets.Currency;
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.managers.AssetManager;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -17,7 +17,7 @@ public class AssetGrowthChartFetcher {
      * Version: 1.0
      */
 
-    public static DefaultCategoryDataset getData(DataAccessInterfaceRelay api) {
+    public static DefaultCategoryDataset getData(DataAccessInterfaceUsecaseRelay api) {
 
         DefaultCategoryDataset series = new DefaultCategoryDataset( );
 

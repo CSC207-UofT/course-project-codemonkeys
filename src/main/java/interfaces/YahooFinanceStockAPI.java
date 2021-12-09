@@ -1,6 +1,6 @@
 package interfaces;
 
-import controller.DataAccessInterfaceRelay;
+import controller.DataAccessInterfaceControllerRelay;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
  * Version: 1.0
  */
 
-public class YahooFinanceStockAPI implements DataAccessInterfaceRelay {
+public class YahooFinanceStockAPI implements DataAccessInterfaceControllerRelay {
     /**
      * Updates stock price data given stock symbol as provided by Yahoo Finance's API (NASDAQ).
      * @param symbol Symbol of a stock

@@ -8,5 +8,5 @@ import entities.assets.DataAccessInterface;
  * Date: Nov 25 2021
  * Version: 1.0
  */
-public interface DataAccessInterfaceRelay extends DataAccessInterface {
+public interface DataAccessInterfaceUsecaseRelay extends DataAccessInterface {
 }

@@ -1,6 +1,6 @@
 package presenters;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.GUIDataFetcher.PortfolioValueChartFetcher;
 
 import org.jfree.chart.ChartFactory;
@@ -15,9 +15,9 @@ import java.awt.*;
 class PortfolioValueChartPanel implements Panel {
 // Create a ChartPanel displaying the value of the portfolio over time.
 
-    DataAccessInterfaceRelay api;
+    DataAccessInterfaceUsecaseRelay api;
 
-    public PortfolioValueChartPanel(DataAccessInterfaceRelay api) {
+    public PortfolioValueChartPanel(DataAccessInterfaceUsecaseRelay api) {
         this.api = api;
     }
 

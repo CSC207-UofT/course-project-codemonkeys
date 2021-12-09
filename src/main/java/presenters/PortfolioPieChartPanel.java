@@ -1,7 +1,7 @@
 package presenters;
 
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.GUIDataFetcher.PortfolioPieChartFetcher;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -19,11 +19,11 @@ class PortfolioPieChartPanel implements Panel {
     // Generate a pie chart showing the portfolio composition
 
     //____________________ Variables ___________________________________________________________________________________
-    private final DataAccessInterfaceRelay api;
+    private final DataAccessInterfaceUsecaseRelay api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PortfolioPieChartPanel(DataAccessInterfaceRelay api){
+    public PortfolioPieChartPanel(DataAccessInterfaceUsecaseRelay api){
         this.api = api;
     }
 

@@ -3,7 +3,7 @@ package controller;
 import java.io.IOException;
 
 public interface GraphicInterfaceRelay {
-    void generateGraphics(DataAccessInterfaceRelay i);
+    void generateGraphics(DataAccessInterfaceControllerRelay i);
 
-    void generateImage(DataAccessInterfaceRelay i) throws IOException;
+    void generateImage(DataAccessInterfaceControllerRelay i) throws IOException;
 }

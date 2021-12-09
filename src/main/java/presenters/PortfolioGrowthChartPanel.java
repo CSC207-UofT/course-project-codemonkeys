@@ -1,6 +1,6 @@
 package presenters;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.GUIDataFetcher.PortfolioGrowthChartFetcher;
 
 import org.jfree.chart.ChartFactory;
@@ -21,9 +21,9 @@ import java.awt.*;
 class PortfolioGrowthChartPanel implements Panel {
     // Assemble the chart displaying growth rate of the portfolio at different time frames as a bar chart.
 
-    DataAccessInterfaceRelay api;
+    DataAccessInterfaceUsecaseRelay api;
 
-    public PortfolioGrowthChartPanel(DataAccessInterfaceRelay api) {
+    public PortfolioGrowthChartPanel(DataAccessInterfaceUsecaseRelay api) {
         this.api = api;
     }
 

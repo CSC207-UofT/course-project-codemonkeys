@@ -1,7 +1,7 @@
 package usecase.GUIDataFetcher;
 
 import entities.users.User;
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.managers.ExecutionChecker;
 import usecase.managers.UserManager;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -16,7 +16,7 @@ public class UserLeaderboardChartFetcher {
      * Author: Andrew Zhang
      * Version: 1.0
      */
-    public static DefaultCategoryDataset getData(DataAccessInterfaceRelay api) {
+    public static DefaultCategoryDataset getData(DataAccessInterfaceUsecaseRelay api) {
         /*
          * Prepares data for graphing.
          *

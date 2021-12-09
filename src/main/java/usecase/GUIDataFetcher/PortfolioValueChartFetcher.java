@@ -1,6 +1,6 @@
 package usecase.GUIDataFetcher;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.managers.PerformanceHistoryManager;
 import org.jfree.data.xy.XYSeries;
 
@@ -14,7 +14,7 @@ public class PortfolioValueChartFetcher {
      * Author: Andrew Zhang
      * Version: 1.0
      */
-    public static XYSeries getData(DataAccessInterfaceRelay api) {
+    public static XYSeries getData(DataAccessInterfaceUsecaseRelay api) {
         // Format the data as needed by JFreeChart
 
         var series = new XYSeries("Portfolio Value (US $)");

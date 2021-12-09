@@ -1,6 +1,6 @@
 package presenters;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.GUIDataFetcher.TextFetcher;
 
 import javax.swing.*;
@@ -10,9 +10,9 @@ import java.awt.*;
 // Generate a Jpanel containing a text summary of the current status of the communal portfolio
 
 class TextPanel implements Panel {
-    DataAccessInterfaceRelay api;
+    DataAccessInterfaceUsecaseRelay api;
 
-    public TextPanel(DataAccessInterfaceRelay api) {
+    public TextPanel(DataAccessInterfaceUsecaseRelay api) {
         this.api = api;
     }
 

@@ -1,6 +1,6 @@
 package presenters;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 
 import javax.swing.*;
 import java.util.Objects;
@@ -14,11 +14,11 @@ public class PanelFactory {
      */
 
     //____________________ Variables ___________________________________________________________________________________
-    DataAccessInterfaceRelay api;
+    DataAccessInterfaceUsecaseRelay api;
 
 
     //____________________ Constructors ________________________________________________________________________________
-    public PanelFactory(DataAccessInterfaceRelay api) {
+    public PanelFactory(DataAccessInterfaceUsecaseRelay api) {
         this.api = api;
     }
 

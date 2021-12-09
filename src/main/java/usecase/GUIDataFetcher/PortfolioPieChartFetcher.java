@@ -1,7 +1,7 @@
 package usecase.GUIDataFetcher;
 
 import entities.assets.Asset;
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.managers.AssetManager;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -16,7 +16,7 @@ public class PortfolioPieChartFetcher {
      * Version: 1.0
      */
 
-    public static PieDataset getData(DataAccessInterfaceRelay api) {
+    public static PieDataset getData(DataAccessInterfaceUsecaseRelay api) {
         DefaultPieDataset series = new DefaultPieDataset();
 
         List<Asset> assetList = AssetManager.getInstance().getAssetList();

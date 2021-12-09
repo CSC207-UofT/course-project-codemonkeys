@@ -5,7 +5,6 @@ import java.util.TreeMap;
 import java.util.Date;
 import java.io.Serializable;
 
-//TODO: add tests and serialize
 
 public class AssetPerformanceHistory implements Serializable{
     private final TreeMap<Date, Object> treeQueue = new TreeMap<>();

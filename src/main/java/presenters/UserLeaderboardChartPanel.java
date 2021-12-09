@@ -1,6 +1,6 @@
 package presenters;
 
-import usecase.DataAccessInterfaceRelay;
+import usecase.DataAccessInterfaceUsecaseRelay;
 import usecase.GUIDataFetcher.UserLeaderboardChartFetcher;
 
 import org.jfree.chart.ChartFactory;
@@ -19,9 +19,9 @@ import java.awt.*;
 class UserLeaderboardChartPanel implements Panel {
 
 
-    private final DataAccessInterfaceRelay api;
+    private final DataAccessInterfaceUsecaseRelay api;
 
-    public UserLeaderboardChartPanel(DataAccessInterfaceRelay api) {
+    public UserLeaderboardChartPanel(DataAccessInterfaceUsecaseRelay api) {
         this.api = api;
     }
 
