@@ -15,7 +15,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 
-class PortfolioPieChartPanel {
+class PortfolioPieChartPanel implements Panel {
     // Generate a pie chart showing the portfolio composition
 
     //____________________ Variables ___________________________________________________________________________________
