@@ -1,5 +1,5 @@
 # **Pooled Investment Portfolio Management Simulation**
-[Design document for this project.](Design_Document_Phase_2.pdf)
+[Design document for this project.](https://github.com/CSC207-UofT/course-project-codemonkeys/blob/93318c5e8154993b1de3ce2532a8cf7ee5f3fba8/Design%20Document%20Phase%202.pdf)
 
 ## Purpose
 The purpose of the project is to develop a management tool for a simulated 
