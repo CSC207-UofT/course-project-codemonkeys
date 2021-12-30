@@ -1,4 +1,5 @@
 # **Pooled Investment Portfolio Management Simulation**
+[Design document for this project.](Design_Document_Phase_2.pdf)
 
 ## Purpose
 The purpose of the project is to develop a management tool for a simulated 
